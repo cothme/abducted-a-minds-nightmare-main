@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
 
-public class CameraScript : MonoBehaviour
+public class PlayerCameraScript : MonoBehaviour
 {
+    [SerializeField] Transform playerTransform;
+    [SerializeField] Canvas aimCanvas;
     CinemachineVirtualCamera virtualCamera;
     public float rotationSpeed;
     public int priorityCameraNumber;
-    [SerializeField] Transform playerTransform;
     Transform cameraTransform;
     public static bool isAiming = false;
     float scroll;
@@ -34,6 +36,12 @@ public class CameraScript : MonoBehaviour
             PlayerRotateBaseOnCamera(playerTransform,cameraTransform);
         }  
     }
+
+    private void Shoot()
+    {
+        throw new NotImplementedException();
+    }
+
     float MouseScroll(int maxValue)
     {
         scroll += Input.mouseScrollDelta.y;
@@ -56,10 +64,12 @@ public class CameraScript : MonoBehaviour
     {
         if(isAiming)
         {
+            aimCanvas.enabled = true;
             virtualCamera.Priority = 9;
         }
         else
         {
+            aimCanvas.enabled = false;
             virtualCamera.Priority = 10;
         }  
     }

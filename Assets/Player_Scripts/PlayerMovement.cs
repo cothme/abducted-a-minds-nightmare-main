@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(movementVector != Vector3.zero && !CameraScript.isAiming)
+        if(movementVector != Vector3.zero && !PlayerCameraScript.isAiming)
         {
             Quaternion toRotation = Quaternion.LookRotation(movementVector,Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation,toRotation,rotationSpeed);
