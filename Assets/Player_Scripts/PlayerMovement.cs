@@ -1,33 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float movementSpeed;
-    public float rotationSpeed;
+    CharacterController controller;
+    Vector3 playerVelocity;
+    bool groundedPlayer;
     Transform cameraTransform;
-    Vector3 input;
-    Vector3 movementVector;
-    Rigidbody playerRigidBody;
-    void Start()
+    [SerializeField] float playerSpeed = 2.0f;
+    [SerializeField] float jumpHeight = 1.0f;
+    [SerializeField] float gravityValue = -9.81f;
+    [SerializeField] float rotationSpeed = 4f;
+    [SerializeField] InputActionReference movementControl;
+    [SerializeField] InputActionReference jumpControl;
+
+    private void OnEnable()
     {
-        playerRigidBody = GetComponent<Rigidbody>();
+        movementControl.action.Enable();
+        jumpControl.action.Enable();
+    }
+    private void OnDisable()
+    {
+        movementControl.action.Disable();
+        jumpControl.action.Disable();
+    }
+
+    private void Start()
+    {
+        controller = gameObject.GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
     }
+
     void Update()
-    {    
-        input = new Vector3(Input.GetAxis("Horizontal"),0, Input.GetAxis("Vertical"));
-    }
-    void FixedUpdate()
     {
-        if(movementVector != Vector3.zero && !PlayerCameraScript.isAiming)
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
         {
-            Quaternion toRotation = Quaternion.LookRotation(movementVector,Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation,toRotation,rotationSpeed);
-        } 
-        movementVector = input.x * movementSpeed *  cameraTransform.right + input.z * cameraTransform.forward * movementSpeed;
-        playerRigidBody.velocity = new Vector3(movementVector.x, playerRigidBody.velocity.y, movementVector.z);       
+            playerVelocity.y = 0f;
+        }
+
+        Vector2 movement = movementControl.action.ReadValue<Vector2>();
+        Vector3 move = new Vector3(movement.x,0,movement.y);
+        move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
+        move.y = 0;
+
+        controller.Move(move * Time.deltaTime * playerSpeed);
+
+        // Changes the height position of the player..
+        if (jumpControl.action.triggered)
+        {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
+
+        if(movement != Vector2.zero && !PlayerCameraScript.isAiming)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(move,Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
+
     }
 }

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Cinemachine;
 using System;
 
 public class PlayerCameraScript : MonoBehaviour
 {
+    [SerializeField] InputActionReference leftClickControl;
     [SerializeField] Transform playerTransform;
     [SerializeField] Canvas aimCanvas;
     CinemachineVirtualCamera virtualCamera;
@@ -14,6 +16,16 @@ public class PlayerCameraScript : MonoBehaviour
     Transform cameraTransform;
     public static bool isAiming = false;
     float scroll;
+    Vector2 mouseScroll;
+
+    private void OnEnable()
+    {
+        leftClickControl.action.Enable();
+    }
+    private void OnDisable()
+    {
+        leftClickControl.action.Disable();
+    }
 
     void Awake()
     {
@@ -22,14 +34,14 @@ public class PlayerCameraScript : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetButtonDown("Fire2"))
+        if(leftClickControl.action.triggered)
         {
             isAiming = !isAiming;
             StartAim();
         }
         else
         {
-            var camera = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = MouseScroll(10);
+            var camera = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraZoomAmount(5);
         }
         if(isAiming)
         {
@@ -42,9 +54,9 @@ public class PlayerCameraScript : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    float MouseScroll(int maxValue)
+    float cameraZoomAmount(int maxValue)
     {
-        scroll += Input.mouseScrollDelta.y;
+        scroll += Mouse.current.scroll.ReadValue().y;
         if(scroll > maxValue)
         {
             scroll = maxValue;
