@@ -24,7 +24,6 @@ public class InventoryHighlight : MonoBehaviour
           targetItem.onGridPositionX, 
           targetItem.onGridPositionY);
         highlighter.localPosition = pos;
-        Debug.Log("Highlight Position: " + highlighter.localPosition);
     }
 
     public void SetParent(ItemGrid targetGrid)

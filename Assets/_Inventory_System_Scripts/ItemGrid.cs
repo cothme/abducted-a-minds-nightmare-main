@@ -80,7 +80,6 @@ public class ItemGrid : MonoBehaviour
 
         Vector2 position = CalculatePositionOnGridItem(inventoryItem, posX, posY);
         itemRectTransform.localPosition = position;
-        Debug.Log(itemRectTransform.localPosition);
     }
 
     public Vector2 CalculatePositionOnGrid(InventoryItem inventoryItem,int posX, int posY)

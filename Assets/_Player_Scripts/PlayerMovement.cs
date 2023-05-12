@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        // Cursor.visible = false;
         controller = gameObject.GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
     }
@@ -49,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        // Changes the height position of the player..
         if (jumpControl.action.triggered)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
@@ -62,6 +62,5 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(move,Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
-
     }
 }

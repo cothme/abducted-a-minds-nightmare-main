@@ -48,7 +48,6 @@ public class PlayerCameraScript : MonoBehaviour
             PlayerRotateBaseOnCamera(playerTransform,cameraTransform);
         }  
     }
-
     private void Shoot()
     {
         throw new NotImplementedException();

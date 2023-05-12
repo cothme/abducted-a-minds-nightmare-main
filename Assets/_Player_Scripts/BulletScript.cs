@@ -6,9 +6,7 @@ public class BulletScript : MonoBehaviour
 {
     [SerializeField] GameObject bulletDecal;
     float speed = 100f;
-
     float timeToDestroy = 2f;
-
     public Vector3 target { get; set; }
     public bool hit { get; set; }
     void Start()
