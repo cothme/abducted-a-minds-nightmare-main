@@ -6,7 +6,8 @@ using UnityEngine;
 public class ItemList : MonoBehaviour
 {
     public static ItemList Instance;
-    public List<int> itemList;
+    private List<int> itemList = new List<int>();
+    public List<int>Itemlist { get { return new List<int>(itemList); }}
 
     public void AddItem(string name)
     {

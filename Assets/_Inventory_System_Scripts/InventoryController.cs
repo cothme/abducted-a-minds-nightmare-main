@@ -7,7 +7,11 @@ using UnityEngine.InputSystem;
 //this script is used for controlling the inventory
 public class InventoryController : MonoBehaviour
 {
+    [SerializeField] List<ItemData> items;
+    [SerializeField] GameObject itemPrefab;
+    [SerializeField] Transform canvasTransform;
     [SerializeField] InputActionReference inControl;
+    [SerializeField] InputActionReference mouseLeftClick;
     [HideInInspector] private ItemGrid selectedItemGrid;
     public ItemGrid SelectedItemGrid { get => selectedItemGrid; 
             set {
@@ -17,23 +21,27 @@ public class InventoryController : MonoBehaviour
     InventoryItem selectedItem;
     InventoryItem overLapItem;
     RectTransform rectTransform;
-
-    [SerializeField] List<ItemData> items;
-    [SerializeField] GameObject itemPrefab;
-    [SerializeField] Transform canvasTransform;
-
     InventoryHighlight inventoryHighlight;
+    PlayerControls playerControls;
+    InputAction rotateButton;
+    void Awake()
+    {
+        playerControls = new PlayerControls();
+        inventoryHighlight = GetComponent<InventoryHighlight>();   
+    }
     private void OnEnable()
     {
+        rotateButton = playerControls.Inventory.RotateItem;
+        rotateButton.Enable();
+        rotateButton.performed += RotateItem;
         inControl.action.Enable();
+        mouseLeftClick.action.Enable();
     }
     private void OnDisable()
     {
+        rotateButton.Disable();
         inControl.action.Disable();
-    }
-    void Awake()
-    {
-        inventoryHighlight = GetComponent<InventoryHighlight>();   
+        mouseLeftClick.action.Disable();
     }
     private void Start()
     {
@@ -52,10 +60,6 @@ public class InventoryController : MonoBehaviour
         // {
         //     InsertRandomItem(ItemList.Instance.itemList.Last());
         // }
-        // if(Input.GetKeyDown(KeyCode.R))
-        // {     
-        //     RotateItem();
-        // }
         // if(Input.GetKeyDown(KeyCode.X))
         // {
         //     DeleteItem(selectedItem);
@@ -71,10 +75,10 @@ public class InventoryController : MonoBehaviour
             return; 
         }
         HandleHighlight();
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //     LeftMouseButtonPress();
-        // }
+        if (mouseLeftClick.action.triggered)
+        {
+            LeftMouseButtonPress();
+        }
     }
     public void DeleteItem(InventoryItem item)
     {
@@ -99,13 +103,17 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void RotateItem()
+    private void RotateItem(InputAction.CallbackContext context)
     {
-        if(selectedItemGrid == null) { return; }
-        Debug.Log(selectedItem.rotated);
-        selectedItem.Rotate();
+        if(selectedItemGrid == null || selectedItem == null)
+        { 
+            return; 
+        }
+        else 
+        { 
+            selectedItem.Rotate(); 
+        }
     }
-
     public void InsertRandomItem(int itemID)
     {
         if(selectedItemGrid == null) { return; }
@@ -176,18 +184,22 @@ public class InventoryController : MonoBehaviour
 
     private void LeftMouseButtonPress()
     {
-        Vector2Int tileGridPosition = GetTileGridPosition();
-
-        if (selectedItem is null)
+        try
         {
-            PickUpItem(tileGridPosition);
-        }
-        else
+            Vector2Int tileGridPosition = GetTileGridPosition();
+            if (selectedItem is null)
+            {
+                PickUpItem(tileGridPosition);
+            }
+            else
+            {
+                PlaceItem(tileGridPosition);
+            }
+        }catch(IndexOutOfRangeException)
         {
-            PlaceItem(tileGridPosition);
+            return;
         }
     }
-
     private Vector2Int GetTileGridPosition()
     {
         Vector2 position = Mouse.current.position.ReadValue();

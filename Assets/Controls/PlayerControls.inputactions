@@ -60,6 +60,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Select Item",
+                    "type": "Button",
+                    "id": "0c36ef51-c918-4be6-83a6-7d7e678f4490",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Center Camera",
+                    "type": "Button",
+                    "id": "f6993321-fa4c-4606-940d-3be6a1e54738",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -181,6 +197,177 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact/Pickup Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62cbb75a-045b-41f6-bec9-8e60db47bebc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f3cf78d1-dcd7-40d2-a5fa-ebd5eeeb92f3",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Center Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Inventory",
+            "id": "0026b077-2698-426c-af14-617854d1ca12",
+            "actions": [
+                {
+                    "name": "Select Item",
+                    "type": "Button",
+                    "id": "dfac266d-72d2-48fb-82b9-b00edf7444ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Rotate Item",
+                    "type": "Button",
+                    "id": "57dfe9fc-66af-4b5e-a416-fa5f1a7b77eb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Use Item",
+                    "type": "Button",
+                    "id": "ce05bea8-8e01-46c0-85a6-a47074426320",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "72784512-2548-468b-9aad-bf1bc51fb85e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "77271e27-5e43-446b-98ba-f7122784071b",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d38f89a1-3406-42d5-873d-d255bb90ff62",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Weapon",
+            "id": "15124809-8fdb-438e-bdfd-e94fb27b1edb",
+            "actions": [
+                {
+                    "name": "Weapon 1",
+                    "type": "Button",
+                    "id": "477f9212-f21f-46ff-b006-5d9265d3282e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Weapon 2",
+                    "type": "Button",
+                    "id": "cb438ae0-a22a-4838-adf1-57a6226a030d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Weapon 3",
+                    "type": "Button",
+                    "id": "d21a62c4-cb27-400f-b3e4-e657f6000f68",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Weapon 4",
+                    "type": "Button",
+                    "id": "56140e0e-9923-45a2-9d57-6d5a801e1e19",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "94a2228c-97d4-4e33-8b44-233310b68db7",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Weapon 1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8aabf183-456b-467a-8cd4-6556cacc9d9f",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Weapon 2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9938458c-a324-436a-91cb-c021866ae668",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Weapon 3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b8c2bf2-ac31-4ef3-92c1-e0b295e62289",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Weapon 4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

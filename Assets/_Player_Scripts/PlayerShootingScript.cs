@@ -7,48 +7,48 @@ using UnityEngine.InputSystem;
 public class PlayerShootingScript : MonoBehaviour
 {
     [SerializeField] Transform cameraTransform;
-    [SerializeField] InputActionReference rightClickControl;
     [SerializeField] GameObject bulletPreFab;
     [SerializeField] Transform bulletTransform;
     [SerializeField] float bulletMissDistance = 25f;
-
+    PlayerControls playerControls;
+    InputAction fireButton;
+    #region Input Setup
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+    }
      private void OnEnable()
     {
-        rightClickControl.action.Enable();
+        fireButton = playerControls.Player.FireSingleBullet;
+        fireButton.Enable();
+        fireButton.performed += Shoot;
     }
     private void OnDisable()
     {
-        rightClickControl.action.Disable();
+        fireButton.Disable();
     }
-
+    #endregion
     void Start()
     {
         cameraTransform = Camera.main.transform;
     }
-    void Update()
+    private void Shoot(InputAction.CallbackContext context)
     {
-        if(PlayerCameraScript.isAiming)
+        if(PlayerState.Instance.Aiming)
         {
-            if(rightClickControl.action.triggered)
+            RaycastHit hit;
+            GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,Quaternion.identity);
+            BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
+            if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, Mathf.Infinity))
             {
-                Shoot();
+                bulletInstance.target = hit.point;
+                bulletInstance.hit = true; 
             }
-        }
-    }
-    private void Shoot()
-    {
-        RaycastHit hit;
-        GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,Quaternion.identity);
-        BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
-        if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, Mathf.Infinity))
-        {
-            bulletInstance.target = hit.point;
-            bulletInstance.hit = true; 
-        }
-        else
-        {
-            bulletInstance.target = cameraTransform.position + cameraTransform.forward * bulletMissDistance;
-            bulletInstance.hit = true; 
-        }
+            else
+            {
+                bulletInstance.target = cameraTransform.position + cameraTransform.forward * bulletMissDistance;
+                bulletInstance.hit = true; 
+            }
+        } 
     }
 }

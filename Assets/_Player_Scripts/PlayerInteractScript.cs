@@ -8,49 +8,51 @@ using System.Linq;
 
 public class PlayerInteractScript : MonoBehaviour
 {
-    [SerializeField] InputActionReference tabKeyControl;
     [SerializeField] InputActionReference interactControl;
     [SerializeField] CanvasGroup inventoryCanvas;
     [SerializeField] Canvas interactCanvas;
     [SerializeField] Transform cameraTransform;
     InventoryController inventoryController;
+    PlayerControls playerControls;
+    InputAction openInventoryButton,interactButton;
     bool inventoryOpen = false;
     RaycastHit hit;
     Ray ray;
     public LayerMask layerMask;
     GameObject lastLookedObject;
-    // Start is called before the first frame update
-    private void OnEnable()
-    {
-        tabKeyControl.action.Enable();
-        interactControl.action.Enable();
-    }
-    private void OnDisable()
-    {
-        tabKeyControl.action.Disable();
-        interactControl.action.Disable();
-    }
+    #region Input Setup
     private void Awake()
     {
         inventoryController = FindObjectOfType(typeof(InventoryController)) as  InventoryController;
+        playerControls = new PlayerControls();
     }
+    private void OnEnable()
+    {
+        interactButton = playerControls.Player.InteractPickupItem;
+        interactButton.Enable();
+        openInventoryButton = playerControls.Player.OpenInventory;
+        openInventoryButton.Enable();
+        openInventoryButton.performed += OpenInventory;
+        interactControl.action.Enable();
+    }
+    private void OnDisable()
+    {   
+        interactButton.Disable();
+        openInventoryButton.Disable();
+        interactControl.action.Disable();
+    }
+    #endregion
     void Start()
     {
         cameraTransform = Camera.main.transform;
         inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
         Cursor.lockState = CursorLockMode.Locked;
     }
-
-    // Update is called once per frame
     void Update()
-    {
-        if(tabKeyControl.action.triggered)
-        {
-            OpenInventory();
-        }
+    { 
         LookAtItem();
     }
-    void OpenInventory()
+    void OpenInventory(InputAction.CallbackContext context)
     {
         inventoryOpen = !inventoryOpen;
         if(inventoryOpen) 
@@ -100,13 +102,14 @@ public class PlayerInteractScript : MonoBehaviour
         } 
     }
     void PickUpItem(GameObject itemObject,string itemName)
-    {
-        if(interactControl.action.triggered)
+    {       
+        if(playerControls.Player.InteractPickupItem.triggered)
         {
             ItemList.Instance.AddItem(itemName);
-            inventoryController.InsertRandomItem(ItemList.Instance.itemList.Last());
-            // Destroy(itemObject);
-        }
+            inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
+            interactCanvas.enabled = false;
+            Destroy(itemObject);
+        } 
     }
     void GameplayPause(bool enabled)
     {

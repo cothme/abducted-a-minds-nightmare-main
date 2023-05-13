@@ -14,25 +14,32 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpHeight = 1.0f;
     [SerializeField] float gravityValue = -9.81f;
     [SerializeField] float rotationSpeed = 4f;
-    [SerializeField] InputActionReference movementControl;
-    [SerializeField] InputActionReference jumpControl;
+    [SerializeField] InputActionReference jumpControl; 
+    PlayerControls playerControls;
+    InputAction movementControl;
+    #region Input Setup
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+    }
 
     private void OnEnable()
-    {
-        movementControl.action.Enable();
+    {   
+        movementControl = playerControls.Player.Movement;
+        movementControl.Enable();
         jumpControl.action.Enable();
     }
     private void OnDisable()
     {
-        movementControl.action.Disable();
+        movementControl.Disable();
         jumpControl.action.Disable();
     }
-
+    #endregion
     private void Start()
     {
-        // Cursor.visible = false;
         controller = gameObject.GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
+        PlayerState.Instance.Aiming = false;
     }
 
     void Update()
@@ -42,9 +49,10 @@ public class PlayerMovement : MonoBehaviour
         {
             playerVelocity.y = 0f;
         }
+        Debug.Log(PlayerState.Instance.Aiming);
 
-        Vector2 movement = movementControl.action.ReadValue<Vector2>();
-        Vector3 move = new Vector3(movement.x,0,movement.y);
+        Vector2 movementDirection = movementControl.ReadValue<Vector2>();
+        Vector3 move = new Vector3(movementDirection.x,0,movementDirection.y);
         move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
         move.y = 0;
 
@@ -57,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
-        if(movement != Vector2.zero && !PlayerCameraScript.isAiming)
+        if(movementDirection != Vector2.zero && !PlayerState.Instance.Aiming)
         {
             Quaternion targetRotation = Quaternion.LookRotation(move,Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
