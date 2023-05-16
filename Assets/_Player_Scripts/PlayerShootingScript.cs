@@ -37,7 +37,7 @@ public class PlayerShootingScript : MonoBehaviour
         if(PlayerState.Instance.Aiming)
         {
             RaycastHit hit;
-            GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
             BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
             if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, Mathf.Infinity))
             {
