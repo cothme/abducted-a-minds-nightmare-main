@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerShootingScript : MonoBehaviour
 {
+    [SerializeField] ParticleSystem playerParticleSystem;
     [SerializeField] Transform cameraTransform;
     [SerializeField] GameObject bulletPreFab;
     [SerializeField] Transform bulletTransform;
@@ -36,6 +37,7 @@ public class PlayerShootingScript : MonoBehaviour
     {
         if(PlayerState.Instance.Aiming)
         {
+            playerParticleSystem.Emit(1);
             RaycastHit hit;
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
             BulletScript bulletInstance = bullet.GetComponent<BulletScript>();

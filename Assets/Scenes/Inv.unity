@@ -850,6 +850,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25e316dd637b24f40b4d654a5df756ab, type: 2}
   itemPrefab: {fileID: 6608296501257370220, guid: 27b78860531ad0a43b84abe332f30732, type: 3}
   canvasTransform: {fileID: 252086469}
+  inControl: {fileID: 0}
+  mouseLeftClick: {fileID: 0}
 --- !u!81 &1363651334
 AudioListener:
   m_ObjectHideFlags: 0
