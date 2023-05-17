@@ -15,6 +15,7 @@ public class PlayerShootingScript : MonoBehaviour
     PlayerControls playerControls;
     InputAction fireButton;
     InputAction reloadButton;
+    InputAction rifleButton,shotgunButton,pistolButton,knifeButton;
     #region Input Setup
     private void Awake()
     {
@@ -22,17 +23,34 @@ public class PlayerShootingScript : MonoBehaviour
     }
      private void OnEnable()
     {
+        rifleButton = playerControls.Weapon.Weapon1;
+        shotgunButton = playerControls.Weapon.Weapon2;
+        pistolButton = playerControls.Weapon.Weapon3;
+        knifeButton = playerControls.Weapon.Weapon4;
         fireButton = playerControls.Player.FireSingleBullet;
         fireButton.Enable();
         fireButton.performed += Shoot;
         reloadButton = playerControls.Player.Reload;
         reloadButton.performed += Reload;
         reloadButton.Enable();
+        rifleButton.Enable();
+        shotgunButton.Enable();
+        pistolButton.Enable();
+        knifeButton.Enable();
+        reloadButton.performed += Reload;
+        rifleButton.performed += ChooseRifle;
+        shotgunButton.performed += ChooseShotgun;
+        pistolButton.performed += ChoosePistol;
+        knifeButton.performed += ChooseKnife;
     }
     private void OnDisable()
     {
         fireButton.Disable();
         reloadButton.Disable();
+        rifleButton.Disable();
+        shotgunButton.Disable();
+        pistolButton.Disable();
+        knifeButton.Disable();
     }
     #endregion
     void Start()
@@ -63,5 +81,45 @@ public class PlayerShootingScript : MonoBehaviour
     private void Reload(InputAction.CallbackContext context)
     {
         GunManager.Instance.Reload();
+    }
+    void ChooseRifle(InputAction.CallbackContext context)
+    {
+        GunManager.Instance.CheckForWeapon();
+        if(GunManager.Instance.CanEquipRifle)
+        {
+            GunManager.Instance.WeaponEquipped = "Rifle";
+            GunManager.Instance.SetWeaponChanges();
+            Debug.Log(GunManager.Instance.reloadTime);
+        }
+    }
+    void ChooseShotgun(InputAction.CallbackContext context)
+    {
+        GunManager.Instance.CheckForWeapon();
+        if(GunManager.Instance.CanEquipShotgun)
+        {
+            GunManager.Instance.WeaponEquipped = "Shotgun";
+            GunManager.Instance.SetWeaponChanges();
+            Debug.Log(GunManager.Instance.reloadTime);
+        }
+    }
+    void ChoosePistol(InputAction.CallbackContext context)
+    {
+        GunManager.Instance.CheckForWeapon();
+        if(GunManager.Instance.CanEquipPistol)
+        {
+            GunManager.Instance.WeaponEquipped = "Pistol";
+            GunManager.Instance.SetWeaponChanges();
+            Debug.Log(GunManager.Instance.reloadTime);
+        }
+    }
+    void ChooseKnife(InputAction.CallbackContext context)
+    {
+        GunManager.Instance.CheckForWeapon();
+        if(GunManager.Instance.CanEquipKnife)
+        {
+            GunManager.Instance.WeaponEquipped = "Knife";
+            GunManager.Instance.SetWeaponChanges();
+            Debug.Log(GunManager.Instance.reloadTime);
+        }
     }
 }

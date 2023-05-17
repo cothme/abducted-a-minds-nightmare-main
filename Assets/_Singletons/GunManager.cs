@@ -9,29 +9,32 @@ public class GunManager : MonoBehaviour
 {
     private static GunManager instance;
     public static GunManager Instance { get { return instance; } }
+    [SerializeField] List<WeaponData> weapons;
     [SerializeField] TextMeshProUGUI magazineCountText;
     [SerializeField] TextMeshProUGUI totalBulletsCountText;
     [SerializeField] TextMeshProUGUI bulletsCountText;
     [SerializeField] TextMeshProUGUI statusIndicator;
+    [SerializeField] TextMeshProUGUI weaponIndicator;
+    private string weaponEquipped;
+    private int bulletsLoaded;
+    private int totalBullets;
+    public float reloadTime;
+    private bool canEquipPistol, canEquipRifle, canEquipShotgun,canEquipKnife;
     int bulletToMinus;
     private List<int> magazine;
-    private int bulletsLoaded;
-    private float reloadTime = 3.0f;
-    private int totalBullets;
-    public int BulletsLoaded { get { return bulletsLoaded; } }
-    public int TotalBullets { get { return totalBullets; } }
-
     public List<int> Magazine { get => magazine; set => magazine = value; }
-
+    public bool CanEquipPistol { get => canEquipPistol; set => canEquipPistol = value; }
+    public bool CanEquipRifle { get => canEquipRifle; set => canEquipRifle = value; }
+    public bool CanEquipShotgun { get => canEquipShotgun; set => canEquipShotgun = value; }
+    public bool CanEquipKnife { get => canEquipKnife; set => canEquipKnife = value; }
+    public string WeaponEquipped { get => weaponEquipped; set => weaponEquipped = value; }
     private void Initialize()
     {
         magazine = new List<int> {  };
     }
-    void Start()
-    {
-    }
     private void Update()
     {
+        weaponIndicator.text = WeaponEquipped;
         totalBulletsCountText.text = totalBullets.ToString();
         bulletsCountText.text = bulletsLoaded.ToString();
     }
@@ -73,38 +76,78 @@ public class GunManager : MonoBehaviour
     private IEnumerator ReloadCoroutine()
     {
         float remainingTime = reloadTime;
-
-        // Perform any additional actions before the reload completes
-
         while (remainingTime > 0)
         {
-            statusIndicator.text = "Reloading: " + remainingTime.ToString("F1"); // Update the TextMeshProUGUI with remaining time
-            yield return new WaitForSeconds(0.1f); // Wait for a short duration (adjust as needed)
-            remainingTime -= 0.1f; // Decrease the remaining time
-        }
+            statusIndicator.text = "Reloading: " + reloadTime.ToString("F1");
+            yield return new WaitForSeconds(0.1f);
+            remainingTime -= 0.1f; 
+            // foreach (int clip in magazine)
+            // {
+            //     Debug.Log(clip);
+            // }
+        }   
         if (magazine[0] <= 0)
+            {
+                magazine.RemoveAt(0);
+            }
+            if (bulletsLoaded == 0)
+            {
+                bulletToMinus = magazine[0];
+                totalBullets -= bulletToMinus;
+                bulletsLoaded += bulletToMinus;
+            }
+            else if (bulletsLoaded >= 30)
+            {
+                yield break;
+            }
+            else
+            {
+                bulletToMinus = 30 - bulletsLoaded;
+                bulletsLoaded += bulletToMinus;
+                totalBullets -= bulletToMinus;
+            }
+    }
+    public void CheckForWeapon()
+    {
+        foreach (int item in ItemList.Instance.Itemlist)
         {
-            magazine.RemoveAt(0);
-        }
-        if (bulletsLoaded == 0)
-        {
-            bulletToMinus = magazine[0];
-            totalBullets -= bulletToMinus;
-            bulletsLoaded += bulletToMinus;
-        }
-        else if (bulletsLoaded >= 30)
-        {
-            yield break; // Exit the coroutine if the gun is already fully loaded
-        }
-        else
-        {
-            bulletToMinus = 30 - bulletsLoaded;
-            bulletsLoaded += bulletToMinus;
-            totalBullets -= bulletToMinus;
-        } 
-        foreach (int clip in magazine)
-        {
-            Debug.Log(clip);
+            switch (item)
+            {
+                case 1:
+                    CanEquipRifle = true;
+                    break;
+                case 5:
+                    CanEquipPistol = true;
+                    break;
+                case 6:
+                    CanEquipShotgun = true;
+                    break;
+                case 2:
+                    CanEquipKnife = true;
+                    break;
+                default:
+                    break;
+            }
         }
     }
+   public void SetWeaponChanges()
+   {
+        switch (weaponEquipped)
+        {
+            case "Rifle":
+                reloadTime = weapons[0].reloadSpeed;
+                break;
+            case "Shotgun":
+                reloadTime = weapons[1].reloadSpeed;
+                break;
+            case "Pistol":
+                reloadTime = weapons[2].reloadSpeed;
+                break;
+            case "Knife":
+                reloadTime = weapons[3].reloadSpeed;
+                break;
+            default:
+                break;
+        }
+   } 
 }

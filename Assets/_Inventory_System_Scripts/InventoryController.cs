@@ -254,8 +254,8 @@ public class InventoryController : MonoBehaviour
     private void ItemIconDrag()
     {
         if (selectedItem != null)
-        {
-            rectTransform.position = Mouse.current.position.ReadValue();
+        {     
+            rectTransform.position = Mouse.current.position.ReadValue() + new Vector2(-50,75);
         }
     }
 }
