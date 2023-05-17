@@ -15,6 +15,8 @@ public class ItemList : MonoBehaviour
         {
             case "Ammo":
             itemList.Add(0);
+            GunManager.Instance.Magazine.Add(30);
+            GunManager.Instance.UpdateBullets();
             break;
             case "Assault Rifle":
             itemList.Add(1);
@@ -30,6 +32,9 @@ public class ItemList : MonoBehaviour
             break;
             case "Pistol":
             itemList.Add(5);
+            break;
+            case "Shotgun":
+            itemList.Add(6);
             break;
         }
     }    

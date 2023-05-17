@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.InputSystem;
 
 public class PlayerShootingScript : MonoBehaviour
@@ -13,6 +14,7 @@ public class PlayerShootingScript : MonoBehaviour
     [SerializeField] float bulletMissDistance = 25f;
     PlayerControls playerControls;
     InputAction fireButton;
+    InputAction reloadButton;
     #region Input Setup
     private void Awake()
     {
@@ -23,10 +25,14 @@ public class PlayerShootingScript : MonoBehaviour
         fireButton = playerControls.Player.FireSingleBullet;
         fireButton.Enable();
         fireButton.performed += Shoot;
+        reloadButton = playerControls.Player.Reload;
+        reloadButton.performed += Reload;
+        reloadButton.Enable();
     }
     private void OnDisable()
     {
         fireButton.Disable();
+        reloadButton.Disable();
     }
     #endregion
     void Start()
@@ -41,6 +47,7 @@ public class PlayerShootingScript : MonoBehaviour
             RaycastHit hit;
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
             BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
+            GunManager.Instance.Shoot();
             if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, Mathf.Infinity))
             {
                 bulletInstance.target = hit.point;
@@ -52,5 +59,9 @@ public class PlayerShootingScript : MonoBehaviour
                 bulletInstance.hit = true; 
             }
         } 
+    }
+    private void Reload(InputAction.CallbackContext context)
+    {
+        GunManager.Instance.Reload();
     }
 }

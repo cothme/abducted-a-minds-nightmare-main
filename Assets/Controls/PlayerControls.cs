@@ -89,6 +89,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""6c1b11ff-3266-4b2a-9794-044702f87d9a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -232,6 +240,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Center Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99206cd0-9281-4b1f-b97d-c246931e45cd"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -400,6 +419,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player_InteractPickupItem = m_Player.FindAction("Interact/Pickup Item", throwIfNotFound: true);
         m_Player_SelectItem = m_Player.FindAction("Select Item", throwIfNotFound: true);
         m_Player_CenterCamera = m_Player.FindAction("Center Camera", throwIfNotFound: true);
+        m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_SelectItem = m_Inventory.FindAction("Select Item", throwIfNotFound: true);
@@ -469,6 +489,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_InteractPickupItem;
     private readonly InputAction m_Player_SelectItem;
     private readonly InputAction m_Player_CenterCamera;
+    private readonly InputAction m_Player_Reload;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -482,6 +503,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @InteractPickupItem => m_Wrapper.m_Player_InteractPickupItem;
         public InputAction @SelectItem => m_Wrapper.m_Player_SelectItem;
         public InputAction @CenterCamera => m_Wrapper.m_Player_CenterCamera;
+        public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -518,6 +540,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @CenterCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCenterCamera;
                 @CenterCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCenterCamera;
                 @CenterCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCenterCamera;
+                @Reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -549,6 +574,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @CenterCamera.started += instance.OnCenterCamera;
                 @CenterCamera.performed += instance.OnCenterCamera;
                 @CenterCamera.canceled += instance.OnCenterCamera;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
@@ -670,6 +698,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnInteractPickupItem(InputAction.CallbackContext context);
         void OnSelectItem(InputAction.CallbackContext context);
         void OnCenterCamera(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
     public interface IInventoryActions
     {
