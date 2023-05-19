@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class ItemList : MonoBehaviour
 {
+    InventoryController inventoryController;
     public static ItemList Instance;
     private List<int> itemList = new List<int>();
     public List<int>Itemlist { get { return new List<int>(itemList); }}
+    public List<InventoryItem> inventoryItems = new List<InventoryItem>();
 
     public void AddItem(string name)
     {
@@ -37,9 +39,48 @@ public class ItemList : MonoBehaviour
             itemList.Add(6);
             break;
         }
+    }
+    public void DropItem(string name)
+    {
+        switch(name)
+        {
+            case "Ammo":
+            itemList.Remove(0);
+            GunManager.Instance.Magazine.RemoveAt(0);
+            GunManager.Instance.UpdateBullets();
+            inventoryItems.Remove(inventoryController.selectedItem);
+            break;
+            case "Assault Rifle":
+            itemList.Remove(1);
+            inventoryItems.Remove(inventoryController.selectedItem);
+            break;
+            case "Knife":
+            itemList.Remove(2);
+            inventoryItems.Remove(inventoryController.selectedItem);
+            break;
+            case "Mask":
+            itemList.Remove(3);
+            inventoryItems.Remove(inventoryController.selectedItem);
+            break;
+            case "Oxygen Kit":
+            itemList.Remove(4);
+            inventoryItems.Remove(inventoryController.selectedItem);
+            break;
+            case "Pistol":
+            itemList.Remove(5);
+            inventoryItems.Remove(inventoryController.selectedItem);
+            break;
+            case "Shotgun":
+            itemList.Remove(6);
+            inventoryItems.Remove(inventoryController.selectedItem);
+            break;
+            default:
+            break;
+        }
     }    
     private void Awake()
     {
+        inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
         if (Instance == null)
         {
             Instance = this;

@@ -14,7 +14,7 @@ public class PlayerInteractScript : MonoBehaviour
     [SerializeField] Transform cameraTransform;
     InventoryController inventoryController;
     PlayerControls playerControls;
-    InputAction openInventoryButton,interactButton;
+    InputAction openInventoryButton,interactButton,dropButton;
     bool inventoryOpen = false;
     RaycastHit hit;
     Ray ray;
@@ -28,6 +28,9 @@ public class PlayerInteractScript : MonoBehaviour
     }
     private void OnEnable()
     {
+        dropButton = playerControls.Inventory.DropItem;
+        dropButton.Enable();
+        dropButton.performed += DropItem;
         interactButton = playerControls.Player.InteractPickupItem;
         interactButton.Enable();
         openInventoryButton = playerControls.Player.OpenInventory;
@@ -37,6 +40,7 @@ public class PlayerInteractScript : MonoBehaviour
     }
     private void OnDisable()
     {   
+        dropButton.Disable();
         interactButton.Disable();
         openInventoryButton.Disable();
         interactControl.action.Disable();
@@ -110,6 +114,11 @@ public class PlayerInteractScript : MonoBehaviour
             interactCanvas.enabled = false;
             Destroy(itemObject);
         } 
+    }
+    void DropItem(InputAction.CallbackContext context)
+    {            
+        ItemList.Instance.DropItem(inventoryController.selectedItem.itemData.name);  
+        inventoryController.DeleteItem(inventoryController.selectedItem);     
     }
     void GameplayPause(bool enabled)
     {

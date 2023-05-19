@@ -270,6 +270,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Drop Item ",
+                    "type": "Button",
+                    "id": "26ba5fcd-a1eb-4c3a-b8c1-5ad10782da8a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -303,6 +311,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Use Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c33d27b3-ba47-4ff1-a8e3-f6236d094d5a",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop Item ",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

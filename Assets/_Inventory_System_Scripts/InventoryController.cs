@@ -18,7 +18,7 @@ public class InventoryController : MonoBehaviour
                 selectedItemGrid = value;
                 inventoryHighlight.SetParent(value);
             } }
-    InventoryItem selectedItem;
+    public InventoryItem selectedItem;
     InventoryItem overLapItem;
     RectTransform rectTransform;
     InventoryHighlight inventoryHighlight;
@@ -50,6 +50,14 @@ public class InventoryController : MonoBehaviour
     }
     void Update()
     {
+        if(selectedItem != null)
+        {
+            Debug.Log(selectedItem.itemData.name);
+        }
+        else
+        {
+            Debug.Log("NULL!");
+        }
         ItemIconDrag();
         // if(inControl.action.triggered)
         // {
@@ -89,20 +97,10 @@ public class InventoryController : MonoBehaviour
         {
             selectedItem = null;
             inventoryHighlight.Show(false);
-        }
-        if(items.Contains(item.itemData))
-        {
-            for(int x = 0; x < item.onGridPositionX + item.WIDTH; x++)
-            {
-                for(int y = 0; y < item.HEIGHT; y++)
-                {
-                    selectedItemGrid.inventoryItemSlot[x, y] = null;
-                }
-            }
             Destroy(item.gameObject);
+            Debug.Log("Success");
         }
     }
-
     private void RotateItem(InputAction.CallbackContext context)
     {
         if(selectedItemGrid == null || selectedItem == null)
@@ -118,6 +116,7 @@ public class InventoryController : MonoBehaviour
     {
         if(selectedItemGrid == null) { return; }
         CreateItem(itemID);
+        ItemList.Instance.inventoryItems.Add(selectedItem);
         InventoryItem itemToInsert = selectedItem;
         selectedItem = null;
         InsertItem(itemToInsert);

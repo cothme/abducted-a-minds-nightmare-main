@@ -1824,6 +1824,7 @@ MonoBehaviour:
   canvasTransform: {fileID: 1253970103}
   inControl: {fileID: 8186308247974758262, guid: e60ecd8a52bdfec43a2ffa0d2428e7b1, type: 3}
   mouseLeftClick: {fileID: -5089110489838651150, guid: e60ecd8a52bdfec43a2ffa0d2428e7b1, type: 3}
+  selectedItem: {fileID: 0}
 --- !u!114 &739003031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4466,6 +4467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23a30c9507bd7640ba21174783e7afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryItems: []
 --- !u!4 &1627427801
 Transform:
   m_ObjectHideFlags: 0
@@ -4766,7 +4768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1977226333
 MonoBehaviour:
   m_ObjectHideFlags: 0

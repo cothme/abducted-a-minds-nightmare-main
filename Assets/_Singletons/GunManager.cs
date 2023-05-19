@@ -15,9 +15,11 @@ public class GunManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI bulletsCountText;
     [SerializeField] TextMeshProUGUI statusIndicator;
     [SerializeField] TextMeshProUGUI weaponIndicator;
+    InventoryController inventoryController;
     private string weaponEquipped;
     private int bulletsLoaded;
     private int totalBullets;
+    private int maxBullets = 30;
     public float reloadTime;
     private bool canEquipPistol, canEquipRifle, canEquipShotgun,canEquipKnife;
     int bulletToMinus;
@@ -28,6 +30,8 @@ public class GunManager : MonoBehaviour
     public bool CanEquipShotgun { get => canEquipShotgun; set => canEquipShotgun = value; }
     public bool CanEquipKnife { get => canEquipKnife; set => canEquipKnife = value; }
     public string WeaponEquipped { get => weaponEquipped; set => weaponEquipped = value; }
+    public int BulletsLoaded { get => bulletsLoaded; set => bulletsLoaded = value; }
+
     private void Initialize()
     {
         magazine = new List<int> {  };
@@ -36,76 +40,61 @@ public class GunManager : MonoBehaviour
     {
         weaponIndicator.text = WeaponEquipped;
         totalBulletsCountText.text = totalBullets.ToString();
-        bulletsCountText.text = bulletsLoaded.ToString();
+        bulletsCountText.text = BulletsLoaded.ToString();
     }
     public void Shoot()
     {
-        if(bulletsLoaded <= 0)
+        if(magazine.Count >= 1)
+        {
+            Debug.Log(magazine.Count);
+        }
+        else 
+        {
+            return;
+        }
+        if(BulletsLoaded <= 0)
         {
             return;
         }
         else
         {
-            bulletsLoaded -= 1;
+            BulletsLoaded -= 1;
             magazine[0] -= 1;
         }
     }
     public void Reload()
     {
-        if(totalBullets <= 0 || magazine.Count == 0)
-        {
-            return;
-        }
-        StartCoroutine(ReloadCoroutine());
+        StartCoroutine(ReloadCoroutine()); 
     }
     public void UpdateBullets()
     {   
         totalBullets = magazine.Sum() - bulletsLoaded;
     }
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-        Initialize();
-    }
     private IEnumerator ReloadCoroutine()
     {
-        float remainingTime = reloadTime;
-        while (remainingTime > 0)
+        if(magazine.Count >= 1)
         {
-            statusIndicator.text = "Reloading: " + reloadTime.ToString("F1");
-            yield return new WaitForSeconds(0.1f);
-            remainingTime -= 0.1f; 
-            // foreach (int clip in magazine)
-            // {
-            //     Debug.Log(clip);
-            // }
-        }   
-        if (magazine[0] <= 0)
+            if(magazine[0] <= 0)
             {
                 magazine.RemoveAt(0);
             }
-            if (bulletsLoaded == 0)
-            {
-                bulletToMinus = magazine[0];
-                totalBullets -= bulletToMinus;
-                bulletsLoaded += bulletToMinus;
-            }
-            else if (bulletsLoaded >= 30)
-            {
-                yield break;
-            }
-            else
-            {
-                bulletToMinus = 30 - bulletsLoaded;
-                bulletsLoaded += bulletToMinus;
-                totalBullets -= bulletToMinus;
-            }
+        }
+        else
+        {
+            Debug.Log("No bullets in magazine List!!");
+            yield break;
+        }
+        float remainingTime = reloadTime;
+        while (remainingTime > 0)
+        {
+            statusIndicator.text = "Reloading: " + remainingTime.ToString("F1");
+            yield return new WaitForSeconds(0.1f);
+            remainingTime -= 0.1f; 
+        }       
+        int reloadAmount = maxBullets - bulletsLoaded;
+        reloadAmount = (totalBullets - reloadAmount) >= 0 ? reloadAmount : totalBullets;
+        bulletsLoaded += reloadAmount;
+        totalBullets -= reloadAmount;       
     }
     public void CheckForWeapon()
     {
@@ -130,7 +119,7 @@ public class GunManager : MonoBehaviour
             }
         }
     }
-   public void SetWeaponChanges()
+    public void SetWeaponChanges()
    {
         switch (weaponEquipped)
         {
@@ -149,5 +138,17 @@ public class GunManager : MonoBehaviour
             default:
                 break;
         }
-   } 
+   }
+    private void Awake()
+    {
+        inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+        Initialize();
+    }
 }

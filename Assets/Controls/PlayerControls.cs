@@ -283,6 +283,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Drop Item "",
+                    ""type"": ""Button"",
+                    ""id"": ""26ba5fcd-a1eb-4c3a-b8c1-5ad10782da8a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -316,6 +324,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Use Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c33d27b3-ba47-4ff1-a8e3-f6236d094d5a"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop Item "",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -425,6 +444,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Inventory_SelectItem = m_Inventory.FindAction("Select Item", throwIfNotFound: true);
         m_Inventory_RotateItem = m_Inventory.FindAction("Rotate Item", throwIfNotFound: true);
         m_Inventory_UseItem = m_Inventory.FindAction("Use Item", throwIfNotFound: true);
+        m_Inventory_DropItem = m_Inventory.FindAction("Drop Item ", throwIfNotFound: true);
         // Weapon
         m_Weapon = asset.FindActionMap("Weapon", throwIfNotFound: true);
         m_Weapon_Weapon1 = m_Weapon.FindAction("Weapon 1", throwIfNotFound: true);
@@ -588,6 +608,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Inventory_SelectItem;
     private readonly InputAction m_Inventory_RotateItem;
     private readonly InputAction m_Inventory_UseItem;
+    private readonly InputAction m_Inventory_DropItem;
     public struct InventoryActions
     {
         private @PlayerControls m_Wrapper;
@@ -595,6 +616,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @SelectItem => m_Wrapper.m_Inventory_SelectItem;
         public InputAction @RotateItem => m_Wrapper.m_Inventory_RotateItem;
         public InputAction @UseItem => m_Wrapper.m_Inventory_UseItem;
+        public InputAction @DropItem => m_Wrapper.m_Inventory_DropItem;
         public InputActionMap Get() { return m_Wrapper.m_Inventory; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -613,6 +635,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @UseItem.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnUseItem;
                 @UseItem.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnUseItem;
                 @UseItem.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnUseItem;
+                @DropItem.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnDropItem;
+                @DropItem.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnDropItem;
+                @DropItem.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnDropItem;
             }
             m_Wrapper.m_InventoryActionsCallbackInterface = instance;
             if (instance != null)
@@ -626,6 +651,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @UseItem.started += instance.OnUseItem;
                 @UseItem.performed += instance.OnUseItem;
                 @UseItem.canceled += instance.OnUseItem;
+                @DropItem.started += instance.OnDropItem;
+                @DropItem.performed += instance.OnDropItem;
+                @DropItem.canceled += instance.OnDropItem;
             }
         }
     }
@@ -705,6 +733,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnSelectItem(InputAction.CallbackContext context);
         void OnRotateItem(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
+        void OnDropItem(InputAction.CallbackContext context);
     }
     public interface IWeaponActions
     {
