@@ -41,16 +41,31 @@ public class GunManager : MonoBehaviour
         weaponIndicator.text = WeaponEquipped;
         totalBulletsCountText.text = totalBullets.ToString();
         bulletsCountText.text = BulletsLoaded.ToString();
+        Debug.Log(magazine.Count + "      " + magazine[0]);
+        Debug.Log(inventoryController.selectedItem);
     }
     public void Shoot()
     {
-        if(magazine.Count >= 1)
+        if(magazine.Count > 0)
         {
-            Debug.Log(magazine.Count);
+            if(magazine[0] <= 0)
+            {   
+                magazine.RemoveAt(0);
+                foreach(InventoryItem i in ItemList.Instance.inventoryItems)
+                {
+                    if(i.itemData.name == "Ammo")
+                    {
+                        ItemList.Instance.inventoryItems.Remove(i);
+                        inventoryController.selectedItem = i;
+                        inventoryController.DeleteItem(inventoryController.selectedItem);
+                        break;
+                    }
+                }
+            }
         }
-        else 
+        else
         {
-            return;
+            Debug.Log("No magazines!!");
         }
         if(BulletsLoaded <= 0)
         {
@@ -72,18 +87,6 @@ public class GunManager : MonoBehaviour
     }
     private IEnumerator ReloadCoroutine()
     {
-        if(magazine.Count >= 1)
-        {
-            if(magazine[0] <= 0)
-            {
-                magazine.RemoveAt(0);
-            }
-        }
-        else
-        {
-            Debug.Log("No bullets in magazine List!!");
-            yield break;
-        }
         float remainingTime = reloadTime;
         while (remainingTime > 0)
         {
@@ -94,7 +97,7 @@ public class GunManager : MonoBehaviour
         int reloadAmount = maxBullets - bulletsLoaded;
         reloadAmount = (totalBullets - reloadAmount) >= 0 ? reloadAmount : totalBullets;
         bulletsLoaded += reloadAmount;
-        totalBullets -= reloadAmount;       
+        totalBullets -= reloadAmount;    
     }
     public void CheckForWeapon()
     {

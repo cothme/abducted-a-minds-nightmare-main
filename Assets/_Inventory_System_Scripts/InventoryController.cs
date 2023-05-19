@@ -50,14 +50,6 @@ public class InventoryController : MonoBehaviour
     }
     void Update()
     {
-        if(selectedItem != null)
-        {
-            Debug.Log(selectedItem.itemData.name);
-        }
-        else
-        {
-            Debug.Log("NULL!");
-        }
         ItemIconDrag();
         // if(inControl.action.triggered)
         // {
@@ -92,13 +84,12 @@ public class InventoryController : MonoBehaviour
     {
         // Destroy(GameObject.FindGameObjectWithTag(tag));
         // selectedItem = null;
-        if(selectedItem == null) { return; }
+        if(selectedItem == null) { Debug.Log("dsadasdas"); return; }
         if (selectedItem == item)
         {
             selectedItem = null;
             inventoryHighlight.Show(false);
             Destroy(item.gameObject);
-            Debug.Log("Success");
         }
     }
     private void RotateItem(InputAction.CallbackContext context)
