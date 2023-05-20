@@ -59,6 +59,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""FireMultipleBullets"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c50c2e2-32af-4af0-ab73-0aa396c8598a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold""
+                },
+                {
                     ""name"": ""Open Inventory"",
                     ""type"": ""Button"",
                     ""id"": ""aa966db1-29cd-4c24-9adc-b68f572235fb"",
@@ -253,6 +261,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40b6ca7e-ff5c-46ab-bb0c-f7710aeda766"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireMultipleBullets"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -434,6 +453,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_FireSingleBullet = m_Player.FindAction("Fire Single Bullet", throwIfNotFound: true);
+        m_Player_FireMultipleBullets = m_Player.FindAction("FireMultipleBullets", throwIfNotFound: true);
         m_Player_OpenInventory = m_Player.FindAction("Open Inventory", throwIfNotFound: true);
         m_Player_InteractPickupItem = m_Player.FindAction("Interact/Pickup Item", throwIfNotFound: true);
         m_Player_SelectItem = m_Player.FindAction("Select Item", throwIfNotFound: true);
@@ -505,6 +525,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_FireSingleBullet;
+    private readonly InputAction m_Player_FireMultipleBullets;
     private readonly InputAction m_Player_OpenInventory;
     private readonly InputAction m_Player_InteractPickupItem;
     private readonly InputAction m_Player_SelectItem;
@@ -519,6 +540,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @FireSingleBullet => m_Wrapper.m_Player_FireSingleBullet;
+        public InputAction @FireMultipleBullets => m_Wrapper.m_Player_FireMultipleBullets;
         public InputAction @OpenInventory => m_Wrapper.m_Player_OpenInventory;
         public InputAction @InteractPickupItem => m_Wrapper.m_Player_InteractPickupItem;
         public InputAction @SelectItem => m_Wrapper.m_Player_SelectItem;
@@ -548,6 +570,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @FireSingleBullet.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireSingleBullet;
                 @FireSingleBullet.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireSingleBullet;
                 @FireSingleBullet.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireSingleBullet;
+                @FireMultipleBullets.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireMultipleBullets;
+                @FireMultipleBullets.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireMultipleBullets;
+                @FireMultipleBullets.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireMultipleBullets;
                 @OpenInventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenInventory;
                 @OpenInventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenInventory;
                 @OpenInventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenInventory;
@@ -582,6 +607,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @FireSingleBullet.started += instance.OnFireSingleBullet;
                 @FireSingleBullet.performed += instance.OnFireSingleBullet;
                 @FireSingleBullet.canceled += instance.OnFireSingleBullet;
+                @FireMultipleBullets.started += instance.OnFireMultipleBullets;
+                @FireMultipleBullets.performed += instance.OnFireMultipleBullets;
+                @FireMultipleBullets.canceled += instance.OnFireMultipleBullets;
                 @OpenInventory.started += instance.OnOpenInventory;
                 @OpenInventory.performed += instance.OnOpenInventory;
                 @OpenInventory.canceled += instance.OnOpenInventory;
@@ -722,6 +750,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnFireSingleBullet(InputAction.CallbackContext context);
+        void OnFireMultipleBullets(InputAction.CallbackContext context);
         void OnOpenInventory(InputAction.CallbackContext context);
         void OnInteractPickupItem(InputAction.CallbackContext context);
         void OnSelectItem(InputAction.CallbackContext context);

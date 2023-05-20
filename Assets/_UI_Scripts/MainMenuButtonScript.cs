@@ -1,75 +1,51 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
 using System.Collections;
+using UnityEngine.EventSystems;
+using System;
 
 public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private Button button;
-    private RectTransform rectTransform;
-    private TextMeshProUGUI textMesh;
-    private Outline textOutline;
-    private bool isHovering = false;
-    [SerializeField] Color hoverColor;
-    [SerializeField] Color exitHoverColor;
-
+    public TextMeshProUGUI text;
+    private Vector3 originalPosition,targetPosition;
     void Start()
     {
-        button = GetComponent<Button>();
-        rectTransform = GetComponent<RectTransform>();
-        textMesh = GetComponentInChildren<TextMeshProUGUI>();
-        textOutline = textMesh.GetComponent<Outline>();
+        try
+        {
+            originalPosition = text.transform.localPosition;
+            targetPosition = new Vector3(100,0,0);
+        }
+        catch(NullReferenceException)
+        {
+            return;
+        } 
     }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
-        isHovering = true;
-        StartCoroutine(ButtonMoveAnimation(10f, hoverColor, true));
+        try
+        {
+            text.transform.localPosition = targetPosition;
+        }
+        catch(NullReferenceException)
+        {
+            return;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        isHovering = false;
-        StartCoroutine(ButtonMoveAnimation(-10f, Color.white, false));
+        try
+        {
+            text.transform.localPosition = originalPosition;
+        }
+        catch(NullReferenceException)
+        {
+            return;
+        }
     }
-
-    IEnumerator ButtonMoveAnimation(float moveAmount, Color color, bool enableOutline)
+    IEnumerator ButtonAnimation(Vector3 targetPosition)
     {
-        float duration = 0.2f;
-        float timer = 0f;
-        Vector2 startPosition = rectTransform.anchoredPosition;
-        Color startColor = textMesh.color;
-        bool startOutlineState = textOutline.enabled;
-
-        while (timer < duration)
-        {
-            float t = timer / duration;
-            rectTransform.anchoredPosition = Vector2.Lerp(startPosition, startPosition + new Vector2(moveAmount, 0f), t);
-            textMesh.color = Color.Lerp(startColor, color, t);
-            textOutline.enabled = enableOutline;
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        rectTransform.anchoredPosition = startPosition + new Vector2(moveAmount, 0f);
-        textMesh.color = color;
-        textOutline.enabled = enableOutline;
-
-        if (!isHovering)
-        {
-            timer = 0f;
-            while (timer < duration)
-            {
-                float t = timer / duration;
-                rectTransform.anchoredPosition = Vector2.Lerp(startPosition + new Vector2(moveAmount, 0f), startPosition, t);
-                textMesh.color = Color.Lerp(color, startColor, t);
-                timer += Time.deltaTime;
-                yield return null;
-            }
-
-            rectTransform.anchoredPosition = startPosition;
-            textMesh.color = startColor;
-        }
+        yield break;
     }
 }

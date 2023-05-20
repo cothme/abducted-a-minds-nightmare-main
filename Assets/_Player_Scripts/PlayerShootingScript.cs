@@ -16,6 +16,8 @@ public class PlayerShootingScript : MonoBehaviour
     InputAction fireButton;
     InputAction reloadButton;
     InputAction rifleButton,shotgunButton,pistolButton,knifeButton;
+    float shootTimer = 0f;
+    bool isShooting = false;
     #region Input Setup
     private void Awake()
     {
@@ -31,7 +33,6 @@ public class PlayerShootingScript : MonoBehaviour
         fireButton.Enable();
         fireButton.performed += Shoot;
         reloadButton = playerControls.Player.Reload;
-        reloadButton.performed += Reload;
         reloadButton.Enable();
         rifleButton.Enable();
         shotgunButton.Enable();
@@ -42,6 +43,17 @@ public class PlayerShootingScript : MonoBehaviour
         shotgunButton.performed += ChooseShotgun;
         pistolButton.performed += ChoosePistol;
         knifeButton.performed += ChooseKnife;
+    }
+    void Update()
+    {
+        if (Mouse.current.leftButton.isPressed && GunManager.Instance.WeaponEquipped == "Rifle" && !isShooting)
+        {
+            StartCoroutine(ShootRifleCoroutine()); // Start shooting coroutine
+        }
+        else
+        {
+            return;
+        }
     }
     private void OnDisable()
     {
@@ -57,9 +69,9 @@ public class PlayerShootingScript : MonoBehaviour
     {
         cameraTransform = Camera.main.transform;
     }
-    private void Shoot(InputAction.CallbackContext context)
+    private void ShootAssaultRifle()
     {
-        if(PlayerState.Instance.Aiming)
+        if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
         {
             playerParticleSystem.Emit(1);
             RaycastHit hit;
@@ -78,6 +90,45 @@ public class PlayerShootingScript : MonoBehaviour
             }
         } 
     }
+    private void Shoot(InputAction.CallbackContext context)
+    {
+        if(GunManager.Instance.WeaponEquipped == "Rifle")
+        {
+            return;
+        }
+        else
+        {
+            if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
+            {
+                playerParticleSystem.Emit(1);
+                RaycastHit hit;
+                GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
+                BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
+                GunManager.Instance.Shoot();
+                if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, Mathf.Infinity))
+                {
+                    bulletInstance.target = hit.point;
+                    bulletInstance.hit = true; 
+                }
+                else
+                {
+                    bulletInstance.target = cameraTransform.position + cameraTransform.forward * bulletMissDistance;
+                    bulletInstance.hit = true; 
+                }
+            } 
+        }
+    }
+    IEnumerator ShootRifleCoroutine()
+    {
+       isShooting = true;
+
+        while (Mouse.current.leftButton.isPressed)
+        {
+            ShootAssaultRifle();
+            yield return new WaitForSeconds(GunManager.Instance.attackSpeed);
+        }
+        isShooting = false;
+    }
     private void Reload(InputAction.CallbackContext context)
     {
         GunManager.Instance.Reload();
@@ -89,7 +140,6 @@ public class PlayerShootingScript : MonoBehaviour
         {
             GunManager.Instance.WeaponEquipped = "Rifle";
             GunManager.Instance.SetWeaponChanges();
-            Debug.Log(GunManager.Instance.reloadTime);
         }
     }
     void ChooseShotgun(InputAction.CallbackContext context)
@@ -99,7 +149,6 @@ public class PlayerShootingScript : MonoBehaviour
         {
             GunManager.Instance.WeaponEquipped = "Shotgun";
             GunManager.Instance.SetWeaponChanges();
-            Debug.Log(GunManager.Instance.reloadTime);
         }
     }
     void ChoosePistol(InputAction.CallbackContext context)
@@ -109,7 +158,6 @@ public class PlayerShootingScript : MonoBehaviour
         {
             GunManager.Instance.WeaponEquipped = "Pistol";
             GunManager.Instance.SetWeaponChanges();
-            Debug.Log(GunManager.Instance.reloadTime);
         }
     }
     void ChooseKnife(InputAction.CallbackContext context)
@@ -119,7 +167,6 @@ public class PlayerShootingScript : MonoBehaviour
         {
             GunManager.Instance.WeaponEquipped = "Knife";
             GunManager.Instance.SetWeaponChanges();
-            Debug.Log(GunManager.Instance.reloadTime);
         }
     }
 }

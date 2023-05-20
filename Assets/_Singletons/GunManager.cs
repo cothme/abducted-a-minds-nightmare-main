@@ -20,7 +20,7 @@ public class GunManager : MonoBehaviour
     private int bulletsLoaded;
     private int totalBullets;
     private int maxBullets = 30;
-    public float reloadTime;
+    public float reloadTime,attackSpeed;
     private bool canEquipPistol, canEquipRifle, canEquipShotgun,canEquipKnife;
     int bulletToMinus;
     private List<int> magazine;
@@ -41,14 +41,12 @@ public class GunManager : MonoBehaviour
         weaponIndicator.text = WeaponEquipped;
         totalBulletsCountText.text = totalBullets.ToString();
         bulletsCountText.text = BulletsLoaded.ToString();
-        Debug.Log(magazine.Count + "      " + magazine[0]);
-        Debug.Log(inventoryController.selectedItem);
     }
     public void Shoot()
     {
         if(magazine.Count > 0)
         {
-            if(magazine[0] <= 0)
+            if(magazine[0] <= 1)
             {   
                 magazine.RemoveAt(0);
                 foreach(InventoryItem i in ItemList.Instance.inventoryItems)
@@ -128,15 +126,19 @@ public class GunManager : MonoBehaviour
         {
             case "Rifle":
                 reloadTime = weapons[0].reloadSpeed;
+                attackSpeed = weapons[0].attackSpeed;
                 break;
             case "Shotgun":
                 reloadTime = weapons[1].reloadSpeed;
+                attackSpeed = weapons[0].attackSpeed;
                 break;
             case "Pistol":
                 reloadTime = weapons[2].reloadSpeed;
+                attackSpeed = weapons[0].attackSpeed;
                 break;
             case "Knife":
                 reloadTime = weapons[3].reloadSpeed;
+                attackSpeed = weapons[0].attackSpeed;
                 break;
             default:
                 break;

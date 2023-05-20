@@ -46,6 +46,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "FireMultipleBullets",
+                    "type": "Button",
+                    "id": "3c50c2e2-32af-4af0-ab73-0aa396c8598a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold"
+                },
+                {
                     "name": "Open Inventory",
                     "type": "Button",
                     "id": "aa966db1-29cd-4c24-9adc-b68f572235fb",
@@ -238,6 +246,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40b6ca7e-ff5c-46ab-bb0c-f7710aeda766",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireMultipleBullets",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

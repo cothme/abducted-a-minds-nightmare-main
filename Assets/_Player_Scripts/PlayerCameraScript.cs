@@ -52,11 +52,6 @@ public class PlayerCameraScript : MonoBehaviour
             PlayerRotateBaseOnCamera(playerTransform,cameraTransform);
         } 
     }
-    private void Shoot()
-    {
-        throw new NotImplementedException();
-    }
-
     float cameraZoomAmount(int maxValue)
     {
         scroll += Mouse.current.scroll.ReadValue().y;
@@ -77,17 +72,24 @@ public class PlayerCameraScript : MonoBehaviour
     }
     void StartAim(InputAction.CallbackContext context)
     {
-        PlayerState.Instance.Aiming = !PlayerState.Instance.Aiming;
-        if(PlayerState.Instance.Aiming)
+        if(GunManager.Instance.WeaponEquipped == null)
         {
-            aimCanvas.enabled = true;
-            virtualCamera.Priority = 9;
+            return;
         }
         else
         {
-            aimCanvas.enabled = false;
-            virtualCamera.Priority = 10;
-        }  
+            PlayerState.Instance.Aiming = !PlayerState.Instance.Aiming;
+            if(PlayerState.Instance.Aiming)
+            {
+                aimCanvas.enabled = true;
+                virtualCamera.Priority = 9;
+            }
+            else
+            {
+                aimCanvas.enabled = false;
+                virtualCamera.Priority = 10;
+            }  
+        }
     }
     void RecenterCamera()
     {
