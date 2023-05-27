@@ -16,6 +16,7 @@ public class PlayerShootingScript : MonoBehaviour
     InputAction fireButton;
     InputAction reloadButton;
     InputAction rifleButton,shotgunButton,pistolButton,knifeButton;
+    float shootTimer = 0f;
     bool isShooting = false;
     #region Input Setup
     private void Awake()
