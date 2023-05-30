@@ -9,8 +9,6 @@ using System;
 
 public class PlayerInteractScript : MonoBehaviour
 {
-    [SerializeField] CanvasGroup inventoryCanvas;
-    [SerializeField] Canvas interactCanvas;
     [SerializeField] Transform cameraTransform;
     InventoryController inventoryController;
     PlayerControls playerControls;
@@ -48,15 +46,19 @@ public class PlayerInteractScript : MonoBehaviour
         inventoryOpen = !inventoryOpen;
         if(inventoryOpen) 
         {   
+            gameObject.GetComponent<PlayerMovement>().enabled = false;
             Cursor.lockState = CursorLockMode.None;
-            inventoryCanvas.alpha = 1;
+            CanvasManager.Instance.InventoryCanvas.alpha = 1;
+            CanvasManager.Instance.MainCanvas.enabled = false;
             Cursor.visible = true;
             GameObject.Find("Main Camera").GetComponent<CinemachineBrain>().enabled = false;
         } 
         else
         {
+            gameObject.GetComponent<PlayerMovement>().enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
-            inventoryCanvas.alpha = 0;
+            CanvasManager.Instance.InventoryCanvas.alpha = 0;
+            CanvasManager.Instance.MainCanvas.enabled = true;
             Cursor.visible = false;
             GameObject.Find("Main Camera").GetComponent<CinemachineBrain>().enabled = true;
         }
@@ -71,7 +73,7 @@ public class PlayerInteractScript : MonoBehaviour
                 hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                 lastLookedObject = hit.collider.gameObject;
                 string itemName = lastLookedObject.name;
-                interactCanvas.enabled = true;
+                CanvasManager.Instance.PressEtoInsertCanvas.enabled = true;
                 PickUpItem(lastLookedObject,itemName);
             }
             else if(lastLookedObject is null)
@@ -87,7 +89,7 @@ public class PlayerInteractScript : MonoBehaviour
                 else
                 {
                     lastLookedObject.GetComponent<MeshRenderer>().material.color = Color.white;
-                    interactCanvas.enabled = false;
+                    CanvasManager.Instance.PressEtoInsertCanvas.enabled = false;
                 }
             }
         } 
@@ -98,7 +100,7 @@ public class PlayerInteractScript : MonoBehaviour
         {
             ItemList.Instance.AddItem(itemName);
             inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
-            interactCanvas.enabled = false;
+            CanvasManager.Instance.PressEtoInsertCanvas.enabled = false;
             Destroy(itemObject);
         } 
     }

@@ -16,6 +16,7 @@ public class ControlsManager : MonoBehaviour
     private bool isPistolButtonDown;
     private bool isKnifeButtonDown;
     private bool isReloadButtonDown;
+    private bool isPauseButtonDown;
     public bool IsJumpButtonDown { get { return isJumpButtonDown; } }
     public bool IsFireButtonDown { get { return isFireButtonDown; } }
     public bool IsTabDown { get => isTabDown; set => isTabDown = value; }
@@ -26,6 +27,7 @@ public class ControlsManager : MonoBehaviour
     public bool IsPistolButtonDown { get => isPistolButtonDown; set => isPistolButtonDown = value; }
     public bool IsKnifeButtonDown { get => isKnifeButtonDown; set => isKnifeButtonDown = value; }
     public bool IsReloadButtonDown { get => isReloadButtonDown; set => isReloadButtonDown = value; }
+    public bool IsPauseButtonDown { get => isPauseButtonDown; set => isPauseButtonDown = value; }
 
     private void Update()
     {
@@ -39,6 +41,7 @@ public class ControlsManager : MonoBehaviour
         isPistolButtonDown = Input.GetKeyDown(KeyCode.Alpha3);
         isKnifeButtonDown = Input.GetKeyDown(KeyCode.Alpha4);
         isReloadButtonDown = Input.GetKeyDown(KeyCode.R);
+        isPauseButtonDown = Input.GetKeyDown(KeyCode.Escape);
     }
     private void Awake()
     {

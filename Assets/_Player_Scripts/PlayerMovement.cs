@@ -45,6 +45,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         groundedPlayer = controller.isGrounded;
+        if(ControlsManager.Instance.IsPauseButtonDown)
+        {
+            PlayerState.Instance.Paused = !PlayerState.Instance.Paused;
+            CanvasManager.Instance.PauseCanvas.enabled = true;
+        }
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
