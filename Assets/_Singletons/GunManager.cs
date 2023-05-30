@@ -80,7 +80,7 @@ public class GunManager : MonoBehaviour
         }
         catch (ArgumentOutOfRangeException)
         {
-            Debug.Log("dsad");
+            return;
         }
     }
     public void reloadInGunManager()

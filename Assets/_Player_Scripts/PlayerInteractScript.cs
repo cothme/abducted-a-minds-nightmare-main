@@ -6,9 +6,11 @@ using TMPro;
 using Cinemachine;
 using System.Linq;
 using System;
+using TMPro;
 
 public class PlayerInteractScript : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI itemNameUI;
     [SerializeField] Transform cameraTransform;
     InventoryController inventoryController;
     PlayerControls playerControls;
@@ -73,6 +75,7 @@ public class PlayerInteractScript : MonoBehaviour
                 hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                 lastLookedObject = hit.collider.gameObject;
                 string itemName = lastLookedObject.name;
+                itemNameUI.text = itemName;
                 CanvasManager.Instance.PressEtoInsertCanvas.enabled = true;
                 PickUpItem(lastLookedObject,itemName);
             }
