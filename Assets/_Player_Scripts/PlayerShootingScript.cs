@@ -12,59 +12,40 @@ public class PlayerShootingScript : MonoBehaviour
     [SerializeField] GameObject bulletPreFab;
     [SerializeField] Transform bulletTransform;
     [SerializeField] float bulletMissDistance = 25f;
-    PlayerControls playerControls;
-    InputAction fireButton;
-    InputAction reloadButton;
-    InputAction rifleButton,shotgunButton,pistolButton,knifeButton;
     float shootTimer = 0f;
     bool isShooting = false;
-    #region Input Setup
-    private void Awake()
-    {
-        playerControls = new PlayerControls();
-    }
-     private void OnEnable()
-    {
-        rifleButton = playerControls.Weapon.Weapon1;
-        shotgunButton = playerControls.Weapon.Weapon2;
-        pistolButton = playerControls.Weapon.Weapon3;
-        knifeButton = playerControls.Weapon.Weapon4;
-        fireButton = playerControls.Player.FireSingleBullet;
-        fireButton.Enable();
-        fireButton.performed += Shoot;
-        reloadButton = playerControls.Player.Reload;
-        reloadButton.Enable();
-        rifleButton.Enable();
-        shotgunButton.Enable();
-        pistolButton.Enable();
-        knifeButton.Enable();
-        reloadButton.performed += Reload;
-        rifleButton.performed += ChooseRifle;
-        shotgunButton.performed += ChooseShotgun;
-        pistolButton.performed += ChoosePistol;
-        knifeButton.performed += ChooseKnife;
-    }
     void Update()
     {
-        if (Mouse.current.leftButton.isPressed && GunManager.Instance.WeaponEquipped == "Rifle" && !isShooting)
+        if(ControlsManager.Instance.IsRifleButtonDown)
         {
-            StartCoroutine(ShootRifleCoroutine()); // Start shooting coroutine
+            ChooseRifle();
         }
-        else
+        else if(ControlsManager.Instance.IsShotgunButtonDown)
         {
-            return;
+            ChooseShotgun();
+        }
+        else if(ControlsManager.Instance.IsPistolButtonDown)
+        {
+            ChoosePistol();
+        }
+        else if(ControlsManager.Instance.IsKnifeButtonDown)
+        {
+            ChooseKnife();
+        }
+        if (Input.GetMouseButton(0) && GunManager.Instance.WeaponEquipped == "Rifle" && !isShooting)
+        {
+            StartCoroutine(ShootRifleCoroutine());
+        }
+        if(Input.GetMouseButtonDown(0) && GunManager.Instance.WeaponEquipped != "Rifle" && !isShooting)
+        {
+            Debug.Log("ssss");
+            StartCoroutine(ShootCoroutine());
+        }
+        if(ControlsManager.Instance.IsReloadButtonDown)
+        {
+            Reload();
         }
     }
-    private void OnDisable()
-    {
-        fireButton.Disable();
-        reloadButton.Disable();
-        rifleButton.Disable();
-        shotgunButton.Disable();
-        pistolButton.Disable();
-        knifeButton.Disable();
-    }
-    #endregion
     void Start()
     {
         cameraTransform = Camera.main.transform;
@@ -77,7 +58,7 @@ public class PlayerShootingScript : MonoBehaviour
             RaycastHit hit;
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
             BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
-            GunManager.Instance.Shoot();
+            GunManager.Instance.shootInGunManager();
             if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, Mathf.Infinity))
             {
                 bulletInstance.target = hit.point;
@@ -90,31 +71,24 @@ public class PlayerShootingScript : MonoBehaviour
             }
         } 
     }
-    private void Shoot(InputAction.CallbackContext context)
+    private void Shoot()
     {
-        if(GunManager.Instance.WeaponEquipped == "Rifle")
+        if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
         {
-            return;
-        }
-        else
-        {
-            if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
+            playerParticleSystem.Emit(1);
+            RaycastHit hit;
+            GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
+            BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
+            GunManager.Instance.shootInGunManager();
+            if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, Mathf.Infinity))
             {
-                playerParticleSystem.Emit(1);
-                RaycastHit hit;
-                GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
-                BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
-                GunManager.Instance.Shoot();
-                if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, Mathf.Infinity))
-                {
-                    bulletInstance.target = hit.point;
-                    bulletInstance.hit = true; 
-                }
-                else
-                {
-                    bulletInstance.target = cameraTransform.position + cameraTransform.forward * bulletMissDistance;
-                    bulletInstance.hit = true; 
-                }
+                bulletInstance.target = hit.point;
+                bulletInstance.hit = true; 
+            }
+            else
+            {
+                bulletInstance.target = cameraTransform.position + cameraTransform.forward * bulletMissDistance;
+                bulletInstance.hit = true; 
             } 
         }
     }
@@ -129,41 +103,52 @@ public class PlayerShootingScript : MonoBehaviour
         }
         isShooting = false;
     }
-    private void Reload(InputAction.CallbackContext context)
-    {
-        GunManager.Instance.Reload();
+    IEnumerator ShootCoroutine()
+    {   
+        isShooting = false;
+        if(!isShooting)
+        {
+            isShooting = true;
+            Shoot();
+        }
+        yield return new WaitForSeconds(GunManager.Instance.attackSpeed);        
+        isShooting = false;
     }
-    void ChooseRifle(InputAction.CallbackContext context)
+    private void Reload()
+    {
+        GunManager.Instance.reloadInGunManager();
+    }
+    void ChooseRifle()
     {
         GunManager.Instance.CheckForWeapon();
-        if(GunManager.Instance.CanEquipRifle)
+        if(GunManager.Instance.CanEquipRifle && !PlayerState.Instance.Reloading)
         {
             GunManager.Instance.WeaponEquipped = "Rifle";
             GunManager.Instance.SetWeaponChanges();
         }
     }
-    void ChooseShotgun(InputAction.CallbackContext context)
+    void ChooseShotgun()
     {
         GunManager.Instance.CheckForWeapon();
-        if(GunManager.Instance.CanEquipShotgun)
+        if(GunManager.Instance.CanEquipShotgun && !PlayerState.Instance.Reloading)
         {
             GunManager.Instance.WeaponEquipped = "Shotgun";
             GunManager.Instance.SetWeaponChanges();
         }
     }
-    void ChoosePistol(InputAction.CallbackContext context)
+    void ChoosePistol()
     {
         GunManager.Instance.CheckForWeapon();
-        if(GunManager.Instance.CanEquipPistol)
+        if(GunManager.Instance.CanEquipPistol && !PlayerState.Instance.Reloading)
         {
             GunManager.Instance.WeaponEquipped = "Pistol";
             GunManager.Instance.SetWeaponChanges();
         }
     }
-    void ChooseKnife(InputAction.CallbackContext context)
+    void ChooseKnife()
     {
         GunManager.Instance.CheckForWeapon();
-        if(GunManager.Instance.CanEquipKnife)
+        if(GunManager.Instance.CanEquipKnife && !PlayerState.Instance.Reloading)
         {
             GunManager.Instance.WeaponEquipped = "Knife";
             GunManager.Instance.SetWeaponChanges();

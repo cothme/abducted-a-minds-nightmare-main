@@ -17,24 +17,24 @@ public class GunManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI weaponIndicator;
     InventoryController inventoryController;
     private string weaponEquipped;
-    private int bulletsLoaded;
-    private int totalBullets;
-    private int maxBullets = 30;
+    private float bulletsLoaded;
+    private float totalBullets;
+    private float capacity;
     public float reloadTime,attackSpeed;
     private bool canEquipPistol, canEquipRifle, canEquipShotgun,canEquipKnife;
-    int bulletToMinus;
-    private List<int> magazine;
-    public List<int> Magazine { get => magazine; set => magazine = value; }
+    float bulletToMinus;
+    private List<float> magazine;
+    public List<float> Magazine { get => magazine; set => magazine = value; }
     public bool CanEquipPistol { get => canEquipPistol; set => canEquipPistol = value; }
     public bool CanEquipRifle { get => canEquipRifle; set => canEquipRifle = value; }
     public bool CanEquipShotgun { get => canEquipShotgun; set => canEquipShotgun = value; }
     public bool CanEquipKnife { get => canEquipKnife; set => canEquipKnife = value; }
     public string WeaponEquipped { get => weaponEquipped; set => weaponEquipped = value; }
-    public int BulletsLoaded { get => bulletsLoaded; set => bulletsLoaded = value; }
+    public float BulletsLoaded { get => bulletsLoaded; set => bulletsLoaded = value; }
 
     private void Initialize()
     {
-        magazine = new List<int> {  };
+        magazine = new List<float> {  };
     }
     private void Update()
     {
@@ -42,42 +42,57 @@ public class GunManager : MonoBehaviour
         totalBulletsCountText.text = totalBullets.ToString();
         bulletsCountText.text = BulletsLoaded.ToString();
     }
-    public void Shoot()
+    public void shootInGunManager()
     {
-        if(magazine.Count > 0)
+        try
         {
-            if(magazine[0] <= 1)
-            {   
-                magazine.RemoveAt(0);
-                foreach(InventoryItem i in ItemList.Instance.inventoryItems)
+            if(BulletsLoaded < 0)
                 {
-                    if(i.itemData.name == "Ammo")
+                    Debug.Log("No Bullets!");
+                    return;
+                }
+                else
+                {
+                    BulletsLoaded -= 1;
+                    magazine[0] -= 1;
+                }
+            if(magazine.Count > 0)
+            {
+                if(magazine[0] <= 1)
+                {   
+                    magazine.RemoveAt(0);
+                    foreach(InventoryItem i in ItemList.Instance.inventoryItems)
                     {
-                        ItemList.Instance.inventoryItems.Remove(i);
-                        inventoryController.selectedItem = i;
-                        inventoryController.DeleteItem(inventoryController.selectedItem);
-                        break;
+                        if(i.itemData.name == "Ammo")
+                        {
+                            ItemList.Instance.inventoryItems.Remove(i);
+                            inventoryController.selectedItem = i;
+                            inventoryController.DeleteItem(inventoryController.selectedItem);
+                            break;
+                        }
                     }
                 }
             }
+            else
+            {
+                return;
+            }
         }
-        else
+        catch (ArgumentOutOfRangeException)
         {
-            Debug.Log("No magazines!!");
+            Debug.Log("dsad");
         }
-        if(BulletsLoaded <= 0)
+    }
+    public void reloadInGunManager()
+    {
+        if(bulletsLoaded == capacity)
         {
             return;
         }
         else
         {
-            BulletsLoaded -= 1;
-            magazine[0] -= 1;
+            StartCoroutine(ReloadCoroutine()); 
         }
-    }
-    public void Reload()
-    {
-        StartCoroutine(ReloadCoroutine()); 
     }
     public void UpdateBullets()
     {   
@@ -85,21 +100,26 @@ public class GunManager : MonoBehaviour
     }
     private IEnumerator ReloadCoroutine()
     {
-        float remainingTime = reloadTime;
-        while (remainingTime > 0)
+        if(!PlayerState.Instance.Reloading)
         {
-            statusIndicator.text = "Reloading: " + remainingTime.ToString("F1");
-            yield return new WaitForSeconds(0.1f);
-            remainingTime -= 0.1f; 
-        }       
-        int reloadAmount = maxBullets - bulletsLoaded;
-        reloadAmount = (totalBullets - reloadAmount) >= 0 ? reloadAmount : totalBullets;
-        bulletsLoaded += reloadAmount;
-        totalBullets -= reloadAmount;    
+            PlayerState.Instance.Reloading = true;  
+            float remainingTime = reloadTime;
+            while (remainingTime > 0)
+            {
+                statusIndicator.text = "Reloading: " + remainingTime.ToString("F1");
+                yield return new WaitForSeconds(0.1f);
+                remainingTime -= 0.1f; 
+            }       
+            float reloadAmount = capacity - bulletsLoaded;
+            reloadAmount = (totalBullets - reloadAmount) >= 0 ? reloadAmount : totalBullets;
+            bulletsLoaded += reloadAmount;
+            totalBullets -= reloadAmount;  
+            PlayerState.Instance.Reloading = false;  
+        }
     }
     public void CheckForWeapon()
     {
-        foreach (int item in ItemList.Instance.Itemlist)
+        foreach (float item in ItemList.Instance.Itemlist)
         {
             switch (item)
             {
@@ -127,18 +147,40 @@ public class GunManager : MonoBehaviour
             case "Rifle":
                 reloadTime = weapons[0].reloadSpeed;
                 attackSpeed = weapons[0].attackSpeed;
+                capacity = weapons[0].capacity;
+                if(bulletsLoaded > capacity)
+                {
+                    float bulletsStored = bulletsLoaded - capacity;
+                    bulletsLoaded = capacity;
+                    totalBullets += bulletsStored;
+                }
                 break;
             case "Shotgun":
                 reloadTime = weapons[1].reloadSpeed;
-                attackSpeed = weapons[0].attackSpeed;
+                attackSpeed = weapons[1].attackSpeed;
+                capacity = weapons[1].capacity;
+                if(bulletsLoaded > capacity)
+                {
+                    float bulletsStored = bulletsLoaded - capacity;
+                    bulletsLoaded = capacity;
+                    totalBullets += bulletsStored;
+                }
                 break;
             case "Pistol":
                 reloadTime = weapons[2].reloadSpeed;
-                attackSpeed = weapons[0].attackSpeed;
+                attackSpeed = weapons[2].attackSpeed;
+                capacity = weapons[2].capacity;
+                if(bulletsLoaded > capacity)
+                {
+                    float bulletsStored = bulletsLoaded - capacity;
+                    bulletsLoaded = capacity;
+                    totalBullets += bulletsStored;
+                }
                 break;
             case "Knife":
                 reloadTime = weapons[3].reloadSpeed;
-                attackSpeed = weapons[0].attackSpeed;
+                attackSpeed = weapons[3].attackSpeed;
+                capacity = weapons[3].capacity;
                 break;
             default:
                 break;

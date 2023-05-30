@@ -10,7 +10,6 @@ public class ItemList : MonoBehaviour
     private List<int> itemList = new List<int>();
     public List<int>Itemlist { get { return new List<int>(itemList); }}
     public List<InventoryItem> inventoryItems = new List<InventoryItem>();
-
     public void AddItem(string name)
     {
         switch(name)
@@ -26,17 +25,20 @@ public class ItemList : MonoBehaviour
             case "Knife":
             itemList.Add(2);
             break;
-            case "Mask":
+            case "Space Mask":
             itemList.Add(3);
             break;
             case "Oxygen Kit":
             itemList.Add(4);
             break;
-            case "Pistol":
+            case "Handgun":
             itemList.Add(5);
             break;
             case "Shotgun":
             itemList.Add(6);
+            break;
+            case "Health Kit":
+            itemList.Add(7);
             break;
         }
     }

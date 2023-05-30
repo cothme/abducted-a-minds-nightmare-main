@@ -5,10 +5,10 @@ using UnityEngine.InputSystem;
 using TMPro;
 using Cinemachine;
 using System.Linq;
+using System;
 
 public class PlayerInteractScript : MonoBehaviour
 {
-    [SerializeField] InputActionReference interactControl;
     [SerializeField] CanvasGroup inventoryCanvas;
     [SerializeField] Canvas interactCanvas;
     [SerializeField] Transform cameraTransform;
@@ -16,36 +16,15 @@ public class PlayerInteractScript : MonoBehaviour
     PlayerControls playerControls;
     InputAction openInventoryButton,interactButton,dropButton;
     bool inventoryOpen = false;
+    Color currentColor;
     RaycastHit hit;
     Ray ray;
     public LayerMask layerMask;
     GameObject lastLookedObject;
-    #region Input Setup
     private void Awake()
     {
         inventoryController = FindObjectOfType(typeof(InventoryController)) as  InventoryController;
-        playerControls = new PlayerControls();
     }
-    private void OnEnable()
-    {
-        dropButton = playerControls.Inventory.DropItem;
-        dropButton.Enable();
-        dropButton.performed += DropItem;
-        interactButton = playerControls.Player.InteractPickupItem;
-        interactButton.Enable();
-        openInventoryButton = playerControls.Player.OpenInventory;
-        openInventoryButton.Enable();
-        openInventoryButton.performed += OpenInventory;
-        interactControl.action.Enable();
-    }
-    private void OnDisable()
-    {   
-        dropButton.Disable();
-        interactButton.Disable();
-        openInventoryButton.Disable();
-        interactControl.action.Disable();
-    }
-    #endregion
     void Start()
     {
         cameraTransform = Camera.main.transform;
@@ -55,8 +34,16 @@ public class PlayerInteractScript : MonoBehaviour
     void Update()
     { 
         LookAtItem();
+        if(ControlsManager.Instance.IsTabDown)
+        {
+            OpenInventory();
+        }
+        if(ControlsManager.Instance.IsDropButtonDown)
+        {
+            DropItem();
+        }
     }
-    void OpenInventory(InputAction.CallbackContext context)
+    void OpenInventory()
     {
         inventoryOpen = !inventoryOpen;
         if(inventoryOpen) 
@@ -81,7 +68,7 @@ public class PlayerInteractScript : MonoBehaviour
         {
             if(hit.collider.tag == "Item")
             {
-                hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                 lastLookedObject = hit.collider.gameObject;
                 string itemName = lastLookedObject.name;
                 interactCanvas.enabled = true;
@@ -99,7 +86,7 @@ public class PlayerInteractScript : MonoBehaviour
                 }
                 else
                 {
-                    lastLookedObject.GetComponent<Renderer>().material.color = Color.white;
+                    lastLookedObject.GetComponent<MeshRenderer>().material.color = Color.white;
                     interactCanvas.enabled = false;
                 }
             }
@@ -107,7 +94,7 @@ public class PlayerInteractScript : MonoBehaviour
     }
     void PickUpItem(GameObject itemObject,string itemName)
     {       
-        if(playerControls.Player.InteractPickupItem.triggered)
+        if(ControlsManager.Instance.IsPickUpButtonDown)
         {
             ItemList.Instance.AddItem(itemName);
             inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
@@ -115,10 +102,16 @@ public class PlayerInteractScript : MonoBehaviour
             Destroy(itemObject);
         } 
     }
-    void DropItem(InputAction.CallbackContext context)
-    {            
-        ItemList.Instance.DropItem(inventoryController.selectedItem.itemData.name);  
-        inventoryController.DeleteItem(inventoryController.selectedItem);     
+    void DropItem()
+    {   
+        try
+        {
+            ItemList.Instance.DropItem(inventoryController.selectedItem.itemData.name);  
+            inventoryController.DeleteItem(inventoryController.selectedItem);     
+        }catch(NullReferenceException)
+        {
+            return;
+        }             
     }
     void GameplayPause(bool enabled)
     {

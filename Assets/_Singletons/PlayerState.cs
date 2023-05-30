@@ -6,7 +6,9 @@ public class PlayerState : MonoBehaviour
 {
     public static PlayerState Instance;
     private bool aiming;
+    private bool reloading;
     public bool Aiming { get => aiming; set => aiming = value; }
+    public bool Reloading { get => reloading; set => reloading = value; }
 
     private void Awake()
     {

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d18ce0b465a3d9f40a7292820bb760a7, type: 3}
-  m_Name: Shotgun
+  m_Script: {fileID: 11500000, guid: dc3e8a9ac5a809b46a2b2d304adb5b8e, type: 3}
+  m_Name: Health Kit
   m_EditorClassIdentifier: 
-  reloadSpeed: 3.03
-  damage: 4
-  attackSpeed: 2
-  capacity: 6
+  width: 1
+  height: 1
+  itemIcon: {fileID: 21300000, guid: 8e2bbf0c3cbbd1b4ca09bb3b17cf06f5, type: 3}
+  model: {fileID: 0}
