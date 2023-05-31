@@ -8,9 +8,11 @@ public class PlayerState : MonoBehaviour
     private bool aiming;
     private bool reloading;
     private bool paused = false;
+    private float moving;
     public bool Aiming { get => aiming; set => aiming = value; }
     public bool Reloading { get => reloading; set => reloading = value; }
     public bool Paused { get => paused; set => paused = value; }
+    public float Moving { get => moving; set => moving = value; }
 
     private void Awake()
     {

@@ -16,3 +16,4 @@ MonoBehaviour:
   damage: 3
   attackSpeed: 0.1
   capacity: 20
+  weaponRecoil: 3

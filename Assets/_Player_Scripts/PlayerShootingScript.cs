@@ -11,8 +11,9 @@ public class PlayerShootingScript : MonoBehaviour
     [SerializeField] Transform cameraTransform;
     [SerializeField] GameObject bulletPreFab;
     [SerializeField] Transform bulletTransform;
+    [SerializeField] GameObject aimCamera;
     [SerializeField] float bulletMissDistance = 25f;
-    float shootTimer = 0f;
+    WeaponRecoil recoil;
     bool isShooting = false;
     void Update()
     {
@@ -38,7 +39,6 @@ public class PlayerShootingScript : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(0) && GunManager.Instance.WeaponEquipped != "Rifle" && !isShooting)
         {
-            Debug.Log("ssss");
             StartCoroutine(ShootCoroutine());
         }
         if(ControlsManager.Instance.IsReloadButtonDown)
@@ -49,6 +49,7 @@ public class PlayerShootingScript : MonoBehaviour
     void Start()
     {
         cameraTransform = Camera.main.transform;
+        recoil = aimCamera.GetComponent<WeaponRecoil>();
     }
     private void ShootAssaultRifle()
     {
@@ -75,6 +76,7 @@ public class PlayerShootingScript : MonoBehaviour
     {
         if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
         {
+            recoil.StartShooting();
             playerParticleSystem.Emit(1);
             RaycastHit hit;
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
@@ -111,7 +113,7 @@ public class PlayerShootingScript : MonoBehaviour
             isShooting = true;
             Shoot();
         }
-        yield return new WaitForSeconds(GunManager.Instance.attackSpeed);        
+        yield return new WaitForSeconds(GunManager.Instance.attackSpeed);       
         isShooting = false;
     }
     private void Reload()

@@ -6,7 +6,6 @@ using TMPro;
 using Cinemachine;
 using System.Linq;
 using System;
-using TMPro;
 
 public class PlayerInteractScript : MonoBehaviour
 {
@@ -117,9 +116,5 @@ public class PlayerInteractScript : MonoBehaviour
         {
             return;
         }             
-    }
-    void GameplayPause(bool enabled)
-    {
-        
     }
 }

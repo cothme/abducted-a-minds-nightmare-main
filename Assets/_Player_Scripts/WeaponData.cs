@@ -9,4 +9,5 @@ public class WeaponData : ScriptableObject
     public float damage;
     public float attackSpeed;
     public float capacity;
+    public float weaponRecoil;
 }
