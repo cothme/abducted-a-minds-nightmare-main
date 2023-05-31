@@ -69,9 +69,8 @@ public class PlayerMovement : MonoBehaviour
         Vector2 movementDirection = movementControl.ReadValue<Vector2>();
 
         Vector3 move = new Vector3(movementDirection.x,0,movementDirection.y);
-        Debug.Log(move.z);
-        PlayerState.Instance.Moving = move.z;
-
+        PlayerState.Instance.MovingX = move.x;
+        PlayerState.Instance.MovingZ = move.z;
         move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
         move.y = 0;
 
