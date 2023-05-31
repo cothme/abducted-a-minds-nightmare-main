@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 playerVelocity;
     bool groundedPlayer;
     Transform cameraTransform;
-    [SerializeField] float playerSpeed = 2.0f;
+    [SerializeField] float playerSpeed = 6.0f;
     [SerializeField] float jumpHeight = 1.0f;
     [SerializeField] float gravityValue = -9.81f;
     [SerializeField] float rotationSpeed = 4f;
@@ -50,6 +50,18 @@ public class PlayerMovement : MonoBehaviour
             PlayerState.Instance.Paused = !PlayerState.Instance.Paused;
             CanvasManager.Instance.PauseCanvas.enabled = true;
         }
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            playerSpeed += 2f;
+            if(playerSpeed >= 10f)
+            {
+                playerSpeed = 20f;
+            }
+        }
+        if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            playerSpeed = 6f;
+        }
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -57,8 +69,8 @@ public class PlayerMovement : MonoBehaviour
         Vector2 movementDirection = movementControl.ReadValue<Vector2>();
 
         Vector3 move = new Vector3(movementDirection.x,0,movementDirection.y);
-        PlayerState.Instance.Moving = move.z;
-
+        PlayerState.Instance.MovingX = move.x;
+        PlayerState.Instance.MovingZ = move.z;
         move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
         move.y = 0;
 

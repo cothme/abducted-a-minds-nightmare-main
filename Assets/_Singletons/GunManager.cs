@@ -16,10 +16,12 @@ public class GunManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI statusIndicator;
     [SerializeField] TextMeshProUGUI weaponIndicator;
     InventoryController inventoryController;
+
     private string weaponEquipped;
     private float bulletsLoaded;
     private float totalBullets;
     private float capacity;
+    private float recoil;
     public float reloadTime,attackSpeed;
     private bool canEquipPistol, canEquipRifle, canEquipShotgun,canEquipKnife;
     float bulletToMinus;
@@ -53,6 +55,7 @@ public class GunManager : MonoBehaviour
                 }
                 else
                 {
+
                     BulletsLoaded -= 1;
                     magazine[0] -= 1;
                 }
@@ -148,6 +151,7 @@ public class GunManager : MonoBehaviour
                 reloadTime = weapons[0].reloadSpeed;
                 attackSpeed = weapons[0].attackSpeed;
                 capacity = weapons[0].capacity;
+                recoil = weapons[0].weaponRecoil;
                 if(bulletsLoaded > capacity)
                 {
                     float bulletsStored = bulletsLoaded - capacity;
@@ -159,6 +163,7 @@ public class GunManager : MonoBehaviour
                 reloadTime = weapons[1].reloadSpeed;
                 attackSpeed = weapons[1].attackSpeed;
                 capacity = weapons[1].capacity;
+                recoil = weapons[1].weaponRecoil;
                 if(bulletsLoaded > capacity)
                 {
                     float bulletsStored = bulletsLoaded - capacity;
@@ -170,6 +175,7 @@ public class GunManager : MonoBehaviour
                 reloadTime = weapons[2].reloadSpeed;
                 attackSpeed = weapons[2].attackSpeed;
                 capacity = weapons[2].capacity;
+                recoil = weapons[2].weaponRecoil;
                 if(bulletsLoaded > capacity)
                 {
                     float bulletsStored = bulletsLoaded - capacity;
@@ -181,6 +187,7 @@ public class GunManager : MonoBehaviour
                 reloadTime = weapons[3].reloadSpeed;
                 attackSpeed = weapons[3].attackSpeed;
                 capacity = weapons[3].capacity;
+                recoil = weapons[3].weaponRecoil;
                 break;
             default:
                 break;
