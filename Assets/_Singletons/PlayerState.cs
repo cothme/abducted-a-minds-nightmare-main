@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour
 {
     public static PlayerState Instance;
+
+    private float moving;
+
     private bool aiming;
     private bool reloading;
     private bool paused = false;
