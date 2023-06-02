@@ -14,9 +14,7 @@ public class GunManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI totalBulletsCountText;
     [SerializeField] TextMeshProUGUI bulletsCountText;
     [SerializeField] TextMeshProUGUI statusIndicator;
-    [SerializeField] TextMeshProUGUI weaponIndicator;
     InventoryController inventoryController;
-
     private string weaponEquipped;
     private float bulletsLoaded;
     private float totalBullets;
@@ -40,7 +38,7 @@ public class GunManager : MonoBehaviour
     }
     private void Update()
     {
-        weaponIndicator.text = WeaponEquipped;
+        CheckForWeapon();
         totalBulletsCountText.text = totalBullets.ToString();
         bulletsCountText.text = BulletsLoaded.ToString();
     }
@@ -55,7 +53,6 @@ public class GunManager : MonoBehaviour
                 }
                 else
                 {
-
                     BulletsLoaded -= 1;
                     magazine[0] -= 1;
                 }
@@ -122,25 +119,43 @@ public class GunManager : MonoBehaviour
     }
     public void CheckForWeapon()
     {
-        foreach (float item in ItemList.Instance.Itemlist)
+        Debug.Log(ItemList.Instance.Itemlist.Count);
+        Debug.Log(CanEquipRifle);
+        if(ItemList.Instance.Itemlist.Contains(1))
         {
-            switch (item)
-            {
-                case 1:
-                    CanEquipRifle = true;
-                    break;
-                case 5:
-                    CanEquipPistol = true;
-                    break;
-                case 6:
-                    CanEquipShotgun = true;
-                    break;
-                case 2:
-                    CanEquipKnife = true;
-                    break;
-                default:
-                    break;
-            }
+            CanEquipRifle = true;
+        }
+        else
+        {
+            CanEquipRifle = false;
+            CanvasManager.Instance.gunImages[0].SetActive(false);
+        }
+        if(ItemList.Instance.Itemlist.Contains(5))
+        {
+            CanEquipPistol = true;
+        }
+        else
+        {
+            CanEquipPistol = false;
+            CanvasManager.Instance.gunImages[2].SetActive(false);
+        }
+        if(ItemList.Instance.Itemlist.Contains(6))
+        {
+            CanEquipShotgun = true;
+        }
+        else
+        {
+            CanEquipShotgun = false;
+            CanvasManager.Instance.gunImages[1].SetActive(false);
+        }
+        if(ItemList.Instance.Itemlist.Contains(2))
+        {
+            CanEquipKnife = true;
+        }
+        else
+        {
+            CanEquipKnife = false;
+            CanvasManager.Instance.gunImages[3].SetActive(false);
         }
     }
     public void SetWeaponChanges()

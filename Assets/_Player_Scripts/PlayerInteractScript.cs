@@ -15,6 +15,7 @@ public class PlayerInteractScript : MonoBehaviour
     PlayerControls playerControls;
     InputAction openInventoryButton,interactButton,dropButton;
     bool inventoryOpen = false;
+    int lookDistance = 10;
     Color currentColor;
     RaycastHit hit;
     Ray ray;
@@ -67,7 +68,7 @@ public class PlayerInteractScript : MonoBehaviour
     void LookAtItem()
     {
         RaycastHit hit;
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.TransformDirection(Vector3.forward), out hit,15, layerMask))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.TransformDirection(Vector3.forward), out hit,lookDistance, layerMask))
         {
             if(hit.collider.tag == "Item")
             {
@@ -95,6 +96,11 @@ public class PlayerInteractScript : MonoBehaviour
                 }
             }
         } 
+        // if(hit.collider.tag == "Puzzle")
+        // {
+        //     itemNameUI.text = "itemName";
+        //     CanvasManager.Instance.PressEtoInsertCanvas.enabled = true;    
+        // }
     }
     void PickUpItem(GameObject itemObject,string itemName)
     {       
@@ -110,8 +116,9 @@ public class PlayerInteractScript : MonoBehaviour
     {   
         try
         {
+            GunManager.Instance.CheckForWeapon();
             ItemList.Instance.DropItem(inventoryController.selectedItem.itemData.name);  
-            inventoryController.DeleteItem(inventoryController.selectedItem);     
+            inventoryController.DeleteItem(inventoryController.selectedItem);
         }catch(NullReferenceException)
         {
             return;

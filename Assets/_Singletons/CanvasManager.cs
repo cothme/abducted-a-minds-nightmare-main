@@ -14,10 +14,11 @@ public class CanvasManager : MonoBehaviour
     public Canvas PressEtoInsertCanvas { get => pressEtoInsertCanvas; set => pressEtoInsertCanvas = value; }
     public Canvas MainCanvas { get => mainCanvas; set => mainCanvas = value; }
     public Canvas PauseCanvas { get => pauseCanvas; set => pauseCanvas = value; }
+    [SerializeField] public GameObject[] gunImages;
+
 
     private void Awake()
     {
-        // Ensure there is only one instance of InputManager
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);

@@ -84,7 +84,7 @@ public class InventoryController : MonoBehaviour
     {
         // Destroy(GameObject.FindGameObjectWithTag(tag));
         // selectedItem = null;
-        if(selectedItem == null) { Debug.Log("dsadasdas"); return; }
+        if(selectedItem == null) { Debug.Log("Delete Item Null!!!!"); return; }
         if (selectedItem == item)
         {
             selectedItem = null;

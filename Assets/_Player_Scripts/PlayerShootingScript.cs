@@ -33,6 +33,11 @@ public class PlayerShootingScript : MonoBehaviour
         {
             ChooseKnife();
         }
+        else if(ControlsManager.Instance.IsUnequipButtonDown)
+        {
+            GunManager.Instance.WeaponEquipped = null;
+            Unequip();
+        }
         if (Input.GetMouseButton(0) && GunManager.Instance.WeaponEquipped == "Rifle" && !isShooting)
         {
             StartCoroutine(ShootRifleCoroutine());
@@ -127,6 +132,10 @@ public class PlayerShootingScript : MonoBehaviour
         {
             GunManager.Instance.WeaponEquipped = "Rifle";
             GunManager.Instance.SetWeaponChanges();
+            CanvasManager.Instance.gunImages[0].SetActive(true);
+            CanvasManager.Instance.gunImages[1].SetActive(false);
+            CanvasManager.Instance.gunImages[2].SetActive(false);
+            CanvasManager.Instance.gunImages[3].SetActive(false);
         }
     }
     void ChooseShotgun()
@@ -136,6 +145,10 @@ public class PlayerShootingScript : MonoBehaviour
         {
             GunManager.Instance.WeaponEquipped = "Shotgun";
             GunManager.Instance.SetWeaponChanges();
+            CanvasManager.Instance.gunImages[0].SetActive(false);
+            CanvasManager.Instance.gunImages[1].SetActive(true);
+            CanvasManager.Instance.gunImages[2].SetActive(false);
+            CanvasManager.Instance.gunImages[3].SetActive(false);
         }
     }
     void ChoosePistol()
@@ -145,6 +158,10 @@ public class PlayerShootingScript : MonoBehaviour
         {
             GunManager.Instance.WeaponEquipped = "Pistol";
             GunManager.Instance.SetWeaponChanges();
+            CanvasManager.Instance.gunImages[0].SetActive(false);
+            CanvasManager.Instance.gunImages[1].SetActive(false);
+            CanvasManager.Instance.gunImages[2].SetActive(true);
+            CanvasManager.Instance.gunImages[3].SetActive(false);
         }
     }
     void ChooseKnife()
@@ -154,6 +171,19 @@ public class PlayerShootingScript : MonoBehaviour
         {
             GunManager.Instance.WeaponEquipped = "Knife";
             GunManager.Instance.SetWeaponChanges();
+            CanvasManager.Instance.gunImages[0].SetActive(false);
+            CanvasManager.Instance.gunImages[1].SetActive(false);
+            CanvasManager.Instance.gunImages[2].SetActive(false);
+            CanvasManager.Instance.gunImages[3].SetActive(true);
         }
+    }
+    void Unequip()
+    {
+        GunManager.Instance.WeaponEquipped = null;
+        GunManager.Instance.SetWeaponChanges();
+        CanvasManager.Instance.gunImages[0].SetActive(false);
+        CanvasManager.Instance.gunImages[1].SetActive(false);
+        CanvasManager.Instance.gunImages[2].SetActive(false);
+        CanvasManager.Instance.gunImages[3].SetActive(false);
     }
 }
