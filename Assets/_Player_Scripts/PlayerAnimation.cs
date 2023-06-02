@@ -13,5 +13,6 @@ public class PlayerAnimation : MonoBehaviour
     {
         anim.SetFloat("WalkFB",PlayerState.Instance.MovingZ);
         anim.SetFloat("WalkSR",PlayerState.Instance.MovingX);
+        anim.SetBool("", PlayerState.Instance.Reloading);
     }
 }
