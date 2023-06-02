@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
 {
+    private static CanvasManager instance;
     [SerializeField] CanvasGroup inventoryCanvas;
-    [SerializeField] Canvas pressEtoInsertCanvas;
+    [SerializeField] Canvas interactCanvas;
     [SerializeField] Canvas pauseCanvas;
     [SerializeField] Canvas mainCanvas;
-    private static CanvasManager instance;
+    [SerializeField] Canvas puzzleOneCanvas;
+    [SerializeField] Canvas puzzleTwoCanvas;
+    [SerializeField] Canvas puzzleThreeCanvas;
     public static CanvasManager Instance { get { return instance; } }
     public CanvasGroup InventoryCanvas { get => inventoryCanvas; set => inventoryCanvas = value; }
-    public Canvas PressEtoInsertCanvas { get => pressEtoInsertCanvas; set => pressEtoInsertCanvas = value; }
+    public Canvas InteractCanvas { get => interactCanvas; set => interactCanvas = value; }
     public Canvas MainCanvas { get => mainCanvas; set => mainCanvas = value; }
     public Canvas PauseCanvas { get => pauseCanvas; set => pauseCanvas = value; }
+    public Canvas PuzzleOneCanvas { get => puzzleOneCanvas; set => puzzleOneCanvas = value; }
+
     [SerializeField] public GameObject[] gunImages;
 
 

@@ -9,7 +9,7 @@ public class ControlsManager : MonoBehaviour
     private bool isJumpButtonDown;
     private bool isFireButtonDown;
     private bool isTabDown = false;
-    private bool isPickUpButtonDown;
+    private bool isInteractButtonDown;
     private bool isDropButtonDown;
     private bool isRifleButtonDown;
     private bool isShotgunButtonDown;
@@ -21,7 +21,7 @@ public class ControlsManager : MonoBehaviour
     public bool IsJumpButtonDown { get { return isJumpButtonDown; } }
     public bool IsFireButtonDown { get { return isFireButtonDown; } }
     public bool IsTabDown { get => isTabDown; set => isTabDown = value; }
-    public bool IsPickUpButtonDown { get => isPickUpButtonDown; set => isPickUpButtonDown = value; }
+    public bool IsInteractButtonDown { get => isInteractButtonDown; set => isInteractButtonDown = value; }
     public bool IsDropButtonDown { get => isDropButtonDown; set => isDropButtonDown = value; }
     public bool IsRifleButtonDown { get => isRifleButtonDown; set => isRifleButtonDown = value; }
     public bool IsShotgunButtonDown { get => isShotgunButtonDown; set => isShotgunButtonDown = value; }
@@ -36,7 +36,7 @@ public class ControlsManager : MonoBehaviour
         isJumpButtonDown = Input.GetButtonDown("Jump");
         isFireButtonDown = Input.GetButtonDown("Fire1");
         isTabDown = Input.GetKeyDown(KeyCode.Tab);
-        isPickUpButtonDown = Input.GetKeyDown(KeyCode.E);
+        isInteractButtonDown = Input.GetKeyDown(KeyCode.E);
         isDropButtonDown = Input.GetKeyDown(KeyCode.X);
         isRifleButtonDown = Input.GetKeyDown(KeyCode.Alpha1);
         isShotgunButtonDown = Input.GetKeyDown(KeyCode.Alpha2);

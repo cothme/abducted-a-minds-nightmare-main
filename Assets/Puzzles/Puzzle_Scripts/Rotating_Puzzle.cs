@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Rotating_Puzzle : MonoBehaviour
 {
+    [SerializeField] Canvas puzzleOneCanvas;
     public Button move3,move4;
     int pointedNumber;
     int nodeID,limit;
@@ -31,14 +32,11 @@ public class Rotating_Puzzle : MonoBehaviour
     }
     IEnumerator RotateArrow(float targetAngle)
     {
-        // wait for the delay before starting to rotate the arrow
         yield return new WaitForSeconds(rotationDelay);
 
-        // calculate the difference between the current angle and the target angle
         float currentAngle = arrow.rotation.eulerAngles.z;
         float angleDifference = Mathf.DeltaAngle(currentAngle, targetAngle);
 
-        // rotate the arrow gradually over time
         while (Mathf.Abs(angleDifference) > 0.01f)
         {
             float rotationAmount = Mathf.MoveTowardsAngle(currentAngle, targetAngle, rotationSpeed * Time.deltaTime);
@@ -63,7 +61,7 @@ public class Rotating_Puzzle : MonoBehaviour
         if(CheckWinCondition())
         {
             gameWonPanel.SetActive(true);
-            Debug.Log("Win");
+            PlayerState.Instance.IsPuzzleOneSolved = true;
         }
         move3.interactable = true;
         move4.interactable = true;
@@ -106,5 +104,10 @@ public class Rotating_Puzzle : MonoBehaviour
     private bool CheckWinCondition()
     {
         return Enumerable.SequenceEqual(winningImages,coloredImages);
+    }
+    public void Exit()
+    {
+        puzzleOneCanvas.enabled = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

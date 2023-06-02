@@ -75,9 +75,15 @@ public class PlayerInteractScript : MonoBehaviour
                 hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                 lastLookedObject = hit.collider.gameObject;
                 string itemName = lastLookedObject.name;
-                itemNameUI.text = itemName;
-                CanvasManager.Instance.PressEtoInsertCanvas.enabled = true;
-                PickUpItem(lastLookedObject,itemName);
+                itemNameUI.text = "Press E to pick up " + itemName;
+                CanvasManager.Instance.InteractCanvas.enabled = true;
+                Interact(lastLookedObject,itemName,"Item");
+            }
+            else if(hit.collider.tag == "Puzzle")
+            {
+                itemNameUI.text = "Press E to play puzzle";
+                CanvasManager.Instance.InteractCanvas.enabled = true;
+                Interact();   
             }
             else if(lastLookedObject is null)
             {
@@ -85,6 +91,7 @@ public class PlayerInteractScript : MonoBehaviour
             }
             else
             {
+                CanvasManager.Instance.InteractCanvas.enabled = false;
                 if(lastLookedObject == null)
                 {
                     return;
@@ -92,24 +99,31 @@ public class PlayerInteractScript : MonoBehaviour
                 else
                 {
                     lastLookedObject.GetComponent<MeshRenderer>().material.color = Color.white;
-                    CanvasManager.Instance.PressEtoInsertCanvas.enabled = false;
+                    CanvasManager.Instance.InteractCanvas.enabled = false;
                 }
             }
+        }
+        else
+        {
+            CanvasManager.Instance.InteractCanvas.enabled = false;
         } 
-        // if(hit.collider.tag == "Puzzle")
-        // {
-        //     itemNameUI.text = "itemName";
-        //     CanvasManager.Instance.PressEtoInsertCanvas.enabled = true;    
-        // }
     }
-    void PickUpItem(GameObject itemObject,string itemName)
+    void Interact(GameObject itemObject,string itemName,string colliderTag)
     {       
-        if(ControlsManager.Instance.IsPickUpButtonDown)
+        if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Item")
         {
             ItemList.Instance.AddItem(itemName);
             inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
-            CanvasManager.Instance.PressEtoInsertCanvas.enabled = false;
+            CanvasManager.Instance.InteractCanvas.enabled = false;
             Destroy(itemObject);
+        }
+    }
+    void Interact()
+    {       
+        if(ControlsManager.Instance.IsInteractButtonDown)
+        {
+            CanvasManager.Instance.PuzzleOneCanvas.enabled = true;
+            Cursor.lockState = CursorLockMode.None;
         } 
     }
     void DropItem()

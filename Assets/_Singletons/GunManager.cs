@@ -119,8 +119,6 @@ public class GunManager : MonoBehaviour
     }
     public void CheckForWeapon()
     {
-        Debug.Log(ItemList.Instance.Itemlist.Count);
-        Debug.Log(CanEquipRifle);
         if(ItemList.Instance.Itemlist.Contains(1))
         {
             CanEquipRifle = true;
