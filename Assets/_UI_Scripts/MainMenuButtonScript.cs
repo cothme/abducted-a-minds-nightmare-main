@@ -7,6 +7,7 @@ using System;
 
 public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] Image highlightImage;
     public TextMeshProUGUI text;
     private Vector3 originalPosition,targetPosition;
     void Start()
@@ -25,6 +26,7 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         try
         {
+            highlightImage.enabled = true;
             text.transform.localPosition = targetPosition;
         }
         catch(NullReferenceException)
@@ -37,6 +39,7 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         try
         {
+            highlightImage.enabled = false;
             text.transform.localPosition = originalPosition;
         }
         catch(NullReferenceException)

@@ -48,7 +48,6 @@ public class ControlsManager : MonoBehaviour
     }
     private void Awake()
     {
-        // Ensure there is only one instance of InputManager
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);

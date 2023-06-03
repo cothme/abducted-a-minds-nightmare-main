@@ -45,11 +45,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         groundedPlayer = controller.isGrounded;
-        if(ControlsManager.Instance.IsPauseButtonDown)
-        {
-            PlayerState.Instance.Paused = !PlayerState.Instance.Paused;
-            CanvasManager.Instance.PauseCanvas.enabled = true;
-        }
         if(Input.GetKey(KeyCode.LeftShift))
         {
             playerSpeed += 2f;

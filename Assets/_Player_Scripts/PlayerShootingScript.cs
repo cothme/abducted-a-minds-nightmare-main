@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerShootingScript : MonoBehaviour
 {
-    [SerializeField] ParticleSystem playerParticleSystem;
     [SerializeField] Transform cameraTransform;
     [SerializeField] GameObject bulletPreFab;
     [SerializeField] Transform bulletTransform;
@@ -60,7 +59,6 @@ public class PlayerShootingScript : MonoBehaviour
     {
         if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
         {
-            playerParticleSystem.Emit(1);
             RaycastHit hit;
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
             BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
@@ -82,7 +80,6 @@ public class PlayerShootingScript : MonoBehaviour
         if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
         {
             recoil.StartShooting();
-            playerParticleSystem.Emit(1);
             RaycastHit hit;
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
             BulletScript bulletInstance = bullet.GetComponent<BulletScript>();

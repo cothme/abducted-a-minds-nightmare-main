@@ -21,6 +21,7 @@ public class PlayerInteractScript : MonoBehaviour
     Ray ray;
     public LayerMask layerMask;
     GameObject lastLookedObject;
+    Vector3 doorTargetPosition;
     private void Awake()
     {
         inventoryController = FindObjectOfType(typeof(InventoryController)) as  InventoryController;
@@ -30,6 +31,7 @@ public class PlayerInteractScript : MonoBehaviour
         cameraTransform = Camera.main.transform;
         inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
         Cursor.lockState = CursorLockMode.Locked;
+
     }
     void Update()
     { 
@@ -83,7 +85,13 @@ public class PlayerInteractScript : MonoBehaviour
             {
                 itemNameUI.text = "Press E to play puzzle";
                 CanvasManager.Instance.InteractCanvas.enabled = true;
-                Interact();   
+                Interact(hit.collider.gameObject,"Puzzle");   
+            }
+            else if(hit.collider.tag == "Door")
+            {
+                itemNameUI.text = "Press E to Open";
+                CanvasManager.Instance.InteractCanvas.enabled = true;
+                Interact(hit.collider.gameObject,"Door");
             }
             else if(lastLookedObject is null)
             {
@@ -118,13 +126,18 @@ public class PlayerInteractScript : MonoBehaviour
             Destroy(itemObject);
         }
     }
-    void Interact()
+    void Interact(GameObject gameObject, string colliderTag)
     {       
-        if(ControlsManager.Instance.IsInteractButtonDown)
+        if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Puzzle")
         {
             CanvasManager.Instance.PuzzleOneCanvas.enabled = true;
             Cursor.lockState = CursorLockMode.None;
         } 
+        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Door")
+        {
+            doorTargetPosition = gameObject.transform.position + Vector3.back * 20;
+            StartCoroutine(OpenDoor(gameObject));
+        }
     }
     void DropItem()
     {   
@@ -137,5 +150,22 @@ public class PlayerInteractScript : MonoBehaviour
         {
             return;
         }             
+    }
+    private IEnumerator OpenDoor(GameObject gameObject)
+    {
+        Vector3 startPosition = gameObject.transform.position;  // Starting position of the object
+
+        float startTime = Time.time;  // Time when the movement started
+        float journeyLength = Vector3.Distance(startPosition, doorTargetPosition);  // Total distance to be covered
+
+        while (gameObject.transform.position != doorTargetPosition)
+        {
+            float distanceCovered = (Time.time - startTime) * 5;  // Distance covered since the movement started
+            float fractionOfJourney = distanceCovered / journeyLength;  // Fraction of the total distance covered
+
+            gameObject.transform.position = Vector3.Lerp(startPosition, doorTargetPosition, fractionOfJourney);  // Update the object's position
+
+            yield return null;
+        }
     }
 }

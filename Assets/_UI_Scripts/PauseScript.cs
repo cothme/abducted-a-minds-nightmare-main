@@ -8,6 +8,11 @@ public class PauseScript : MonoBehaviour
     [SerializeField] GameObject player;
     void Update()
     {
+        if(ControlsManager.Instance.IsPauseButtonDown)
+        {
+            PlayerState.Instance.Paused = !PlayerState.Instance.Paused;
+            CanvasManager.Instance.PauseCanvas.enabled = true;
+        }
         if(PlayerState.Instance.Paused)
         {
             Time.timeScale = 0;
