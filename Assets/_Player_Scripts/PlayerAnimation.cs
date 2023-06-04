@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    private Animator anim;
+    private Animator anim;    
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -13,6 +13,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         anim.SetFloat("WalkFB",PlayerState.Instance.MovingZ);
         anim.SetFloat("WalkSR",PlayerState.Instance.MovingX);
-        anim.SetBool("", PlayerState.Instance.Reloading);
+        anim.SetBool("HandgunReload", PlayerState.Instance.Reloading);
+        anim.SetBool("Running", PlayerState.Instance.Running);
     }
 }

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Alex Hair
+  m_Name: 19 Shoes Sole
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -105,12 +105,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.049483802, g: 0.0754717, b: 0.07200665, a: 1}
-    - _Color: {r: 0.072312206, g: 0.07638422, b: 0.122641504, a: 1}
+    - _BaseColor: {r: 0.5283019, g: 0.45871785, b: 0.44606623, a: 1}
+    - _Color: {r: 0.254717, g: 0.18677244, b: 0.15018691, a: 0.003921569}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &4072852274741456646
+--- !u!114 &793024945225896869
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
