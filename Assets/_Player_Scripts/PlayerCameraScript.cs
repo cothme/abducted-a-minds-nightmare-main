@@ -46,7 +46,7 @@ public class PlayerCameraScript : MonoBehaviour
     void Update()
     {
         RecenterCamera();
-        var camera = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraZoomAmount(5);
+        var camera = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraZoomAmount(7);
         if(PlayerState.Instance.Aiming)
         {
             PlayerRotateBaseOnCamera(playerTransform,cameraTransform);
@@ -59,9 +59,9 @@ public class PlayerCameraScript : MonoBehaviour
         {
             scroll = maxValue;
         }     
-        else if(scroll <= 3)
+        else if(scroll <= 4)
         {
-            scroll = 3;
+            scroll = 4;
         }
         return scroll;        
     }

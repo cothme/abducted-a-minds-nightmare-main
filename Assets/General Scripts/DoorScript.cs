@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float closeDelay = 2.0f;
+    public Vector3 closedPosition;
+    public float closeSpeed = 2.0f;
 
-    // Update is called once per frame
-    void Update()
+    private Vector3 openPosition;
+    private bool isOpen = true; 
+
+    private void Start()
     {
-        
+        openPosition = transform.position;
+        StartCoroutine(CloseDoor());
+    }
+    private IEnumerator CloseDoor()
+    {
+        yield return new WaitForSeconds(closeDelay);
+
+        while (transform.position != closedPosition)
+        {
+            // Move the door towards the closed position
+            transform.position = Vector3.MoveTowards(transform.position, closedPosition, closeSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+        isOpen = false;  // Set the flag to indicate that the door is closed
     }
 }

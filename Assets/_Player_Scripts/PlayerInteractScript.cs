@@ -136,7 +136,7 @@ public class PlayerInteractScript : MonoBehaviour
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Door")
         {
             doorTargetPosition = gameObject.transform.position + Vector3.back * 20;
-            StartCoroutine(OpenDoor(gameObject));
+            StartCoroutine(DoorBehaviour(gameObject));
         }
     }
     void DropItem()
@@ -151,21 +151,33 @@ public class PlayerInteractScript : MonoBehaviour
             return;
         }             
     }
-    private IEnumerator OpenDoor(GameObject gameObject)
+    private IEnumerator DoorBehaviour(GameObject gameObject)
     {
-        Vector3 startPosition = gameObject.transform.position;  // Starting position of the object
+        float elapsedTime = 0f;
+        Vector3 originalPosition = gameObject.transform.position;
 
-        float startTime = Time.time;  // Time when the movement started
-        float journeyLength = Vector3.Distance(startPosition, doorTargetPosition);  // Total distance to be covered
-
-        while (gameObject.transform.position != doorTargetPosition)
+        while (elapsedTime < 3.0f)
         {
-            float distanceCovered = (Time.time - startTime) * 5;  // Distance covered since the movement started
-            float fractionOfJourney = distanceCovered / journeyLength;  // Fraction of the total distance covered
+            gameObject.transform.position = Vector3.Lerp(originalPosition, doorTargetPosition, elapsedTime / 3.0f);
 
-            gameObject.transform.position = Vector3.Lerp(startPosition, doorTargetPosition, fractionOfJourney);  // Update the object's position
+            elapsedTime += Time.deltaTime;
 
             yield return null;
         }
+        gameObject.transform.position = doorTargetPosition;
+
+        yield return new WaitForSeconds(2.0f);
+
+        elapsedTime = 0f;
+
+        while (elapsedTime < 3.0f)
+        {
+            gameObject.transform.position = Vector3.Lerp(doorTargetPosition, originalPosition, elapsedTime / 3.0f);
+
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+        gameObject.transform.position = originalPosition;
     }
 }
