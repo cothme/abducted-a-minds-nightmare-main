@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         groundedPlayer = controller.isGrounded;
         if(Input.GetKey(KeyCode.LeftShift))
         {
+            PlayerState.Instance.Running = true;
             playerSpeed += 2f;
             if(playerSpeed >= 10f)
             {
@@ -55,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if(Input.GetKeyUp(KeyCode.LeftShift))
         {
+            PlayerState.Instance.Running = false;
             playerSpeed = 6f;
         }
         if (groundedPlayer && playerVelocity.y < 0)
