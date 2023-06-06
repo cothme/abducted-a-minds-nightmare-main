@@ -13,7 +13,7 @@ public class PlayerShootingScript : MonoBehaviour
     [SerializeField] GameObject aimCamera;
     [SerializeField] float bulletMissDistance = 25f;
     WeaponRecoil recoil;
-    bool isShooting = false;
+    public bool isShooting = false;
     void Update()
     {
         if(ControlsManager.Instance.IsRifleButtonDown)
@@ -43,6 +43,7 @@ public class PlayerShootingScript : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(0) && GunManager.Instance.WeaponEquipped != "Rifle" && !isShooting)
         {
+            gameObject.GetComponent<Animator>().Play("Fire");
             StartCoroutine(ShootCoroutine());
         }
         if(ControlsManager.Instance.IsReloadButtonDown)
@@ -79,7 +80,7 @@ public class PlayerShootingScript : MonoBehaviour
     {
         if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
         {
-            recoil.StartShooting();
+            // recoil.StartShooting();
             RaycastHit hit;
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
             BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
@@ -99,7 +100,6 @@ public class PlayerShootingScript : MonoBehaviour
     IEnumerator ShootRifleCoroutine()
     {
        isShooting = true;
-
         while (Mouse.current.leftButton.isPressed)
         {
             ShootAssaultRifle();
@@ -154,6 +154,7 @@ public class PlayerShootingScript : MonoBehaviour
         GunManager.Instance.CheckForWeapon();
         if(GunManager.Instance.CanEquipPistol && !PlayerState.Instance.Reloading)
         {
+            gameObject.GetComponent<Animator>().Play("Equip Handgun");
             GunManager.Instance.WeaponEquipped = "Pistol";
             GunManager.Instance.SetWeaponChanges();
             CanvasManager.Instance.gunImages[0].SetActive(false);

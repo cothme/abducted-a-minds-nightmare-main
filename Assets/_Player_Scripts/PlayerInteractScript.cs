@@ -120,6 +120,7 @@ public class PlayerInteractScript : MonoBehaviour
     {       
         if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Item")
         {
+            gameObject.GetComponent<Animator>().Play("Pick Up Item");
             ItemList.Instance.AddItem(itemName);
             inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
             CanvasManager.Instance.InteractCanvas.enabled = false;
