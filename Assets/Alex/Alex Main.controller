@@ -59,7 +59,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Run Forward
+  m_Name: Run Forward HG
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -264,7 +264,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Aim Idle
+  m_Name: Aim HG Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -400,7 +400,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.8
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -464,7 +464,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Walk Forward (Right)
+  m_Name: Walk Forward HG (Right)
   m_Speed: 5
   m_CycleOffset: 0
   m_Transitions:
@@ -593,7 +593,7 @@ AnimatorStateMachine:
     m_Position: {x: 230, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8185406488096825749}
-    m_Position: {x: 240, y: 20, z: 0}
+    m_Position: {x: 240, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7956158738612254461}
     m_Position: {x: 580, y: 330, z: 0}
@@ -703,10 +703,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: HGReload
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 9194584308800475119}
   m_Solo: 0
@@ -776,7 +773,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 'Fire '
+  m_Name: Fire HG
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -803,7 +800,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Equip Handgun
+  m_Name: Equip HG
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1050,7 +1047,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Walk Forward (Left)
+  m_Name: Walk Forward HG (Left)
   m_Speed: 5
   m_CycleOffset: 0
   m_Transitions:
@@ -1077,7 +1074,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Walk Forward
+  m_Name: Walk Forward HG
   m_Speed: 5
   m_CycleOffset: 0
   m_Transitions:
@@ -1180,7 +1177,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HG Reload
+  m_Name: Reload HG
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1208,7 +1205,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Walk Forward (Backward)
+  m_Name: Walk Forward HG (Backward)
   m_Speed: 5
   m_CycleOffset: 0
   m_Transitions:
@@ -1282,7 +1279,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Handgun Idle
+  m_Name: Idle HG
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

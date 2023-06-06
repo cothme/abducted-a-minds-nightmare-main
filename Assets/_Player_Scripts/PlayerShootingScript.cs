@@ -43,7 +43,7 @@ public class PlayerShootingScript : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(0) && GunManager.Instance.WeaponEquipped != "Rifle" && !isShooting)
         {
-            gameObject.GetComponent<Animator>().Play("Fire");
+            gameObject.GetComponent<Animator>().Play("Fire HG");
             StartCoroutine(ShootCoroutine());
         }
         if(ControlsManager.Instance.IsReloadButtonDown)
@@ -120,7 +120,7 @@ public class PlayerShootingScript : MonoBehaviour
     }
     private void Reload()
     {
-        gameObject.GetComponent<Animator>().Play("HG Reload");
+        gameObject.GetComponent<Animator>().Play("Reload HG");
         GunManager.Instance.reloadInGunManager();
     }
     void ChooseRifle()
@@ -154,7 +154,7 @@ public class PlayerShootingScript : MonoBehaviour
         GunManager.Instance.CheckForWeapon();
         if(GunManager.Instance.CanEquipPistol && !PlayerState.Instance.Reloading)
         {
-            gameObject.GetComponent<Animator>().Play("Equip Handgun");
+            gameObject.GetComponent<Animator>().Play("Equip HG");
             GunManager.Instance.WeaponEquipped = "Pistol";
             GunManager.Instance.SetWeaponChanges();
             CanvasManager.Instance.gunImages[0].SetActive(false);
