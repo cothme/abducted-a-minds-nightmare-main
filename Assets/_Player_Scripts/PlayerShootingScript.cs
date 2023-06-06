@@ -120,6 +120,7 @@ public class PlayerShootingScript : MonoBehaviour
     }
     private void Reload()
     {
+        gameObject.GetComponent<Animator>().Play("HG Reload");
         GunManager.Instance.reloadInGunManager();
     }
     void ChooseRifle()

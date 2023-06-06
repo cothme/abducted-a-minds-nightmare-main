@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] Animator animator;
     CharacterController controller;
     Vector3 playerVelocity;
     bool groundedPlayer;

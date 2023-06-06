@@ -7,6 +7,7 @@ using System;
 
 public class PlayerCameraScript : MonoBehaviour
 {
+    [SerializeField] Animator animator;
     [SerializeField] InputActionReference leftClickControl;
     [SerializeField] Transform playerTransform;
     [SerializeField] Canvas aimCanvas;
@@ -81,6 +82,7 @@ public class PlayerCameraScript : MonoBehaviour
             PlayerState.Instance.Aiming = !PlayerState.Instance.Aiming;
             if(PlayerState.Instance.Aiming)
             {
+                animator.Play("HG Aim Center"); 
                 aimCanvas.enabled = true;
                 virtualCamera.Priority = 9;
             }
