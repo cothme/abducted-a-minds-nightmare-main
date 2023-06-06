@@ -13,7 +13,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         anim.SetFloat("WalkFB",PlayerState.Instance.MovingZ);
         anim.SetFloat("WalkSR",PlayerState.Instance.MovingX);
-        anim.SetBool("HandgunReload", PlayerState.Instance.Reloading);
+        anim.SetBool("HGReload", PlayerState.Instance.Reloading);
         anim.SetBool("Running", PlayerState.Instance.Running);
     }
 }

@@ -99,7 +99,7 @@ public class GunManager : MonoBehaviour
         totalBullets = magazine.Sum() - bulletsLoaded;
     }
     private IEnumerator ReloadCoroutine()
-    {
+    {        
         if(!PlayerState.Instance.Reloading)
         {
             PlayerState.Instance.Reloading = true;  
