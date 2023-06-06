@@ -43,7 +43,6 @@ public class PlayerShootingScript : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(0) && GunManager.Instance.WeaponEquipped != "Rifle" && !isShooting)
         {
-            gameObject.GetComponent<Animator>().Play("Fire HG");
             StartCoroutine(ShootCoroutine());
         }
         if(ControlsManager.Instance.IsReloadButtonDown)
@@ -81,6 +80,7 @@ public class PlayerShootingScript : MonoBehaviour
         if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
         {
             // recoil.StartShooting();
+            gameObject.GetComponent<Animator>().Play("Fire HG");
             RaycastHit hit;
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
             BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
@@ -154,7 +154,10 @@ public class PlayerShootingScript : MonoBehaviour
         GunManager.Instance.CheckForWeapon();
         if(GunManager.Instance.CanEquipPistol && !PlayerState.Instance.Reloading)
         {
-            gameObject.GetComponent<Animator>().Play("Equip HG");
+            if(GunManager.Instance.WeaponEquipped != "Pistol")
+            {
+                gameObject.GetComponent<Animator>().Play("Equip HG");
+            }
             GunManager.Instance.WeaponEquipped = "Pistol";
             GunManager.Instance.SetWeaponChanges();
             CanvasManager.Instance.gunImages[0].SetActive(false);

@@ -51,6 +51,8 @@ public class PlayerInteractScript : MonoBehaviour
         if(inventoryOpen) 
         {   
             gameObject.GetComponent<PlayerMovement>().enabled = false;
+            gameObject.GetComponent<PlayerAnimation>().enabled = false; 
+            gameObject.GetComponent<PlayerShootingScript>().enabled = false; 
             Cursor.lockState = CursorLockMode.None;
             CanvasManager.Instance.InventoryCanvas.alpha = 1;
             CanvasManager.Instance.MainCanvas.enabled = false;
@@ -60,6 +62,8 @@ public class PlayerInteractScript : MonoBehaviour
         else
         {
             gameObject.GetComponent<PlayerMovement>().enabled = true;
+            gameObject.GetComponent<PlayerAnimation>().enabled = true; 
+            gameObject.GetComponent<PlayerShootingScript>().enabled = true; 
             Cursor.lockState = CursorLockMode.Locked;
             CanvasManager.Instance.InventoryCanvas.alpha = 0;
             CanvasManager.Instance.MainCanvas.enabled = true;

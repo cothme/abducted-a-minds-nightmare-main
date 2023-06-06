@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         groundedPlayer = controller.isGrounded;
-        if(Input.GetKey(KeyCode.LeftShift))
+    if(Input.GetKey(KeyCode.LeftShift) &&  !PlayerState.Instance.Aiming)
         {
             PlayerState.Instance.Running = true;
             playerSpeed += 2f;

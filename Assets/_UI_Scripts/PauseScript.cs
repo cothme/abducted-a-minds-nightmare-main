@@ -18,6 +18,8 @@ public class PauseScript : MonoBehaviour
             Time.timeScale = 0;
             player.GetComponent<PlayerMovement>().enabled = false;
             player.GetComponent<PlayerInteractScript>().enabled = false;
+            player.GetComponent<PlayerShootingScript>().enabled = false;
+            player.GetComponent<PlayerAnimation>().enabled = false;
             CanvasManager.Instance.MainCanvas.enabled = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -34,6 +36,8 @@ public class PauseScript : MonoBehaviour
         CanvasManager.Instance.PauseCanvas.enabled = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerInteractScript>().enabled = true;
+        player.GetComponent<PlayerShootingScript>().enabled = true;
+            player.GetComponent<PlayerAnimation>().enabled = true;
         GameObject.Find("Main Camera").GetComponent<CinemachineBrain>().enabled = true;
     }
 }
