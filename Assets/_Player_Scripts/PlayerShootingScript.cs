@@ -103,7 +103,7 @@ public class PlayerShootingScript : MonoBehaviour
         while (Mouse.current.leftButton.isPressed)
         {
             ShootAssaultRifle();
-            yield return new WaitForSeconds(GunManager.Instance.attackSpeed);
+            yield return new WaitForSeconds(GunManager.Instance.AttackSpeed);
         }
         isShooting = false;
     }
@@ -115,7 +115,7 @@ public class PlayerShootingScript : MonoBehaviour
             isShooting = true;
             Shoot();
         }
-        yield return new WaitForSeconds(GunManager.Instance.attackSpeed);       
+        yield return new WaitForSeconds(GunManager.Instance.AttackSpeed);       
         isShooting = false;
     }
     private void Reload()

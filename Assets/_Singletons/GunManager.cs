@@ -20,7 +20,7 @@ public class GunManager : MonoBehaviour
     private float totalBullets;
     private float capacity;
     private float recoil;
-    public float reloadTime,attackSpeed;
+    private float reloadTime,attackSpeed;
     private bool canEquipPistol, canEquipRifle, canEquipShotgun,canEquipKnife;
     float bulletToMinus;
     private List<float> magazine;
@@ -31,6 +31,8 @@ public class GunManager : MonoBehaviour
     public bool CanEquipKnife { get => canEquipKnife; set => canEquipKnife = value; }
     public string WeaponEquipped { get => weaponEquipped; set => weaponEquipped = value; }
     public float BulletsLoaded { get => bulletsLoaded; set => bulletsLoaded = value; }
+    public float ReloadTime { get => reloadTime; set => reloadTime = value; }
+    public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
 
     private void Initialize()
     {
@@ -103,7 +105,7 @@ public class GunManager : MonoBehaviour
         if(!PlayerState.Instance.Reloading)
         {
             PlayerState.Instance.Reloading = true;  
-            float remainingTime = reloadTime;
+            float remainingTime = ReloadTime;
             while (remainingTime > 0)
             {
                 statusIndicator.text = "Reloading: " + remainingTime.ToString("F1");
@@ -161,8 +163,8 @@ public class GunManager : MonoBehaviour
         switch (weaponEquipped)
         {
             case "Rifle":
-                reloadTime = weapons[0].reloadSpeed;
-                attackSpeed = weapons[0].attackSpeed;
+                ReloadTime = weapons[0].reloadSpeed;
+                AttackSpeed = weapons[0].attackSpeed;
                 capacity = weapons[0].capacity;
                 recoil = weapons[0].weaponRecoil;
                 if(bulletsLoaded > capacity)
@@ -173,8 +175,8 @@ public class GunManager : MonoBehaviour
                 }
                 break;
             case "Shotgun":
-                reloadTime = weapons[1].reloadSpeed;
-                attackSpeed = weapons[1].attackSpeed;
+                ReloadTime = weapons[1].reloadSpeed;
+                AttackSpeed = weapons[1].attackSpeed;
                 capacity = weapons[1].capacity;
                 recoil = weapons[1].weaponRecoil;
                 if(bulletsLoaded > capacity)
@@ -185,8 +187,8 @@ public class GunManager : MonoBehaviour
                 }
                 break;
             case "Pistol":
-                reloadTime = weapons[2].reloadSpeed;
-                attackSpeed = weapons[2].attackSpeed;
+                ReloadTime = weapons[2].reloadSpeed;
+                AttackSpeed = weapons[2].attackSpeed;
                 capacity = weapons[2].capacity;
                 recoil = weapons[2].weaponRecoil;
                 if(bulletsLoaded > capacity)
@@ -197,8 +199,8 @@ public class GunManager : MonoBehaviour
                 }
                 break;
             case "Knife":
-                reloadTime = weapons[3].reloadSpeed;
-                attackSpeed = weapons[3].attackSpeed;
+                ReloadTime = weapons[3].reloadSpeed;
+                AttackSpeed = weapons[3].attackSpeed;
                 capacity = weapons[3].capacity;
                 recoil = weapons[3].weaponRecoil;
                 break;

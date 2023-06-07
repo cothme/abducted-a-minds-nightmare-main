@@ -7,14 +7,4 @@ public class StoryScript : MonoBehaviour
     [TextArea] [SerializeField] string sentence;
 
     public string Sentence { get => sentence; set => sentence = value; }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }

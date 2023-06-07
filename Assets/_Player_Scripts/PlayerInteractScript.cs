@@ -44,7 +44,7 @@ public class PlayerInteractScript : MonoBehaviour
         {
             if(hit.collider.tag == "Item")
             {
-                hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                hit.collider.gameObject.GetComponent<Outline>().enabled = true;
                 lastLookedObject = hit.collider.gameObject;
                 string itemName = lastLookedObject.name;
                 itemNameUI.text = "Press E to pick up " + itemName;
@@ -82,7 +82,7 @@ public class PlayerInteractScript : MonoBehaviour
                 }
                 else
                 {
-                    lastLookedObject.GetComponent<MeshRenderer>().material.color = Color.white;
+                    lastLookedObject.GetComponent<Outline>().enabled = false;
                     CanvasManager.Instance.InteractCanvas.enabled = false;
                 }
             }
