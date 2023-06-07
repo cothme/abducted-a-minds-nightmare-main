@@ -105,9 +105,4 @@ public class Rotating_Puzzle : MonoBehaviour
     {
         return Enumerable.SequenceEqual(winningImages,coloredImages);
     }
-    public void Exit()
-    {
-        puzzleOneCanvas.enabled = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
 }

@@ -21,6 +21,7 @@ public class PlayerCameraScript : MonoBehaviour
     PlayerControls playerControls;
     InputAction aimButton;
     InputAction middleMouseButton;
+    bool exitAim;
     void Awake()
     { 
         playerControls = new PlayerControls();
@@ -46,12 +47,10 @@ public class PlayerCameraScript : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log(exitAim);
         RecenterCamera();
         var camera = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraZoomAmount(7);
-        if(PlayerState.Instance.Aiming)
-        {
-            PlayerRotateBaseOnCamera(playerTransform,cameraTransform);
-        } 
+        PlayerRotateBaseOnCamera(playerTransform,cameraTransform);
     }
     float cameraZoomAmount(int maxValue)
     {
@@ -68,8 +67,22 @@ public class PlayerCameraScript : MonoBehaviour
     }
     private void PlayerRotateBaseOnCamera(Transform playerTransform, Transform cameraTransform)
     {
-        Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
-        playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        if(PlayerState.Instance.Aiming)
+        {
+            Quaternion targetRotation = Quaternion.Euler(cameraTransform.eulerAngles.x, cameraTransform.eulerAngles.y, 0);
+            playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            exitAim = true;
+        }
+        else
+        {
+            if(exitAim)
+            {
+                Debug.Log("dasdsa");
+                Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
+                playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, 1);
+            }
+            exitAim = false;
+        }
     }
     void StartAim(InputAction.CallbackContext context)
     {

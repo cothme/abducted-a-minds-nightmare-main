@@ -10,11 +10,11 @@ using System;
 public class PlayerInteractScript : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI itemNameUI;
+    [SerializeField] TextMeshProUGUI storyText;
     [SerializeField] Transform cameraTransform;
     InventoryController inventoryController;
     PlayerControls playerControls;
-    InputAction openInventoryButton,interactButton,dropButton;
-    bool inventoryOpen = false;
+    InputAction interactButton;
     int lookDistance = 10;
     Color currentColor;
     RaycastHit hit;
@@ -22,10 +22,6 @@ public class PlayerInteractScript : MonoBehaviour
     public LayerMask layerMask;
     GameObject lastLookedObject;
     Vector3 doorTargetPosition;
-    private void Awake()
-    {
-        inventoryController = FindObjectOfType(typeof(InventoryController)) as  InventoryController;
-    }
     void Start()
     {
         cameraTransform = Camera.main.transform;
@@ -35,41 +31,11 @@ public class PlayerInteractScript : MonoBehaviour
     }
     void Update()
     { 
-        LookAtItem();
-        if(ControlsManager.Instance.IsTabDown)
+        if(CanvasManager.Instance.PuzzleOneCanvas.enabled == true)
         {
-            OpenInventory();
-        }
-        if(ControlsManager.Instance.IsDropButtonDown)
-        {
-            DropItem();
-        }
-    }
-    void OpenInventory()
-    {
-        inventoryOpen = !inventoryOpen;
-        if(inventoryOpen) 
-        {   
-            gameObject.GetComponent<PlayerMovement>().enabled = false;
-            gameObject.GetComponent<PlayerAnimation>().enabled = false; 
-            gameObject.GetComponent<PlayerShootingScript>().enabled = false; 
             Cursor.lockState = CursorLockMode.None;
-            CanvasManager.Instance.InventoryCanvas.alpha = 1;
-            CanvasManager.Instance.MainCanvas.enabled = false;
-            Cursor.visible = true;
-            GameObject.Find("Main Camera").GetComponent<CinemachineBrain>().enabled = false;
-        } 
-        else
-        {
-            gameObject.GetComponent<PlayerMovement>().enabled = true;
-            gameObject.GetComponent<PlayerAnimation>().enabled = true; 
-            gameObject.GetComponent<PlayerShootingScript>().enabled = true; 
-            Cursor.lockState = CursorLockMode.Locked;
-            CanvasManager.Instance.InventoryCanvas.alpha = 0;
-            CanvasManager.Instance.MainCanvas.enabled = true;
-            Cursor.visible = false;
-            GameObject.Find("Main Camera").GetComponent<CinemachineBrain>().enabled = true;
         }
+        LookAtItem();
     }
     void LookAtItem()
     {
@@ -96,6 +62,12 @@ public class PlayerInteractScript : MonoBehaviour
                 itemNameUI.text = "Press E to Open";
                 CanvasManager.Instance.InteractCanvas.enabled = true;
                 Interact(hit.collider.gameObject,"Door");
+            }
+            else if(hit.collider.tag == "StoryItem")
+            {
+                itemNameUI.text = "Press E to read";
+                CanvasManager.Instance.InteractCanvas.enabled = true;
+                Interact(hit.collider.gameObject,"StoryItem");
             }
             else if(lastLookedObject is null)
             {
@@ -135,26 +107,21 @@ public class PlayerInteractScript : MonoBehaviour
     {       
         if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Puzzle")
         {
+            DisableScripts(true);
             CanvasManager.Instance.PuzzleOneCanvas.enabled = true;
-            Cursor.lockState = CursorLockMode.None;
         } 
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Door")
         {
             doorTargetPosition = gameObject.transform.position + Vector3.back * 20;
             StartCoroutine(DoorBehaviour(gameObject));
         }
-    }
-    void DropItem()
-    {   
-        try
+        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "StoryItem")
         {
-            GunManager.Instance.CheckForWeapon();
-            ItemList.Instance.DropItem(inventoryController.selectedItem.itemData.name);  
-            inventoryController.DeleteItem(inventoryController.selectedItem);
-        }catch(NullReferenceException)
-        {
-            return;
-        }             
+            DisableScripts(true);
+            storyText.text =  gameObject.GetComponent<StoryScript>().Sentence;
+            Cursor.lockState = CursorLockMode.None;
+            CanvasManager.Instance.StoryCanvas.enabled = true;
+        }
     }
     private IEnumerator DoorBehaviour(GameObject gameObject)
     {
@@ -184,5 +151,36 @@ public class PlayerInteractScript : MonoBehaviour
             yield return null;
         }
         gameObject.transform.position = originalPosition;
+    }
+    public void ExitStoryText()
+    {
+        DisableScripts(false);
+        CanvasManager.Instance.StoryCanvas.enabled = false;
+    }
+    public void ExitPuzzle()
+    {
+        DisableScripts(false);
+        CanvasManager.Instance.PuzzleOneCanvas.enabled = false;
+    }
+    public void DisableScripts(bool isOn)
+    {
+        if(isOn)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            gameObject.GetComponent<PlayerMovement>().enabled = false;
+            gameObject.GetComponent<PlayerShootingScript>().enabled = false;
+            gameObject.GetComponent<PlayerAnimation>().enabled = false;
+            gameObject.GetComponent<PlayerInventory>().enabled = false;
+            Camera.main.GetComponent<CinemachineBrain>().enabled = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            gameObject.GetComponent<PlayerMovement>().enabled = true;
+            gameObject.GetComponent<PlayerShootingScript>().enabled = true;
+            gameObject.GetComponent<PlayerAnimation>().enabled = true;
+            gameObject.GetComponent<PlayerInventory>().enabled = true;
+            Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+        }
     }
 }

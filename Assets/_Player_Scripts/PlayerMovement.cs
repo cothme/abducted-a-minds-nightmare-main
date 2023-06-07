@@ -7,15 +7,15 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Animator animator;
-    CharacterController controller;
-    Vector3 playerVelocity;
-    bool groundedPlayer;
-    Transform cameraTransform;
     [SerializeField] float playerSpeed = 6.0f;
     [SerializeField] float jumpHeight = 1.0f;
     [SerializeField] float gravityValue = -9.81f;
     [SerializeField] float rotationSpeed = 4f;
     [SerializeField] InputActionReference jumpControl; 
+    CharacterController controller;
+    Vector3 playerVelocity;
+    bool groundedPlayer;
+    Transform cameraTransform;
     PlayerControls playerControls;
     InputAction movementControl;
     #region Input Setup
@@ -46,16 +46,16 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         groundedPlayer = controller.isGrounded;
-    if(Input.GetKey(KeyCode.LeftShift) &&  !PlayerState.Instance.Aiming)
+        if (Input.GetKey(KeyCode.LeftShift) && !PlayerState.Instance.Aiming)
         {
             PlayerState.Instance.Running = true;
             playerSpeed += 2f;
-            if(playerSpeed >= 10f)
+            if (playerSpeed >= 10f)
             {
                 playerSpeed = 20f;
             }
         }
-        if(Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             PlayerState.Instance.Running = false;
             playerSpeed = 6f;
@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         }
         Vector2 movementDirection = movementControl.ReadValue<Vector2>();
 
-        Vector3 move = new Vector3(movementDirection.x,0,movementDirection.y);
+        Vector3 move = new Vector3(movementDirection.x, 0, movementDirection.y);
         PlayerState.Instance.MovingX = move.x;
         PlayerState.Instance.MovingZ = move.z;
         move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
@@ -80,11 +80,14 @@ public class PlayerMovement : MonoBehaviour
         }
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
-
-        if(movementDirection != Vector2.zero && !PlayerState.Instance.Aiming)
+        RotateBasedOnWASD(movementDirection, move);
+    }
+    public void RotateBasedOnWASD(Vector2 movementDirection, Vector3 move)
+    {
+        if (movementDirection != Vector2.zero && !PlayerState.Instance.Aiming)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(move,Vector3.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            Quaternion targetRotation = Quaternion.LookRotation(move, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
 }

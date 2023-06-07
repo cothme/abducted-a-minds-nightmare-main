@@ -9,6 +9,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] Canvas interactCanvas;
     [SerializeField] Canvas pauseCanvas;
     [SerializeField] Canvas mainCanvas;
+    [SerializeField] Canvas storyCanvas;
     [SerializeField] Canvas puzzleOneCanvas;
     [SerializeField] Canvas puzzleTwoCanvas;
     [SerializeField] Canvas puzzleThreeCanvas;
@@ -18,6 +19,7 @@ public class CanvasManager : MonoBehaviour
     public Canvas MainCanvas { get => mainCanvas; set => mainCanvas = value; }
     public Canvas PauseCanvas { get => pauseCanvas; set => pauseCanvas = value; }
     public Canvas PuzzleOneCanvas { get => puzzleOneCanvas; set => puzzleOneCanvas = value; }
+    public Canvas StoryCanvas { get => storyCanvas; set => storyCanvas = value; }
 
     [SerializeField] public GameObject[] gunImages;
 
