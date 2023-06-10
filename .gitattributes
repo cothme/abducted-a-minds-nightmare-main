@@ -36,6 +36,7 @@
 *.preset unityyaml
 *.asmdef -text diff
 
+
 # Unity Binary Assets
 *.cubemap lfs
 *.unitypackage lfs
@@ -71,7 +72,7 @@
 *.psd lfs
 *.afphoto lfs
 *.afdesign lfs
-
+*.unity lfs
 # Audio
 *.mp3 lfs
 *.ogg lfs
