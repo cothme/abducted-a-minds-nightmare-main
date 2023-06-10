@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3e8a9ac5a809b46a2b2d304adb5b8e, type: 3}
   m_Name: Health Kit
   m_EditorClassIdentifier: 
-  width: 2
-  height: 3
-  itemIcon: {fileID: 21300000, guid: 8e2bbf0c3cbbd1b4ca09bb3b17cf06f5, type: 3}
+  width: 3
+  height: 2
+  itemIcon: {fileID: 21300000, guid: 7d9982ce7bccbf243a468a1252e917c7, type: 3}
   model: {fileID: 0}
