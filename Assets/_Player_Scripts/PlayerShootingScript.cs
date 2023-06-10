@@ -7,24 +7,31 @@ using UnityEngine.InputSystem;
 
 public class PlayerShootingScript : MonoBehaviour
 {
-    [SerializeField] Transform cameraTransform;
+    [SerializeField] GameObject[] gunImages; 
     [SerializeField] GameObject bulletPreFab;
     [SerializeField] Transform bulletTransform;
     [SerializeField] GameObject aimCamera;
     [SerializeField] float bulletMissDistance = 25f;
+    [SerializeField] TextMeshProUGUI magazineCountText;
+    [SerializeField] TextMeshProUGUI totalBulletsCountText;
+    [SerializeField] TextMeshProUGUI bulletsCountText;
+    [SerializeField] TextMeshProUGUI statusIndicator;
     WeaponRecoil recoil;
     public bool isShooting = false;
     void Update()
     {
+        totalBulletsCountText.text = GunManager.Instance.TotalBullets.ToString();
+        bulletsCountText.text = GunManager.Instance.TotalBullets.ToString();
+        // UpdateWeaponImageInUI();
         if(ControlsManager.Instance.IsRifleButtonDown)
         {
             ChooseRifle();
         }
-        else if(ControlsManager.Instance.IsShotgunButtonDown)
+        if(ControlsManager.Instance.IsShotgunButtonDown)
         {
             ChooseShotgun();
         }
-        else if(ControlsManager.Instance.IsPistolButtonDown)
+        if(ControlsManager.Instance.IsPistolButtonDown)
         {
             ChoosePistol();
         }
@@ -52,7 +59,6 @@ public class PlayerShootingScript : MonoBehaviour
     }
     void Start()
     {
-        cameraTransform = Camera.main.transform;
         recoil = aimCamera.GetComponent<WeaponRecoil>();
     }
     private void ShootAssaultRifle()
@@ -63,38 +69,38 @@ public class PlayerShootingScript : MonoBehaviour
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
             BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
             GunManager.Instance.shootInGunManager();
-            if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, Mathf.Infinity))
+            if(Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward,out hit, Mathf.Infinity))
             {
                 bulletInstance.target = hit.point;
                 bulletInstance.hit = true; 
             }
             else
             {
-                bulletInstance.target = cameraTransform.position + cameraTransform.forward * bulletMissDistance;
+                bulletInstance.target = Camera.main.transform.position + Camera.main.transform.forward * bulletMissDistance;
                 bulletInstance.hit = true; 
             }
         } 
     }
     private void Shoot()
     {
-        if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
+        if(PlayerState.Instance.Aiming)
         {
             // recoil.StartShooting();
             gameObject.GetComponent<Animator>().Play("Fire HG");
-            RaycastHit hit;
-            GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
-            BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
+            // RaycastHit hit;
+            GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,gameObject.transform.rotation);
+            // BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
             GunManager.Instance.shootInGunManager();
-            if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, Mathf.Infinity))
-            {
-                bulletInstance.target = hit.point;
-                bulletInstance.hit = true; 
-            }
-            else
-            {
-                bulletInstance.target = cameraTransform.position + cameraTransform.forward * bulletMissDistance;
-                bulletInstance.hit = true; 
-            } 
+            // if(Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward,out hit, Mathf.Infinity))
+            // {
+            //     bulletInstance.target = hit.point;
+            //     bulletInstance.hit = true; 
+            // }
+            // else
+            // {
+            //     bulletInstance.target = Camera.main.transform.position + Camera.main.transform.forward * bulletMissDistance;
+            //     bulletInstance.hit = true; 
+            // } 
         }
     }
     IEnumerator ShootRifleCoroutine()
@@ -120,8 +126,15 @@ public class PlayerShootingScript : MonoBehaviour
     }
     private void Reload()
     {
-        gameObject.GetComponent<Animator>().Play("Reload HG");
-        GunManager.Instance.reloadInGunManager();
+        if(!PlayerState.Instance.Reloading)
+        {
+            gameObject.GetComponent<Animator>().Play("Reload HG");  
+            GunManager.Instance.reloadInGunManager();
+        }
+        else
+        {
+            return;
+        }   
     }
     void ChooseRifle()
     {
@@ -130,10 +143,10 @@ public class PlayerShootingScript : MonoBehaviour
         {
             GunManager.Instance.WeaponEquipped = "Rifle";
             GunManager.Instance.SetWeaponChanges();
-            CanvasManager.Instance.gunImages[0].SetActive(true);
-            CanvasManager.Instance.gunImages[1].SetActive(false);
-            CanvasManager.Instance.gunImages[2].SetActive(false);
-            CanvasManager.Instance.gunImages[3].SetActive(false);
+            gunImages[0].SetActive(true);
+            gunImages[1].SetActive(false);
+            gunImages[2].SetActive(false);
+            gunImages[3].SetActive(false);
         }
     }
     void ChooseShotgun()
@@ -143,10 +156,10 @@ public class PlayerShootingScript : MonoBehaviour
         {
             GunManager.Instance.WeaponEquipped = "Shotgun";
             GunManager.Instance.SetWeaponChanges();
-            CanvasManager.Instance.gunImages[0].SetActive(false);
-            CanvasManager.Instance.gunImages[1].SetActive(true);
-            CanvasManager.Instance.gunImages[2].SetActive(false);
-            CanvasManager.Instance.gunImages[3].SetActive(false);
+            gunImages[0].SetActive(false);
+            gunImages[1].SetActive(true);
+            gunImages[2].SetActive(false);
+            gunImages[3].SetActive(false);
         }
     }
     void ChoosePistol()
@@ -160,10 +173,10 @@ public class PlayerShootingScript : MonoBehaviour
             }
             GunManager.Instance.WeaponEquipped = "Pistol";
             GunManager.Instance.SetWeaponChanges();
-            CanvasManager.Instance.gunImages[0].SetActive(false);
-            CanvasManager.Instance.gunImages[1].SetActive(false);
-            CanvasManager.Instance.gunImages[2].SetActive(true);
-            CanvasManager.Instance.gunImages[3].SetActive(false);
+            gunImages[0].SetActive(false);
+            gunImages[1].SetActive(false);
+            gunImages[2].SetActive(true);
+            gunImages[3].SetActive(false);
         }
     }
     void ChooseKnife()
@@ -173,19 +186,38 @@ public class PlayerShootingScript : MonoBehaviour
         {
             GunManager.Instance.WeaponEquipped = "Knife";
             GunManager.Instance.SetWeaponChanges();
-            CanvasManager.Instance.gunImages[0].SetActive(false);
-            CanvasManager.Instance.gunImages[1].SetActive(false);
-            CanvasManager.Instance.gunImages[2].SetActive(false);
-            CanvasManager.Instance.gunImages[3].SetActive(true);
+            gunImages[0].SetActive(false);
+            gunImages[1].SetActive(false);
+            gunImages[2].SetActive(false);
+            gunImages[3].SetActive(true);
         }
     }
     void Unequip()
     {
         GunManager.Instance.WeaponEquipped = null;
         GunManager.Instance.SetWeaponChanges();
-        CanvasManager.Instance.gunImages[0].SetActive(false);
-        CanvasManager.Instance.gunImages[1].SetActive(false);
-        CanvasManager.Instance.gunImages[2].SetActive(false);
-        CanvasManager.Instance.gunImages[3].SetActive(false);
+        gunImages[0].SetActive(false);
+        gunImages[1].SetActive(false);
+        gunImages[2].SetActive(false);
+        gunImages[3].SetActive(false);
+    }
+    void UpdateWeaponImageInUI()
+    {
+        if(!GunManager.Instance.CanEquipRifle)
+        {
+            gunImages[0].SetActive(false);
+        }
+        if(!GunManager.Instance.CanEquipShotgun)
+        {
+            gunImages[1].SetActive(false);
+        }
+        if(!GunManager.Instance.CanEquipPistol)
+        {
+            gunImages[2].SetActive(false);
+        }
+        if(!GunManager.Instance.CanEquipKnife)
+        {
+            gunImages[3].SetActive(false);
+        }
     }
 }

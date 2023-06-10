@@ -9,9 +9,11 @@ using System;
 
 public class PlayerInteractScript : MonoBehaviour
 {
+    [SerializeField] Canvas interactCanvas;
+    [SerializeField] Canvas puzzleOneCanvas;
     [SerializeField] TextMeshProUGUI itemNameUI;
     [SerializeField] TextMeshProUGUI storyText;
-    [SerializeField] Transform cameraTransform;
+    [SerializeField] Animator doorAnimator;
     InventoryController inventoryController;
     PlayerControls playerControls;
     InputAction interactButton;
@@ -24,14 +26,13 @@ public class PlayerInteractScript : MonoBehaviour
     Vector3 doorTargetPosition;
     void Start()
     {
-        cameraTransform = Camera.main.transform;
         inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
         Cursor.lockState = CursorLockMode.Locked;
 
     }
     void Update()
     { 
-        if(CanvasManager.Instance.PuzzleOneCanvas.enabled == true)
+        if(puzzleOneCanvas.enabled == true)
         {
             Cursor.lockState = CursorLockMode.None;
         }
@@ -40,7 +41,7 @@ public class PlayerInteractScript : MonoBehaviour
     void LookAtItem()
     {
         RaycastHit hit;
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.TransformDirection(Vector3.forward), out hit,lookDistance, layerMask))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hit,lookDistance, layerMask))
         {
             if(hit.collider.tag == "Item")
             {
@@ -48,25 +49,25 @@ public class PlayerInteractScript : MonoBehaviour
                 lastLookedObject = hit.collider.gameObject;
                 string itemName = lastLookedObject.name;
                 itemNameUI.text = "Press E to pick up " + itemName;
-                CanvasManager.Instance.InteractCanvas.enabled = true;
+                interactCanvas.enabled = true;
                 Interact(lastLookedObject,itemName,"Item");
             }
             else if(hit.collider.tag == "Puzzle")
             {
                 itemNameUI.text = "Press E to play puzzle";
-                CanvasManager.Instance.InteractCanvas.enabled = true;
+                interactCanvas.enabled = true;
                 Interact(hit.collider.gameObject,"Puzzle");   
             }
             else if(hit.collider.tag == "Door")
             {
                 itemNameUI.text = "Press E to Open";
-                CanvasManager.Instance.InteractCanvas.enabled = true;
+                interactCanvas.enabled = true;
                 Interact(hit.collider.gameObject,"Door");
             }
             else if(hit.collider.tag == "StoryItem")
             {
                 itemNameUI.text = "Press E to read";
-                CanvasManager.Instance.InteractCanvas.enabled = true;
+                interactCanvas.enabled = true;
                 Interact(hit.collider.gameObject,"StoryItem");
             }
             else if(lastLookedObject is null)
@@ -75,7 +76,7 @@ public class PlayerInteractScript : MonoBehaviour
             }
             else
             {
-                CanvasManager.Instance.InteractCanvas.enabled = false;
+                interactCanvas.enabled = false;
                 if(lastLookedObject == null)
                 {
                     return;
@@ -83,13 +84,13 @@ public class PlayerInteractScript : MonoBehaviour
                 else
                 {
                     lastLookedObject.GetComponent<Outline>().enabled = false;
-                    CanvasManager.Instance.InteractCanvas.enabled = false;
+                    interactCanvas.enabled = false;
                 }
             }
         }
         else
         {
-            CanvasManager.Instance.InteractCanvas.enabled = false;
+            interactCanvas.enabled = false;
         } 
     }
     void Interact(GameObject itemObject,string itemName,string colliderTag)
@@ -99,7 +100,7 @@ public class PlayerInteractScript : MonoBehaviour
             gameObject.GetComponent<Animator>().Play("Pick Up Item");
             ItemList.Instance.AddItem(itemName);
             inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
-            CanvasManager.Instance.InteractCanvas.enabled = false;
+            interactCanvas.enabled = false;
             Destroy(itemObject);
         }
     }
@@ -108,20 +109,23 @@ public class PlayerInteractScript : MonoBehaviour
         if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Puzzle")
         {
             DisableScripts(true);
-            CanvasManager.Instance.PuzzleOneCanvas.enabled = true;
+            puzzleOneCanvas.enabled = true;
         } 
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Door")
-        {
-            doorTargetPosition = gameObject.transform.position + Vector3.back * 20;
-            StartCoroutine(DoorBehaviour(gameObject));
+        {   
+            gameObject.GetComponent<Animator>().Play("Door");
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "StoryItem")
         {
             DisableScripts(true);
             storyText.text =  gameObject.GetComponent<StoryScript>().Sentence;
             Cursor.lockState = CursorLockMode.None;
-            CanvasManager.Instance.StoryCanvas.enabled = true;
         }
+    }
+    private void CalculateTargetPosition(GameObject gameObject)
+    {
+        Vector3 leftDirection = transform.right;  // Get the left direction based on object's rotation
+        doorTargetPosition = gameObject.transform.position + leftDirection * 30;  // Calculate the target position
     }
     private IEnumerator DoorBehaviour(GameObject gameObject)
     {
@@ -144,6 +148,7 @@ public class PlayerInteractScript : MonoBehaviour
 
         while (elapsedTime < 3.0f)
         {
+            CalculateTargetPosition(gameObject);
             gameObject.transform.position = Vector3.Lerp(doorTargetPosition, originalPosition, elapsedTime / 3.0f);
 
             elapsedTime += Time.deltaTime;
@@ -155,12 +160,10 @@ public class PlayerInteractScript : MonoBehaviour
     public void ExitStoryText()
     {
         DisableScripts(false);
-        CanvasManager.Instance.StoryCanvas.enabled = false;
     }
     public void ExitPuzzle()
     {
         DisableScripts(false);
-        CanvasManager.Instance.PuzzleOneCanvas.enabled = false;
     }
     public void DisableScripts(bool isOn)
     {

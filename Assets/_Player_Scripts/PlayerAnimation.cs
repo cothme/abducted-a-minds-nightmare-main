@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class PlayerAnimation : MonoBehaviour
     }
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("Level 1 Intro");
+        }
         anim.SetFloat("WalkFB",PlayerState.Instance.MovingZ);
         anim.SetFloat("WalkSR",PlayerState.Instance.MovingX);
         anim.SetBool("HGReload", PlayerState.Instance.Reloading);

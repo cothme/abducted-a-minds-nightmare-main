@@ -5,40 +5,34 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
-{
-    [SerializeField] Animator animator;
-    [SerializeField] float playerSpeed = 6.0f;
-    [SerializeField] float jumpHeight = 1.0f;
-    [SerializeField] float gravityValue = -9.81f;
-    [SerializeField] float rotationSpeed = 4f;
-    [SerializeField] InputActionReference jumpControl; 
+{   
+    Animator animator;
+    float playerSpeed = 6.0f;
+    float gravityValue = -9.81f;
+    float rotationSpeed = 4f;
     CharacterController controller;
     Vector3 playerVelocity;
     bool groundedPlayer;
     Transform cameraTransform;
     PlayerControls playerControls;
     InputAction movementControl;
-    #region Input Setup
     private void Awake()
     {
         playerControls = new PlayerControls();
     }
-
     private void OnEnable()
     {   
         movementControl = playerControls.Player.Movement;
         movementControl.Enable();
-        jumpControl.action.Enable();
     }
     private void OnDisable()
     {
         movementControl.Disable();
-        jumpControl.action.Disable();
     }
-    #endregion
     private void Start()
     {
-        controller = gameObject.GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+        controller = GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
         PlayerState.Instance.Aiming = false;
     }
@@ -46,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         groundedPlayer = controller.isGrounded;
-        if (Input.GetKey(KeyCode.LeftShift) && !PlayerState.Instance.Aiming)
+        if (Input.GetKey(KeyCode.LeftShift) && !PlayerState.Instance.Aiming && !PlayerState.Instance.Reloading)
         {
             PlayerState.Instance.Running = true;
             playerSpeed += 2f;
@@ -74,10 +68,6 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        if (jumpControl.action.triggered)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
         RotateBasedOnWASD(movementDirection, move);

@@ -47,7 +47,6 @@ public class PlayerCameraScript : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(exitAim);
         RecenterCamera();
         var camera = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraZoomAmount(7);
         PlayerRotateBaseOnCamera(playerTransform,cameraTransform);
@@ -86,7 +85,7 @@ public class PlayerCameraScript : MonoBehaviour
     }
     void StartAim(InputAction.CallbackContext context)
     {
-        if(GunManager.Instance.WeaponEquipped == null)
+        if(GunManager.Instance.WeaponEquipped == null || PlayerState.Instance.Reloading)
         {
             return;
         }

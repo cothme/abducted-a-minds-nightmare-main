@@ -3574,6 +3574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b12adf201315a459dd0c8ec79c3758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactCanvas: {fileID: 0}
+  puzzleOneCanvas: {fileID: 0}
   itemNameUI: {fileID: 0}
   storyText: {fileID: 0}
   cameraTransform: {fileID: 0}
@@ -3604,12 +3606,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505c91efeeee7a74293570d57fd0796f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 6222618446751639710}
-  playerSpeed: 6
-  jumpHeight: 1
-  gravityValue: -9.81
-  rotationSpeed: 10
-  jumpControl: {fileID: 1853356140666798705, guid: e60ecd8a52bdfec43a2ffa0d2428e7b1, type: 3}
 --- !u!114 &6222618446751639680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3622,6 +3618,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4135c15d377c6f4e895b13d08353c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunImages:
+  - {fileID: 7118096811813236693, guid: e5247e3c27b1b3d4eae7edfdb7c32a6c, type: 3}
+  - {fileID: 1820584869365755958, guid: dc1748f3c2bd0ec428fc4b59d837a108, type: 3}
+  - {fileID: 5791716662072770663, guid: 320779711a9119348bb879e13970d69a, type: 3}
+  - {fileID: 42611569873322537, guid: 878ee1247a091e9418fb5bf5fb53225e, type: 3}
   cameraTransform: {fileID: 0}
   bulletPreFab: {fileID: 6787605666375521077, guid: 7460a5c644341e04ab9b32b45fd08e16, type: 3}
   bulletTransform: {fileID: 0}
@@ -3640,6 +3641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d35f0c7259bf7a4cb6be91ff631ad41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryCanvas: {fileID: 0}
+  mainCanvas: {fileID: 0}
 --- !u!1 &6550310271615435231
 GameObject:
   m_ObjectHideFlags: 0

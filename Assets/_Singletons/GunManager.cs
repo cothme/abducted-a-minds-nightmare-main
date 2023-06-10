@@ -10,10 +10,6 @@ public class GunManager : MonoBehaviour
     private static GunManager instance;
     public static GunManager Instance { get { return instance; } }
     [SerializeField] List<WeaponData> weapons;
-    [SerializeField] TextMeshProUGUI magazineCountText;
-    [SerializeField] TextMeshProUGUI totalBulletsCountText;
-    [SerializeField] TextMeshProUGUI bulletsCountText;
-    [SerializeField] TextMeshProUGUI statusIndicator;
     InventoryController inventoryController;
     private string weaponEquipped;
     private float bulletsLoaded;
@@ -33,6 +29,8 @@ public class GunManager : MonoBehaviour
     public float BulletsLoaded { get => bulletsLoaded; set => bulletsLoaded = value; }
     public float ReloadTime { get => reloadTime; set => reloadTime = value; }
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
+    public List<WeaponData> Weapons { get => weapons; set => weapons = value; }
+    public float TotalBullets { get => totalBullets; set => totalBullets = value; }
 
     private void Initialize()
     {
@@ -41,8 +39,6 @@ public class GunManager : MonoBehaviour
     private void Update()
     {
         CheckForWeapon();
-        totalBulletsCountText.text = totalBullets.ToString();
-        bulletsCountText.text = BulletsLoaded.ToString();
     }
     public void shootInGunManager()
     {
@@ -98,24 +94,23 @@ public class GunManager : MonoBehaviour
     }
     public void UpdateBullets()
     {   
-        totalBullets = magazine.Sum() - bulletsLoaded;
+        TotalBullets = magazine.Sum() - bulletsLoaded;
     }
     private IEnumerator ReloadCoroutine()
     {        
         if(!PlayerState.Instance.Reloading)
-        {
-            PlayerState.Instance.Reloading = true;  
+        {   
+            PlayerState.Instance.Reloading = true;
             float remainingTime = ReloadTime;
             while (remainingTime > 0)
             {
-                statusIndicator.text = "Reloading: " + remainingTime.ToString("F1");
                 yield return new WaitForSeconds(0.1f);
                 remainingTime -= 0.1f; 
             }       
             float reloadAmount = capacity - bulletsLoaded;
-            reloadAmount = (totalBullets - reloadAmount) >= 0 ? reloadAmount : totalBullets;
+            reloadAmount = (TotalBullets - reloadAmount) >= 0 ? reloadAmount : TotalBullets;
             bulletsLoaded += reloadAmount;
-            totalBullets -= reloadAmount;  
+            TotalBullets -= reloadAmount;  
             PlayerState.Instance.Reloading = false;  
         }
     }
@@ -128,7 +123,7 @@ public class GunManager : MonoBehaviour
         else
         {
             CanEquipRifle = false;
-            CanvasManager.Instance.gunImages[0].SetActive(false);
+            
         }
         if(ItemList.Instance.Itemlist.Contains(5))
         {
@@ -137,7 +132,6 @@ public class GunManager : MonoBehaviour
         else
         {
             CanEquipPistol = false;
-            CanvasManager.Instance.gunImages[2].SetActive(false);
         }
         if(ItemList.Instance.Itemlist.Contains(6))
         {
@@ -146,7 +140,6 @@ public class GunManager : MonoBehaviour
         else
         {
             CanEquipShotgun = false;
-            CanvasManager.Instance.gunImages[1].SetActive(false);
         }
         if(ItemList.Instance.Itemlist.Contains(2))
         {
@@ -155,7 +148,6 @@ public class GunManager : MonoBehaviour
         else
         {
             CanEquipKnife = false;
-            CanvasManager.Instance.gunImages[3].SetActive(false);
         }
     }
     public void SetWeaponChanges()
@@ -163,46 +155,46 @@ public class GunManager : MonoBehaviour
         switch (weaponEquipped)
         {
             case "Rifle":
-                ReloadTime = weapons[0].reloadSpeed;
-                AttackSpeed = weapons[0].attackSpeed;
-                capacity = weapons[0].capacity;
-                recoil = weapons[0].weaponRecoil;
+                ReloadTime = Weapons[0].reloadSpeed;
+                AttackSpeed = Weapons[0].attackSpeed;
+                capacity = Weapons[0].capacity;
+                recoil = Weapons[0].weaponRecoil;
                 if(bulletsLoaded > capacity)
                 {
                     float bulletsStored = bulletsLoaded - capacity;
                     bulletsLoaded = capacity;
-                    totalBullets += bulletsStored;
+                    TotalBullets += bulletsStored;
                 }
                 break;
             case "Shotgun":
-                ReloadTime = weapons[1].reloadSpeed;
-                AttackSpeed = weapons[1].attackSpeed;
-                capacity = weapons[1].capacity;
-                recoil = weapons[1].weaponRecoil;
+                ReloadTime = Weapons[1].reloadSpeed;
+                AttackSpeed = Weapons[1].attackSpeed;
+                capacity = Weapons[1].capacity;
+                recoil = Weapons[1].weaponRecoil;
                 if(bulletsLoaded > capacity)
                 {
                     float bulletsStored = bulletsLoaded - capacity;
                     bulletsLoaded = capacity;
-                    totalBullets += bulletsStored;
+                    TotalBullets += bulletsStored;
                 }
                 break;
             case "Pistol":
-                ReloadTime = weapons[2].reloadSpeed;
-                AttackSpeed = weapons[2].attackSpeed;
-                capacity = weapons[2].capacity;
-                recoil = weapons[2].weaponRecoil;
+                ReloadTime = Weapons[2].reloadSpeed;
+                AttackSpeed = Weapons[2].attackSpeed;
+                capacity = Weapons[2].capacity;
+                recoil = Weapons[2].weaponRecoil;
                 if(bulletsLoaded > capacity)
                 {
                     float bulletsStored = bulletsLoaded - capacity;
                     bulletsLoaded = capacity;
-                    totalBullets += bulletsStored;
+                    TotalBullets += bulletsStored;
                 }
                 break;
             case "Knife":
-                ReloadTime = weapons[3].reloadSpeed;
-                AttackSpeed = weapons[3].attackSpeed;
-                capacity = weapons[3].capacity;
-                recoil = weapons[3].weaponRecoil;
+                ReloadTime = Weapons[3].reloadSpeed;
+                AttackSpeed = Weapons[3].attackSpeed;
+                capacity = Weapons[3].capacity;
+                recoil = Weapons[3].weaponRecoil;
                 break;
             default:
                 break;

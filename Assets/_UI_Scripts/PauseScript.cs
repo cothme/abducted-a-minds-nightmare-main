@@ -11,7 +11,7 @@ public class PauseScript : MonoBehaviour
         if(ControlsManager.Instance.IsPauseButtonDown)
         {
             PlayerState.Instance.Paused = !PlayerState.Instance.Paused;
-            CanvasManager.Instance.PauseCanvas.enabled = true;
+            gameObject.GetComponent<Canvas>().enabled = true;
         }
         if(PlayerState.Instance.Paused)
         {
@@ -29,7 +29,7 @@ public class PauseScript : MonoBehaviour
         PlayerState.Instance.Paused = false;
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
-        CanvasManager.Instance.PauseCanvas.enabled = false;
+        gameObject.GetComponent<Canvas>().enabled = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerInteractScript>().enabled = true;
         player.GetComponent<PlayerShootingScript>().enabled = true;

@@ -9,6 +9,8 @@ using System;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [SerializeField] Canvas inventoryCanvas;
+    [SerializeField] Canvas mainCanvas;
     InventoryController inventoryController;
     PlayerControls playerControls;
     InputAction openInventoryButton,interactButton,dropButton;
@@ -41,22 +43,24 @@ public class PlayerInventory : MonoBehaviour
         inventoryOpen = !inventoryOpen;
         if(inventoryOpen) 
         {   
+            inventoryController.enabled = true;
             gameObject.GetComponent<PlayerMovement>().enabled = false;
             gameObject.GetComponent<PlayerAnimation>().enabled = false; 
             gameObject.GetComponent<PlayerShootingScript>().enabled = false; 
             Cursor.lockState = CursorLockMode.None;
-            CanvasManager.Instance.InventoryCanvas.alpha = 1;
-            CanvasManager.Instance.MainCanvas.enabled = false;
+            inventoryCanvas.GetComponent<CanvasGroup>().alpha = 1;
+            mainCanvas.enabled = false;
             Camera.main.GetComponent<CinemachineBrain>().enabled = false;
         } 
         else
         {
+            inventoryController.enabled = false;
             gameObject.GetComponent<PlayerMovement>().enabled = true;
             gameObject.GetComponent<PlayerAnimation>().enabled = true; 
             gameObject.GetComponent<PlayerShootingScript>().enabled = true; 
             Cursor.lockState = CursorLockMode.Locked;
-            CanvasManager.Instance.InventoryCanvas.alpha = 0;
-            CanvasManager.Instance.MainCanvas.enabled = true;
+            inventoryCanvas.GetComponent<CanvasGroup>().alpha = 0;
+            mainCanvas.enabled = true;
             Camera.main.GetComponent<CinemachineBrain>().enabled = true;
         }
     }
