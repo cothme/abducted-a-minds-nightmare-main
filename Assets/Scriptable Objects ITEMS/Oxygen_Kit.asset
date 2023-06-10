@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3e8a9ac5a809b46a2b2d304adb5b8e, type: 3}
   m_Name: Oxygen_Kit
   m_EditorClassIdentifier: 
-  width: 2
-  height: 3
-  itemIcon: {fileID: 21300000, guid: 5182884511bff19438f13fd025b3bf10, type: 3}
+  width: 3
+  height: 2
+  itemIcon: {fileID: 21300000, guid: 24f88448da7b88c48a86602d6e3353dd, type: 3}
   model: {fileID: 0}
