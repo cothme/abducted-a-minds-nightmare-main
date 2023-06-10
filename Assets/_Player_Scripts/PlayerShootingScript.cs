@@ -48,7 +48,15 @@ public class PlayerShootingScript : MonoBehaviour
         {
             StartCoroutine(ShootRifleCoroutine());
         }
-        if(Input.GetMouseButtonDown(0) && GunManager.Instance.WeaponEquipped != "Rifle" && !isShooting)
+        if(Input.GetMouseButtonDown(0) &&  GunManager.Instance.WeaponEquipped == "Knife" && !isShooting)
+        {
+            gameObject.GetComponent<Animator>().Play("Knife Attack 1");
+        }
+        if(Input.GetMouseButtonDown(0) && GunManager.Instance.WeaponEquipped == "Knife" && !isShooting)
+        {
+            KnifeAttack();
+        }
+        if(Input.GetMouseButtonDown(0) && GunManager.Instance.WeaponEquipped != "Rifle" && !isShooting && GunManager.Instance.WeaponEquipped != "Knife")
         {
             StartCoroutine(ShootCoroutine());
         }
@@ -101,6 +109,13 @@ public class PlayerShootingScript : MonoBehaviour
             //     bulletInstance.target = Camera.main.transform.position + Camera.main.transform.forward * bulletMissDistance;
             //     bulletInstance.hit = true; 
             // } 
+        }
+    }
+    private void KnifeAttack()
+    {
+        if(PlayerState.Instance.Aiming)
+        {
+            gameObject.GetComponent<Animator>().Play("Knife Attack 2");
         }
     }
     IEnumerator ShootRifleCoroutine()
@@ -169,7 +184,7 @@ public class PlayerShootingScript : MonoBehaviour
         {
             if(GunManager.Instance.WeaponEquipped != "Pistol")
             {
-                gameObject.GetComponent<Animator>().Play("Equip HG");
+                gameObject.GetComponent<Animator>().Play("HG Equip");
             }
             GunManager.Instance.WeaponEquipped = "Pistol";
             GunManager.Instance.SetWeaponChanges();
@@ -184,6 +199,7 @@ public class PlayerShootingScript : MonoBehaviour
         GunManager.Instance.CheckForWeapon();
         if(GunManager.Instance.CanEquipKnife && !PlayerState.Instance.Reloading)
         {
+            gameObject.GetComponent<Animator>().Play("KF Equip");
             GunManager.Instance.WeaponEquipped = "Knife";
             GunManager.Instance.SetWeaponChanges();
             gunImages[0].SetActive(false);

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reloadSpeed: 0
   damage: 0.5
-  attackSpeed: 3
+  attackSpeed: 0
   capacity: 0
+  weaponRecoil: 0

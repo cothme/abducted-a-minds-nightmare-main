@@ -92,9 +92,15 @@ public class PlayerCameraScript : MonoBehaviour
         else
         {
             PlayerState.Instance.Aiming = !PlayerState.Instance.Aiming;
-            if(PlayerState.Instance.Aiming)
+            if(PlayerState.Instance.Aiming && GunManager.Instance.WeaponEquipped == "Pistol")
             {
-                animator.Play("HG Aim Center"); 
+                animator.Play("HG Aim"); 
+                aimCanvas.enabled = true;
+                virtualCamera.Priority = 9;
+            }
+            else if(PlayerState.Instance.Aiming && GunManager.Instance.WeaponEquipped == "Knife")
+            {
+                animator.Play("KF Aim"); 
                 aimCanvas.enabled = true;
                 virtualCamera.Priority = 9;
             }
