@@ -6,16 +6,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {   
-    [SerializeField] GameObject rifle;
-    [SerializeField] GameObject shotgun;
-    [SerializeField] GameObject pistol;
-    [SerializeField] GameObject knife;
-    [SerializeField] GameObject healthkit;
-    [SerializeField] GameObject oxygenkit;
-    [SerializeField] GameObject ammo;
-    [SerializeField] GameObject mask;
-    [SerializeField] GameObject flashlight;
-    [SerializeField] GameObject uvflashlight;
     Animator animator;
     float playerSpeed = 6.0f;
     float gravityValue = -9.81f;

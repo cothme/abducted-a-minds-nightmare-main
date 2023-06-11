@@ -48,21 +48,7 @@ public class PlayerCameraScript : MonoBehaviour
     void Update()
     {
         RecenterCamera();
-        var camera = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraZoomAmount(7);
         PlayerRotateBaseOnCamera(playerTransform,cameraTransform);
-    }
-    float cameraZoomAmount(int maxValue)
-    {
-        scroll += Mouse.current.scroll.ReadValue().y;
-        if(scroll > maxValue)
-        {
-            scroll = maxValue;
-        }     
-        else if(scroll <= 4)
-        {
-            scroll = 4;
-        }
-        return scroll;        
     }
     private void PlayerRotateBaseOnCamera(Transform playerTransform, Transform cameraTransform)
     {
@@ -76,7 +62,6 @@ public class PlayerCameraScript : MonoBehaviour
         {
             if(exitAim)
             {
-                Debug.Log("dasdsa");
                 Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
                 playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, 1);
             }
@@ -101,6 +86,18 @@ public class PlayerCameraScript : MonoBehaviour
             else if(PlayerState.Instance.Aiming && GunManager.Instance.WeaponEquipped == "Knife")
             {
                 animator.Play("KF Aim"); 
+                aimCanvas.enabled = true;
+                virtualCamera.Priority = 9;
+            }
+            else if(PlayerState.Instance.Aiming && GunManager.Instance.WeaponEquipped == "Rifle")
+            {
+                animator.Play("Rif Aim"); 
+                aimCanvas.enabled = true;
+                virtualCamera.Priority = 9;
+            }
+            else if(PlayerState.Instance.Aiming && GunManager.Instance.WeaponEquipped == "Shotgun")
+            {
+                animator.Play("SG Aim"); 
                 aimCanvas.enabled = true;
                 virtualCamera.Priority = 9;
             }

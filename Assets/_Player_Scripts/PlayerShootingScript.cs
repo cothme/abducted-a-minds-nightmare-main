@@ -7,6 +7,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerShootingScript : MonoBehaviour
 {
+    [SerializeField] GameObject rifle;
+    [SerializeField] GameObject shotgun;
+    [SerializeField] GameObject pistol;
+    [SerializeField] GameObject knife;
+    [SerializeField] GameObject healthkit;
+    [SerializeField] GameObject oxygenkit;
+    [SerializeField] GameObject mask;
     [SerializeField] GameObject[] gunImages; 
     [SerializeField] GameObject bulletPreFab;
     [SerializeField] Transform bulletTransform;
@@ -17,6 +24,7 @@ public class PlayerShootingScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI bulletsCountText;
     [SerializeField] TextMeshProUGUI statusIndicator;
     WeaponRecoil recoil;
+    bool maskEquipped = false;
     public bool isShooting = false;
     void Update()
     {
@@ -38,6 +46,10 @@ public class PlayerShootingScript : MonoBehaviour
         else if(ControlsManager.Instance.IsKnifeButtonDown)
         {
             ChooseKnife();
+        }
+        else if(ControlsManager.Instance.IsMaskEquipButtonDown)
+        {
+            EquipMask();
         }
         else if(ControlsManager.Instance.IsUnequipButtonDown)
         {
@@ -71,29 +83,29 @@ public class PlayerShootingScript : MonoBehaviour
     }
     private void ShootAssaultRifle()
     {
-        if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
+        if(PlayerState.Instance.Aiming)
         {
-            RaycastHit hit;
-            GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,bulletTransform.rotation);
-            BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
+            // RaycastHit hit;
+            gameObject.GetComponent<Animator>().Play("Rif Fire");
+            GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,gameObject.transform.rotation);
+            // BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
             GunManager.Instance.shootInGunManager();
-            if(Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward,out hit, Mathf.Infinity))
-            {
-                bulletInstance.target = hit.point;
-                bulletInstance.hit = true; 
-            }
-            else
-            {
-                bulletInstance.target = Camera.main.transform.position + Camera.main.transform.forward * bulletMissDistance;
-                bulletInstance.hit = true; 
-            }
+            // if(Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward,out hit, Mathf.Infinity))
+            // {
+            //     bulletInstance.target = hit.point;
+            //     bulletInstance.hit = true; 
+            // }
+            // else
+            // {
+            //     bulletInstance.target = Camera.main.transform.position + Camera.main.transform.forward * bulletMissDistance;
+            //     bulletInstance.hit = true; 
+            // }
         } 
     }
     private void Shoot()
     {
         if(PlayerState.Instance.Aiming)
         {
-            // recoil.StartShooting();
             gameObject.GetComponent<Animator>().Play("Fire HG");
             // RaycastHit hit;
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,gameObject.transform.rotation);
@@ -143,8 +155,25 @@ public class PlayerShootingScript : MonoBehaviour
     {
         if(!PlayerState.Instance.Reloading)
         {
-            gameObject.GetComponent<Animator>().Play("Reload HG");  
-            GunManager.Instance.reloadInGunManager();
+            if(GunManager.Instance.WeaponEquipped == "Rifle")
+            {
+                gameObject.GetComponent<Animator>().Play("Rif Reload");  
+                GunManager.Instance.reloadInGunManager();
+            }
+            else if(GunManager.Instance.WeaponEquipped == "Shotgun")
+            {
+                gameObject.GetComponent<Animator>().Play("SG Reload");  
+                GunManager.Instance.reloadInGunManager();
+            }
+            else if(GunManager.Instance.WeaponEquipped == "Pistol")
+            {
+                gameObject.GetComponent<Animator>().Play("HG Reload"); 
+                GunManager.Instance.reloadInGunManager();             
+            }
+            else if(GunManager.Instance.WeaponEquipped == "Knife")
+            {
+                return; 
+            }
         }
         else
         {
@@ -156,8 +185,17 @@ public class PlayerShootingScript : MonoBehaviour
         GunManager.Instance.CheckForWeapon();
         if(GunManager.Instance.CanEquipRifle && !PlayerState.Instance.Reloading)
         {
+            if(GunManager.Instance.WeaponEquipped != "Rifle")
+            {
+                gameObject.GetComponent<Animator>().Play("Rif Equip");
+                rifle.SetActive(true);
+            }
             GunManager.Instance.WeaponEquipped = "Rifle";
             GunManager.Instance.SetWeaponChanges();
+            rifle.SetActive(true);
+            shotgun.SetActive(false);
+            pistol.SetActive(false);
+            knife.SetActive(false);
             gunImages[0].SetActive(true);
             gunImages[1].SetActive(false);
             gunImages[2].SetActive(false);
@@ -169,8 +207,16 @@ public class PlayerShootingScript : MonoBehaviour
         GunManager.Instance.CheckForWeapon();
         if(GunManager.Instance.CanEquipShotgun && !PlayerState.Instance.Reloading)
         {
+            if(GunManager.Instance.WeaponEquipped != "Shotgun")
+            {
+                gameObject.GetComponent<Animator>().Play("SG Equip");
+            }
             GunManager.Instance.WeaponEquipped = "Shotgun";
             GunManager.Instance.SetWeaponChanges();
+            rifle.SetActive(false);
+            shotgun.SetActive(true);
+            pistol.SetActive(false);
+            knife.SetActive(false);
             gunImages[0].SetActive(false);
             gunImages[1].SetActive(true);
             gunImages[2].SetActive(false);
@@ -188,6 +234,10 @@ public class PlayerShootingScript : MonoBehaviour
             }
             GunManager.Instance.WeaponEquipped = "Pistol";
             GunManager.Instance.SetWeaponChanges();
+            rifle.SetActive(false);
+            shotgun.SetActive(false);
+            pistol.SetActive(true);
+            knife.SetActive(false);
             gunImages[0].SetActive(false);
             gunImages[1].SetActive(false);
             gunImages[2].SetActive(true);
@@ -202,16 +252,43 @@ public class PlayerShootingScript : MonoBehaviour
             gameObject.GetComponent<Animator>().Play("KF Equip");
             GunManager.Instance.WeaponEquipped = "Knife";
             GunManager.Instance.SetWeaponChanges();
+            rifle.SetActive(false);
+            shotgun.SetActive(false);
+            pistol.SetActive(false);
+            knife.SetActive(true);
             gunImages[0].SetActive(false);
             gunImages[1].SetActive(false);
             gunImages[2].SetActive(false);
             gunImages[3].SetActive(true);
         }
     }
+    
+    private void EquipMask()
+    {
+        if(GunManager.Instance.CanEquipMask && maskEquipped == false)
+        {
+            maskEquipped = !maskEquipped;
+            gameObject.GetComponent<Animator>().Play("Equip Space Mask");
+            mask.SetActive(true);
+        }
+        else if(maskEquipped)
+        {
+            maskEquipped = !maskEquipped;
+            mask.SetActive(false);
+        }
+        else
+        {
+            mask.SetActive(false);  
+        }
+    }
     void Unequip()
     {
         GunManager.Instance.WeaponEquipped = null;
         GunManager.Instance.SetWeaponChanges();
+        rifle.SetActive(false);
+        shotgun.SetActive(false);
+        pistol.SetActive(false);
+        knife.SetActive(false);
         gunImages[0].SetActive(false);
         gunImages[1].SetActive(false);
         gunImages[2].SetActive(false);

@@ -335,7 +335,6 @@ GameObject:
   - component: {fileID: 3741339990218741816}
   - component: {fileID: 3774387690520101903}
   - component: {fileID: 3774387690520101888}
-  - component: {fileID: -316740426491076773}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Item
@@ -421,24 +420,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-316740426491076773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4080323155397427842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 0, b: 0, a: 1}
-  outlineWidth: 5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &4448267823765199488
 GameObject:
   m_ObjectHideFlags: 0

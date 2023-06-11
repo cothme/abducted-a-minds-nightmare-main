@@ -13,7 +13,6 @@ public class PlayerInteractScript : MonoBehaviour
     [SerializeField] Canvas puzzleOneCanvas;
     [SerializeField] TextMeshProUGUI itemNameUI;
     [SerializeField] TextMeshProUGUI storyText;
-    [SerializeField] Animator doorAnimator;
     InventoryController inventoryController;
     PlayerControls playerControls;
     InputAction interactButton;
@@ -45,7 +44,6 @@ public class PlayerInteractScript : MonoBehaviour
         {
             if(hit.collider.tag == "Item")
             {
-                hit.collider.gameObject.GetComponent<Outline>().enabled = true;
                 lastLookedObject = hit.collider.gameObject;
                 string itemName = lastLookedObject.name;
                 itemNameUI.text = "Press E to pick up " + itemName;
@@ -83,7 +81,6 @@ public class PlayerInteractScript : MonoBehaviour
                 }
                 else
                 {
-                    lastLookedObject.GetComponent<Outline>().enabled = false;
                     interactCanvas.enabled = false;
                 }
             }

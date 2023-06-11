@@ -17,7 +17,7 @@ public class GunManager : MonoBehaviour
     private float capacity;
     private float recoil;
     private float reloadTime,attackSpeed;
-    private bool canEquipPistol, canEquipRifle, canEquipShotgun,canEquipKnife;
+    private bool canEquipPistol, canEquipRifle, canEquipShotgun,canEquipKnife,canEquipMask;
     float bulletToMinus;
     private List<float> magazine;
     public List<float> Magazine { get => magazine; set => magazine = value; }
@@ -31,6 +31,7 @@ public class GunManager : MonoBehaviour
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
     public List<WeaponData> Weapons { get => weapons; set => weapons = value; }
     public float TotalBullets { get => totalBullets; set => totalBullets = value; }
+    public bool CanEquipMask { get => canEquipMask; set => canEquipMask = value; }
 
     private void Initialize()
     {
@@ -148,6 +149,14 @@ public class GunManager : MonoBehaviour
         else
         {
             CanEquipKnife = false;
+        }
+        if(ItemList.Instance.Itemlist.Contains(3))
+        {
+            CanEquipMask = true;
+        }
+        else
+        {
+            CanEquipMask = false;
         }
     }
     public void SetWeaponChanges()

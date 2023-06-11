@@ -19,7 +19,6 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetFloat("WalkFB",PlayerState.Instance.MovingZ);
         anim.SetFloat("WalkSR",PlayerState.Instance.MovingX);
         anim.SetBool("Aiming",PlayerState.Instance.Aiming);
-        anim.SetBool("Reloading",PlayerState.Instance.Reloading);
         anim.SetBool("Running",PlayerState.Instance.Running);
     }
 }
