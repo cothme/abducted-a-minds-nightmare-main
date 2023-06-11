@@ -82,6 +82,7 @@
 *.it lfs
 *.s3m lfs
 *.xm lfs
+*.unity lfs
 
 # Video
 *.mov lfs
