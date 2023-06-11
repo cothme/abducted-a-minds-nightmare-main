@@ -72,7 +72,6 @@
 *.psd lfs
 *.afphoto lfs
 *.afdesign lfs
-*.unity lfs
 # Audio
 *.mp3 lfs
 *.ogg lfs
