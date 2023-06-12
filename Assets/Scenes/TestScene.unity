@@ -1179,18 +1179,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1064680318}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &211963587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3364,30 +3352,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: PlayerInteractScript, Assembly-CSharp
         m_MethodName: ExitPuzzle
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1064680318}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1644168310}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7671,7 +7635,7 @@ PrefabInstance:
     - target: {fileID: 7118096811813236699, guid: e5247e3c27b1b3d4eae7edfdb7c32a6c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2810e1fd28d88a042a9564725fea004c, type: 3}
+      objectReference: {fileID: 21300000, guid: 3e6bc2ffea5f8a941afc5140b943bc3e, type: 3}
     - target: {fileID: 7118096811813236699, guid: e5247e3c27b1b3d4eae7edfdb7c32a6c, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -9636,7 +9600,7 @@ PrefabInstance:
     - target: {fileID: 42611569873322539, guid: 878ee1247a091e9418fb5bf5fb53225e, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f4ce0da6ce558e44db74cc39fa550858, type: 3}
+      objectReference: {fileID: 21300000, guid: 968d7ff420eaac842a81e35cb62cf560, type: 3}
     - target: {fileID: 42611569873322539, guid: 878ee1247a091e9418fb5bf5fb53225e, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -10802,7 +10766,7 @@ PrefabInstance:
     - target: {fileID: 1820584869365755960, guid: dc1748f3c2bd0ec428fc4b59d837a108, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 02e780a7b77d4774eb5a87f2e0965a40, type: 3}
+      objectReference: {fileID: 21300000, guid: 90531b70262c1384b8a510e0f3194285, type: 3}
     - target: {fileID: 1820584869365755960, guid: dc1748f3c2bd0ec428fc4b59d837a108, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -13505,7 +13469,7 @@ PrefabInstance:
     - target: {fileID: 5791716662072770665, guid: 320779711a9119348bb879e13970d69a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5903527e0694b8a40b622ce3e2a14145, type: 3}
+      objectReference: {fileID: 21300000, guid: f74b323693316914b8542dbbdf65f20b, type: 3}
     - target: {fileID: 5791716662072770665, guid: 320779711a9119348bb879e13970d69a, type: 3}
       propertyPath: m_Enabled
       value: 1
