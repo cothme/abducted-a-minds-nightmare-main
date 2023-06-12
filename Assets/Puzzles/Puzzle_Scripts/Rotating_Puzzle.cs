@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Rotating_Puzzle : MonoBehaviour
 {
     [SerializeField] Canvas puzzleOneCanvas;
+    [SerializeField] GameObject keyCard;
     public Button move3,move4;
     int pointedNumber;
     int nodeID,limit;
@@ -61,6 +62,7 @@ public class Rotating_Puzzle : MonoBehaviour
         if(CheckWinCondition())
         {
             gameWonPanel.SetActive(true);
+            Instantiate(keyCard,gameObject.transform.position,gameObject.transform.rotation);
             PlayerState.Instance.IsPuzzleOneSolved = true;
         }
         move3.interactable = true;

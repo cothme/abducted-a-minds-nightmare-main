@@ -13,6 +13,7 @@ TagManager:
   - Attack
   - Bullet
   - LockedDoor
+  - Reader
   layers:
   - Default
   - TransparentFX
