@@ -2784,9 +2784,9 @@ MonoBehaviour:
   bulletTransform: {fileID: 1400391536}
   aimCamera: {fileID: 1788265795}
   bulletMissDistance: 25
-  magazineCountText: {fileID: 836644715}
+  magazineCountText: {fileID: 112057566}
   totalBulletsCountText: {fileID: 112057566}
-  bulletsCountText: {fileID: 112057566}
+  bulletsCountText: {fileID: 836644715}
   statusIndicator: {fileID: 13748121}
   isShooting: 0
 --- !u!95 &571396572
@@ -3835,6 +3835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317fdd513a499174e84c7b95a40d8caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   health: 100
   agent: {fileID: 684298136}
   playerTransform: {fileID: 543450653128898108}

@@ -12,6 +12,7 @@ TagManager:
   - Wall
   - Attack
   - Bullet
+  - LockedDoor
   layers:
   - Default
   - TransparentFX
