@@ -29,7 +29,7 @@ public class PlayerShootingScript : MonoBehaviour
     void Update()
     {
         totalBulletsCountText.text = GunManager.Instance.TotalBullets.ToString();
-        bulletsCountText.text = GunManager.Instance.TotalBullets.ToString();
+        bulletsCountText.text = GunManager.Instance.BulletsLoaded.ToString();
         // UpdateWeaponImageInUI();
         if(ControlsManager.Instance.IsRifleButtonDown)
         {
@@ -83,7 +83,7 @@ public class PlayerShootingScript : MonoBehaviour
     }
     private void ShootAssaultRifle()
     {
-        if(PlayerState.Instance.Aiming)
+        if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
         {
             gameObject.GetComponent<Animator>().Play("Rif Fire");
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,gameObject.transform.rotation);
@@ -92,7 +92,7 @@ public class PlayerShootingScript : MonoBehaviour
     }
     private void Shoot()
     {
-        if(PlayerState.Instance.Aiming)
+        if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
         {
             gameObject.GetComponent<Animator>().Play("Fire HG");
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,gameObject.transform.rotation);
