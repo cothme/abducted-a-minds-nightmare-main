@@ -8,12 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: KeycardReader
-    second: {fileID: 2100000, guid: 6975a6aec7e8b7b4a9bb5667776589b8, type: 2}
+    second: {fileID: 2100000, guid: 1d738638c25e7254b94b080acafa4dc5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: KeycardReaderSideTexture
-    second: {fileID: -1536519034987021355, guid: 867c098ac152fe641836e06d2b237057, type: 3}
+    second: {fileID: 2100000, guid: a984739222f226f47a333274ff4ada70, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RedLight
+    second: {fileID: 2100000, guid: c8c26fa7d239aff42a890fc5fe39719a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
