@@ -3,7 +3,27 @@ guid: d8e4aac6656a727448adbec394010b91
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flashlight_Base
+    second: {fileID: 2100000, guid: 6975a6aec7e8b7b4a9bb5667776589b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flashlight_Bottom
+    second: {fileID: 2100000, guid: 1cb0dd7c62a74e245987833ad8a18497, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flashlight_Inicator
+    second: {fileID: 2100000, guid: da5ababfb080b9047a14fbd28bf4abc3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flashlight_Light
+    second: {fileID: 2100000, guid: d885b4ce679556840bdaa387ca4ec85c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -85,7 +105,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.5
+    globalScale: 50
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

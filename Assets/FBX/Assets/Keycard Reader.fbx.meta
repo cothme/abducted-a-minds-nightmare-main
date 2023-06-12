@@ -3,7 +3,17 @@ guid: 800ff96126d298c43a70981789956dca
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KeycardReader
+    second: {fileID: 2100000, guid: 6975a6aec7e8b7b4a9bb5667776589b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KeycardReaderSideTexture
+    second: {fileID: -1536519034987021355, guid: 867c098ac152fe641836e06d2b237057, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -34,7 +44,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 50
+    globalScale: 45
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -85,7 +95,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.5
+    globalScale: 45
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

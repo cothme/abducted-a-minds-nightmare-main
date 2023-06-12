@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 158ba20e5f0eed342a92256548bdaea9
+guid: 5c0d1873040ffdd4093ac509d0bd62fa
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,28 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: BackKeyCardTexture
-    second: {fileID: 2100000, guid: 1cb0dd7c62a74e245987833ad8a18497, type: 2}
+      name: AmmoBase
+    second: {fileID: 2100000, guid: 5a9d519f364715e4793d7bbfb761a0ca, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: BlackMaterial
-    second: {fileID: 2100000, guid: 665782e0c5558f145af5e017f69afc5f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: CopperMetal
-    second: {fileID: 2100000, guid: 9a199537b8f0ea64780e2b1905279983, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: FrontKeyCardTexture
-    second: {fileID: 2100000, guid: c0ad0835104a8084795e3ed5a288db59, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: SerialNumber
-    second: {fileID: 2100000, guid: 28c4c3be6e3848c48a9a1c1604071d66, type: 2}
+      name: AmmoUV
+    second: {fileID: 2100000, guid: d5bea3da27571d740aaef2a8d4a1e262, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -59,7 +44,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 45
+    globalScale: 50
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -110,7 +95,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 45
+    globalScale: 50
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
