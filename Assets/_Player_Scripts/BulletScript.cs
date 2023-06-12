@@ -14,11 +14,13 @@ public class BulletScript : MonoBehaviour
     // }
     void Update()
     {
+        target = Camera.main.transform.position + Camera.main.transform.forward * speed;
         transform.position = Vector3.MoveTowards(transform.position,target,speed * Time.deltaTime);
-        if(hit && Vector3.Distance(transform.position,target) < .01f)
-        {
-            Destroy(gameObject);
-        }
+        // if(hit && Vector3.Distance(transform.position,target) < .01f)
+        // {
+        //     Destroy(gameObject);
+        // }
+        Destroy(gameObject,1f);
     }
     void OnCollisionEnter(Collision col)
     {

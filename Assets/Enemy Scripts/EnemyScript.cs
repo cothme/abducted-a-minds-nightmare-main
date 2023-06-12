@@ -6,6 +6,10 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
+    [SerializeField] Animator anim;
+    bool animationPlayed = false;
+    bool walking = false;
+    int attackType;
     public float health;
     public NavMeshAgent agent;
     public Transform playerTransform;
@@ -26,7 +30,20 @@ public class EnemyScript : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(isFacingObstacle);
+        if(attacked)
+        {
+            agent.SetDestination(gameObject.transform.position);
+        }
+        if(transform.position != Vector3.zero && !attacked)
+        {
+            walking = true;
+            anim.SetBool("Walking",walking);
+        }
+        else
+        {
+            walking = false;
+            anim.SetBool("Walking",walking);
+        }
         CheckObstacle();
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, player);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, player);
@@ -37,7 +54,7 @@ public class EnemyScript : MonoBehaviour
         } 
         else if(playerInSightRange && !playerInAttackRange)
         {
-            ChasePlayer();
+            StartCoroutine(ChasePlayerCoroutine());
         }
         else if(playerInAttackRange && playerInSightRange)
         {
@@ -105,18 +122,28 @@ public class EnemyScript : MonoBehaviour
 
     void ChasePlayer()
     {
+        anim.SetBool("Alerted",false);
+        agent.speed = 10;
         agent.SetDestination(playerTransform.position);
     }
     void AttackPlayer()
     {
         agent.SetDestination(transform.position);
-
         transform.LookAt(playerTransform);
-         
         if(!attacked)
         {
             //attack animations and types here
-
+            attackType = UnityEngine.Random.Range(1,3);
+            if(attackType == 1)
+            { 
+                anim.Play("Attack 1"); 
+                attackDelay = 1.80f;
+            }
+            else 
+            { 
+                anim.Play("Attack 2"); 
+                attackDelay = 3.57f;
+            }
             attacked = true;
             Invoke(nameof(ResetAttack),attackDelay);
         }
@@ -143,5 +170,24 @@ public class EnemyScript : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position,attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position,sightRange);
+    }
+    IEnumerator ChasePlayerCoroutine()
+    {   
+        if(!animationPlayed)
+        {
+            anim.Play("Alerted");
+        }
+            animationPlayed = true;
+        yield return new WaitForSeconds(2f);
+        ChasePlayer();
+    }
+    void OnCollisionEnter(Collision col)
+    {
+        if(col.collider.tag == "Bullet")
+        {
+            anim.Play("Hit 1");
+            health -= 1;
+            Debug.Log("Hit!");
+        }
     }
 }

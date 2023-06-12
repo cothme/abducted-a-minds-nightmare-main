@@ -9,7 +9,8 @@ public class ShotBehavior : MonoBehaviour {
 	}
 	
 	void Update () {
-		transform.position += transform.forward * Time.deltaTime * 100f;
+		// transform.position += transform.forward * Time.deltaTime * 100f;
+		// transform.position = Vector3.MoveTowards(transform.position,target,100f * Time.deltaTime);
 		Destroy(gameObject,3f);
 	}
 	void OnCollisionEnter(Collision other)

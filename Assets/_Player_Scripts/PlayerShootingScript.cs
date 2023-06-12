@@ -85,21 +85,9 @@ public class PlayerShootingScript : MonoBehaviour
     {
         if(PlayerState.Instance.Aiming)
         {
-            // RaycastHit hit;
             gameObject.GetComponent<Animator>().Play("Rif Fire");
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,gameObject.transform.rotation);
-            // BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
             GunManager.Instance.shootInGunManager();
-            // if(Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward,out hit, Mathf.Infinity))
-            // {
-            //     bulletInstance.target = hit.point;
-            //     bulletInstance.hit = true; 
-            // }
-            // else
-            // {
-            //     bulletInstance.target = Camera.main.transform.position + Camera.main.transform.forward * bulletMissDistance;
-            //     bulletInstance.hit = true; 
-            // }
         } 
     }
     private void Shoot()
@@ -107,20 +95,8 @@ public class PlayerShootingScript : MonoBehaviour
         if(PlayerState.Instance.Aiming)
         {
             gameObject.GetComponent<Animator>().Play("Fire HG");
-            // RaycastHit hit;
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,gameObject.transform.rotation);
-            // BulletScript bulletInstance = bullet.GetComponent<BulletScript>();
             GunManager.Instance.shootInGunManager();
-            // if(Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward,out hit, Mathf.Infinity))
-            // {
-            //     bulletInstance.target = hit.point;
-            //     bulletInstance.hit = true; 
-            // }
-            // else
-            // {
-            //     bulletInstance.target = Camera.main.transform.position + Camera.main.transform.forward * bulletMissDistance;
-            //     bulletInstance.hit = true; 
-            // } 
         }
     }
     private void KnifeAttack()

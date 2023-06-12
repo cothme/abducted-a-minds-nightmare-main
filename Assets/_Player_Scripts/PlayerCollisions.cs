@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter(Collision col)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log(col.collider.name);
+        if(col.collider.tag == "Attack")
+        {
+            
+        }
     }
 }
