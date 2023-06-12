@@ -9,6 +9,7 @@ public class Rotating_Puzzle : MonoBehaviour
 {
     [SerializeField] Canvas puzzleOneCanvas;
     [SerializeField] GameObject keyCard;
+    [SerializeField] GameObject puzzleObject;
     public Button move3,move4;
     int pointedNumber;
     int nodeID,limit;
@@ -62,8 +63,9 @@ public class Rotating_Puzzle : MonoBehaviour
         if(CheckWinCondition())
         {
             gameWonPanel.SetActive(true);
-            Instantiate(keyCard,gameObject.transform.position,gameObject.transform.rotation);
+            keyCard.SetActive(true);
             PlayerState.Instance.IsPuzzleOneSolved = true;
+            Destroy(puzzleObject);
         }
         move3.interactable = true;
         move4.interactable = true;

@@ -1455,6 +1455,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Keycard
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 158ba20e5f0eed342a92256548bdaea9, type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 158ba20e5f0eed342a92256548bdaea9, type: 3}
 --- !u!4 &240584503 stripped
@@ -5305,6 +5309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzleOneCanvas: {fileID: 1064680318}
+  keyCard: {fileID: 0}
   move3: {fileID: 897512534}
   move4: {fileID: 373387568}
   arrow: {fileID: 1604588884}
@@ -6678,6 +6683,24 @@ Transform:
   m_Father: {fileID: 4266819486036700630}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1401864698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 158ba20e5f0eed342a92256548bdaea9, type: 3}
+  m_PrefabInstance: {fileID: 240584502}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1401864699
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401864698}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7801257, y: 0.49328393, z: 0.106038556}
+  m_Center: {x: 0, y: 0, z: -0.00000023841858}
 --- !u!1 &1419863485
 GameObject:
   m_ObjectHideFlags: 0
@@ -13293,12 +13316,16 @@ PrefabInstance:
       objectReference: {fileID: 1253970103}
     - target: {fileID: 5702912832177033866, guid: f326d231be1b2f2418acb4dc68c0c64b, type: 3}
       propertyPath: items.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5702912832177033866, guid: f326d231be1b2f2418acb4dc68c0c64b, type: 3}
       propertyPath: items.Array.data[8]
       value: 
-      objectReference: {fileID: 11400000, guid: 8d836e8e487df8e449c981a84150af25, type: 2}
+      objectReference: {fileID: 11400000, guid: abff089a4f5f2564a882e81c54523634, type: 2}
+    - target: {fileID: 5702912832177033866, guid: f326d231be1b2f2418acb4dc68c0c64b, type: 3}
+      propertyPath: items.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1f8ae51bdbe09d148ae58d02890a697a, type: 2}
     - target: {fileID: 5702912832177033867, guid: f326d231be1b2f2418acb4dc68c0c64b, type: 3}
       propertyPath: highlighter
       value: 

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour
 {
+    [SerializeField] 
     private void OnCollisionEnter(Collision col)
     {
-        Debug.Log(col.collider.name);
         if(col.collider.tag == "Attack")
         {
-            
+            PlayerData.Instance.PlayerHealth -= 3f;
         }
     }
 }

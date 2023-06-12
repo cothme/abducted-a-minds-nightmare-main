@@ -22,7 +22,6 @@ public class PlayerShootingScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI magazineCountText;
     [SerializeField] TextMeshProUGUI totalBulletsCountText;
     [SerializeField] TextMeshProUGUI bulletsCountText;
-    [SerializeField] TextMeshProUGUI statusIndicator;
     WeaponRecoil recoil;
     bool maskEquipped = false;
     public bool isShooting = false;

@@ -12,7 +12,6 @@ TagManager:
   - Wall
   - Attack
   - Bullet
-  - LockedDoor
   - Reader
   layers:
   - Default

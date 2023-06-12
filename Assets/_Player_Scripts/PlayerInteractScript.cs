@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 using TMPro;
 using Cinemachine;
 using System.Linq;
@@ -9,6 +10,7 @@ using System;
 
 public class PlayerInteractScript : MonoBehaviour
 {
+    [SerializeField] PlayableDirector doorUnlockedPlayableDirector;
     [SerializeField] Canvas interactCanvas;
     [SerializeField] Canvas puzzleOneCanvas;
     [SerializeField] TextMeshProUGUI itemNameUI;
@@ -68,6 +70,20 @@ public class PlayerInteractScript : MonoBehaviour
                 interactCanvas.enabled = true;
                 Interact(hit.collider.gameObject,"StoryItem");
             }
+            else if(hit.collider.tag == "Reader")
+            {
+                if(ItemList.Instance.Itemlist.Contains(8))
+                {
+                    itemNameUI.text = "Press E to unlock door using Keycard";
+                    interactCanvas.enabled = true;
+                    Interact(hit.collider.gameObject,"Reader");
+                }
+                else
+                {
+                    itemNameUI.text = "You need a keycard to open this door!";
+                    interactCanvas.enabled = true;
+                }
+            }
             else if(lastLookedObject is null)
             {
                 return;
@@ -118,41 +134,12 @@ public class PlayerInteractScript : MonoBehaviour
             storyText.text =  gameObject.GetComponent<StoryScript>().Sentence;
             Cursor.lockState = CursorLockMode.None;
         }
-    }
-    private void CalculateTargetPosition(GameObject gameObject)
-    {
-        Vector3 leftDirection = transform.right;  // Get the left direction based on object's rotation
-        doorTargetPosition = gameObject.transform.position + leftDirection * 30;  // Calculate the target position
-    }
-    private IEnumerator DoorBehaviour(GameObject gameObject)
-    {
-        float elapsedTime = 0f;
-        Vector3 originalPosition = gameObject.transform.position;
-
-        while (elapsedTime < 3.0f)
-        {
-            gameObject.transform.position = Vector3.Lerp(originalPosition, doorTargetPosition, elapsedTime / 3.0f);
-
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
+        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Reader")
+        {  
+            PlayerState.Instance.LevelOneDoorUnlocked = true;
+            doorUnlockedPlayableDirector.Play();
+            ItemList.Instance.DropItem("Keycard");
         }
-        gameObject.transform.position = doorTargetPosition;
-
-        yield return new WaitForSeconds(2.0f);
-
-        elapsedTime = 0f;
-
-        while (elapsedTime < 3.0f)
-        {
-            CalculateTargetPosition(gameObject);
-            gameObject.transform.position = Vector3.Lerp(doorTargetPosition, originalPosition, elapsedTime / 3.0f);
-
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
-        gameObject.transform.position = originalPosition;
     }
     public void ExitStoryText()
     {

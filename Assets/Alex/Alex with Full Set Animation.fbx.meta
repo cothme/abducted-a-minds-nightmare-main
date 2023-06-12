@@ -200,7 +200,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mask_Eyes_Glow
-    second: {fileID: 2100000, guid: f35a0b7fe5dfaaf488a7cf24bfed61d0, type: 2}
+    second: {fileID: 2100000, guid: ad4403cb28f868a4785294bcd3e583f5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

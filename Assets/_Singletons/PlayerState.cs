@@ -7,12 +7,12 @@ public class PlayerState : MonoBehaviour
     public static PlayerState Instance;
     private float movingX;
     private float movingZ;
-
     private bool aiming;
     private bool reloading;
     private bool running;
-
     private bool paused = false;
+    private bool levelOneDoorUnlocked = false;
+    private bool levelOneCageUnlocked = false;
     private bool isPuzzleOneSolved = false;
     public bool Aiming { get => aiming; set => aiming = value; }
     public bool Reloading { get => reloading; set => reloading = value; }
@@ -21,6 +21,8 @@ public class PlayerState : MonoBehaviour
     public float MovingX { get => movingX; set => movingX = value; }
     public float MovingZ { get => movingZ; set => movingZ = value; }
     public bool IsPuzzleOneSolved { get => isPuzzleOneSolved; set => isPuzzleOneSolved = value; }
+    public bool LevelOneDoorUnlocked { get => levelOneDoorUnlocked; set => levelOneDoorUnlocked = value; }
+    public bool LevelOneCageUnlocked { get => levelOneCageUnlocked; set => levelOneCageUnlocked = value; }
 
     private void Awake()
     {

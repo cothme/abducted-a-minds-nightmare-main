@@ -40,6 +40,9 @@ public class ItemList : MonoBehaviour
             case "Health Kit":
             itemList.Add(7);
             break;
+            case "Keycard":
+            itemList.Add(8);
+            break;
         }
     }
     public void DropItem(string name)
@@ -74,6 +77,14 @@ public class ItemList : MonoBehaviour
             break;
             case "Shotgun":
             itemList.Remove(6);
+            inventoryItems.Remove(inventoryController.selectedItem);
+            break;
+            case "Health Kit":
+            itemList.Remove(7);
+            inventoryItems.Remove(inventoryController.selectedItem);
+            break;
+            case "Keycard":
+            itemList.Remove(8);
             inventoryItems.Remove(inventoryController.selectedItem);
             break;
             default:
