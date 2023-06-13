@@ -7,12 +7,14 @@ public class PlayerData : MonoBehaviour
 {
     private static PlayerData instance;
     Vector3 playerPosition;
-    float playerHealth = 100f;
+    float playerHealth = 50f;
     float playerOxygen = 100f;
+    float gemsCollected = 0f;
     public static PlayerData Instance { get { return instance; } }
     public float PlayerHealth { get => playerHealth; set => playerHealth = value; }
     public float PlayerOxygen { get => playerOxygen; set => playerOxygen = value; }
     public Vector3 PlayerPosition { get => playerPosition; set => playerPosition = value; }
+    public float GemsCollected { get => gemsCollected; set => gemsCollected = value; }
 
     void Update()
     {

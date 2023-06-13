@@ -13,12 +13,13 @@ public class PlayerInteractScript : MonoBehaviour
     [SerializeField] PlayableDirector doorUnlockedPlayableDirector;
     [SerializeField] Canvas interactCanvas;
     [SerializeField] Canvas puzzleOneCanvas;
+    [SerializeField] Canvas storyCanvas;
     [SerializeField] TextMeshProUGUI itemNameUI;
     [SerializeField] TextMeshProUGUI storyText;
     InventoryController inventoryController;
     PlayerControls playerControls;
     InputAction interactButton;
-    int lookDistance = 10;
+    int lookDistance = 15;
     Color currentColor;
     RaycastHit hit;
     Ray ray;
@@ -131,6 +132,8 @@ public class PlayerInteractScript : MonoBehaviour
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "StoryItem")
         {
             DisableScripts(true);
+            storyCanvas.enabled = true;
+            interactCanvas.enabled = false;
             storyText.text =  gameObject.GetComponent<StoryScript>().Sentence;
             Cursor.lockState = CursorLockMode.None;
         }
@@ -144,6 +147,7 @@ public class PlayerInteractScript : MonoBehaviour
     public void ExitStoryText()
     {
         DisableScripts(false);
+
     }
     public void ExitPuzzle()
     {

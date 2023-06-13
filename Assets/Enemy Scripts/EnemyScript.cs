@@ -10,7 +10,8 @@ public class EnemyScript : MonoBehaviour
     bool animationPlayed = false;
     bool walking = false;
     int attackType;
-    public float health;
+    public float health = 50f;
+    public float deathAnimTime;
     public NavMeshAgent agent;
     public Transform playerTransform;
     public LayerMask ground, player;
@@ -44,7 +45,6 @@ public class EnemyScript : MonoBehaviour
             walking = false;
             anim.SetBool("Walking",walking);
         }
-        CheckObstacle();
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, player);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, player);
 
@@ -60,24 +60,6 @@ public class EnemyScript : MonoBehaviour
         {
             AttackPlayer();
         }
-    }
-
-    private void CheckObstacle()
-    {
-        direction = Vector3.forward;
-        Ray ray = new Ray(transform.position, transform.TransformDirection(direction * attackRange));
-        if(Physics.Raycast(ray, out hit,attackRange))
-        {
-            if(hit.collider.tag == "Wall")
-            {
-                isFacingObstacle = true;
-            }
-        }
-        else
-        {
-            isFacingObstacle = false;
-        }
-        Debug.DrawRay(transform.position, transform.TransformDirection(direction * attackRange));
     }
     void Patrolling()
     {
@@ -154,7 +136,6 @@ public class EnemyScript : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        health -= damage;
         if(health <= 0)
         {
             Die();
@@ -162,7 +143,9 @@ public class EnemyScript : MonoBehaviour
     }
     private void Die()
     {
-        Destroy(gameObject);
+        agent.SetDestination(transform.position);
+        anim.Play("Death");
+        Destroy(gameObject, deathAnimTime);
     }
     void OnDrawGizmosSelected()
     {
@@ -186,8 +169,7 @@ public class EnemyScript : MonoBehaviour
         if(col.collider.tag == "Bullet")
         {
             anim.Play("Hit 1");
-            health -= 1;
-            Debug.Log("Hit!");
+            health -= GunManager.Instance.Damage;
         }
     }
 }

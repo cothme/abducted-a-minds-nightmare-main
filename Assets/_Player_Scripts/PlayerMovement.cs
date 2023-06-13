@@ -39,8 +39,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Vector2 movementDirection = movementControl.ReadValue<Vector2>();
         groundedPlayer = controller.isGrounded;
-        if (Input.GetKey(KeyCode.LeftShift) && !PlayerState.Instance.Aiming && !PlayerState.Instance.Reloading)
+        if (Input.GetKey(KeyCode.LeftShift) && !PlayerState.Instance.Aiming && !PlayerState.Instance.Reloading && movementDirection != Vector2.zero)
         {
             PlayerState.Instance.Running = true;
             playerSpeed += 2f;
@@ -58,8 +59,6 @@ public class PlayerMovement : MonoBehaviour
         {
             playerVelocity.y = 0f;
         }
-        Vector2 movementDirection = movementControl.ReadValue<Vector2>();
-
         Vector3 move = new Vector3(movementDirection.x, 0, movementDirection.y);
         PlayerState.Instance.MovingX = move.x;
         PlayerState.Instance.MovingZ = move.z;

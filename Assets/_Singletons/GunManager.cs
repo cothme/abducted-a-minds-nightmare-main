@@ -15,6 +15,7 @@ public class GunManager : MonoBehaviour
     private float bulletsLoaded;
     private float totalBullets;
     private float capacity;
+    private float damage;
     private float recoil;
     private float reloadTime,attackSpeed;
     private bool canEquipPistol, canEquipRifle, canEquipShotgun,canEquipKnife,canEquipMask;
@@ -32,6 +33,7 @@ public class GunManager : MonoBehaviour
     public List<WeaponData> Weapons { get => weapons; set => weapons = value; }
     public float TotalBullets { get => totalBullets; set => totalBullets = value; }
     public bool CanEquipMask { get => canEquipMask; set => canEquipMask = value; }
+    public float Damage { get => damage; set => damage = value; }
 
     private void Initialize()
     {
@@ -164,6 +166,7 @@ public class GunManager : MonoBehaviour
         switch (weaponEquipped)
         {
             case "Rifle":
+                Damage = Weapons[0].damage;
                 ReloadTime = Weapons[0].reloadSpeed;
                 AttackSpeed = Weapons[0].attackSpeed;
                 capacity = Weapons[0].capacity;
@@ -176,6 +179,7 @@ public class GunManager : MonoBehaviour
                 }
                 break;
             case "Shotgun":
+                Damage = Weapons[1].damage;
                 ReloadTime = Weapons[1].reloadSpeed;
                 AttackSpeed = Weapons[1].attackSpeed;
                 capacity = Weapons[1].capacity;
@@ -188,6 +192,7 @@ public class GunManager : MonoBehaviour
                 }
                 break;
             case "Pistol":
+                Damage = Weapons[2].damage;
                 ReloadTime = Weapons[2].reloadSpeed;
                 AttackSpeed = Weapons[2].attackSpeed;
                 capacity = Weapons[2].capacity;
@@ -200,6 +205,7 @@ public class GunManager : MonoBehaviour
                 }
                 break;
             case "Knife":
+                Damage = Weapons[3].damage;
                 ReloadTime = Weapons[3].reloadSpeed;
                 AttackSpeed = Weapons[3].attackSpeed;
                 capacity = Weapons[3].capacity;

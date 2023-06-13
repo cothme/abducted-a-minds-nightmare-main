@@ -59,7 +59,7 @@ public class PlayerShootingScript : MonoBehaviour
         {
             StartCoroutine(ShootRifleCoroutine());
         }
-        if(Input.GetMouseButtonDown(0) &&  GunManager.Instance.WeaponEquipped == "Knife" && !isShooting)
+        if(Input.GetMouseButtonDown(0) &&  GunManager.Instance.WeaponEquipped == "Knife" && !isShooting && !PlayerState.Instance.Aiming)
         {
             gameObject.GetComponent<Animator>().Play("Knife Attack 1");
         }
