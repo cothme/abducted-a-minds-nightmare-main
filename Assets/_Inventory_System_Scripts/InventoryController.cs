@@ -12,6 +12,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] Transform canvasTransform;
     [SerializeField] InputActionReference inControl;
     [SerializeField] InputActionReference mouseLeftClick;
+    [SerializeField] AudioSource generalSound;
     [HideInInspector] private ItemGrid selectedItemGrid;
     public ItemGrid SelectedItemGrid { get => selectedItemGrid; 
             set {
@@ -33,7 +34,6 @@ public class InventoryController : MonoBehaviour
     {
         rotateButton = playerControls.Inventory.RotateItem;
         rotateButton.Enable();
-        rotateButton.performed += RotateItem;
         inControl.action.Enable();
         mouseLeftClick.action.Enable();
     }
@@ -50,6 +50,10 @@ public class InventoryController : MonoBehaviour
     }
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            RotateItem();
+        }
         ItemIconDrag();
         // if(inControl.action.triggered)
         // {
@@ -92,7 +96,7 @@ public class InventoryController : MonoBehaviour
             Destroy(item.gameObject);
         }
     }
-    private void RotateItem(InputAction.CallbackContext context)
+    private void RotateItem()
     {
         if(selectedItemGrid == null || selectedItem == null)
         { 
@@ -203,6 +207,7 @@ public class InventoryController : MonoBehaviour
 
     public void PlaceItem(Vector2Int tileGridPosition)
     {
+        AudioManager.Instance.PlaySound(generalSound,"Inv Select");
         if(selectedItem == null)
         {
             return;
@@ -223,6 +228,7 @@ public class InventoryController : MonoBehaviour
 
     private void PickUpItem(Vector2Int tileGridPosition)
     {
+        AudioManager.Instance.PlaySound(generalSound,"Inv Select");
         selectedItem = selectedItemGrid.PickupItem(tileGridPosition.x, tileGridPosition.y);
         if(selectedItem != null)
         {

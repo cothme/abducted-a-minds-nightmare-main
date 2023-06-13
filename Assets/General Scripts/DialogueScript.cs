@@ -13,7 +13,6 @@ public class DialogueScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("dsadsad");
         if(other.tag == "Player")
         {
             StartCoroutine(ShowSubtitle());

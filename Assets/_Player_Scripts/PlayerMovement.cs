@@ -40,8 +40,26 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Vector2 movementDirection = movementControl.ReadValue<Vector2>();
+        if(movementDirection != Vector2.zero && !PlayerState.Instance.Running)
+        {
+            PlayerState.Instance.Walking = true;
+            gameObject.GetComponent<AudioSource>().enabled = true;
+        }
+        else
+        {
+            PlayerState.Instance.Walking = false;
+            gameObject.GetComponent<AudioSource>().enabled = false;
+        }
+        if(PlayerState.Instance.Running)
+        {
+            GameObject.Find("Run").GetComponent<AudioSource>().enabled = true;
+        }
+        else
+        {
+            GameObject.Find("Run").GetComponent<AudioSource>().enabled = false;
+        }
         groundedPlayer = controller.isGrounded;
-        if (Input.GetKey(KeyCode.LeftShift) && !PlayerState.Instance.Aiming && !PlayerState.Instance.Reloading && movementDirection != Vector2.zero)
+        if(Input.GetKey(KeyCode.LeftShift) && !PlayerState.Instance.Aiming && !PlayerState.Instance.Reloading && movementDirection != Vector2.zero)
         {
             PlayerState.Instance.Running = true;
             playerSpeed += 2f;

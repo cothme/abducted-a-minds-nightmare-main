@@ -22,6 +22,7 @@ public class PlayerShootingScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI magazineCountText;
     [SerializeField] TextMeshProUGUI totalBulletsCountText;
     [SerializeField] TextMeshProUGUI bulletsCountText;
+    [SerializeField] AudioSource generalSound;
     WeaponRecoil recoil;
     bool maskEquipped = false;
     public bool isShooting = false;
@@ -84,6 +85,7 @@ public class PlayerShootingScript : MonoBehaviour
     {
         if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
         {
+            AudioManager.Instance.PlaySound(generalSound,"Fire");
             gameObject.GetComponent<Animator>().Play("Rif Fire");
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,gameObject.transform.rotation);
             GunManager.Instance.shootInGunManager();
@@ -93,7 +95,15 @@ public class PlayerShootingScript : MonoBehaviour
     {
         if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
         {
-            gameObject.GetComponent<Animator>().Play("Fire HG");
+            if(GunManager.Instance.WeaponEquipped == "Pistol")
+            {
+                gameObject.GetComponent<Animator>().Play("HG Fire");
+            }
+            else if(GunManager.Instance.WeaponEquipped == "Shotgun")
+            {
+                gameObject.GetComponent<Animator>().Play("SG Fire");
+            }
+            AudioManager.Instance.PlaySound(generalSound,"Fire");
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,gameObject.transform.rotation);
             GunManager.Instance.shootInGunManager();
         }
@@ -133,16 +143,19 @@ public class PlayerShootingScript : MonoBehaviour
             if(GunManager.Instance.WeaponEquipped == "Rifle")
             {
                 gameObject.GetComponent<Animator>().Play("Rif Reload");  
+                AudioManager.Instance.PlaySound(generalSound,"Reload");
                 GunManager.Instance.reloadInGunManager();
             }
             else if(GunManager.Instance.WeaponEquipped == "Shotgun")
             {
                 gameObject.GetComponent<Animator>().Play("SG Reload");  
+                AudioManager.Instance.PlaySound(generalSound,"Reload");
                 GunManager.Instance.reloadInGunManager();
             }
             else if(GunManager.Instance.WeaponEquipped == "Pistol")
             {
                 gameObject.GetComponent<Animator>().Play("HG Reload"); 
+                AudioManager.Instance.PlaySound(generalSound,"Reload");
                 GunManager.Instance.reloadInGunManager();             
             }
             else if(GunManager.Instance.WeaponEquipped == "Knife")
@@ -205,6 +218,7 @@ public class PlayerShootingScript : MonoBehaviour
         {
             if(GunManager.Instance.WeaponEquipped != "Pistol")
             {
+                AudioManager.Instance.PlaySound(generalSound,"Pistol Equip");
                 gameObject.GetComponent<Animator>().Play("HG Equip");
             }
             GunManager.Instance.WeaponEquipped = "Pistol";
@@ -224,7 +238,11 @@ public class PlayerShootingScript : MonoBehaviour
         GunManager.Instance.CheckForWeapon();
         if(GunManager.Instance.CanEquipKnife && !PlayerState.Instance.Reloading)
         {
-            gameObject.GetComponent<Animator>().Play("KF Equip");
+            if(GunManager.Instance.WeaponEquipped != "Knife")
+            {
+                AudioManager.Instance.PlaySound(generalSound,"Knife Equip");
+                gameObject.GetComponent<Animator>().Play("KF Equip");
+            }
             GunManager.Instance.WeaponEquipped = "Knife";
             GunManager.Instance.SetWeaponChanges();
             rifle.SetActive(false);

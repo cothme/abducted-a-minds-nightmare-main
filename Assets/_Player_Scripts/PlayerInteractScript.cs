@@ -16,6 +16,7 @@ public class PlayerInteractScript : MonoBehaviour
     [SerializeField] Canvas storyCanvas;
     [SerializeField] TextMeshProUGUI itemNameUI;
     [SerializeField] TextMeshProUGUI storyText;
+    [SerializeField] AudioSource generalSound;
     InventoryController inventoryController;
     PlayerControls playerControls;
     InputAction interactButton;
@@ -111,6 +112,7 @@ public class PlayerInteractScript : MonoBehaviour
     {       
         if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Item")
         {
+            AudioManager.Instance.PlaySound(generalSound,"Pick Up");
             gameObject.GetComponent<Animator>().Play("Pick Up Item");
             ItemList.Instance.AddItem(itemName);
             inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
@@ -127,10 +129,12 @@ public class PlayerInteractScript : MonoBehaviour
         } 
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Door")
         {   
+            AudioManager.Instance.PlaySound(gameObject.GetComponent<AudioSource>(),"Door Open");
             gameObject.GetComponent<Animator>().Play("Door");
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "StoryItem")
         {
+            AudioManager.Instance.PlaySound(generalSound,"Open Story");
             DisableScripts(true);
             storyCanvas.enabled = true;
             interactCanvas.enabled = false;

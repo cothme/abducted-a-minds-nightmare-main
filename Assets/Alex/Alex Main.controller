@@ -1394,6 +1394,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Running
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: PistolEquipped
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1075850121313324383}
   m_Solo: 0
@@ -2286,6 +2289,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Running
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: KnifeEquipped
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8185406488096825749}
   m_Solo: 0
@@ -2320,7 +2326,7 @@ AnimatorStateMachine:
     m_Position: {x: -640, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8185406488096825749}
-    m_Position: {x: -640, y: -590, z: 0}
+    m_Position: {x: 100, y: -120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7956158738612254461}
     m_Position: {x: 10, y: -640, z: 0}
@@ -2341,7 +2347,7 @@ AnimatorStateMachine:
     m_Position: {x: -1530, y: -240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1590511511384170209}
-    m_Position: {x: -220, y: -120, z: 0}
+    m_Position: {x: -200, y: -210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2183235888238225810}
     m_Position: {x: 10, y: -850, z: 0}
@@ -2356,7 +2362,7 @@ AnimatorStateMachine:
     m_Position: {x: 10, y: -800, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2058481979024876032}
-    m_Position: {x: 10, y: -690, z: 0}
+    m_Position: {x: 320, y: -680, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1233976079867282473}
     m_Position: {x: -640, y: -840, z: 0}
@@ -2449,13 +2455,13 @@ AnimatorStateMachine:
     m_Position: {x: -220, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7855791104372836776}
-    m_Position: {x: -640, y: -1170, z: 0}
+    m_Position: {x: -220, y: -1270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4707072648621044249}
-    m_Position: {x: -640, y: -1220, z: 0}
+    m_Position: {x: -1200, y: -1230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1075850121313324383}
-    m_Position: {x: -640, y: -1120, z: 0}
+    m_Position: {x: -810, y: -1040, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4138149530940485932}
     m_Position: {x: -640, y: -1320, z: 0}
@@ -2491,7 +2497,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -620, y: -170, z: 0}
+  m_AnyStatePosition: {x: -310, y: -110, z: 0}
   m_EntryPosition: {x: -730, y: 40, z: 0}
   m_ExitPosition: {x: -510, y: 40, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -2833,6 +2839,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Running
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: RifleEquipped
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7855791104372836776}
   m_Solo: 0
@@ -3126,6 +3135,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: Running
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ShotgunEquipped
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4707072648621044249}
@@ -3773,6 +3785,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: Running
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: KnifeEquipped
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8185406488096825749}

@@ -11,6 +11,7 @@ public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] Canvas inventoryCanvas;
     [SerializeField] Canvas mainCanvas;
+    [SerializeField] AudioSource generalSound;
     InventoryController inventoryController;
     PlayerControls playerControls;
     InputAction openInventoryButton,interactButton,dropButton;
@@ -40,6 +41,7 @@ public class PlayerInventory : MonoBehaviour
     }
     void OpenInventory()
     {
+        AudioManager.Instance.PlaySound(generalSound,"Inventory Open");
         inventoryOpen = !inventoryOpen;
         if(inventoryOpen) 
         {   
