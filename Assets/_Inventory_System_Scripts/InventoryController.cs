@@ -111,7 +111,7 @@ public class InventoryController : MonoBehaviour
     {
         if(selectedItemGrid == null) { return; }
         CreateItem(itemID);
-        ItemList.Instance.inventoryItems.Add(selectedItem);
+        ItemList.Instance.InventoryItems.Add(selectedItem);
         InventoryItem itemToInsert = selectedItem;
         selectedItem = null;
         InsertItem(itemToInsert);

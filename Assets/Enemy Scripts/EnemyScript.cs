@@ -134,7 +134,7 @@ public class EnemyScript : MonoBehaviour
     {
         attacked = false;
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage()
     {
         if(health <= 0)
         {
@@ -170,6 +170,7 @@ public class EnemyScript : MonoBehaviour
         {
             anim.Play("Hit 1");
             health -= GunManager.Instance.Damage;
+            TakeDamage();
         }
     }
 }

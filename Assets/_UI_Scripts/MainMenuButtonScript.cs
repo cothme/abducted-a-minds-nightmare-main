@@ -4,6 +4,9 @@ using TMPro;
 using System.Collections;
 using UnityEngine.EventSystems;
 using System;
+using System.IO;
+using System.Xml.Serialization;
+using UnityEngine.SceneManagement;
 
 public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -34,7 +37,6 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
             return;
         }
     }
-
     public void OnPointerExit(PointerEventData eventData)
     {
         try
@@ -50,5 +52,21 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
     IEnumerator ButtonAnimation(Vector3 targetPosition)
     {
         yield break;
+    }
+    public void LoadData()
+    {
+        XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
+        StreamReader sr = new StreamReader("Abducted Save File");
+        DataMembers dm = (DataMembers)loadData.Deserialize(sr);  
+        PlayerData.Instance.Stage = dm.level;
+        PlayerData.Instance.PlayerHealth = dm.health;
+        PlayerData.Instance.PlayerOxygen= dm.oxygen;
+        PlayerData.Instance.PlayerPosition = dm.position;
+        PlayerData.Instance.PlayerRotation = dm.rotation;
+        GunManager.Instance.WeaponEquipped = dm.weaponEquipped;
+        // dm.itemList = ItemList.Instance.Itemlist;
+        GunManager.Instance.BulletsLoaded = dm.bulletsLoaded;
+        GunManager.Instance.TotalBullets = dm.totalBullets;
+        SceneManager.LoadScene("MockScene");
     }
 }

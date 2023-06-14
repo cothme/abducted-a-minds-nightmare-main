@@ -8,11 +8,11 @@ public class LocksScript : MonoBehaviour
     {
         if(PlayerState.Instance.LevelOneDoorUnlocked)
         {
-            gameObject.GetComponent<BoxCollider>().enabled = true;
+            gameObject.tag = "Door";
         }
         else
         {
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+             gameObject.tag = "Untagged";
         }     
     }
 }
