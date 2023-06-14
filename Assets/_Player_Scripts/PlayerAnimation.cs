@@ -20,5 +20,6 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetFloat("WalkSR",PlayerState.Instance.MovingX);
         anim.SetBool("Aiming",PlayerState.Instance.Aiming);
         anim.SetBool("Running",PlayerState.Instance.Running);
+        anim.SetBool("Walking",PlayerState.Instance.Walking);
     }
 }

@@ -55,18 +55,10 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
     }
     public void LoadData()
     {
-        XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
-        StreamReader sr = new StreamReader("Abducted Save File");
-        DataMembers dm = (DataMembers)loadData.Deserialize(sr);  
-        PlayerData.Instance.Stage = dm.level;
-        PlayerData.Instance.PlayerHealth = dm.health;
-        PlayerData.Instance.PlayerOxygen= dm.oxygen;
-        PlayerData.Instance.PlayerPosition = dm.position;
-        PlayerData.Instance.PlayerRotation = dm.rotation;
-        GunManager.Instance.WeaponEquipped = dm.weaponEquipped;
-        // dm.itemList = ItemList.Instance.Itemlist;
-        GunManager.Instance.BulletsLoaded = dm.bulletsLoaded;
-        GunManager.Instance.TotalBullets = dm.totalBullets;
         SceneManager.LoadScene("MockScene");
+    }
+    public void QuitClicked()
+    {
+        Debug.Log(PlayerData.Instance.PlayerPosition);
     }
 }

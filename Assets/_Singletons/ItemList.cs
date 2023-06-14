@@ -46,6 +46,39 @@ public class ItemList : MonoBehaviour
             break;
         }
     }
+    public void AddItem(int id)
+    {
+        switch(id)
+        {
+            case 0:
+            itemList.Add(0);
+            break;
+            case 1:
+            itemList.Add(1);
+            break;
+            case 2:
+            itemList.Add(2);
+            break;
+            case 3:
+            itemList.Add(3);
+            break;
+            case 4:
+            itemList.Add(4);
+            break;
+            case 5:
+            itemList.Add(5);
+            break;
+            case 6:
+            itemList.Add(6);
+            break;
+            case 7:
+            itemList.Add(7);
+            break;
+            case 8:
+            itemList.Add(8);
+            break;
+        }
+    }
     public void DropItem(string name)
     {
         switch(name)

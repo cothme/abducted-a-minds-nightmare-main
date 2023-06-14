@@ -31,8 +31,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Start()
     {
-        gameObject.transform.position = PlayerData.Instance.PlayerPosition;
-        gameObject.transform.rotation = PlayerData.Instance.PlayerRotation;
+        
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;

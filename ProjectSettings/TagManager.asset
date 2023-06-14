@@ -15,6 +15,7 @@ TagManager:
   - Reader
   - Prompt
   - SavePoint
+  - BossInitiate
   layers:
   - Default
   - TransparentFX

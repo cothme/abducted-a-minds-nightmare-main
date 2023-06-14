@@ -73,6 +73,10 @@ public class GunManager : MonoBehaviour
                         }
                     }
                 }
+                else
+                {
+                    return;
+                }
             }
             else
             {

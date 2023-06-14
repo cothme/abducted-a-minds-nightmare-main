@@ -125,7 +125,7 @@ public class PlayerInteractScript : MonoBehaviour
             ItemList.Instance.AddItem(itemName);
             inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
             interactCanvas.enabled = false;
-            Destroy(itemObject);
+            itemObject.SetActive(false);
         }
     }
     void Interact(GameObject gameObject, string colliderTag)
@@ -165,10 +165,11 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "SavePoint")
         {
-            PlayerData.Instance.PlayerPosition = gameObject.transform.position;
-            PlayerData.Instance.PlayerRotation = gameObject.transform.rotation;
+            PlayerData.Instance.PlayerPosition = this.gameObject.transform.position;
+            PlayerData.Instance.PlayerRotation = this.gameObject.transform.rotation;
             DataMembers dm = new DataMembers();
             dm.level = PlayerData.Instance.Stage;
+            dm.isSessionSaved = true;
             dm.health = PlayerData.Instance.PlayerHealth;
             dm.oxygen = PlayerData.Instance.PlayerOxygen;
             dm.position = PlayerData.Instance.PlayerPosition;
@@ -181,13 +182,11 @@ public class PlayerInteractScript : MonoBehaviour
             StreamWriter sw = new StreamWriter("Abducted Save File");
             saveData.Serialize(sw,dm);
             sw.Close();
-
         }
     }
     public void ExitStoryText()
     {
         DisableScripts(false);
-
     }
     public void ExitPuzzle()
     {
