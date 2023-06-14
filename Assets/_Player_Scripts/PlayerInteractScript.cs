@@ -7,10 +7,13 @@ using TMPro;
 using Cinemachine;
 using System.Linq;
 using System;
+using System.Xml.Serialization;
+using System.IO;
 
 public class PlayerInteractScript : MonoBehaviour
 {
     [SerializeField] PlayableDirector doorUnlockedPlayableDirector;
+    [SerializeField] PlayableDirector brutesAppear;
     [SerializeField] Canvas interactCanvas;
     [SerializeField] Canvas puzzleOneCanvas;
     [SerializeField] Canvas storyCanvas;
@@ -86,6 +89,18 @@ public class PlayerInteractScript : MonoBehaviour
                     interactCanvas.enabled = true;
                 }
             }
+            else if(hit.collider.tag == "SavePoint")
+            {
+                itemNameUI.text = "Press E to save";
+                interactCanvas.enabled = true;
+                Interact(hit.collider.gameObject,"SavePoint");
+            }
+            else if(hit.collider.tag == "BossInitiate")
+            {
+                itemNameUI.text = "Press E";
+                interactCanvas.enabled = true;
+                Interact(hit.collider.gameObject,"BossInitiate");
+            }
             else if(lastLookedObject is null)
             {
                 return;
@@ -117,7 +132,7 @@ public class PlayerInteractScript : MonoBehaviour
             ItemList.Instance.AddItem(itemName);
             inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
             interactCanvas.enabled = false;
-            Destroy(itemObject);
+            itemObject.SetActive(false);
         }
     }
     void Interact(GameObject gameObject, string colliderTag)
@@ -146,12 +161,43 @@ public class PlayerInteractScript : MonoBehaviour
             PlayerState.Instance.LevelOneDoorUnlocked = true;
             doorUnlockedPlayableDirector.Play();
             ItemList.Instance.DropItem("Keycard");
+            foreach(InventoryItem i in ItemList.Instance.InventoryItems)
+            {
+                 if(i.itemData.name == "KeyCard")
+                 {
+                    inventoryController.selectedItem = i;
+                    inventoryController.DeleteItem(inventoryController.selectedItem);
+                 }
+            }
+        }
+        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "SavePoint")
+        {
+            PlayerData.Instance.PlayerPosition = this.gameObject.transform.position;
+            PlayerData.Instance.PlayerRotation = this.gameObject.transform.rotation;
+            DataMembers dm = new DataMembers();
+            dm.level = PlayerData.Instance.Stage;
+            dm.isSessionSaved = true;
+            dm.health = PlayerData.Instance.PlayerHealth;
+            dm.oxygen = PlayerData.Instance.PlayerOxygen;
+            dm.position = PlayerData.Instance.PlayerPosition;
+            dm.rotation = PlayerData.Instance.PlayerRotation;
+            dm.weaponEquipped = GunManager.Instance.WeaponEquipped;
+            dm.itemList = ItemList.Instance.Itemlist;
+            dm.bulletsLoaded = GunManager.Instance.BulletsLoaded;
+            dm.totalBullets = GunManager.Instance.TotalBullets;
+            XmlSerializer saveData = new XmlSerializer(typeof(DataMembers));
+            StreamWriter sw = new StreamWriter("Abducted Save File");
+            saveData.Serialize(sw,dm);
+            sw.Close();
+        }
+        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "BossInitiate")
+        {
+            brutesAppear.Play();
         }
     }
     public void ExitStoryText()
     {
         DisableScripts(false);
-
     }
     public void ExitPuzzle()
     {

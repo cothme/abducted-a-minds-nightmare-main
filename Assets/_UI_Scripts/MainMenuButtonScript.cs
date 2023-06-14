@@ -4,6 +4,9 @@ using TMPro;
 using System.Collections;
 using UnityEngine.EventSystems;
 using System;
+using System.IO;
+using System.Xml.Serialization;
+using UnityEngine.SceneManagement;
 
 public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -34,7 +37,6 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
             return;
         }
     }
-
     public void OnPointerExit(PointerEventData eventData)
     {
         try
@@ -50,5 +52,13 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
     IEnumerator ButtonAnimation(Vector3 targetPosition)
     {
         yield break;
+    }
+    public void LoadData()
+    {
+        SceneManager.LoadScene("MockScene");
+    }
+    public void QuitClicked()
+    {
+        Debug.Log(PlayerData.Instance.PlayerPosition);
     }
 }

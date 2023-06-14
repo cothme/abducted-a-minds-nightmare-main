@@ -62,16 +62,20 @@ public class GunManager : MonoBehaviour
                 if(magazine[0] <= 1)
                 {   
                     magazine.RemoveAt(0);
-                    foreach(InventoryItem i in ItemList.Instance.inventoryItems)
+                    foreach(InventoryItem i in ItemList.Instance.InventoryItems)
                     {
                         if(i.itemData.name == "Ammo")
                         {
-                            ItemList.Instance.inventoryItems.Remove(i);
+                            ItemList.Instance.InventoryItems.Remove(i);
                             inventoryController.selectedItem = i;
                             inventoryController.DeleteItem(inventoryController.selectedItem);
                             break;
                         }
                     }
+                }
+                else
+                {
+                    return;
                 }
             }
             else

@@ -13,6 +13,9 @@ TagManager:
   - Attack
   - Bullet
   - Reader
+  - Prompt
+  - SavePoint
+  - BossInitiate
   layers:
   - Default
   - TransparentFX

@@ -30,7 +30,8 @@ public class PlayerShootingScript : MonoBehaviour
     {
         totalBulletsCountText.text = GunManager.Instance.TotalBullets.ToString();
         bulletsCountText.text = GunManager.Instance.BulletsLoaded.ToString();
-        // UpdateWeaponImageInUI();
+        RemoveWeaponImageInUI();
+        ShowWeapoInUI();
         if(ControlsManager.Instance.IsRifleButtonDown)
         {
             ChooseRifle();
@@ -287,7 +288,7 @@ public class PlayerShootingScript : MonoBehaviour
         gunImages[2].SetActive(false);
         gunImages[3].SetActive(false);
     }
-    void UpdateWeaponImageInUI()
+    void RemoveWeaponImageInUI()
     {
         if(!GunManager.Instance.CanEquipRifle)
         {
@@ -304,6 +305,29 @@ public class PlayerShootingScript : MonoBehaviour
         if(!GunManager.Instance.CanEquipKnife)
         {
             gunImages[3].SetActive(false);
+        }
+    }
+    void ShowWeapoInUI()
+    {
+        if(GunManager.Instance.WeaponEquipped == "Rifle")
+        {
+            rifle.SetActive(true);
+            gunImages[0].SetActive(true);
+        }
+        else if(GunManager.Instance.WeaponEquipped == "Shotgun")
+        {
+            shotgun.SetActive(true);
+            gunImages[1].SetActive(true);
+        }
+        else if(GunManager.Instance.WeaponEquipped == "Pistol")
+        {
+            pistol.SetActive(true);
+            gunImages[2].SetActive(true);
+        }
+        else if(GunManager.Instance.WeaponEquipped == "Knife")
+        {
+            knife.SetActive(true);
+            gunImages[3].SetActive(true);
         }
     }
 }

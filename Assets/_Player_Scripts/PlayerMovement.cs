@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Start()
     {
+        
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
