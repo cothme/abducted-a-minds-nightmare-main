@@ -19,6 +19,7 @@ public class EnemyScript : MonoBehaviour
     bool walkPointSet;
     public float walkPointRange;
     public float attackDelay;
+    public float alertTime;
     bool attacked;
     public float sightRange, attackRange;
     public bool playerInSightRange,playerInAttackRange,isFacingObstacle;
@@ -26,7 +27,6 @@ public class EnemyScript : MonoBehaviour
     Vector3 direction;
     void Awake()
     {
-        playerTransform = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
     void Update()
@@ -101,7 +101,6 @@ public class EnemyScript : MonoBehaviour
             walkPointSet = true;
         }
     }
-
     void ChasePlayer()
     {
         anim.SetBool("Alerted",false);
@@ -158,10 +157,11 @@ public class EnemyScript : MonoBehaviour
     {   
         if(!animationPlayed)
         {
+            agent.SetDestination(gameObject.transform.position);
             anim.Play("Alerted");
         }
             animationPlayed = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(alertTime);
         ChasePlayer();
     }
     void OnCollisionEnter(Collision col)

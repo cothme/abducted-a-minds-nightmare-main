@@ -13,6 +13,7 @@ using System.IO;
 public class PlayerInteractScript : MonoBehaviour
 {
     [SerializeField] PlayableDirector doorUnlockedPlayableDirector;
+    [SerializeField] PlayableDirector brutesAppear;
     [SerializeField] Canvas interactCanvas;
     [SerializeField] Canvas puzzleOneCanvas;
     [SerializeField] Canvas storyCanvas;
@@ -93,6 +94,12 @@ public class PlayerInteractScript : MonoBehaviour
                 itemNameUI.text = "Press E to save";
                 interactCanvas.enabled = true;
                 Interact(hit.collider.gameObject,"SavePoint");
+            }
+            else if(hit.collider.tag == "BossInitiate")
+            {
+                itemNameUI.text = "Press E";
+                interactCanvas.enabled = true;
+                Interact(hit.collider.gameObject,"BossInitiate");
             }
             else if(lastLookedObject is null)
             {
@@ -182,6 +189,10 @@ public class PlayerInteractScript : MonoBehaviour
             StreamWriter sw = new StreamWriter("Abducted Save File");
             saveData.Serialize(sw,dm);
             sw.Close();
+        }
+        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "BossInitiate")
+        {
+            brutesAppear.Play();
         }
     }
     public void ExitStoryText()
