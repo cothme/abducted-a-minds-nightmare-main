@@ -57,9 +57,25 @@ public class AsyncManager : MonoBehaviour
     }
     public void goToMainMenu(string levelToLoad)
     {
-        loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
-        loadingScreen.SetActive(true);
-        StartCoroutine(LoadLevelAsync(levelToLoad));
+            PlayerData.Instance.Stage = 0;
+            PlayerData.Instance.IsSessionSaved = false;
+            PlayerData.Instance.PlayerHealth = 50;
+            PlayerData.Instance.PlayerOxygen= 100;
+            GunManager.Instance.WeaponEquipped = null;
+            GunManager.Instance.BulletsLoaded = 0;
+            GunManager.Instance.TotalBullets = 0;
+            GunManager.Instance.CanEquipRifle = false;
+            GunManager.Instance.CanEquipShotgun = false;
+            GunManager.Instance.CanEquipPistol = false;
+            GunManager.Instance.CanEquipKnife = false;
+            PlayerState.Instance.Aiming = false;
+            PlayerState.Instance.Reloading = false;
+            PlayerState.Instance.Running = false;
+            PlayerState.Instance.IsPuzzleOneSolved = false;
+            PlayerState.Instance.LevelOneDoorUnlocked = false;
+            PlayerState.Instance.LevelOneCageUnlocked = false;
+            loadingScreen.SetActive(true);
+            StartCoroutine(LoadLevelAsync(levelToLoad));
     }
     void QuitClicked()
     {

@@ -10,6 +10,7 @@ public class DataInitialize : MonoBehaviour
     InventoryController inventoryController;
     void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         if(PlayerData.Instance.IsSessionSaved == true)
         {
             XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));

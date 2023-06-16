@@ -15,6 +15,7 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
     private Vector3 originalPosition,targetPosition;
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
         try
         {
             originalPosition = text.transform.localPosition;
