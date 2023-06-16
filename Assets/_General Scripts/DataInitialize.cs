@@ -25,7 +25,6 @@ public class DataInitialize : MonoBehaviour
         inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
         if(PlayerData.Instance.IsSessionSaved == true)
         {
-            Debug.Log("haha");
             XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
             StreamReader sr = new StreamReader("Abducted Save File");
             DataMembers dm = (DataMembers)loadData.Deserialize(sr);  

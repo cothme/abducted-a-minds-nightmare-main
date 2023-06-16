@@ -4,13 +4,14 @@ using System.Collections;
 public class ShotBehavior : MonoBehaviour {
 
 	[SerializeField] GameObject hitEffect;
-	void Start () {
-	
+	Vector3 target;
+	void Start ()
+	{
+		target = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane));
 	}
 	
 	void Update () {
-		// transform.position += transform.forward * Time.deltaTime * 100f;
-		// transform.position = Vector3.MoveTowards(transform.position,target,100f * Time.deltaTime);
+		transform.position += transform.forward * Time.deltaTime * 100f;
 		Destroy(gameObject,3f);
 	}
 	void OnCollisionEnter(Collision other)
