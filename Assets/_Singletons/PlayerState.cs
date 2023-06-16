@@ -10,7 +10,6 @@ public class PlayerState : MonoBehaviour
     private bool aiming;
     private bool reloading;
     private bool running;
-    private bool paused = false;
     private bool levelOneDoorUnlocked = false;
     private bool levelOneCageUnlocked = false;
     private bool isPuzzleOneSolved = false;
@@ -18,7 +17,6 @@ public class PlayerState : MonoBehaviour
     public bool Aiming { get => aiming; set => aiming = value; }
     public bool Reloading { get => reloading; set => reloading = value; }
     public bool Running { get => running; set => running = value; }
-    public bool Paused { get => paused; set => paused = value; }
     public float MovingX { get => movingX; set => movingX = value; }
     public float MovingZ { get => movingZ; set => movingZ = value; }
     public bool IsPuzzleOneSolved { get => isPuzzleOneSolved; set => isPuzzleOneSolved = value; }

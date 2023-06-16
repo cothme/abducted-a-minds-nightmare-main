@@ -218,6 +218,16 @@ public class PlayerInteractScript : MonoBehaviour
             dm.itemList = ItemList.Instance.Itemlist;
             dm.bulletsLoaded = GunManager.Instance.BulletsLoaded;
             dm.totalBullets = GunManager.Instance.TotalBullets;
+            dm.canEquipRifle = GunManager.Instance.CanEquipRifle;
+            dm.canEquipShotgun = GunManager.Instance.CanEquipShotgun;
+            dm.canEquipPistol = GunManager.Instance.CanEquipPistol;
+            dm.canEquipKnife = GunManager.Instance.CanEquipKnife;
+            dm.aiming = PlayerState.Instance.Aiming;
+            dm.reloading = PlayerState.Instance.Reloading;
+            dm.running = PlayerState.Instance.Running;
+            dm.isPuzzleOneSolved = PlayerState.Instance.IsPuzzleOneSolved;
+            dm.levelOneDoorUnlocked = PlayerState.Instance.LevelOneDoorUnlocked;
+            dm.levelOneCageUnlocked = PlayerState.Instance.LevelOneCageUnlocked;
             XmlSerializer saveData = new XmlSerializer(typeof(DataMembers));
             StreamWriter sw = new StreamWriter("Abducted Save File");
             saveData.Serialize(sw,dm);

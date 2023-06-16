@@ -23,7 +23,7 @@ public class DialogueScript : MonoBehaviour
             return;
         }
     }  
-    IEnumerator ShowSubtitle()
+    public IEnumerator ShowSubtitle()
     {
         canvasText.text = subtitle;
         dialogueCanvas.enabled = true;
