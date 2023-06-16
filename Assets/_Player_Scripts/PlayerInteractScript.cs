@@ -9,12 +9,14 @@ using System.Linq;
 using System;
 using System.Xml.Serialization;
 using System.IO;
+using UnityEngine.UI;
 
 public class PlayerInteractScript : MonoBehaviour
 {
     [SerializeField] PlayableDirector doorUnlockedPlayableDirector;
     [SerializeField] PlayableDirector brutesAppear;
     [SerializeField] Canvas interactCanvas;
+    [SerializeField] Image storyImage;
     [SerializeField] Canvas puzzleOneCanvas;
     [SerializeField] Canvas storyCanvas;
     [SerializeField] TextMeshProUGUI itemNameUI;
@@ -69,12 +71,31 @@ public class PlayerInteractScript : MonoBehaviour
                 interactCanvas.enabled = true;
                 Interact(hit.collider.gameObject,"Door");
             }
+
             else if(hit.collider.tag == "StoryItem")
+            {
+                if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Folder Open"))
+                {
+                    itemNameUI.text = "Press E to Open Folder";
+                    interactCanvas.enabled = true;
+                    Interact(hit.collider.gameObject, "StoryItem");
+                }
+                else
+                {
+                    itemNameUI.text = "Press E to Close Folder";
+                    interactCanvas.enabled = true;
+                    Interact(hit.collider.gameObject, "StoryItem");
+                }
+
+            }
+
+            else if (hit.collider.tag == "StoryFile")
             {
                 itemNameUI.text = "Press E to read";
                 interactCanvas.enabled = true;
-                Interact(hit.collider.gameObject,"StoryItem");
+                Interact(hit.collider.gameObject, "StoryFile");
             }
+
             else if(hit.collider.tag == "Reader")
             {
                 if(ItemList.Instance.Itemlist.Contains(8))
@@ -145,16 +166,28 @@ public class PlayerInteractScript : MonoBehaviour
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Door")
         {   
             AudioManager.Instance.PlaySound(gameObject.GetComponent<AudioSource>(),"Door Open");
+            this.gameObject.GetComponent<Animator>().Play("Open Door");
             gameObject.GetComponent<Animator>().Play("Door");
         }
-        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "StoryItem")
-        {
-            AudioManager.Instance.PlaySound(generalSound,"Open Story");
+        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "StoryFile")
+        {            
+            AudioManager.Instance.PlaySound(generalSound,"Open Story");            
             DisableScripts(true);
             storyCanvas.enabled = true;
+            storyImage.sprite = gameObject.GetComponent<StoryScript>().sprite;
             interactCanvas.enabled = false;
             storyText.text =  gameObject.GetComponent<StoryScript>().Sentence;
             Cursor.lockState = CursorLockMode.None;
+        }
+        else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "StoryItem")
+        {
+            AudioManager.Instance.PlaySound(generalSound, "Open Story");
+            gameObject.GetComponent<Animator>().Play("Folder Open");
+            //DisableScripts(true);
+            //storyCanvas.enabled = true;
+            //interactCanvas.enabled = false;
+            //storyText.text = gameObject.GetComponent<StoryScript>().Sentence;
+            //Cursor.lockState = CursorLockMode.None;
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Reader")
         {  

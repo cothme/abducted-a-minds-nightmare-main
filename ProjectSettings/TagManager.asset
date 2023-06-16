@@ -16,6 +16,7 @@ TagManager:
   - Prompt
   - SavePoint
   - BossInitiate
+  - StoryFile
   layers:
   - Default
   - TransparentFX
