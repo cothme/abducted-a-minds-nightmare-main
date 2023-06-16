@@ -26,13 +26,13 @@ public class GunManager : MonoBehaviour
     public bool CanEquipRifle { get => canEquipRifle; set => canEquipRifle = value; }
     public bool CanEquipShotgun { get => canEquipShotgun; set => canEquipShotgun = value; }
     public bool CanEquipKnife { get => canEquipKnife; set => canEquipKnife = value; }
+    public bool CanEquipMask { get => canEquipMask; set => canEquipMask = value; }
     public string WeaponEquipped { get => weaponEquipped; set => weaponEquipped = value; }
     public float BulletsLoaded { get => bulletsLoaded; set => bulletsLoaded = value; }
     public float ReloadTime { get => reloadTime; set => reloadTime = value; }
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
     public List<WeaponData> Weapons { get => weapons; set => weapons = value; }
     public float TotalBullets { get => totalBullets; set => totalBullets = value; }
-    public bool CanEquipMask { get => canEquipMask; set => canEquipMask = value; }
     public float Damage { get => damage; set => damage = value; }
 
     private void Initialize()

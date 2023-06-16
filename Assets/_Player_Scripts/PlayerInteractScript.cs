@@ -9,12 +9,14 @@ using System.Linq;
 using System;
 using System.Xml.Serialization;
 using System.IO;
+using UnityEngine.UI;
 
 public class PlayerInteractScript : MonoBehaviour
 {
     [SerializeField] PlayableDirector doorUnlockedPlayableDirector;
     [SerializeField] PlayableDirector brutesAppear;
     [SerializeField] Canvas interactCanvas;
+    [SerializeField] Image storyImage;
     [SerializeField] Canvas puzzleOneCanvas;
     [SerializeField] Canvas storyCanvas;
     [SerializeField] TextMeshProUGUI itemNameUI;
@@ -69,12 +71,25 @@ public class PlayerInteractScript : MonoBehaviour
                 interactCanvas.enabled = true;
                 Interact(hit.collider.gameObject,"Door");
             }
-            else if(hit.collider.tag == "StoryItem")
+            else if(hit.collider.tag == "Folder")
+            {
+                itemNameUI.text = "Press E to Open Folder";
+                interactCanvas.enabled = true;
+                Interact(hit.collider.gameObject, "Folder");
+            }
+            else if (hit.collider.tag == "JournalPage")
+            {
+                itemNameUI.text = "Press E to read journal page";
+                interactCanvas.enabled = true;
+                Interact(hit.collider.gameObject, "JournalPage");
+            }
+            else if (hit.collider.tag == "UVPaperFile")
             {
                 itemNameUI.text = "Press E to read";
                 interactCanvas.enabled = true;
-                Interact(hit.collider.gameObject,"StoryItem");
+                Interact(hit.collider.gameObject, "UVPaperFile");
             }
+
             else if(hit.collider.tag == "Reader")
             {
                 if(ItemList.Instance.Itemlist.Contains(8))
@@ -145,15 +160,33 @@ public class PlayerInteractScript : MonoBehaviour
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Door")
         {   
             AudioManager.Instance.PlaySound(gameObject.GetComponent<AudioSource>(),"Door Open");
+            this.gameObject.GetComponent<Animator>().Play("Open Door");
             gameObject.GetComponent<Animator>().Play("Door");
         }
-        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "StoryItem")
+        else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Folder")
         {
-            AudioManager.Instance.PlaySound(generalSound,"Open Story");
+            AudioManager.Instance.PlaySound(generalSound, "Open Story");
+            gameObject.GetComponent<Animator>().Play("Folder Open");
+            gameObject.GetComponent<Collider>().enabled = false;
+        }
+        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "UVPaperFile")
+        {            
+            AudioManager.Instance.PlaySound(generalSound,"Open Story");            
             DisableScripts(true);
             storyCanvas.enabled = true;
+            storyImage.sprite = gameObject.GetComponent<StoryScript>().UVsprite;
             interactCanvas.enabled = false;
-            storyText.text =  gameObject.GetComponent<StoryScript>().Sentence;
+            storyText.text = gameObject.GetComponent<StoryScript>().Sentence;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "JournalPage")
+        {
+            AudioManager.Instance.PlaySound(generalSound, "Open Story");
+            DisableScripts(true);
+            storyCanvas.enabled = true;
+            storyImage.sprite = gameObject.GetComponent<StoryScript>().UVsprite;
+            interactCanvas.enabled = false;
+            storyText.text = gameObject.GetComponent<StoryScript>().Sentence;
             Cursor.lockState = CursorLockMode.None;
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Reader")
@@ -185,6 +218,16 @@ public class PlayerInteractScript : MonoBehaviour
             dm.itemList = ItemList.Instance.Itemlist;
             dm.bulletsLoaded = GunManager.Instance.BulletsLoaded;
             dm.totalBullets = GunManager.Instance.TotalBullets;
+            dm.canEquipRifle = GunManager.Instance.CanEquipRifle;
+            dm.canEquipShotgun = GunManager.Instance.CanEquipShotgun;
+            dm.canEquipPistol = GunManager.Instance.CanEquipPistol;
+            dm.canEquipKnife = GunManager.Instance.CanEquipKnife;
+            dm.aiming = PlayerState.Instance.Aiming;
+            dm.reloading = PlayerState.Instance.Reloading;
+            dm.running = PlayerState.Instance.Running;
+            dm.isPuzzleOneSolved = PlayerState.Instance.IsPuzzleOneSolved;
+            dm.levelOneDoorUnlocked = PlayerState.Instance.LevelOneDoorUnlocked;
+            dm.levelOneCageUnlocked = PlayerState.Instance.LevelOneCageUnlocked;
             XmlSerializer saveData = new XmlSerializer(typeof(DataMembers));
             StreamWriter sw = new StreamWriter("Abducted Save File");
             saveData.Serialize(sw,dm);

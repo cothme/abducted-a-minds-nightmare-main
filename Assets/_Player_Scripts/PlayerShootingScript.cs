@@ -18,7 +18,6 @@ public class PlayerShootingScript : MonoBehaviour
     [SerializeField] GameObject bulletPreFab;
     [SerializeField] Transform bulletTransform;
     [SerializeField] GameObject aimCamera;
-    [SerializeField] float bulletMissDistance = 25f;
     [SerializeField] TextMeshProUGUI magazineCountText;
     [SerializeField] TextMeshProUGUI totalBulletsCountText;
     [SerializeField] TextMeshProUGUI bulletsCountText;

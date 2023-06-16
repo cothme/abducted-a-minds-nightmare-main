@@ -16,5 +16,16 @@ public class DataMembers
     public float bulletsLoaded;
     public float totalBullets;
     public bool isSessionSaved;
+    public bool aiming;
+    public bool reloading;
+    public bool running;
+    public bool isPuzzleOneSolved;
+    public bool levelOneDoorUnlocked;
+    public bool levelOneCageUnlocked;
+    public bool canEquipPistol;
+    public bool canEquipShotgun;
+    public bool canEquipKnife;
+    public bool canEquipRifle;
+    public bool paused;
     public List<int> itemList;
 }

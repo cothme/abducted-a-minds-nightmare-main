@@ -5,29 +5,23 @@
   <oxygen>100</oxygen>
   <rotation>
     <x>0</x>
-    <y>-0.00772516243</y>
+    <y>0.0553851575</y>
     <z>0</z>
-    <w>0.9999702</w>
+    <w>-0.998465061</w>
     <eulerAngles>
-      <x>0</x>
-      <y>359.114746</y>
+      <x>-0</x>
+      <y>353.6501</y>
       <z>0</z>
     </eulerAngles>
   </rotation>
   <position>
-    <x>-285.5633</x>
-    <y>12.6493635</y>
-    <z>-18.0525322</z>
+    <x>-284.50647</x>
+    <y>12.6493645</y>
+    <z>-15.7670708</z>
   </position>
-  <weaponEquipped>Knife</weaponEquipped>
   <gemsCollected>0</gemsCollected>
   <bulletsLoaded>0</bulletsLoaded>
-  <totalBullets>30</totalBullets>
+  <totalBullets>0</totalBullets>
   <isSessionSaved>true</isSessionSaved>
-  <itemList>
-    <int>5</int>
-    <int>0</int>
-    <int>7</int>
-    <int>2</int>
-  </itemList>
+  <itemList />
 </DataMembers>

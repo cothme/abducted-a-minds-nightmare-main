@@ -7,6 +7,7 @@ public class StoryScript : MonoBehaviour
 {
     [TextArea] [SerializeField] string sentence;
     [SerializeField] PlayableDirector runnersIntro;
+    [SerializeField] public Sprite UVsprite;
 
     public string Sentence { get => sentence; set => sentence = value; }
 

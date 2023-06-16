@@ -8,7 +8,6 @@ TagManager:
   - Item
   - Puzzle
   - Door
-  - StoryItem
   - Wall
   - Attack
   - Bullet
@@ -16,6 +15,10 @@ TagManager:
   - Prompt
   - SavePoint
   - BossInitiate
+  - StoryFile
+  - Folder
+  - JournalPage
+  - UVPaperFile
   layers:
   - Default
   - TransparentFX

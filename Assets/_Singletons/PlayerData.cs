@@ -11,6 +11,7 @@ public class PlayerData : MonoBehaviour
     float playerHealth = 50f;
     float playerOxygen = 100f;
     float gemsCollected = 0f;
+    float volume;
     float stage;
     bool isSessionSaved;
     public static PlayerData Instance { get { return instance; } }
@@ -21,6 +22,7 @@ public class PlayerData : MonoBehaviour
     public float Stage { get => stage; set => stage = value; }
     public Quaternion PlayerRotation { get => playerRotation; set => playerRotation = value; }
     public bool IsSessionSaved { get => isSessionSaved; set => isSessionSaved = value; }
+    public float Volume { get => volume; set => volume = value; }
 
     void Update()
     {
