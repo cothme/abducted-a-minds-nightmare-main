@@ -59,6 +59,6 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
     }
     public void QuitClicked()
     {
-        Debug.Log(PlayerData.Instance.PlayerPosition);
+        
     }
 }
