@@ -71,29 +71,23 @@ public class PlayerInteractScript : MonoBehaviour
                 interactCanvas.enabled = true;
                 Interact(hit.collider.gameObject,"Door");
             }
-
-            else if(hit.collider.tag == "StoryItem")
+            else if(hit.collider.tag == "Folder")
             {
-                if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Folder Open"))
-                {
-                    itemNameUI.text = "Press E to Open Folder";
-                    interactCanvas.enabled = true;
-                    Interact(hit.collider.gameObject, "StoryItem");
-                }
-                else
-                {
-                    itemNameUI.text = "Press E to Close Folder";
-                    interactCanvas.enabled = true;
-                    Interact(hit.collider.gameObject, "StoryItem");
-                }
-
+                itemNameUI.text = "Press E to Open Folder";
+                interactCanvas.enabled = true;
+                Interact(hit.collider.gameObject, "Folder");
             }
-
-            else if (hit.collider.tag == "StoryFile")
+            else if (hit.collider.tag == "JournalPage")
+            {
+                itemNameUI.text = "Press E to read journal page";
+                interactCanvas.enabled = true;
+                Interact(hit.collider.gameObject, "JournalPage");
+            }
+            else if (hit.collider.tag == "UVPaperFile")
             {
                 itemNameUI.text = "Press E to read";
                 interactCanvas.enabled = true;
-                Interact(hit.collider.gameObject, "StoryFile");
+                Interact(hit.collider.gameObject, "UVPaperFile");
             }
 
             else if(hit.collider.tag == "Reader")
@@ -169,25 +163,31 @@ public class PlayerInteractScript : MonoBehaviour
             this.gameObject.GetComponent<Animator>().Play("Open Door");
             gameObject.GetComponent<Animator>().Play("Door");
         }
-        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "StoryFile")
+        else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Folder")
+        {
+            AudioManager.Instance.PlaySound(generalSound, "Open Story");
+            gameObject.GetComponent<Animator>().Play("Folder Open");
+            gameObject.GetComponent<Collider>().enabled = false;
+        }
+        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "UVPaperFile")
         {            
             AudioManager.Instance.PlaySound(generalSound,"Open Story");            
             DisableScripts(true);
             storyCanvas.enabled = true;
-            storyImage.sprite = gameObject.GetComponent<StoryScript>().sprite;
+            storyImage.sprite = gameObject.GetComponent<StoryScript>().UVsprite;
             interactCanvas.enabled = false;
-            storyText.text =  gameObject.GetComponent<StoryScript>().Sentence;
+            storyText.text = gameObject.GetComponent<StoryScript>().Sentence;
             Cursor.lockState = CursorLockMode.None;
         }
-        else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "StoryItem")
+        else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "JournalPage")
         {
             AudioManager.Instance.PlaySound(generalSound, "Open Story");
-            gameObject.GetComponent<Animator>().Play("Folder Open");
-            //DisableScripts(true);
-            //storyCanvas.enabled = true;
-            //interactCanvas.enabled = false;
-            //storyText.text = gameObject.GetComponent<StoryScript>().Sentence;
-            //Cursor.lockState = CursorLockMode.None;
+            DisableScripts(true);
+            storyCanvas.enabled = true;
+            storyImage.sprite = gameObject.GetComponent<StoryScript>().UVsprite;
+            interactCanvas.enabled = false;
+            storyText.text = gameObject.GetComponent<StoryScript>().Sentence;
+            Cursor.lockState = CursorLockMode.None;
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Reader")
         {  
