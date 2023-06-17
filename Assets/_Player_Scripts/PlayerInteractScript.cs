@@ -25,7 +25,7 @@ public class PlayerInteractScript : MonoBehaviour
     InventoryController inventoryController;
     PlayerControls playerControls;
     InputAction interactButton;
-    int lookDistance = 15;
+    int lookDistance = 10;
     Color currentColor;
     RaycastHit hit;
     Ray ray;
@@ -178,12 +178,20 @@ public class PlayerInteractScript : MonoBehaviour
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "UVPaperFile")
         {            
             AudioManager.Instance.PlaySound(generalSound,"Open Story");            
+            storyImage.sprite = gameObject.GetComponent<StoryScript>().UVsprite;
+            itemNameUI.text = "";
             DisableScripts(true);
             storyCanvas.enabled = true;
-            storyImage.sprite = gameObject.GetComponent<StoryScript>().UVsprite;
-            interactCanvas.enabled = false;
             storyText.text = gameObject.GetComponent<StoryScript>().Sentence;
             Cursor.lockState = CursorLockMode.None;
+            if(gameObject.GetComponent<DialogueScript>() == null)
+            {
+                return;
+            }
+            else
+            {
+                gameObject.GetComponent<DialogueScript>().showText(gameObject.GetComponent<DialogueScript>().subtitle,gameObject.GetComponent<DialogueScript>().deletionTime);
+            }
         }
         else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "JournalPage")
         {
@@ -191,9 +199,17 @@ public class PlayerInteractScript : MonoBehaviour
             DisableScripts(true);
             storyCanvas.enabled = true;
             storyImage.sprite = gameObject.GetComponent<StoryScript>().UVsprite;
-            interactCanvas.enabled = false;
+            itemNameUI.text = "";
             storyText.text = gameObject.GetComponent<StoryScript>().Sentence;
             Cursor.lockState = CursorLockMode.None;
+            if(gameObject.GetComponent<DialogueScript>() == null)
+            {
+                return;
+            }
+            else
+            {
+                gameObject.GetComponent<DialogueScript>().showText(gameObject.GetComponent<DialogueScript>().subtitle,gameObject.GetComponent<DialogueScript>().deletionTime);
+            }
         }
         else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Bag")
         {

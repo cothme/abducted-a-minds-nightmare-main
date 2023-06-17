@@ -27,6 +27,14 @@ public class PauseScript : MonoBehaviour
         }
         else
         {
+            // Time.timeScale = 1;
+            // Cursor.lockState = CursorLockMode.Locked;
+            // gameObject.GetComponent<Canvas>().enabled = false;
+            // player.GetComponent<PlayerMovement>().enabled = true;
+            // player.GetComponent<PlayerInteractScript>().enabled = true;
+            // player.GetComponent<PlayerShootingScript>().enabled = true;
+            // player.GetComponent<PlayerAnimation>().enabled = true;
+            // GameObject.Find("Main Camera").GetComponent<CinemachineBrain>().enabled = true;
             //Time.timeScale = 1;
             //Cursor.lockState = CursorLockMode.Locked;
             //gameObject.GetComponent<Canvas>().enabled = false;
@@ -39,6 +47,7 @@ public class PauseScript : MonoBehaviour
     }
     public void Resume()
     {
+        paused = false;
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         gameObject.GetComponent<Canvas>().enabled = false;

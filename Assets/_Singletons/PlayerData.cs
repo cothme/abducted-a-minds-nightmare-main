@@ -8,7 +8,7 @@ public class PlayerData : MonoBehaviour
     private static PlayerData instance;
     Vector3 playerPosition;
     Quaternion playerRotation;
-    float playerHealth = 50f;
+    float playerHealth = 25f;
     float playerOxygen = 100f;
     float gemsCollected = 0f;
     float volume;
@@ -26,6 +26,10 @@ public class PlayerData : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log(PlayerData.Instance.PlayerPosition);
+        }
         Stage = Level();
     }
     public float Level()
@@ -38,6 +42,8 @@ public class PlayerData : MonoBehaviour
             return 2;
             case "Level 3":
             return 3;
+            case "Level 4":
+            return 4;
             default:
             return 0;
         }
