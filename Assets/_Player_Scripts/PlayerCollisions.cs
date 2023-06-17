@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerCollisions : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI healthText;
+    [SerializeField] Slider healthSlider;
     private void OnCollisionEnter(Collision col)
     {
         if(col.collider.tag == "Attack")
@@ -29,5 +31,6 @@ public class PlayerCollisions : MonoBehaviour
     private void Update()
     {
         healthText.text = PlayerData.Instance.PlayerHealth.ToString();
+        healthSlider.value = PlayerData.Instance.PlayerHealth;
     }
 }

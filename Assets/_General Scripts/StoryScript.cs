@@ -17,8 +17,7 @@ public class StoryScript : MonoBehaviour
         {
             if(col.tag == "Player")
             {
-                runnersIntro.Play();
-                
+                runnersIntro.Play(); 
             }
         }
     }

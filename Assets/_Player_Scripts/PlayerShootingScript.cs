@@ -22,6 +22,7 @@ public class PlayerShootingScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI totalBulletsCountText;
     [SerializeField] TextMeshProUGUI bulletsCountText;
     [SerializeField] AudioSource generalSound;
+    InventoryController inventoryController;
     WeaponRecoil recoil;
     bool maskEquipped = false;
     public bool isShooting = false;
@@ -51,6 +52,10 @@ public class PlayerShootingScript : MonoBehaviour
         {
             EquipMask();
         }
+        else if(ControlsManager.Instance.IsHealthUseButtonDown)
+        {
+            Heal();
+        }
         else if(ControlsManager.Instance.IsUnequipButtonDown)
         {
             GunManager.Instance.WeaponEquipped = null;
@@ -79,7 +84,7 @@ public class PlayerShootingScript : MonoBehaviour
     }
     void Start()
     {
-        recoil = aimCamera.GetComponent<WeaponRecoil>();
+        inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
     }
     private void ShootAssaultRifle()
     {
@@ -255,7 +260,6 @@ public class PlayerShootingScript : MonoBehaviour
             gunImages[3].SetActive(true);
         }
     }
-    
     private void EquipMask()
     {
         if(GunManager.Instance.CanEquipMask && maskEquipped == false)
@@ -272,6 +276,35 @@ public class PlayerShootingScript : MonoBehaviour
         else
         {
             mask.SetActive(false);  
+        }
+    }
+    private void Heal()
+    {
+        if(GunManager.Instance.CanUseHealthKit)
+        {
+            if(PlayerData.Instance.PlayerHealth >= 50)
+            {
+                return;
+            }
+            // gameObject.GetComponent<Animator>().Play("Use Med Kit");
+            // healthkit.SetActive(true);
+            if(PlayerData.Instance.PlayerHealth <= 50)
+            {
+                PlayerData.Instance.PlayerHealth += 25;
+                if(PlayerData.Instance.PlayerHealth >= 50)
+                {
+                    PlayerData.Instance.PlayerHealth = 50;
+                }
+            }
+        }
+        ItemList.Instance.DropItem("Health Kit");
+        foreach(InventoryItem i in ItemList.Instance.InventoryItems)
+        {
+                if(i.itemData.name == "Health Kit")
+                {
+                inventoryController.selectedItem = i;
+                inventoryController.DeleteItem(inventoryController.selectedItem);
+                }
         }
     }
     void Unequip()

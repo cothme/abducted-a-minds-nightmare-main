@@ -19,6 +19,7 @@ public class ControlsManager : MonoBehaviour
     private bool isPauseButtonDown;
     private bool isUnequipButtonDown;
     private bool isMaskEquipButtonDown;
+    private bool isHealthUseButtonDown;
     public bool IsJumpButtonDown { get { return isJumpButtonDown; } }
     public bool IsFireButtonDown { get { return isFireButtonDown; } }
     public bool IsTabDown { get => isTabDown; set => isTabDown = value; }
@@ -32,6 +33,7 @@ public class ControlsManager : MonoBehaviour
     public bool IsPauseButtonDown { get => isPauseButtonDown; set => isPauseButtonDown = value; }
     public bool IsUnequipButtonDown { get => isUnequipButtonDown; set => isUnequipButtonDown = value; }
     public bool IsMaskEquipButtonDown { get => isMaskEquipButtonDown; set => isMaskEquipButtonDown = value; }
+    public bool IsHealthUseButtonDown { get => isHealthUseButtonDown; set => isHealthUseButtonDown = value; }
 
     private void Update()
     {
@@ -48,6 +50,7 @@ public class ControlsManager : MonoBehaviour
         isPauseButtonDown = Input.GetKeyDown(KeyCode.Escape);
         isUnequipButtonDown = Input.GetKeyDown(KeyCode.Alpha5);
         isMaskEquipButtonDown = Input.GetKeyDown(KeyCode.M);
+        isHealthUseButtonDown = Input.GetKeyDown(KeyCode.H);
     }
     private void Awake()
     {
