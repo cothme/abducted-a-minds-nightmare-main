@@ -89,6 +89,12 @@ public class PlayerInteractScript : MonoBehaviour
                 interactCanvas.enabled = true;
                 Interact(hit.collider.gameObject, "UVPaperFile");
             }
+            else if (hit.collider.tag == "Bag")
+            {
+                itemNameUI.text = "Press E to pick up Bag";
+                interactCanvas.enabled = true;
+                Interact(hit.collider.gameObject, "Bag");
+            }
 
             else if(hit.collider.tag == "Reader")
             {
@@ -188,6 +194,12 @@ public class PlayerInteractScript : MonoBehaviour
             interactCanvas.enabled = false;
             storyText.text = gameObject.GetComponent<StoryScript>().Sentence;
             Cursor.lockState = CursorLockMode.None;
+        }
+        else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Bag")
+        {
+            AudioManager.Instance.PlaySound(generalSound, "Pick Up");
+            gameObject.GetComponent<Collider>().enabled = false;
+            gameObject.SetActive(false);
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Reader")
         {  

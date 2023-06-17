@@ -19,6 +19,9 @@ TagManager:
   - Folder
   - JournalPage
   - UVPaperFile
+  - StoryItem
+  - Bag
+  - AlexBag
   layers:
   - Default
   - TransparentFX
