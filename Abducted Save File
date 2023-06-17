@@ -5,24 +5,23 @@
   <oxygen>100</oxygen>
   <rotation>
     <x>0</x>
-    <y>0.0153731778</y>
+    <y>0.158176854</y>
     <z>0</z>
-    <w>-0.999881864</w>
+    <w>-0.987410843</w>
     <eulerAngles>
       <x>-0</x>
-      <y>358.238281</y>
+      <y>341.797821</y>
       <z>0</z>
     </eulerAngles>
   </rotation>
   <position>
-    <x>-285.975616</x>
-    <y>12.6493645</y>
-    <z>-15.78501</z>
+    <x>-284.2815</x>
+    <y>12.6493635</y>
+    <z>-15.9892941</z>
   </position>
-  <weaponEquipped>Knife</weaponEquipped>
   <gemsCollected>0</gemsCollected>
-  <bulletsLoaded>6</bulletsLoaded>
-  <totalBullets>19</totalBullets>
+  <bulletsLoaded>0</bulletsLoaded>
+  <totalBullets>0</totalBullets>
   <isSessionSaved>true</isSessionSaved>
   <aiming>false</aiming>
   <reloading>false</reloading>
@@ -30,15 +29,10 @@
   <isPuzzleOneSolved>false</isPuzzleOneSolved>
   <levelOneDoorUnlocked>false</levelOneDoorUnlocked>
   <levelOneCageUnlocked>false</levelOneCageUnlocked>
-  <canEquipPistol>true</canEquipPistol>
+  <canEquipPistol>false</canEquipPistol>
   <canEquipShotgun>false</canEquipShotgun>
-  <canEquipKnife>true</canEquipKnife>
+  <canEquipKnife>false</canEquipKnife>
   <canEquipRifle>false</canEquipRifle>
   <paused>false</paused>
-  <itemList>
-    <int>5</int>
-    <int>0</int>
-    <int>7</int>
-    <int>2</int>
-  </itemList>
+  <itemList />
 </DataMembers>

@@ -178,6 +178,14 @@ public class PlayerInteractScript : MonoBehaviour
             storyCanvas.enabled = true;
             storyText.text = gameObject.GetComponent<StoryScript>().Sentence;
             Cursor.lockState = CursorLockMode.None;
+            if(gameObject.GetComponent<DialogueScript>() == null)
+            {
+                return;
+            }
+            else
+            {
+                gameObject.GetComponent<DialogueScript>().showText(gameObject.GetComponent<DialogueScript>().subtitle,gameObject.GetComponent<DialogueScript>().deletionTime);
+            }
         }
         else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "JournalPage")
         {
@@ -188,6 +196,14 @@ public class PlayerInteractScript : MonoBehaviour
             itemNameUI.text = "";
             storyText.text = gameObject.GetComponent<StoryScript>().Sentence;
             Cursor.lockState = CursorLockMode.None;
+            if(gameObject.GetComponent<DialogueScript>() == null)
+            {
+                return;
+            }
+            else
+            {
+                gameObject.GetComponent<DialogueScript>().showText(gameObject.GetComponent<DialogueScript>().subtitle,gameObject.GetComponent<DialogueScript>().deletionTime);
+            }
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Reader")
         {  

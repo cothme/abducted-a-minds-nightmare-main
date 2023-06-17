@@ -29,6 +29,14 @@ public class PlayerCollisions : MonoBehaviour
             {
                 gameObject.GetComponent<Animator>().Play("Hit 3");
             }
+        }    
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if(col.tag == "AudioCue")
+        {
+            
         }
     }
     

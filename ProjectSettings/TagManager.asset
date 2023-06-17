@@ -19,6 +19,8 @@ TagManager:
   - Folder
   - JournalPage
   - UVPaperFile
+  - StoryItem
+  - AudioCue
   layers:
   - Default
   - TransparentFX
