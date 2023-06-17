@@ -5,20 +5,21 @@
   <oxygen>100</oxygen>
   <rotation>
     <x>0</x>
-    <y>0.158176854</y>
+    <y>0.221991152</y>
     <z>0</z>
-    <w>-0.987410843</w>
+    <w>-0.9750487</w>
     <eulerAngles>
       <x>-0</x>
-      <y>341.797821</y>
+      <y>334.348</y>
       <z>0</z>
     </eulerAngles>
   </rotation>
   <position>
-    <x>-284.2815</x>
+    <x>-284.108856</x>
     <y>12.6493635</y>
-    <z>-15.9892941</z>
+    <z>-12.2130852</z>
   </position>
+  <weaponEquipped>Knife</weaponEquipped>
   <gemsCollected>0</gemsCollected>
   <bulletsLoaded>0</bulletsLoaded>
   <totalBullets>0</totalBullets>
@@ -29,10 +30,13 @@
   <isPuzzleOneSolved>false</isPuzzleOneSolved>
   <levelOneDoorUnlocked>false</levelOneDoorUnlocked>
   <levelOneCageUnlocked>false</levelOneCageUnlocked>
-  <canEquipPistol>false</canEquipPistol>
+  <canEquipPistol>true</canEquipPistol>
   <canEquipShotgun>false</canEquipShotgun>
-  <canEquipKnife>false</canEquipKnife>
+  <canEquipKnife>true</canEquipKnife>
   <canEquipRifle>false</canEquipRifle>
   <paused>false</paused>
-  <itemList />
+  <itemList>
+    <int>5</int>
+    <int>2</int>
+  </itemList>
 </DataMembers>
