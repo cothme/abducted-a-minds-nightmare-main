@@ -26,14 +26,18 @@ public class AsyncManager : MonoBehaviour
     }
     public void ContinueGame(string levelToLoad)
     {
+        Time.timeScale = 1;
         XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
         StreamReader sr = new StreamReader("Abducted Save File");
         DataMembers dm = (DataMembers)loadData.Deserialize(sr);  
         PlayerData.Instance.IsSessionSaved = dm.isSessionSaved;
+        PlayerData.Instance.PlayerPosition = dm.position;
+        PlayerData.Instance.PlayerRotation = dm.rotation;
         ItemList.Instance.Itemlist.Clear();
+        loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
         mainMenu.SetActive(false);
         loadingScreen.SetActive(true);
-        StartCoroutine(LoadLevelAsync(levelToLoad));
+        SceneManager.LoadScene("Level 1");
     }
     IEnumerator LoadLevelAsync(string levelToLoad)
     {
@@ -74,11 +78,16 @@ public class AsyncManager : MonoBehaviour
             PlayerState.Instance.IsPuzzleOneSolved = false;
             PlayerState.Instance.LevelOneDoorUnlocked = false;
             PlayerState.Instance.LevelOneCageUnlocked = false;
+            loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
             loadingScreen.SetActive(true);
             StartCoroutine(LoadLevelAsync(levelToLoad));
     }
     void QuitClicked()
     {
         Application.Quit();
+    }
+    public void Level1Intro()
+    {
+        SceneManager.LoadScene("Level 1 Intro");
     }
 }

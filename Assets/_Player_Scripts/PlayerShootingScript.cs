@@ -302,8 +302,8 @@ public class PlayerShootingScript : MonoBehaviour
         {
                 if(i.itemData.name == "Health Kit")
                 {
-                inventoryController.selectedItem = i;
-                inventoryController.DeleteItem(inventoryController.selectedItem);
+                    inventoryController.selectedItem = i;
+                    inventoryController.DeleteItem(inventoryController.selectedItem);
                 }
         }
     }
