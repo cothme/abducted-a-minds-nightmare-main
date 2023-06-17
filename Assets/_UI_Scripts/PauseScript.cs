@@ -35,6 +35,14 @@ public class PauseScript : MonoBehaviour
             // player.GetComponent<PlayerShootingScript>().enabled = true;
             // player.GetComponent<PlayerAnimation>().enabled = true;
             // GameObject.Find("Main Camera").GetComponent<CinemachineBrain>().enabled = true;
+            //Time.timeScale = 1;
+            //Cursor.lockState = CursorLockMode.Locked;
+            //gameObject.GetComponent<Canvas>().enabled = false;
+            //player.GetComponent<PlayerMovement>().enabled = true;
+            //player.GetComponent<PlayerInteractScript>().enabled = true;
+            //player.GetComponent<PlayerShootingScript>().enabled = true;
+            //player.GetComponent<PlayerAnimation>().enabled = true;
+            //GameObject.Find("Main Camera").GetComponent<CinemachineBrain>().enabled = true;
         }
     }
     public void Resume()
