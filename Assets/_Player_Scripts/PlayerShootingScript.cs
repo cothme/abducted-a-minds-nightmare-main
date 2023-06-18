@@ -290,23 +290,23 @@ public class PlayerShootingScript : MonoBehaviour
             // healthkit.SetActive(true);
             if(PlayerData.Instance.PlayerHealth <= 50)
             {
-                PlayerData.Instance.PlayerHealth += 25;
-                if(PlayerData.Instance.PlayerHealth >= 50)
+                foreach(InventoryItem i in ItemList.Instance.InventoryItems)
                 {
-                    PlayerData.Instance.PlayerHealth = 50;
+                    if(i.itemData.name == "Health Kit")
+                    {
+                        ItemList.Instance.InventoryItems.Remove(i);
+                        inventoryController.selectedItem = i;
+                        inventoryController.DeleteItem(inventoryController.selectedItem);
+                        break;
+                    }
                 }
+                PlayerData.Instance.PlayerHealth += 25;
             }
-        }
-        foreach(InventoryItem i in ItemList.Instance.InventoryItems)
-        {
-            if(i.itemData.name == "Health Kit")
+            else if(PlayerData.Instance.PlayerHealth >= 50)
             {
-                inventoryController.selectedItem = i;
-                inventoryController.DeleteItem(inventoryController.selectedItem);
-                break;
+                PlayerData.Instance.PlayerHealth = 50;
             }
         }
-        ItemList.Instance.DropItem("Health Kit");
     }
     void Unequip()
     {
