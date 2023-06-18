@@ -297,15 +297,16 @@ public class PlayerShootingScript : MonoBehaviour
                 }
             }
         }
-        ItemList.Instance.DropItem("Health Kit");
         foreach(InventoryItem i in ItemList.Instance.InventoryItems)
         {
-                if(i.itemData.name == "Health Kit")
-                {
-                    inventoryController.selectedItem = i;
-                    inventoryController.DeleteItem(inventoryController.selectedItem);
-                }
+            if(i.itemData.name == "Health Kit")
+            {
+                inventoryController.selectedItem = i;
+                inventoryController.DeleteItem(inventoryController.selectedItem);
+                break;
+            }
         }
+        ItemList.Instance.DropItem("Health Kit");
     }
     void Unequip()
     {

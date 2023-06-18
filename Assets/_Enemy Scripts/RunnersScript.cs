@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class RunnersScript : MonoBehaviour
 {
    // [SerializeField] AudioSource generalSound;
-
+    [SerializeField] AudioSource alertSound;
     Animator anim;
     bool animationPlayed = false;
     bool walking = false;
@@ -173,6 +173,7 @@ public class RunnersScript : MonoBehaviour
         {
             agent.SetDestination(gameObject.transform.position);
             anim.Play("Alerted");
+            AudioManager.Instance.PlaySound(alertSound,"Runners Alert");
         }
             animationPlayed = true;
         yield return new WaitForSeconds(alertTime);

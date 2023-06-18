@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60b08e759251f64db43c54f69849f0f, type: 3}
   m_Name: Runners Alerted
   m_EditorClassIdentifier: 
-  clipName: 
-  clip: {fileID: 0}
+  clipName: Runners Alert
+  clip: {fileID: 8300000, guid: cfe96fcfd67f1434ea67271c1a5c3daa, type: 3}
   volume: 0

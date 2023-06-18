@@ -222,15 +222,16 @@ public class PlayerInteractScript : MonoBehaviour
         {  
             PlayerState.Instance.LevelOneDoorUnlocked = true;
             doorUnlockedPlayableDirector.Play();
-            ItemList.Instance.DropItem("Keycard");
             foreach(InventoryItem i in ItemList.Instance.InventoryItems)
             {
                  if(i.itemData.name == "KeyCard")
                  {
                     inventoryController.selectedItem = i;
                     inventoryController.DeleteItem(inventoryController.selectedItem);
+                    break;
                  }
             }
+            ItemList.Instance.DropItem("Keycard");
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "SavePoint")
         {
