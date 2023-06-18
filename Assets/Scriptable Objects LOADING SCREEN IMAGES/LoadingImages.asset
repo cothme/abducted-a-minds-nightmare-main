@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LoadingImages
   m_EditorClassIdentifier: 
   loadingScreenImages:
-  - {fileID: 21300000, guid: ff9c48975d98a2e47a7b395b91bda21c, type: 3}
-  - {fileID: 21300000, guid: ff9c48975d98a2e47a7b395b91bda21c, type: 3}
-  - {fileID: 21300000, guid: ff9c48975d98a2e47a7b395b91bda21c, type: 3}
-  - {fileID: 21300000, guid: ff9c48975d98a2e47a7b395b91bda21c, type: 3}
+  - {fileID: 21300000, guid: 630125cda63249b4db2c252f4604b98f, type: 3}
+  - {fileID: 21300000, guid: bd1f901be93d3824694b02c2ee9598f8, type: 3}
+  - {fileID: 21300000, guid: 630125cda63249b4db2c252f4604b98f, type: 3}
+  - {fileID: 21300000, guid: bd1f901be93d3824694b02c2ee9598f8, type: 3}

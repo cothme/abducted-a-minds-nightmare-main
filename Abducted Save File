@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DataMembers xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <level>0</level>
-  <health>50</health>
+  <health>25</health>
   <oxygen>100</oxygen>
   <rotation>
     <x>0</x>
-    <y>-0.0111237671</y>
+    <y>-0.08022246</y>
     <z>0</z>
-    <w>0.99993813</w>
+    <w>0.996777</w>
     <eulerAngles>
       <x>0</x>
-      <y>358.725281</y>
+      <y>350.7973</y>
       <z>0</z>
     </eulerAngles>
   </rotation>
   <position>
-    <x>-285.917328</x>
-    <y>12.6493645</y>
-    <z>-15.0892553</z>
+    <x>-285.579071</x>
+    <y>12.6493635</y>
+    <z>-13.7007837</z>
   </position>
   <gemsCollected>0</gemsCollected>
   <bulletsLoaded>0</bulletsLoaded>
-  <totalBullets>30</totalBullets>
+  <totalBullets>0</totalBullets>
   <isSessionSaved>true</isSessionSaved>
   <aiming>false</aiming>
   <reloading>false</reloading>
@@ -29,15 +29,10 @@
   <isPuzzleOneSolved>false</isPuzzleOneSolved>
   <levelOneDoorUnlocked>false</levelOneDoorUnlocked>
   <levelOneCageUnlocked>false</levelOneCageUnlocked>
-  <canEquipPistol>true</canEquipPistol>
+  <canEquipPistol>false</canEquipPistol>
   <canEquipShotgun>false</canEquipShotgun>
-  <canEquipKnife>true</canEquipKnife>
+  <canEquipKnife>false</canEquipKnife>
   <canEquipRifle>false</canEquipRifle>
   <paused>false</paused>
-  <itemList>
-    <int>0</int>
-    <int>5</int>
-    <int>7</int>
-    <int>2</int>
-  </itemList>
+  <itemList />
 </DataMembers>

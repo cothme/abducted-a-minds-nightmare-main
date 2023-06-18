@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Inventory Open
   m_EditorClassIdentifier: 
   clipName: Inventory Open
-  clip: {fileID: 8300000, guid: adf019e53720e3a47bbda2970fa094ce, type: 3}
+  clip: {fileID: 8300000, guid: a08b6105f0593624fbc07b9b2527aceb, type: 3}
   volume: 100
