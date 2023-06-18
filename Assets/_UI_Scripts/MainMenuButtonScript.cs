@@ -11,6 +11,10 @@ using UnityEngine.SceneManagement;
 public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image highlightImage;
+    [SerializeField] AudioSource menuButtonHover;
+    [SerializeField] AudioSource menuButtonPress;
+
+
     public TextMeshProUGUI text;
     private Vector3 originalPosition,targetPosition;
     void Start()
@@ -27,9 +31,12 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
         } 
     }
     public void OnPointerEnter(PointerEventData eventData)
-    {
+    {        
+
         try
         {
+            Debug.Log("Highlight");
+            AudioManager.Instance.PlaySound(menuButtonHover, "Button Hover");
             highlightImage.enabled = true;
             text.transform.localPosition = targetPosition;
         }
@@ -50,6 +57,13 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
             return;
         }
     }
+
+    public void ClickSound ()
+    {
+        menuButtonPress.Play();
+    }
+
+
     IEnumerator ButtonAnimation(Vector3 targetPosition)
     {
         yield break;

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Inv Select
   m_EditorClassIdentifier: 
   clipName: Inv Select
-  clip: {fileID: 8300000, guid: 1f99e07063203c548a4973f6d6917fb4, type: 3}
+  clip: {fileID: 8300000, guid: a08b6105f0593624fbc07b9b2527aceb, type: 3}
   volume: 100

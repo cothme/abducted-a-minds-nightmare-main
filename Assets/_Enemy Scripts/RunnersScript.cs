@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class RunnersScript : MonoBehaviour
 {
+   // [SerializeField] AudioSource generalSound;
+
     Animator anim;
     bool animationPlayed = false;
     bool walking = false;
@@ -77,7 +79,9 @@ public class RunnersScript : MonoBehaviour
     }
     void Patrolling()
     {
-        if(agent.remainingDistance <= agent.stoppingDistance) //done with path
+        //AudioManager.Instance.PlaySound(generalSound, "Pick Up");
+
+        if (agent.remainingDistance <= agent.stoppingDistance) //done with path
         {
             Vector3 point;
             if (RandomPoint(transform.position, walkPointRange, out point))
