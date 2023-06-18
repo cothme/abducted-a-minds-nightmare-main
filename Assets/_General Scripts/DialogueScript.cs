@@ -15,6 +15,7 @@ public class DialogueScript : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            gameObject.GetComponent<BoxCollider>().enabled = false;
             StartCoroutine(ShowSubtitle());
             shownSubtitle = true;
         }

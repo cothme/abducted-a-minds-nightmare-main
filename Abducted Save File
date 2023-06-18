@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DataMembers xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <level>1</level>
-  <health>25</health>
+  <level>0</level>
+  <health>50</health>
   <oxygen>100</oxygen>
   <rotation>
     <x>0</x>
-    <y>0.221991152</y>
+    <y>-0.0111237671</y>
     <z>0</z>
-    <w>-0.9750487</w>
+    <w>0.99993813</w>
     <eulerAngles>
-      <x>-0</x>
-      <y>334.348</y>
+      <x>0</x>
+      <y>358.725281</y>
       <z>0</z>
     </eulerAngles>
   </rotation>
   <position>
-    <x>-284.108856</x>
-    <y>12.6493635</y>
-    <z>-12.2130852</z>
+    <x>-285.917328</x>
+    <y>12.6493645</y>
+    <z>-15.0892553</z>
   </position>
-  <weaponEquipped>Knife</weaponEquipped>
   <gemsCollected>0</gemsCollected>
   <bulletsLoaded>0</bulletsLoaded>
-  <totalBullets>0</totalBullets>
+  <totalBullets>30</totalBullets>
   <isSessionSaved>true</isSessionSaved>
   <aiming>false</aiming>
   <reloading>false</reloading>
@@ -36,7 +35,9 @@
   <canEquipRifle>false</canEquipRifle>
   <paused>false</paused>
   <itemList>
+    <int>0</int>
     <int>5</int>
+    <int>7</int>
     <int>2</int>
   </itemList>
 </DataMembers>
