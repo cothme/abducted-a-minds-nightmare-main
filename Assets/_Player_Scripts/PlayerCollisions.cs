@@ -16,6 +16,7 @@ public class PlayerCollisions : MonoBehaviour
         if(col.collider.tag == "Attack")
         {
             PlayerData.Instance.PlayerHealth -= 3f;
+            Debug.Log("Hit!!");
             int hitNumber = Random.Range(1,4);
             if(hitNumber == 1)
             {
@@ -30,16 +31,7 @@ public class PlayerCollisions : MonoBehaviour
                 gameObject.GetComponent<Animator>().Play("Hit 3");
             }
         }    
-    }
-
-    void OnTriggerEnter(Collider col)
-    {
-        if(col.tag == "AudioCue")
-        {
-            
-        }
-    }
-    
+    }  
     private void Update()
     {
         healthText.text = PlayerData.Instance.PlayerHealth.ToString();
