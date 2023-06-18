@@ -13,6 +13,7 @@ using UnityEngine.UI;
 
 public class PlayerInteractScript : MonoBehaviour
 {
+    [SerializeField] GameObject bag;
     [SerializeField] PlayableDirector doorUnlockedPlayableDirector;
     [SerializeField] PlayableDirector brutesAppear;
     [SerializeField] Canvas interactCanvas;
@@ -214,7 +215,7 @@ public class PlayerInteractScript : MonoBehaviour
         else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Bag")
         {
             AudioManager.Instance.PlaySound(generalSound, "Pick Up");
-            gameObject.GetComponent<Collider>().enabled = false;
+            bag.SetActive(true);
             gameObject.SetActive(false);
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Reader")
