@@ -12,11 +12,6 @@ public class PauseScript : MonoBehaviour
     bool paused = false;
     void Update()
     {
-        if(PlayerState.Instance.LevelOneBossDefeated == true)
-        {   
-            paused = true;
-            levelOneCompleteCanvas.enabled = true;
-        }
         if(ControlsManager.Instance.IsPauseButtonDown)
         {
             settingsOpen.Play();
