@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Playables;
 
 public class BrutesScript : MonoBehaviour
 {
-    [SerializeField] AudioSource brutesWalk;
-    [SerializeField] AudioSource brutesAlert;
+    [SerializeField] PlayableDirector levelOneCutscene;
+    int ctr;
+    bool knocked;
+    // [SerializeField] AudioSource brutesWalk;
+    // [SerializeField] AudioSource brutesAlert;
     Animator anim;
     bool animationPlayed = false;
     bool walking = false;
@@ -33,13 +37,17 @@ public class BrutesScript : MonoBehaviour
     }
     void Update()
     {
+        if(knocked)
+        {
+            agent.SetDestination(this.gameObject.transform.position);
+        }
         if(attacked)
         {
-            agent.SetDestination(gameObject.transform.position);
+            agent.SetDestination(this.gameObject.transform.position);
         }
         if(transform.position != Vector3.zero && !attacked)
         {
-            brutesWalk.Play();
+            // brutesWalk.Play();
             walking = true;
             anim.SetBool("Walking",walking);
         }
@@ -148,9 +156,7 @@ public class BrutesScript : MonoBehaviour
     private void Die()
     {
         agent.SetDestination(gameObject.transform.position);
-        anim.Play("Death");
-        Destroy(gameObject, deathAnimTime);
-        PlayerState.Instance.LevelOneBossDefeated = true;
+        StartCoroutine(BrutesDeathCoroutine());
     }
     void OnDrawGizmosSelected()
     {
@@ -165,7 +171,7 @@ public class BrutesScript : MonoBehaviour
         {
             agent.SetDestination(transform.position);
             anim.Play("Alerted");
-            brutesAlert.Play();
+            // brutesAlert.Play();
         }
             animationPlayed = true;
         yield return new WaitForSeconds(alertTime);
@@ -175,9 +181,29 @@ public class BrutesScript : MonoBehaviour
     {
         if(col.collider.tag == "Bullet")
         {
+            ctr++;
             anim.Play("Hit 1");
             health -= GunManager.Instance.Damage;
             TakeDamage();
         }
+        if(ctr >= 5)
+        {
+            knocked = true;
+            anim.Play("Hit");
+            agent.SetDestination(this.transform.position);
+        }
+        else
+        {
+            knocked = false;
+        }
+    }
+    IEnumerator BrutesDeathCoroutine()
+    {   
+        anim.Play("Death");
+        yield return new WaitForSeconds(deathAnimTime);
+        Destroy(gameObject);
+        PlayerState.Instance.LevelOneBossDefeated = true;
+        levelOneCutscene.Play();
+        Cursor.lockState = CursorLockMode.None;
     }
 }
