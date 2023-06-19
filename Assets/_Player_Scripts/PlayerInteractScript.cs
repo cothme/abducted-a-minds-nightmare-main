@@ -275,6 +275,14 @@ public class PlayerInteractScript : MonoBehaviour
     }
     public void ExitPuzzle()
     {
+        if(PlayerState.Instance.IsPuzzleOneSolved)
+        {
+            gameObject.GetComponent<DialogueScript>().showText("Uhhh what? The answer for that puzzle is… my birthday? Okay?",5);
+        }
+        else
+        {
+            gameObject.GetComponent<DialogueScript>().showText("I didn't expect that it will be THIS hard! Let's see if there's any clues here. ",5);
+        }
         DisableScripts(false);
     }
     public void DisableScripts(bool isOn)
