@@ -491,7 +491,6 @@ GameObject:
   - component: {fileID: 374650238}
   - component: {fileID: 374650237}
   - component: {fileID: 374650236}
-  - component: {fileID: 374650240}
   m_Layer: 0
   m_Name: Portrait 1
   m_TagString: Untagged
@@ -576,21 +575,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &374650240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 374650235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7c872f9baa538b41ab31d754985eac0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doors: []
-  buttons: []
-  correctValues: 00000000010000000000000001000000
 --- !u!1 &489594043
 GameObject:
   m_ObjectHideFlags: 0

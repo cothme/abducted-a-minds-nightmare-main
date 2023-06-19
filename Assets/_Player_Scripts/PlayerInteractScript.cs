@@ -19,6 +19,7 @@ public class PlayerInteractScript : MonoBehaviour
     [SerializeField] Canvas interactCanvas;
     [SerializeField] Image storyImage;
     [SerializeField] Canvas puzzleOneCanvas;
+    [SerializeField] Canvas puzzleTwoCanvas;
     [SerializeField] Canvas storyCanvas;
     [SerializeField] TextMeshProUGUI itemNameUI;
     [SerializeField] TextMeshProUGUI storyText;
@@ -41,7 +42,7 @@ public class PlayerInteractScript : MonoBehaviour
     }
     void Update()
     { 
-        if(puzzleOneCanvas.enabled == true)
+        if(puzzleOneCanvas.enabled == true || puzzleTwoCanvas == true)
         {
             Cursor.lockState = CursorLockMode.None;
         }
