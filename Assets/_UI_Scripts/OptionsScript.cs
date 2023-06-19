@@ -14,7 +14,6 @@ public class OptionsScript : MonoBehaviour
         optionsCanvas.GetComponentInChildren<Slider>().value = 1;
     }
 
-    // Update is called once per frame
     void Update()
     {
         PlayerData.Instance.Volume = optionsCanvas.GetComponentInChildren<Slider>().value;

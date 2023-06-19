@@ -68,6 +68,7 @@ public class PlayerShootingScript : MonoBehaviour
         if(Input.GetMouseButtonDown(0) &&  GunManager.Instance.WeaponEquipped == "Knife" && !isShooting && !PlayerState.Instance.Aiming)
         {
             gameObject.GetComponent<Animator>().Play("Knife Attack 1");
+            AudioManager.Instance.PlaySound(generalSound,"Knife Attack 1");
         }
         if(Input.GetMouseButtonDown(0) && GunManager.Instance.WeaponEquipped == "Knife" && !isShooting)
         {
@@ -116,8 +117,9 @@ public class PlayerShootingScript : MonoBehaviour
     private void KnifeAttack()
     {
         if(PlayerState.Instance.Aiming)
-        {
+        {            
             gameObject.GetComponent<Animator>().Play("Knife Attack 2");
+            AudioManager.Instance.PlaySound(generalSound, "Knife Attack 2");
         }
     }
     IEnumerator ShootRifleCoroutine()
@@ -286,11 +288,13 @@ public class PlayerShootingScript : MonoBehaviour
             {
                 return;
             }
-            // gameObject.GetComponent<Animator>().Play("Use Med Kit");
-            // healthkit.SetActive(true);
-            if(PlayerData.Instance.PlayerHealth <= 50)
+            //gameObject.GetComponent<Animator>().Play("Use Med Kit");
+            //healthkit.SetActive(true);;
+
+            if (PlayerData.Instance.PlayerHealth <= 50)                
             {
-                foreach(InventoryItem i in ItemList.Instance.InventoryItems)
+                AudioManager.Instance.PlaySound(generalSound, "Use Medkit");
+                foreach (InventoryItem i in ItemList.Instance.InventoryItems)
                 {
                     if(i.itemData.name == "Health Kit")
                     {

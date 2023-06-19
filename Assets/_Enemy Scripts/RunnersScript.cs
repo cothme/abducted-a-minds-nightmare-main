@@ -6,7 +6,8 @@ using UnityEngine.AI;
 
 public class RunnersScript : MonoBehaviour
 {
-   // [SerializeField] AudioSource generalSound;
+    [SerializeField] AudioSource attack1Sound;
+    [SerializeField] AudioSource attack2Sound;
     [SerializeField] AudioSource alertSound;
     Animator anim;
     bool animationPlayed = false;
@@ -131,12 +132,14 @@ public class RunnersScript : MonoBehaviour
             attackType = UnityEngine.Random.Range(1,3);
             if(attackType == 1)
             { 
-                anim.Play("Attack 1"); 
+                anim.Play("Attack 1");
+                AudioManager.Instance.PlaySound(alertSound, "Runners Attack 1");
                 attackDelay = 1.80f;
             }
             else 
             { 
-                anim.Play("Attack 2"); 
+                anim.Play("Attack 2");
+                AudioManager.Instance.PlaySound(alertSound, "Runners Attack 2");
                 attackDelay = 3.57f;
             }
             attacked = true;
