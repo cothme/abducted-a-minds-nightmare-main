@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class BrutesScript : MonoBehaviour
 {
+    [SerializeField] AudioSource brutesWalk;
+    [SerializeField] AudioSource brutesAlert;
     Animator anim;
     bool animationPlayed = false;
     bool walking = false;
@@ -37,6 +39,7 @@ public class BrutesScript : MonoBehaviour
         }
         if(transform.position != Vector3.zero && !attacked)
         {
+            brutesWalk.Play();
             walking = true;
             anim.SetBool("Walking",walking);
         }
@@ -162,6 +165,7 @@ public class BrutesScript : MonoBehaviour
         {
             agent.SetDestination(transform.position);
             anim.Play("Alerted");
+            brutesAlert.Play();
         }
             animationPlayed = true;
         yield return new WaitForSeconds(alertTime);
