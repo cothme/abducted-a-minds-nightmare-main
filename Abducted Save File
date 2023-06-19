@@ -5,19 +5,19 @@
   <oxygen>100</oxygen>
   <rotation>
     <x>0</x>
-    <y>-0.08022246</y>
+    <y>-0.008970102</y>
     <z>0</z>
-    <w>0.996777</w>
+    <w>0.999959767</w>
     <eulerAngles>
       <x>0</x>
-      <y>350.7973</y>
+      <y>358.972076</y>
       <z>0</z>
     </eulerAngles>
   </rotation>
   <position>
-    <x>-285.579071</x>
-    <y>12.6493635</y>
-    <z>-13.7007837</z>
+    <x>-286.315277</x>
+    <y>12.6493645</y>
+    <z>-14.2378683</z>
   </position>
   <gemsCollected>0</gemsCollected>
   <bulletsLoaded>0</bulletsLoaded>

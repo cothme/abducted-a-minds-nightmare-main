@@ -13,6 +13,7 @@ public class BrutesScript : MonoBehaviour
     [SerializeField] AudioSource brutesWalk;
     [SerializeField] AudioSource brutesHit;
 
+
     Animator anim;
     bool animationPlayed = false;
     bool walking = false;
@@ -30,6 +31,9 @@ public class BrutesScript : MonoBehaviour
     bool attacked;
     public float sightRange, attackRange;
     public bool playerInSightRange,playerInAttackRange,isFacingObstacle;
+    int ctr;
+    bool knocked;
+    [SerializeField] PlayableDirector levelOneCutscene;
     RaycastHit hit;
     Vector3 direction;
     void Awake()
