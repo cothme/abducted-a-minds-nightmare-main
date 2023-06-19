@@ -74,6 +74,6 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
     }
     public void QuitClicked()
     {
-        
+        Application.Quit();
     }
 }

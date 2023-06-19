@@ -144,9 +144,10 @@ public class BrutesScript : MonoBehaviour
     }
     private void Die()
     {
-        agent.SetDestination(transform.position);
+        agent.SetDestination(gameObject.transform.position);
         anim.Play("Death");
         Destroy(gameObject, deathAnimTime);
+        PlayerState.Instance.LevelOneBossDefeated = true;
     }
     void OnDrawGizmosSelected()
     {

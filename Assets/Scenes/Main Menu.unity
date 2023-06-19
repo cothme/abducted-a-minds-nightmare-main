@@ -3319,7 +3319,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1356522454}
   m_OnClick:
     m_PersistentCalls:
@@ -5014,9 +5014,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1765719017}
-        m_TargetAssemblyTypeName: MainMenuButtonScript, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1765719018}
+        m_TargetAssemblyTypeName: AsyncManager, Assembly-CSharp
+        m_MethodName: QuitClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
