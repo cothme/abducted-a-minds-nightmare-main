@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Brutes Walking
   m_EditorClassIdentifier: 
   clipName: Brutes Walk
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 88bc443d654b0f2459d1cd10b51d5b88, type: 3}
   volume: 0

@@ -6,6 +6,14 @@ using UnityEngine.Playables;
 
 public class BrutesScript : MonoBehaviour
 {
+    [SerializeField] AudioSource brutesAlert;
+    [SerializeField] AudioSource brutesAttack1;
+    [SerializeField] AudioSource brutesAttack2;
+    [SerializeField] AudioSource brutesAttack3;
+    [SerializeField] AudioSource brutesWalk;
+    [SerializeField] AudioSource brutesHit;
+
+
     [SerializeField] PlayableDirector levelOneCutscene;
     int ctr;
     bool knocked;
@@ -26,6 +34,9 @@ public class BrutesScript : MonoBehaviour
     bool attacked;
     public float sightRange, attackRange;
     public bool playerInSightRange,playerInAttackRange,isFacingObstacle;
+    int ctr;
+    bool knocked;
+    [SerializeField] PlayableDirector levelOneCutscene;
     RaycastHit hit;
     Vector3 direction;
     void Awake()
@@ -45,7 +56,7 @@ public class BrutesScript : MonoBehaviour
         }
         if(transform.position != Vector3.zero && !attacked)
         {
-            // brutesWalk.Play();
+            //brutesWalk.Play();
             walking = true;
             anim.SetBool("Walking",walking);
         }
@@ -125,15 +136,18 @@ public class BrutesScript : MonoBehaviour
             {
                 case 1:
                 anim.Play("Attack 1");
-                attackDelay = 4.10f;
+                    brutesAttack1.Play();
+                    attackDelay = 4.10f;
                 break;
                 case 2:
                 anim.Play("Attack 2");
-                attackDelay = 1.70f;
+                    brutesAttack2.Play();
+                    attackDelay = 1.70f;
                 break;
                 case 3:
                 anim.Play("Attack 3");
-                attackDelay = 3.70f;
+                    brutesAttack3.Play();
+                    attackDelay = 3.70f;
                 break;
             }
             attacked = true;
@@ -179,10 +193,10 @@ public class BrutesScript : MonoBehaviour
     {
         if(col.collider.tag == "Bullet")
         {
-            ctr++;
-            anim.Play("Hit 1");
             health -= GunManager.Instance.Damage;
             TakeDamage();
+            //anim.Play("Hit");
+            //brutesHit.Play();
         }
         if(ctr >= 5)
         {
