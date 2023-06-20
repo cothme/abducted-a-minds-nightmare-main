@@ -18,6 +18,7 @@ public class AsyncManager : MonoBehaviour
 
     public void NewGame(string levelToLoad)
     {
+        Time.timeScale = 1;
         PlayerData.Instance.IsSessionSaved = false;
         mainMenu.SetActive(false);
         loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
@@ -61,6 +62,7 @@ public class AsyncManager : MonoBehaviour
     }
     public void goToMainMenu(string levelToLoad)
     {
+            Time.timeScale = 1;
             PlayerData.Instance.Stage = 0;
             PlayerData.Instance.IsSessionSaved = false;
             PlayerData.Instance.PlayerHealth = 50;
@@ -88,6 +90,7 @@ public class AsyncManager : MonoBehaviour
     }
     public void Level1Intro()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Level 1 Intro");
     }
 }

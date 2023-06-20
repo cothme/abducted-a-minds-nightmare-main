@@ -35,7 +35,6 @@ public class MainMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointe
 
         try
         {
-            Debug.Log("Highlight");
             AudioManager.Instance.PlaySound(menuButtonHover, "Button Hover");
             highlightImage.enabled = true;
             text.transform.localPosition = targetPosition;

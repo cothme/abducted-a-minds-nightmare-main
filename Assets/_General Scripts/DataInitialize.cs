@@ -36,6 +36,7 @@ public class DataInitialize : MonoBehaviour
             PlayerData.Instance.IsSessionSaved = dm.isSessionSaved;
             PlayerData.Instance.PlayerHealth = dm.health;
             PlayerData.Instance.PlayerOxygen= dm.oxygen;
+            PlayerData.Instance.PlayerMaxHealth = dm.playerMaxHealth;
             GunManager.Instance.WeaponEquipped = dm.weaponEquipped;
             GunManager.Instance.BulletsLoaded = dm.bulletsLoaded;
             GunManager.Instance.TotalBullets = dm.totalBullets;

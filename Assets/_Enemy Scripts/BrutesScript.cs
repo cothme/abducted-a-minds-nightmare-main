@@ -9,8 +9,6 @@ public class BrutesScript : MonoBehaviour
     [SerializeField] PlayableDirector levelOneCutscene;
     int ctr;
     bool knocked;
-    // [SerializeField] AudioSource brutesWalk;
-    // [SerializeField] AudioSource brutesAlert;
     Animator anim;
     bool animationPlayed = false;
     bool walking = false;

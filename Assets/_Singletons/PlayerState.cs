@@ -15,6 +15,7 @@ public class PlayerState : MonoBehaviour
     private bool isPuzzleOneSolved = false;
     private bool levelOneBossDefeated = false;
     private bool walking;
+    private bool isDead = false;
     public bool Aiming { get => aiming; set => aiming = value; }
     public bool Reloading { get => reloading; set => reloading = value; }
     public bool Running { get => running; set => running = value; }
@@ -25,6 +26,7 @@ public class PlayerState : MonoBehaviour
     public bool LevelOneCageUnlocked { get => levelOneCageUnlocked; set => levelOneCageUnlocked = value; }
     public bool Walking { get => walking; set => walking = value; }
     public bool LevelOneBossDefeated { get => levelOneBossDefeated; set => levelOneBossDefeated = value; }
+    public bool IsDead { get => isDead; set => isDead = value; }
 
     private void Awake()
     {

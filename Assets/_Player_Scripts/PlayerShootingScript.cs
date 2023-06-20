@@ -284,14 +284,14 @@ public class PlayerShootingScript : MonoBehaviour
     {
         if(GunManager.Instance.CanUseHealthKit)
         {
-            if(PlayerData.Instance.PlayerHealth >= 50)
+            if(PlayerData.Instance.PlayerHealth >= PlayerData.Instance.PlayerMaxHealth)
             {
                 return;
             }
             //gameObject.GetComponent<Animator>().Play("Use Med Kit");
             //healthkit.SetActive(true);;
 
-            if (PlayerData.Instance.PlayerHealth <= 50)                
+            if (PlayerData.Instance.PlayerHealth <= PlayerData.Instance.PlayerMaxHealth)                
             {
                 AudioManager.Instance.PlaySound(generalSound, "Use Medkit");
                 foreach (InventoryItem i in ItemList.Instance.InventoryItems)
@@ -306,9 +306,9 @@ public class PlayerShootingScript : MonoBehaviour
                 }
                 PlayerData.Instance.PlayerHealth += 25;
             }
-            else if(PlayerData.Instance.PlayerHealth >= 50)
+            else if(PlayerData.Instance.PlayerHealth >= PlayerData.Instance.PlayerMaxHealth)
             {
-                PlayerData.Instance.PlayerHealth = 50;
+                PlayerData.Instance.PlayerHealth = PlayerData.Instance.PlayerMaxHealth;
             }
         }
     }
