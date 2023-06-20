@@ -480,6 +480,7 @@ MonoBehaviour:
     m_Unicode: 95
     m_GlyphIndex: 66
     m_Scale: 1
+<<<<<<< Updated upstream
   - m_ElementType: 1
     m_Unicode: 74
     m_GlyphIndex: 45
@@ -768,6 +769,8 @@ MonoBehaviour:
     m_Unicode: 8211
     m_GlyphIndex: 2014
     m_Scale: 1
+=======
+>>>>>>> Stashed changes
   m_AtlasTextures:
   - {fileID: 28268798066460806}
   m_AtlasTextureIndex: 0
@@ -782,8 +785,18 @@ MonoBehaviour:
     m_Y: 0
     m_Width: 70
     m_Height: 25
+  m_FreeGlyphRects:
+  - m_X: 0
+    m_Y: 28
+    m_Width: 511
+    m_Height: 483
+  - m_X: 83
+    m_Y: 25
+    m_Width: 428
+    m_Height: 486
   - m_X: 153
     m_Y: 0
+<<<<<<< Updated upstream
     m_Width: 55
     m_Height: 79
   - m_X: 83
@@ -1203,6 +1216,10 @@ MonoBehaviour:
     m_Y: 472
     m_Width: 4
     m_Height: 39
+=======
+    m_Width: 358
+    m_Height: 511
+>>>>>>> Stashed changes
   m_fontInfo:
     Name: Liberation Sans
     PointSize: 86
@@ -1234,6 +1251,7 @@ MonoBehaviour:
   m_KerningTable:
     kerningPairs: []
   m_FontFeatureTable:
+<<<<<<< Updated upstream
     m_GlyphPairAdjustmentRecords:
     - m_FirstAdjustmentRecord:
         m_GlyphIndex: 85
@@ -2645,6 +2663,9 @@ MonoBehaviour:
           m_XAdvance: 0
           m_YAdvance: 0
       m_FeatureLookupFlags: 0
+=======
+    m_GlyphPairAdjustmentRecords: []
+>>>>>>> Stashed changes
   fallbackFontAssets: []
   m_FallbackFontAssetTable: []
   m_CreationSettings:
