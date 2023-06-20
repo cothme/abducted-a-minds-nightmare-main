@@ -22,6 +22,7 @@ TagManager:
   - StoryItem
   - Bag
   - AlexBag
+  - Fog
   layers:
   - Default
   - TransparentFX
@@ -32,29 +33,29 @@ TagManager:
   - Post Processing
   - Ground
   - Player
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0

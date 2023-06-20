@@ -12,8 +12,12 @@ public class PlayerCollisions : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] Slider healthSlider;
+    [SerializeField] Slider oxygenSlider;
+    [SerializeField] GameObject oxygenIcon;
     [SerializeField] Canvas deathCanvas;
-    [SerializeField] Canvas mainCanvas;
+    [SerializeField] public Canvas mainCanvas;
+    Coroutine damageCoroutine;
+    private bool isDamaging = false;
     private void OnCollisionEnter(Collision col)
     {
         if(col.collider.tag == "Attack")
@@ -34,16 +38,30 @@ public class PlayerCollisions : MonoBehaviour
             }
         }    
     }
-    void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter(Collider col)
     {
-        if(col.tag == "AudioCue")
+        if (col.tag == "Fog")
         {
-            
+            if (!isDamaging)
+            {
+                damageCoroutine = StartCoroutine(StartDamageCoroutine());
+            }
+        }
+    }
+    void OnTriggerExit(Collider col)
+    {
+        if(col.tag == "Fog")
+        {
+            if(isDamaging)
+            {
+                StopCoroutine(damageCoroutine);
+                isDamaging = false;
+            }
         }
     }
     private void Update()
     {
-        healthText.text = PlayerData.Instance.PlayerHealth.ToString();
+        oxygenSlider.value = PlayerData.Instance.PlayerOxygen;
         healthSlider.maxValue = PlayerData.Instance.PlayerMaxHealth;
         healthSlider.value = PlayerData.Instance.PlayerHealth;
         if(PlayerData.Instance.PlayerHealth <= 0 && PlayerState.Instance.IsDead == false)
@@ -57,6 +75,18 @@ public class PlayerCollisions : MonoBehaviour
             mainCanvas.enabled = false;
             deathCanvas.enabled = true;   
             PlayerState.Instance.IsDead = true;
+        }
+        if(gameObject.GetComponent<PlayerShootingScript>().mask.activeInHierarchy)
+        {
+            oxygenSlider.gameObject.SetActive(true);
+            oxygenIcon.SetActive(true);
+            oxygenSlider.value = PlayerData.Instance.PlayerOxygen;
+        }
+        else
+        {
+            oxygenSlider.enabled = false;
+            oxygenIcon.SetActive(false);
+            oxygenSlider.value = PlayerData.Instance.PlayerOxygen;
         }
     }
     public void RespawnClicked()
@@ -76,5 +106,47 @@ public class PlayerCollisions : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         deathCanvas.enabled = false;
         mainCanvas.enabled = true;
+    }
+    private void ApplyDamageToPlayer()
+    {
+        // Replace this with your own logic to apply damage to the player
+        // For example:
+        // PlayerHealthScript playerHealth = player.GetComponent<PlayerHealthScript>();
+        // playerHealth.TakeDamage(damageAmount);
+        if(gameObject.GetComponent<PlayerShootingScript>().mask.activeInHierarchy)
+        {
+            if(PlayerData.Instance.PlayerOxygen >= 0)
+            {
+                ReduceOxygen();
+            }
+            else
+            {
+                ReduceHealth();
+            }
+        }
+        else
+        {
+            ReduceHealth();
+        }
+        Debug.Log("Player takes damage: " + 5);
+    }
+    private IEnumerator StartDamageCoroutine()
+    {
+        isDamaging = true;
+        while (true)
+        {
+            ApplyDamageToPlayer();
+            yield return new WaitForSeconds(2);
+        }
+    }
+    void ReduceHealth()
+    {
+        PlayerData.Instance.PlayerHealth -= 5f;
+        healthSlider.value = PlayerData.Instance.PlayerHealth;
+    }
+    void ReduceOxygen()
+    {
+        PlayerData.Instance.PlayerOxygen -= 5f;
+        oxygenSlider.value = PlayerData.Instance.PlayerOxygen;
     }
 }

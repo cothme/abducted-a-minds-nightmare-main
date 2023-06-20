@@ -13,7 +13,8 @@ public class PlayerShootingScript : MonoBehaviour
     [SerializeField] GameObject knife;
     [SerializeField] GameObject healthkit;
     [SerializeField] GameObject oxygenkit;
-    [SerializeField] GameObject mask;
+    [SerializeField] public GameObject mask;
+    [SerializeField] GameObject flashlight;
     [SerializeField] GameObject[] gunImages; 
     [SerializeField] GameObject bulletPreFab;
     [SerializeField] Transform bulletTransform;
@@ -25,7 +26,9 @@ public class PlayerShootingScript : MonoBehaviour
     InventoryController inventoryController;
     WeaponRecoil recoil;
     bool maskEquipped = false;
+    bool flashLightOn = false;
     public bool isShooting = false;
+    int flashLightNumber = 0;
     void Update()
     {
         totalBulletsCountText.text = GunManager.Instance.TotalBullets.ToString();
@@ -81,6 +84,14 @@ public class PlayerShootingScript : MonoBehaviour
         if(ControlsManager.Instance.IsReloadButtonDown)
         {
             Reload();
+        }
+        if(ControlsManager.Instance.IsFlashlightButtonDown)
+        {
+            ToggleFlashlight();
+        }
+        if(ControlsManager.Instance.IsOxygenKitUseButtonDown)
+        {
+            RefillOxygen();
         }
     }
     void Start()
@@ -280,6 +291,35 @@ public class PlayerShootingScript : MonoBehaviour
             mask.SetActive(false);  
         }
     }
+    private void RefillOxygen()
+    {
+        if(GunManager.Instance.CanUseOxygenKit)
+        {
+            if(PlayerData.Instance.PlayerOxygen >= PlayerData.Instance.PlayerMaxOxygen)
+            {
+                return;
+            }
+            if (PlayerData.Instance.PlayerOxygen <= PlayerData.Instance.PlayerMaxOxygen)                
+            {
+                AudioManager.Instance.PlaySound(generalSound, "Use Medkit");
+                foreach (InventoryItem i in ItemList.Instance.InventoryItems)
+                {
+                    if(i.itemData.name == "Oxygen_Kit")
+                    {
+                        ItemList.Instance.InventoryItems.Remove(i);
+                        inventoryController.selectedItem = i;
+                        inventoryController.DeleteItem(inventoryController.selectedItem);
+                        break;
+                    }
+                }
+                PlayerData.Instance.PlayerOxygen += 25;
+            }
+            else if(PlayerData.Instance.PlayerOxygen >= PlayerData.Instance.PlayerMaxOxygen)
+            {
+                PlayerData.Instance.PlayerOxygen = PlayerData.Instance.PlayerMaxOxygen;
+            }
+        }
+    }
     private void Heal()
     {
         if(GunManager.Instance.CanUseHealthKit)
@@ -309,6 +349,32 @@ public class PlayerShootingScript : MonoBehaviour
             else if(PlayerData.Instance.PlayerHealth >= PlayerData.Instance.PlayerMaxHealth)
             {
                 PlayerData.Instance.PlayerHealth = PlayerData.Instance.PlayerMaxHealth;
+            }
+        }
+    }
+    private void ToggleFlashlight()
+    {
+        if(GunManager.Instance.CanUseFlashlight)
+        {
+            Debug.Log(flashLightNumber + " " + GunManager.Instance.CanUseFlashlight);
+            flashLightNumber++;
+            flashLightOn = !flashLightOn;
+            if(flashLightNumber == 1 && flashLightOn)
+            {
+                flashlight.SetActive(true);
+                flashlight.GetComponent<Light>().color = Color.white;
+            }
+            else if(flashLightNumber == 2)
+            {
+                flashlight.SetActive(true);
+                flashlight.GetComponent<Light>().color = Color.magenta;
+            }
+            else if(flashLightNumber == 3)
+            {
+                flashLightOn = !flashLightOn;
+                flashlight.SetActive(false);
+                flashLightNumber = 0;
+                flashlight.GetComponent<Light>().color = Color.white;
             }
         }
     }

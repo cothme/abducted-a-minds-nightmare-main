@@ -10,7 +10,8 @@ public class PlayerData : MonoBehaviour
     Quaternion playerRotation;
     float playerMaxHealth = 50f;
     float playerHealth = 25f;
-    float playerOxygen = 100f;
+    float playerOxygen = 25f;
+    float playerMaxOxygen = 50f;
     float gemsCollected = 0f;
     float volume;
     float stage;
@@ -25,6 +26,7 @@ public class PlayerData : MonoBehaviour
     public bool IsSessionSaved { get => isSessionSaved; set => isSessionSaved = value; }
     public float Volume { get => volume; set => volume = value; }
     public float PlayerMaxHealth { get => playerMaxHealth; set => playerMaxHealth = value; }
+    public float PlayerMaxOxygen { get => playerMaxOxygen; set => playerMaxOxygen = value; }
 
     void Update()
     {

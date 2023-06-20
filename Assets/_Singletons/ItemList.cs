@@ -44,6 +44,12 @@ public class ItemList : MonoBehaviour
             case "Keycard":
             itemList.Add(8);
             break;
+            case "Flashlight":
+            itemList.Add(9);
+            break;
+            case "UV Flashlight":
+            itemList.Add(10);
+            break;
         }
     }
     public void AddItem(int id)
@@ -76,6 +82,12 @@ public class ItemList : MonoBehaviour
             break;
             case 8:
             itemList.Add(8);
+            break;
+            case 9:
+            itemList.Add(9);
+            break;
+            case 10:
+            itemList.Add(10);
             break;
         }
     }
@@ -119,6 +131,14 @@ public class ItemList : MonoBehaviour
             break;
             case "Keycard":
             itemList.Remove(8);
+            InventoryItems.Remove(inventoryController.selectedItem);
+            break;
+            case "Flashlight":
+            itemList.Remove(9);
+            InventoryItems.Remove(inventoryController.selectedItem);
+            break;
+            case "UV Flashlight":
+            itemList.Remove(10);
             InventoryItems.Remove(inventoryController.selectedItem);
             break;
             default:

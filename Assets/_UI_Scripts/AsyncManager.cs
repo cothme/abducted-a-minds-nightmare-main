@@ -84,6 +84,12 @@ public class AsyncManager : MonoBehaviour
             loadingScreen.SetActive(true);
             StartCoroutine(LoadLevelAsync(levelToLoad));
     }
+    public void LoadLevelTwo(string levelToLoad)
+    {
+        loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
+        loadingScreen.SetActive(true);
+        StartCoroutine(LoadLevelAsync(levelToLoad));
+    }
     public void QuitClicked()
     {
         Application.Quit();

@@ -10,12 +10,16 @@ using System;
 using System.Xml.Serialization;
 using System.IO;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerInteractScript : MonoBehaviour
 {
+    [SerializeField] GameObject normalCamera;
+    [SerializeField] GameObject aimCamera;
+    [SerializeField] Canvas mainCanvas;
     [SerializeField] GameObject bag;
     [SerializeField] PlayableDirector doorUnlockedPlayableDirector;
-    [SerializeField] PlayableDirector brutesAppear;
+    [SerializeField] PlayableDirector bossAppear;
     [SerializeField] Canvas interactCanvas;
     [SerializeField] Image storyImage;
     [SerializeField] Canvas puzzleOneCanvas;
@@ -42,7 +46,7 @@ public class PlayerInteractScript : MonoBehaviour
     }
     void Update()
     { 
-        if(puzzleOneCanvas.enabled == true || puzzleTwoCanvas == true)
+        if(puzzleOneCanvas.enabled == true || puzzleTwoCanvas.enabled == true)
         {
             Cursor.lockState = CursorLockMode.None;
         }
@@ -163,7 +167,18 @@ public class PlayerInteractScript : MonoBehaviour
         if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Puzzle")
         {
             DisableScripts(true);
-            puzzleOneCanvas.enabled = true;
+            if(SceneManager.GetActiveScene().name == "level 1")
+            {
+                puzzleOneCanvas.enabled = true;
+            }
+            else if(SceneManager.GetActiveScene().name == "level 2")
+            {
+                Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+                puzzleTwoCanvas.enabled = true;
+                normalCamera.SetActive(false);
+                aimCamera.SetActive(false);
+                mainCanvas.enabled = false;
+            }
         } 
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Door")
         {   
@@ -266,11 +281,19 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "BossInitiate")
         {
-            brutesAppear.Play();
+            bossAppear.Play();
         }
     }
     public void ExitStoryText()
     {
+        DisableScripts(false);
+    }
+    public void ExitPuzzle2()
+    {
+        Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+        normalCamera.SetActive(true);
+        aimCamera.SetActive(true);
+        mainCanvas.enabled = true;
         DisableScripts(false);
     }
     public void ExitPuzzle()
