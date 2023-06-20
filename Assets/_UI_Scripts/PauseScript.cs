@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PauseScript : MonoBehaviour
 {
-    [SerializeField] Canvas levelOneCompleteCanvas;
     [SerializeField] AudioSource settingsOpen;
     [SerializeField] GameObject player;
     bool paused = false;
