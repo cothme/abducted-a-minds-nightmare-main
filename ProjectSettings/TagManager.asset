@@ -23,6 +23,7 @@ TagManager:
   - Bag
   - AlexBag
   - Fog
+  - Button
   layers:
   - Default
   - TransparentFX

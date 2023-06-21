@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Door_Puzzle : MonoBehaviour
 {
+    public GameObject gameWonPanel;
+    [SerializeField] GameObject keyCard;
+    [SerializeField] GameObject puzzleObject;
     [SerializeField] List<Transform> doors;
     [SerializeField] List<Button> buttons;
     public int[] correctValues = new int[] {0,1,1,0};
@@ -35,7 +38,10 @@ public class Door_Puzzle : MonoBehaviour
         enableButtons(buttons);
         if(CheckWinCondition())
         {
-            Debug.Log("WIN");
+            gameWonPanel.SetActive(true);
+            keyCard.SetActive(true);
+            PlayerState.Instance.IsPuzzleTwoSolved = true;
+            Destroy(puzzleObject);
         }
     }
     void disableButtons(List<Button> buttons)
