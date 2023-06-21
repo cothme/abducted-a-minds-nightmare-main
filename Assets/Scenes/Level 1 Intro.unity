@@ -638,8 +638,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035935018}
-  m_LocalRotation: {x: -1.7175609e-30, y: 0.9469948, z: 1.2919427e-29, w: -0.32124895}
-  m_LocalPosition: {x: 169.7136, y: 103, z: 141.13094}
+  m_LocalRotation: {x: -1.7563614e-15, y: 0.14962009, z: 2.6577866e-16, w: 0.9887436}
+  m_LocalPosition: {x: 170.77336, y: 55.89805, z: 103.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 837914829}
@@ -1032,7 +1032,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126677004}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: -0.32124895}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 174.5243, y: 55.89805, z: 111.68475}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1153,7 +1153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268676226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 174.52426, y: 55.99, z: 115.124756}
+  m_LocalPosition: {x: 174.5243, y: 55.89805, z: 111.68475}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1496892461}
@@ -2326,7 +2326,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
