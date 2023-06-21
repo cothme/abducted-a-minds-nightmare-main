@@ -251,11 +251,12 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "SavePoint")
         {
+            PlayerData.Instance.IsSessionSaved = true;
             PlayerData.Instance.PlayerPosition = this.gameObject.transform.position;
             PlayerData.Instance.PlayerRotation = this.gameObject.transform.rotation;
             DataMembers dm = new DataMembers();
             dm.level = PlayerData.Instance.Stage;
-            dm.isSessionSaved = true;
+            dm.isSessionSaved = PlayerData.Instance.IsSessionSaved;
             dm.health = PlayerData.Instance.PlayerHealth;
             dm.oxygen = PlayerData.Instance.PlayerOxygen;
             dm.position = PlayerData.Instance.PlayerPosition;

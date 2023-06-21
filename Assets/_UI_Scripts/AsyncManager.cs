@@ -86,6 +86,23 @@ public class AsyncManager : MonoBehaviour
     }
     public void LoadLevelTwo(string levelToLoad)
     {
+        PlayerData.Instance.IsSessionSaved = true;
+        PlayerData.Instance.PlayerPosition = this.gameObject.transform.position;
+        PlayerData.Instance.PlayerRotation = this.gameObject.transform.rotation;
+        DataMembers dm = new DataMembers();
+        dm.level = PlayerData.Instance.Stage;
+        dm.isSessionSaved = PlayerData.Instance.IsSessionSaved;
+        dm.health = PlayerData.Instance.PlayerHealth;
+        dm.oxygen = PlayerData.Instance.PlayerOxygen;
+        dm.weaponEquipped = GunManager.Instance.WeaponEquipped;
+        dm.itemList = ItemList.Instance.Itemlist;
+        dm.isPuzzleOneSolved = PlayerState.Instance.IsPuzzleOneSolved;
+        dm.levelOneDoorUnlocked = PlayerState.Instance.LevelOneDoorUnlocked;
+        dm.levelOneCageUnlocked = PlayerState.Instance.LevelOneCageUnlocked;
+        XmlSerializer saveData = new XmlSerializer(typeof(DataMembers));
+        StreamWriter sw = new StreamWriter("Abducted Save File");
+        saveData.Serialize(sw,dm);
+        sw.Close();
         loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
         loadingScreen.SetActive(true);
         StartCoroutine(LoadLevelAsync(levelToLoad));
