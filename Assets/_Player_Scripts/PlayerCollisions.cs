@@ -101,18 +101,21 @@ public class PlayerCollisions : MonoBehaviour
         XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
         StreamReader sr = new StreamReader("Abducted Save File");
         DataMembers dm = (DataMembers)loadData.Deserialize(sr);
-        this.gameObject.transform.position = dm.position;
-        this.gameObject.transform.rotation = dm.rotation;
+        if(PlayerData.Instance.Stage == 1)
+        {
+            
+        }
+        else if(PlayerData.Instance.Stage == 2)
+        {
+            this.gameObject.transform.position = new Vector3(74.0699997f,61.7700005f,-1026.83997f);
+            this.gameObject.transform.rotation = new Quaternion(0,0.707106829f,0f,0.707106829f);
+        }
         Cursor.lockState = CursorLockMode.Locked;
         deathCanvas.enabled = false;
         mainCanvas.enabled = true;
     }
     private void ApplyDamageToPlayer()
     {
-        // Replace this with your own logic to apply damage to the player
-        // For example:
-        // PlayerHealthScript playerHealth = player.GetComponent<PlayerHealthScript>();
-        // playerHealth.TakeDamage(damageAmount);
         if(gameObject.GetComponent<PlayerShootingScript>().mask.activeInHierarchy)
         {
             if(PlayerData.Instance.PlayerOxygen >= 0)
@@ -128,7 +131,6 @@ public class PlayerCollisions : MonoBehaviour
         {
             ReduceHealth();
         }
-        Debug.Log("Player takes damage: " + 5);
     }
     private IEnumerator StartDamageCoroutine()
     {

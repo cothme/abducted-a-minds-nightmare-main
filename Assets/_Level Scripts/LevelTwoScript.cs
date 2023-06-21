@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelTwoScript : MonoBehaviour
 {
+    [SerializeField] public GameObject bossCage;
+    [SerializeField] public GameObject doorPuzzle;
     [SerializeField] AudioSource soundToPlay;
     private void OnTriggerEnter(Collider other)
     {
@@ -11,6 +13,13 @@ public class LevelTwoScript : MonoBehaviour
         {
             soundToPlay.Play();
             gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
+    }
+    private void Update()
+    {
+        if(PlayerState.Instance.LevelTwoCageUnlocked)
+        {
+            Destroy(bossCage);
         }
     }
 }

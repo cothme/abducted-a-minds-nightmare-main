@@ -15,7 +15,7 @@ public class PlayerData : MonoBehaviour
     float gemsCollected = 0f;
     float volume;
     float stage;
-    bool isSessionSaved;
+    bool isSessionSaved = false;
     public static PlayerData Instance { get { return instance; } }
     public float PlayerHealth { get => playerHealth; set => playerHealth = value; }
     public float PlayerOxygen { get => playerOxygen; set => playerOxygen = value; }
@@ -32,7 +32,7 @@ public class PlayerData : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log(PlayerData.Instance.PlayerPosition);
+            Debug.Log(PlayerData.Instance.Stage);
         }
         Stage = Level();
     }
@@ -40,13 +40,13 @@ public class PlayerData : MonoBehaviour
     {
         switch(SceneManager.GetActiveScene().name)
         {
-            case "Level 1":
+            case "level 1":
             return 1;
-            case "Level 2":
+            case "level 2":
             return 2;
-            case "Level 3":
+            case "level 3":
             return 3;
-            case "Level 4":
+            case "level 4":
             return 4;
             default:
             return 0;

@@ -128,6 +128,12 @@ public class PlayerInteractScript : MonoBehaviour
                 interactCanvas.enabled = true;
                 Interact(hit.collider.gameObject,"BossInitiate");
             }
+            else if(hit.collider.tag == "Button")
+            {
+                itemNameUI.text = "Press E to press button";
+                interactCanvas.enabled = true;
+                Interact(hit.collider.gameObject,"Button");
+            }
             else if(lastLookedObject is null)
             {
                 return;
@@ -173,11 +179,7 @@ public class PlayerInteractScript : MonoBehaviour
             }
             else if(SceneManager.GetActiveScene().name == "level 2")
             {
-                Camera.main.GetComponent<CinemachineBrain>().enabled = true;
                 puzzleTwoCanvas.enabled = true;
-                normalCamera.SetActive(false);
-                aimCamera.SetActive(false);
-                mainCanvas.enabled = false;
             }
         } 
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Door")
@@ -236,18 +238,36 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Reader")
         {  
-            PlayerState.Instance.LevelOneDoorUnlocked = true;
-            doorUnlockedPlayableDirector.Play();
-            foreach(InventoryItem i in ItemList.Instance.InventoryItems)
+            if(SceneManager.GetActiveScene().name == "level 1")
             {
-                 if(i.itemData.name == "KeyCard")
-                 {
-                    inventoryController.selectedItem = i;
-                    inventoryController.DeleteItem(inventoryController.selectedItem);
-                    break;
-                 }
+                PlayerState.Instance.LevelOneDoorUnlocked = true;
+                doorUnlockedPlayableDirector.Play();
+                foreach(InventoryItem i in ItemList.Instance.InventoryItems)
+                {
+                        if(i.itemData.name == "KeyCard")
+                        {
+                        inventoryController.selectedItem = i;
+                        inventoryController.DeleteItem(inventoryController.selectedItem);
+                        break;
+                        }
+                }
+                ItemList.Instance.DropItem("Keycard");
             }
-            ItemList.Instance.DropItem("Keycard");
+            else if(SceneManager.GetActiveScene().name == "level 2")
+            {
+                PlayerState.Instance.LevelTwoDoorUnlocked = true;
+                doorUnlockedPlayableDirector.Play();
+                foreach(InventoryItem i in ItemList.Instance.InventoryItems)
+                {
+                        if(i.itemData.name == "KeyCard")
+                        {
+                        inventoryController.selectedItem = i;
+                        inventoryController.DeleteItem(inventoryController.selectedItem);
+                        break;
+                        }
+                }
+                ItemList.Instance.DropItem("Keycard");
+            }
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "SavePoint")
         {
@@ -282,7 +302,25 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "BossInitiate")
         {
-            bossAppear.Play();
+            if(PlayerData.Instance.Stage == 1)
+            {
+                bossAppear.Play();
+                PlayerState.Instance.LevelOneCageUnlocked = true;
+            }
+            if(PlayerData.Instance.Stage == 2)
+            {
+                // bossAppear.Play();
+                PlayerState.Instance.LevelTwoCageUnlocked = true;
+            }
+            
+        }
+        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Button")
+        {
+            if(SceneManager.GetActiveScene().name == "level 2")
+            {
+                gameObject.GetComponent<LevelTwoScript>().doorPuzzle.SetActive(false);
+                gameObject.GetComponent<DialogueScript>().showText(gameObject.GetComponent<DialogueScript>().subtitle,gameObject.GetComponent<DialogueScript>().deletionTime);
+            }
         }
     }
     public void ExitStoryText()
@@ -291,10 +329,6 @@ public class PlayerInteractScript : MonoBehaviour
     }
     public void ExitPuzzle2()
     {
-        Camera.main.GetComponent<CinemachineBrain>().enabled = true;
-        normalCamera.SetActive(true);
-        aimCamera.SetActive(true);
-        mainCanvas.enabled = true;
         DisableScripts(false);
     }
     public void ExitPuzzle()

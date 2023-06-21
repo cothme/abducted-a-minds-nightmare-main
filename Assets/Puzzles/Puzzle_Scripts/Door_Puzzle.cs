@@ -9,7 +9,7 @@ public class Door_Puzzle : MonoBehaviour
     public GameObject gameWonPanel;
     [SerializeField] GameObject keyCard;
     [SerializeField] GameObject puzzleObject;
-    [SerializeField] List<Transform> doors;
+    [SerializeField] List<GameObject> doors;
     [SerializeField] List<Button> buttons;
     public int[] correctValues = new int[] {0,1,1,0};
     int[] playerValues = new int[] {0,0,0,0};
@@ -20,10 +20,12 @@ public class Door_Puzzle : MonoBehaviour
         if(!doorFlipped[doorIndex])
         {
             doorFlipped[doorIndex] = true;
+            doors[doorIndex].GetComponent<Image>().color = Color.HSVToRGB(254,84,84);
         }
         else
         {
             doorFlipped[doorIndex] = false;
+            doors[doorIndex].GetComponent<Image>().color = Color.white;
         }
         Quaternion startRotate = doors[doorIndex].transform.rotation;
         Quaternion endRotate = doors[doorIndex].transform.rotation * Quaternion.Euler(0,180,0);

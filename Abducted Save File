@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DataMembers xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <level>0</level>
+  <level>1</level>
   <health>25</health>
   <oxygen>25</oxygen>
   <rotation>
     <x>0</x>
-    <y>0</y>
+    <y>0.7071068</y>
     <z>0</z>
-    <w>0</w>
+    <w>0.7071068</w>
     <eulerAngles>
       <x>-0</x>
-      <y>0</y>
+      <y>90</y>
       <z>0</z>
     </eulerAngles>
   </rotation>
   <position>
-    <x>0</x>
-    <y>0</y>
-    <z>0</z>
+    <x>74.07</x>
+    <y>61.77</y>
+    <z>-1026.84</z>
   </position>
   <weaponEquipped>Pistol</weaponEquipped>
   <gemsCollected>0</gemsCollected>
