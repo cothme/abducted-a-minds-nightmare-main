@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Cinemachine;
 using UnityEngine.InputSystem;
 
 public class PlayerShootingScript : MonoBehaviour
@@ -417,17 +418,22 @@ public class PlayerShootingScript : MonoBehaviour
             rifle.SetActive(true);
             gunImages[0].SetActive(true);
         }
-        else if(GunManager.Instance.WeaponEquipped == "Shotgun")
+        if(GunManager.Instance.WeaponEquipped == "Shotgun")
         {
             shotgun.SetActive(true);
             gunImages[1].SetActive(true);
         }
-        else if(GunManager.Instance.WeaponEquipped == "Pistol")
+        if(GunManager.Instance.WeaponEquipped == "Pistol")
         {
             pistol.SetActive(true);
             gunImages[2].SetActive(true);
         }
-        else if(GunManager.Instance.WeaponEquipped == "Knife")
+        else
+        {
+            pistol.SetActive(false);
+            gunImages[2].SetActive(false);
+        }
+        if(GunManager.Instance.WeaponEquipped == "Knife")
         {
             knife.SetActive(true);
             gunImages[3].SetActive(true);

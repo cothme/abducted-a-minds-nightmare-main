@@ -5,21 +5,20 @@
   <oxygen>25</oxygen>
   <rotation>
     <x>0</x>
-    <y>0.7071068</y>
+    <y>-0.0193093941</y>
     <z>0</z>
-    <w>0.7071068</w>
+    <w>0.999813557</w>
     <eulerAngles>
-      <x>-0</x>
-      <y>90</y>
+      <x>0</x>
+      <y>357.78717</y>
       <z>0</z>
     </eulerAngles>
   </rotation>
   <position>
-    <x>74.07</x>
-    <y>61.77</y>
-    <z>-1026.84</z>
+    <x>-285.476959</x>
+    <y>12.6493635</y>
+    <z>-14.097105</z>
   </position>
-  <weaponEquipped>Pistol</weaponEquipped>
   <gemsCollected>0</gemsCollected>
   <bulletsLoaded>5</bulletsLoaded>
   <totalBullets>49</totalBullets>
@@ -35,14 +34,6 @@
   <canEquipKnife>false</canEquipKnife>
   <canEquipRifle>false</canEquipRifle>
   <paused>false</paused>
-  <itemList>
-    <int>0</int>
-    <int>0</int>
-    <int>7</int>
-    <int>7</int>
-    <int>2</int>
-    <int>5</int>
-    <int>0</int>
-  </itemList>
+  <itemList />
   <playerMaxHealth>0</playerMaxHealth>
 </DataMembers>

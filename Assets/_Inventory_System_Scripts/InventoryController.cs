@@ -12,7 +12,6 @@ public class InventoryController : MonoBehaviour
     [SerializeField] Transform canvasTransform;
     [SerializeField] InputActionReference inControl;
     [SerializeField] InputActionReference mouseLeftClick;
-    [SerializeField] AudioSource generalSound;
     [HideInInspector] private ItemGrid selectedItemGrid;
     public ItemGrid SelectedItemGrid { get => selectedItemGrid; 
             set {
@@ -92,7 +91,7 @@ public class InventoryController : MonoBehaviour
         if (selectedItem == item)
         {
             selectedItem = null;
-            inventoryHighlight.Show(false);
+            // inventoryHighlight.Show(false);
             Destroy(item.gameObject);
         }
     }
@@ -207,7 +206,6 @@ public class InventoryController : MonoBehaviour
 
     public void PlaceItem(Vector2Int tileGridPosition)
     {
-        AudioManager.Instance.PlaySound(generalSound,"Inv Select");
         if(selectedItem == null)
         {
             return;
@@ -228,7 +226,6 @@ public class InventoryController : MonoBehaviour
 
     private void PickUpItem(Vector2Int tileGridPosition)
     {
-        AudioManager.Instance.PlaySound(generalSound,"Inv Select");
         selectedItem = selectedItemGrid.PickupItem(tileGridPosition.x, tileGridPosition.y);
         if(selectedItem != null)
         {

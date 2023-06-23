@@ -18,7 +18,7 @@ public class PlayerInventory : MonoBehaviour
     bool inventoryOpen = false;
     private void Awake()
     {
-        inventoryController = FindObjectOfType(typeof(InventoryController)) as  InventoryController;
+        inventoryController = Camera.main.GetComponent<InventoryController>();
     }
     void Start()
     {
@@ -68,14 +68,14 @@ public class PlayerInventory : MonoBehaviour
     }
     void DropItem()
     {   
-        try
-        {
+        // try
+        // {
             GunManager.Instance.CheckForWeapon();
             ItemList.Instance.DropItem(inventoryController.selectedItem.itemData.name);  
             inventoryController.DeleteItem(inventoryController.selectedItem);
-        }catch(NullReferenceException)
-        {
-            return;
-        }             
+        // }catch(NullReferenceException)
+        // {
+        //     Debug.Log("error");
+        // }             
     }
 }

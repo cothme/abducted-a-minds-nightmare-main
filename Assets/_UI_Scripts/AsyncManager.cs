@@ -41,7 +41,7 @@ public class AsyncManager : MonoBehaviour
         loadingScreen.SetActive(true);
         if(PlayerData.Instance.Stage == 1)
         {
-            
+            StartCoroutine(LoadLevelAsync("level 1"));
         }
         if(PlayerData.Instance.Stage == 2)
         {

@@ -189,8 +189,10 @@ public class BrutesEnemyNormal : MonoBehaviour
         {
             health -= GunManager.Instance.Damage;
             TakeDamage();
+            agent.SetDestination(playerTransform.position);
             //anim.Play("Hit");
             //brutesHit.Play();
+            ctr++;
         }
         if(ctr >= 5)
         {
