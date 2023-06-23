@@ -18,7 +18,7 @@ public class PlayerInteractScript : MonoBehaviour
     [SerializeField] GameObject normalCamera;
     [SerializeField] GameObject aimCamera;
     [SerializeField] Canvas mainCanvas;
-    [SerializeField] GameObject bag;
+    //[SerializeField] GameObject bag;
     [SerializeField] PlayableDirector doorUnlockedPlayableDirector;
     [SerializeField] PlayableDirector bossAppear;
     [SerializeField] Canvas interactCanvas;
