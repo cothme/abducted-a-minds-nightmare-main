@@ -130,6 +130,6 @@ public class AsyncManager : MonoBehaviour
     public void Level1Intro()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("level 1");
+        SceneManager.LoadScene("Level 1 Intro");
     }
 }

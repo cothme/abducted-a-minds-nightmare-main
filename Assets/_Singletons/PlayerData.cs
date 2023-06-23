@@ -32,10 +32,15 @@ public class PlayerData : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            foreach(InventoryItem i in ItemList.Instance.InventoryItems)
-            {
-                Debug.Log(ItemList.Instance.InventoryItems.Count);
-            }
+            // Debug.Log("Inventory Items: "  + ItemList.Instance.InventoryItems.Count);
+            // Debug.Log("Item List: "  + ItemList.Instance.Itemlist.Count);
+            // Debug.Log("Can fire: " + GunManager.Instance.WeaponEquipped);
+            // Debug.Log("Can equip pistol: " + GunManager.Instance.CanEquipPistol);
+            // foreach(int i in ItemList.Instance.Itemlist)
+            // {
+            //     Debug.Log(i);
+            // }
+            Debug.Log(PlayerState.Instance.Aiming);
         }
         Stage = Level();
     }

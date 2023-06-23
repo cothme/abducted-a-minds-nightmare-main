@@ -16,6 +16,7 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetBool("PistolEquipped", GunManager.Instance.WeaponEquipped == "Pistol");
         anim.SetBool("RifleEquipped", GunManager.Instance.WeaponEquipped == "Rifle");
         anim.SetBool("ShotgunEquipped", GunManager.Instance.WeaponEquipped == "Shotgun");
+        anim.SetBool("No Weapon", GunManager.Instance.WeaponEquipped == null);
         anim.SetFloat("WalkFB",PlayerState.Instance.MovingZ);
         anim.SetFloat("WalkSR",PlayerState.Instance.MovingX);
         anim.SetBool("Aiming",PlayerState.Instance.Aiming);

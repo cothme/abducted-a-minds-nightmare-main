@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DataMembers xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <level>2</level>
+  <level>1</level>
   <health>25</health>
   <oxygen>25</oxygen>
   <rotation>
     <x>0</x>
-    <y>-0.777211</y>
+    <y>-0.0193093941</y>
     <z>0</z>
-    <w>0.629240036</w>
+    <w>0.999813557</w>
     <eulerAngles>
       <x>0</x>
-      <y>257.988159</y>
+      <y>357.78717</y>
       <z>0</z>
     </eulerAngles>
   </rotation>
   <position>
-    <x>103.682808</x>
-    <y>62.3997459</y>
-    <z>-924.600769</z>
+    <x>-285.476959</x>
+    <y>12.6493635</y>
+    <z>-14.097105</z>
   </position>
   <gemsCollected>0</gemsCollected>
   <bulletsLoaded>0</bulletsLoaded>

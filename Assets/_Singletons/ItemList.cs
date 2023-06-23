@@ -17,7 +17,7 @@ public class ItemList : MonoBehaviour
         {
             case "Ammo":
             itemList.Add(0);
-            GunManager.Instance.Magazine.Add(10);
+            GunManager.Instance.Magazine.Add(30);
             GunManager.Instance.UpdateBullets();
             break;
             case "Assault Rifle":
@@ -104,10 +104,12 @@ public class ItemList : MonoBehaviour
             case "Assault Rifle":
             itemList.Remove(1);
             InventoryItems.Remove(inventoryController.selectedItem);
+            GunManager.Instance.WeaponEquipped = null;
             break;
             case "Knife":
             itemList.Remove(2);
             InventoryItems.Remove(inventoryController.selectedItem);
+            GunManager.Instance.WeaponEquipped = null;
             break;
             case "Mask":
             itemList.Remove(3);
@@ -120,10 +122,12 @@ public class ItemList : MonoBehaviour
             case "Pistol":
             itemList.Remove(5);
             InventoryItems.Remove(inventoryController.selectedItem);
+            GunManager.Instance.WeaponEquipped = null;
             break;
             case "Shotgun":
             itemList.Remove(6);
             InventoryItems.Remove(inventoryController.selectedItem);
+            GunManager.Instance.WeaponEquipped = null;
             break;
             case "Health Kit":
             itemList.Remove(7);

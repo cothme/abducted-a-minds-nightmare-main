@@ -49,9 +49,16 @@ public class PauseScript : MonoBehaviour
     }
     public void Resume()
     {
+        if(PlayerState.Instance.IsReading == true)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
         paused = false;
         Time.timeScale = 1;
-        Cursor.lockState = CursorLockMode.Locked;
         gameObject.GetComponent<Canvas>().enabled = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerInteractScript>().enabled = true;

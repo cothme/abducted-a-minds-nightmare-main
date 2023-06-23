@@ -195,7 +195,8 @@ public class PlayerInteractScript : MonoBehaviour
             gameObject.GetComponent<Collider>().enabled = false;
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "UVPaperFile")
-        {            
+        {     
+            PlayerState.Instance.IsReading = true;       
             AudioManager.Instance.PlaySound(generalSound,"Open Story");            
             storyImage.sprite = gameObject.GetComponent<StoryScript>().UVsprite;
             itemNameUI.text = "";
@@ -214,6 +215,7 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "JournalPage")
         {
+            PlayerState.Instance.IsReading = true;
             AudioManager.Instance.PlaySound(generalSound, "Open Story");
             DisableScripts(true);
             storyCanvas.enabled = true;
@@ -356,6 +358,7 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else
         {
+            PlayerState.Instance.IsReading = false;
             Cursor.lockState = CursorLockMode.Locked;
             gameObject.GetComponent<PlayerMovement>().enabled = true;
             gameObject.GetComponent<PlayerShootingScript>().enabled = true;
