@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ItemList : MonoBehaviour
 {
-    InventoryController inventoryController;
+    public InventoryController inventoryController;
     public static ItemList Instance;
     private List<int> itemList = new List<int>();
     public List<int>Itemlist { get { return new List<int>(itemList); }}
@@ -17,7 +17,7 @@ public class ItemList : MonoBehaviour
         {
             case "Ammo":
             itemList.Add(0);
-            GunManager.Instance.Magazine.Add(30);
+            GunManager.Instance.Magazine.Add(10);
             GunManager.Instance.UpdateBullets();
             break;
             case "Assault Rifle":
@@ -145,9 +145,13 @@ public class ItemList : MonoBehaviour
             break;
         }
     }    
-    private void Awake()
+    private void Update()
     {
         inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
+    }
+    private void Awake()
+    {
+        GameObject.Find("Main Camera").GetComponent<InventoryController>();
         if (Instance == null)
         {
             Instance = this;

@@ -32,7 +32,10 @@ public class PlayerData : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log(PlayerData.Instance.Stage);
+            foreach(InventoryItem i in ItemList.Instance.InventoryItems)
+            {
+                Debug.Log(ItemList.Instance.InventoryItems.Count);
+            }
         }
         Stage = Level();
     }

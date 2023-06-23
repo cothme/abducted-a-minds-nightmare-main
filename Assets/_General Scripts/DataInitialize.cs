@@ -61,9 +61,9 @@ public class DataInitialize : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            Debug.Log(PlayerData.Instance.IsSessionSaved);
-        }
+        // if(Input.GetKeyDown(KeyCode.P))
+        // {
+        //     Debug.Log(PlayerData.Instance.IsSessionSaved);
+        // }
     }
 }

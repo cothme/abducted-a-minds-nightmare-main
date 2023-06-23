@@ -257,7 +257,7 @@ public class GunManager : MonoBehaviour
    }
     private void Awake()
     {
-        inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
+        inventoryController = Camera.main.GetComponent<InventoryController>();
         if (instance != null && instance != this)
         {
             Destroy(gameObject);

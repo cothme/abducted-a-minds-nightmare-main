@@ -41,7 +41,7 @@ public class AsyncManager : MonoBehaviour
         loadingScreen.SetActive(true);
         if(PlayerData.Instance.Stage == 1)
         {
-            
+            StartCoroutine(LoadLevelAsync("level 1"));
         }
         if(PlayerData.Instance.Stage == 2)
         {
@@ -130,6 +130,6 @@ public class AsyncManager : MonoBehaviour
     public void Level1Intro()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("Level 1 Intro");
+        SceneManager.LoadScene("level 1");
     }
 }

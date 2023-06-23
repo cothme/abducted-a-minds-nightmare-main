@@ -98,12 +98,10 @@ public class PlayerCollisions : MonoBehaviour
         Camera.main.GetComponent<CinemachineBrain>().enabled = true;
         PlayerData.Instance.PlayerHealth = PlayerData.Instance.PlayerMaxHealth;
         PlayerState.Instance.IsDead = false;
-        XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
-        StreamReader sr = new StreamReader("Abducted Save File");
-        DataMembers dm = (DataMembers)loadData.Deserialize(sr);
         if(PlayerData.Instance.Stage == 1)
         {
-            
+            this.gameObject.transform.position = new Vector3(-286f,13.2200003f,-16.3999996f);
+            this.gameObject.transform.rotation = new Quaternion(0,-0.74098742f,0,0.671518922f);
         }
         else if(PlayerData.Instance.Stage == 2)
         {
