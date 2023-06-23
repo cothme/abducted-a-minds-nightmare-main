@@ -109,4 +109,37 @@ public class Rotating_Puzzle : MonoBehaviour
     {
         return Enumerable.SequenceEqual(winningImages,coloredImages);
     }
+    IEnumerator GoBackCoroutine(float targetAngle)
+    {
+        yield return new WaitForSeconds(rotationDelay);
+
+        float currentAngle = arrow.rotation.eulerAngles.z;
+        float angleDifference = Mathf.DeltaAngle(currentAngle, targetAngle);
+
+        while (Mathf.Abs(angleDifference) > 0.01f)
+        {
+            float rotationAmount = Mathf.MoveTowardsAngle(currentAngle, targetAngle, rotationSpeed * Time.deltaTime);
+            arrow.rotation = Quaternion.Euler(0f, 0f, rotationAmount);
+            currentAngle = arrow.rotation.eulerAngles.z;
+            angleDifference = Mathf.DeltaAngle(currentAngle, targetAngle);
+            yield return null;
+        }
+    }
+    public void Go_Back()
+    {
+        pointedNumber = 1;
+        Vector3 direction = images[pointedNumber - 1].position - arrow.position;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        StartCoroutine(GoBackCoroutine(targetAngle));
+    }
+    public void ExitClicked()
+    {
+        coloredImages = new List<int>{};
+        Go_Back();
+        limit = images.Count;
+        foreach(Transform image in images)
+        {
+            image.GetComponent<Image>().color = defaultColor;
+        }
+    }
 }

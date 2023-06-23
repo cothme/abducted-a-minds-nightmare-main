@@ -28,4 +28,5 @@ public class DataMembers
     public bool canEquipRifle;
     public bool paused;
     public List<int> itemList;
+    public float playerMaxHealth;
 }

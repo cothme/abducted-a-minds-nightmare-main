@@ -6,6 +6,9 @@ using UnityEngine.AI;
 
 public class RunnersScript : MonoBehaviour
 {
+    [SerializeField] AudioSource attack1Sound;
+    [SerializeField] AudioSource attack2Sound;
+    [SerializeField] AudioSource alertSound;
     Animator anim;
     bool animationPlayed = false;
     bool walking = false;
@@ -16,7 +19,6 @@ public class RunnersScript : MonoBehaviour
     NavMeshAgent agent;
     public Transform playerTransform;
     public LayerMask ground, player;
-    public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
     public float attackDelay;
@@ -77,10 +79,10 @@ public class RunnersScript : MonoBehaviour
     }
     void Patrolling()
     {
-        if(agent.remainingDistance <= agent.stoppingDistance) //done with path
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
             Vector3 point;
-            if (RandomPoint(transform.position, walkPointRange, out point))
+            if (RandomPoint(this.transform.position, walkPointRange, out point))
             {
                 Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
                 agent.SetDestination(point);
@@ -101,18 +103,6 @@ public class RunnersScript : MonoBehaviour
         result = Vector3.zero;
         return false;
     }
-    private void SearchWalkPoint()
-    {
-        float randomZ = UnityEngine.Random.Range(-walkPointRange,walkPointRange);
-        float randomX = UnityEngine.Random.Range(-walkPointRange,walkPointRange);
-        
-        walkPoint = new Vector3(transform.position.x + randomX,transform.position.y,transform.position.z + randomZ);
-
-        if(Physics.Raycast(walkPoint,-transform.up,ground))
-        {
-            walkPointSet = true;
-        }
-    }
     void ChasePlayer()
     {
         alerted = true;
@@ -127,12 +117,14 @@ public class RunnersScript : MonoBehaviour
             attackType = UnityEngine.Random.Range(1,3);
             if(attackType == 1)
             { 
-                anim.Play("Attack 1"); 
+                anim.Play("Attack 1");
+                AudioManager.Instance.PlaySound(alertSound, "Runners Attack 1");
                 attackDelay = 1.80f;
             }
             else 
             { 
-                anim.Play("Attack 2"); 
+                anim.Play("Attack 2");
+                AudioManager.Instance.PlaySound(alertSound, "Runners Attack 2");
                 attackDelay = 3.57f;
             }
             attacked = true;
@@ -154,7 +146,7 @@ public class RunnersScript : MonoBehaviour
     {
         agent.SetDestination(transform.position);
         anim.Play("Death");
-        Destroy(gameObject, deathAnimTime);
+        Destroy(this.gameObject, deathAnimTime);
     }
     void OnDrawGizmosSelected()
     {
@@ -167,8 +159,9 @@ public class RunnersScript : MonoBehaviour
     {   
         if(!animationPlayed)
         {
-            agent.SetDestination(gameObject.transform.position);
+            agent.SetDestination(this.gameObject.transform.position);
             anim.Play("Alerted");
+            AudioManager.Instance.PlaySound(alertSound,"Runners Alert");
         }
             animationPlayed = true;
         yield return new WaitForSeconds(alertTime);
@@ -181,6 +174,8 @@ public class RunnersScript : MonoBehaviour
             anim.Play("Hit 1");
             health -= GunManager.Instance.Damage;
             TakeDamage();
+            agent.SetDestination(playerTransform.position);
+            alerted = true;
         }
     }
 }

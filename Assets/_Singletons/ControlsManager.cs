@@ -20,6 +20,9 @@ public class ControlsManager : MonoBehaviour
     private bool isUnequipButtonDown;
     private bool isMaskEquipButtonDown;
     private bool isHealthUseButtonDown;
+    private bool isFlashlightButtonDown;
+    private bool isOxygenKitUseButtonDown;
+    private bool isAimButtonDown;
     public bool IsJumpButtonDown { get { return isJumpButtonDown; } }
     public bool IsFireButtonDown { get { return isFireButtonDown; } }
     public bool IsTabDown { get => isTabDown; set => isTabDown = value; }
@@ -34,6 +37,9 @@ public class ControlsManager : MonoBehaviour
     public bool IsUnequipButtonDown { get => isUnequipButtonDown; set => isUnequipButtonDown = value; }
     public bool IsMaskEquipButtonDown { get => isMaskEquipButtonDown; set => isMaskEquipButtonDown = value; }
     public bool IsHealthUseButtonDown { get => isHealthUseButtonDown; set => isHealthUseButtonDown = value; }
+    public bool IsFlashlightButtonDown { get => isFlashlightButtonDown; set => isFlashlightButtonDown = value; }
+    public bool IsOxygenKitUseButtonDown { get => isOxygenKitUseButtonDown; set => isOxygenKitUseButtonDown = value; }
+    public bool IsAimButtonDown { get => isAimButtonDown; set => isAimButtonDown = value; }
 
     private void Update()
     {
@@ -51,6 +57,9 @@ public class ControlsManager : MonoBehaviour
         isUnequipButtonDown = Input.GetKeyDown(KeyCode.Alpha5);
         isMaskEquipButtonDown = Input.GetKeyDown(KeyCode.M);
         isHealthUseButtonDown = Input.GetKeyDown(KeyCode.H);
+        isFlashlightButtonDown = Input.GetKeyDown(KeyCode.F);
+        isOxygenKitUseButtonDown = Input.GetKeyDown(KeyCode.O);
+        isAimButtonDown = Input.GetMouseButtonDown(1);
     }
     private void Awake()
     {

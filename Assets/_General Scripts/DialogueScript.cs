@@ -42,6 +42,6 @@ public class DialogueScript : MonoBehaviour
     {
         subtitle = text;
         this.deletionTime = deletetionTime;
-        StartCoroutine(ShowSubtitle());
+        StartCoroutine(ShowSubtitle2(text, deletetionTime));
     }
 }

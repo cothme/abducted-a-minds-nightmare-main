@@ -2,9 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Playables;
 
 public class BrutesScript : MonoBehaviour
 {
+    [SerializeField] AudioSource brutesAlert;
+    [SerializeField] AudioSource brutesAttack1;
+    [SerializeField] AudioSource brutesAttack2;
+    [SerializeField] AudioSource brutesAttack3;
+    [SerializeField] AudioSource brutesWalk;
+    [SerializeField] AudioSource brutesHit;
+    [SerializeField] PlayableDirector levelOneCutscene;
+    int ctr;
+    bool knocked;
     Animator anim;
     bool animationPlayed = false;
     bool walking = false;
@@ -31,12 +41,17 @@ public class BrutesScript : MonoBehaviour
     }
     void Update()
     {
+        if(knocked)
+        {
+            agent.SetDestination(this.gameObject.transform.position);
+        }
         if(attacked)
         {
-            agent.SetDestination(gameObject.transform.position);
+            agent.SetDestination(this.gameObject.transform.position);
         }
         if(transform.position != Vector3.zero && !attacked)
         {
+            //brutesWalk.Play();
             walking = true;
             anim.SetBool("Walking",walking);
         }
@@ -116,15 +131,18 @@ public class BrutesScript : MonoBehaviour
             {
                 case 1:
                 anim.Play("Attack 1");
-                attackDelay = 4.10f;
+                    brutesAttack1.Play();
+                    attackDelay = 4.10f;
                 break;
                 case 2:
                 anim.Play("Attack 2");
-                attackDelay = 1.70f;
+                    brutesAttack2.Play();
+                    attackDelay = 1.70f;
                 break;
                 case 3:
                 anim.Play("Attack 3");
-                attackDelay = 3.70f;
+                    brutesAttack3.Play();
+                    attackDelay = 3.70f;
                 break;
             }
             attacked = true;
@@ -144,9 +162,8 @@ public class BrutesScript : MonoBehaviour
     }
     private void Die()
     {
-        agent.SetDestination(transform.position);
-        anim.Play("Death");
-        Destroy(gameObject, deathAnimTime);
+        agent.SetDestination(gameObject.transform.position);
+        StartCoroutine(BrutesDeathCoroutine());
     }
     void OnDrawGizmosSelected()
     {
@@ -161,6 +178,7 @@ public class BrutesScript : MonoBehaviour
         {
             agent.SetDestination(transform.position);
             anim.Play("Alerted");
+            // brutesAlert.Play();
         }
             animationPlayed = true;
         yield return new WaitForSeconds(alertTime);
@@ -170,9 +188,31 @@ public class BrutesScript : MonoBehaviour
     {
         if(col.collider.tag == "Bullet")
         {
-            anim.Play("Hit 1");
             health -= GunManager.Instance.Damage;
             TakeDamage();
+            agent.SetDestination(playerTransform.position);
+            //anim.Play("Hit");
+            //brutesHit.Play();
+            ctr++;
         }
+        if(ctr >= 5)
+        {
+            knocked = true;
+            anim.Play("Hit");
+            agent.SetDestination(this.transform.position);
+        }
+        else
+        {
+            knocked = false;
+        }
+    }
+    IEnumerator BrutesDeathCoroutine()
+    {   
+        anim.Play("Death");
+        yield return new WaitForSeconds(deathAnimTime);
+        Destroy(gameObject);
+        PlayerState.Instance.LevelOneBossDefeated = true;
+        levelOneCutscene.Play();
+        Cursor.lockState = CursorLockMode.None;
     }
 }

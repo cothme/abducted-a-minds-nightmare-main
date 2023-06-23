@@ -36,6 +36,7 @@ public class DataInitialize : MonoBehaviour
             PlayerData.Instance.IsSessionSaved = dm.isSessionSaved;
             PlayerData.Instance.PlayerHealth = dm.health;
             PlayerData.Instance.PlayerOxygen= dm.oxygen;
+            PlayerData.Instance.PlayerMaxHealth = dm.playerMaxHealth;
             GunManager.Instance.WeaponEquipped = dm.weaponEquipped;
             GunManager.Instance.BulletsLoaded = dm.bulletsLoaded;
             GunManager.Instance.TotalBullets = dm.totalBullets;
@@ -48,6 +49,21 @@ public class DataInitialize : MonoBehaviour
                 inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
             }
             sr.Close();
-        }   
+        } 
+        // XmlSerializer loadInventory = new XmlSerializer(typeof(DataMembers));
+        // StreamReader st = new StreamReader("Abducted Save File");
+        // DataMembers di = (DataMembers)loadInventory.Deserialize(st);    
+        // foreach(int i in di.itemList)
+        // {
+        //     ItemList.Instance.AddItem(i);
+        //     inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
+        // }
+    }
+    private void Update()
+    {
+        // if(Input.GetKeyDown(KeyCode.P))
+        // {
+        //     Debug.Log(PlayerData.Instance.IsSessionSaved);
+        // }
     }
 }

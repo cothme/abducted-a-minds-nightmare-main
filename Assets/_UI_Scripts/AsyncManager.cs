@@ -18,13 +18,14 @@ public class AsyncManager : MonoBehaviour
 
     public void NewGame(string levelToLoad)
     {
+        Time.timeScale = 1;
         PlayerData.Instance.IsSessionSaved = false;
         mainMenu.SetActive(false);
         loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
         loadingScreen.SetActive(true);
         StartCoroutine(LoadLevelAsync(levelToLoad)); 
     }
-    public void ContinueGame(string levelToLoad)
+    public void ContinueGame()
     {
         Time.timeScale = 1;
         XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
@@ -33,11 +34,23 @@ public class AsyncManager : MonoBehaviour
         PlayerData.Instance.IsSessionSaved = dm.isSessionSaved;
         PlayerData.Instance.PlayerPosition = dm.position;
         PlayerData.Instance.PlayerRotation = dm.rotation;
+        PlayerData.Instance.Stage = dm.level;
         ItemList.Instance.Itemlist.Clear();
         loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
         mainMenu.SetActive(false);
         loadingScreen.SetActive(true);
-        SceneManager.LoadScene("Level 1");
+        if(PlayerData.Instance.Stage == 1)
+        {
+            StartCoroutine(LoadLevelAsync("level 1"));
+        }
+        if(PlayerData.Instance.Stage == 2)
+        {
+            StartCoroutine(LoadLevelAsync("level 2"));
+        }
+        else if(PlayerData.Instance.Stage == 3)
+        {
+            StartCoroutine(LoadLevelAsync("level 3"));
+        }
     }
     IEnumerator LoadLevelAsync(string levelToLoad)
     {
@@ -61,6 +74,7 @@ public class AsyncManager : MonoBehaviour
     }
     public void goToMainMenu(string levelToLoad)
     {
+            Time.timeScale = 1;
             PlayerData.Instance.Stage = 0;
             PlayerData.Instance.IsSessionSaved = false;
             PlayerData.Instance.PlayerHealth = 50;
@@ -82,12 +96,40 @@ public class AsyncManager : MonoBehaviour
             loadingScreen.SetActive(true);
             StartCoroutine(LoadLevelAsync(levelToLoad));
     }
-    void QuitClicked()
+    public void LoadLevelTwo(string levelToLoad)
+    {
+        PlayerData.Instance.IsSessionSaved = true;
+        PlayerData.Instance.PlayerPosition = new Vector3(74.0699997f,61.7700005f,-1026.83997f);
+        PlayerData.Instance.PlayerRotation = new Quaternion(0,0.707106829f,0f,0.707106829f);
+        DataMembers dm = new DataMembers();
+        dm.position = PlayerData.Instance.PlayerPosition;
+        dm.rotation = PlayerData.Instance.PlayerRotation;
+        dm.level = 2;
+        dm.isSessionSaved = PlayerData.Instance.IsSessionSaved;
+        dm.health = PlayerData.Instance.PlayerHealth;
+        dm.oxygen = PlayerData.Instance.PlayerOxygen;
+        dm.weaponEquipped = GunManager.Instance.WeaponEquipped;
+        dm.itemList = ItemList.Instance.Itemlist;
+        dm.bulletsLoaded = GunManager.Instance.BulletsLoaded;
+        dm.totalBullets = GunManager.Instance.TotalBullets;
+        dm.isPuzzleOneSolved = PlayerState.Instance.IsPuzzleOneSolved;
+        dm.levelOneDoorUnlocked = PlayerState.Instance.LevelOneDoorUnlocked;
+        dm.levelOneCageUnlocked = PlayerState.Instance.LevelOneCageUnlocked;
+        XmlSerializer saveData = new XmlSerializer(typeof(DataMembers));
+        StreamWriter sw = new StreamWriter("Abducted Save File");
+        saveData.Serialize(sw,dm);
+        sw.Close();
+        loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
+        loadingScreen.SetActive(true);
+        StartCoroutine(LoadLevelAsync(levelToLoad));
+    }
+    public void QuitClicked()
     {
         Application.Quit();
     }
     public void Level1Intro()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Level 1 Intro");
     }
 }

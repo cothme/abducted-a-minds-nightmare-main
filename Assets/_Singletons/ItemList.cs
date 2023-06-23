@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ItemList : MonoBehaviour
 {
-    InventoryController inventoryController;
+    public InventoryController inventoryController;
     public static ItemList Instance;
     private List<int> itemList = new List<int>();
     public List<int>Itemlist { get { return new List<int>(itemList); }}
@@ -44,6 +44,12 @@ public class ItemList : MonoBehaviour
             case "Keycard":
             itemList.Add(8);
             break;
+            case "Flashlight":
+            itemList.Add(9);
+            break;
+            case "UV Flashlight":
+            itemList.Add(10);
+            break;
         }
     }
     public void AddItem(int id)
@@ -77,6 +83,12 @@ public class ItemList : MonoBehaviour
             case 8:
             itemList.Add(8);
             break;
+            case 9:
+            itemList.Add(9);
+            break;
+            case 10:
+            itemList.Add(10);
+            break;
         }
     }
     public void DropItem(string name)
@@ -92,10 +104,12 @@ public class ItemList : MonoBehaviour
             case "Assault Rifle":
             itemList.Remove(1);
             InventoryItems.Remove(inventoryController.selectedItem);
+            GunManager.Instance.WeaponEquipped = null;
             break;
             case "Knife":
             itemList.Remove(2);
             InventoryItems.Remove(inventoryController.selectedItem);
+            GunManager.Instance.WeaponEquipped = null;
             break;
             case "Mask":
             itemList.Remove(3);
@@ -108,10 +122,12 @@ public class ItemList : MonoBehaviour
             case "Pistol":
             itemList.Remove(5);
             InventoryItems.Remove(inventoryController.selectedItem);
+            GunManager.Instance.WeaponEquipped = null;
             break;
             case "Shotgun":
             itemList.Remove(6);
             InventoryItems.Remove(inventoryController.selectedItem);
+            GunManager.Instance.WeaponEquipped = null;
             break;
             case "Health Kit":
             itemList.Remove(7);
@@ -121,13 +137,25 @@ public class ItemList : MonoBehaviour
             itemList.Remove(8);
             InventoryItems.Remove(inventoryController.selectedItem);
             break;
+            case "Flashlight":
+            itemList.Remove(9);
+            InventoryItems.Remove(inventoryController.selectedItem);
+            break;
+            case "UV Flashlight":
+            itemList.Remove(10);
+            InventoryItems.Remove(inventoryController.selectedItem);
+            break;
             default:
             break;
         }
     }    
-    private void Awake()
+    private void Update()
     {
         inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
+    }
+    private void Awake()
+    {
+        GameObject.Find("Main Camera").GetComponent<InventoryController>();
         if (Instance == null)
         {
             Instance = this;

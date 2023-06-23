@@ -12,7 +12,7 @@ public class ShotBehavior : MonoBehaviour {
 	
 	void Update () {
 		transform.position += transform.forward * Time.deltaTime * 100f;
-		Destroy(gameObject,3f);
+		Destroy(gameObject,0.5f);
 	}
 	void OnCollisionEnter(Collision other)
 	{

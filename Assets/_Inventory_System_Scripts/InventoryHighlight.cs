@@ -7,7 +7,15 @@ public class InventoryHighlight : MonoBehaviour
    [SerializeField] RectTransform highlighter;
    public void Show(bool b)
    {
-      highlighter.gameObject.SetActive(b);
+      if(highlighter.gameObject == null)
+      {
+          return;
+      }
+      else
+      {
+          highlighter.gameObject.SetActive(b);
+      }
+      
    }
 
    public void SetSize(InventoryItem targetItem)

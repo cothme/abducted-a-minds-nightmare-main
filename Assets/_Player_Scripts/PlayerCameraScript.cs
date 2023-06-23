@@ -11,6 +11,7 @@ public class PlayerCameraScript : MonoBehaviour
     [SerializeField] InputActionReference leftClickControl;
     [SerializeField] Transform playerTransform;
     [SerializeField] Canvas aimCanvas;
+    [SerializeField] AudioSource generalSound;
     CinemachineVirtualCamera virtualCamera;
     public float rotationSpeed;
     public int priorityCameraNumber;
@@ -79,7 +80,8 @@ public class PlayerCameraScript : MonoBehaviour
             PlayerState.Instance.Aiming = !PlayerState.Instance.Aiming;
             if(PlayerState.Instance.Aiming && GunManager.Instance.WeaponEquipped == "Pistol")
             {
-                animator.Play("HG Aim"); 
+                animator.Play("HG Aim");
+                AudioManager.Instance.PlaySound(generalSound,"Aim");
                 aimCanvas.enabled = true;
                 virtualCamera.Priority = 9;
             }

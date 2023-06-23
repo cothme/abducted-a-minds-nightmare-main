@@ -18,7 +18,7 @@ public class GunManager : MonoBehaviour
     private float damage;
     private float recoil;
     private float reloadTime,attackSpeed;
-    private bool canEquipPistol, canEquipRifle, canEquipShotgun,canEquipKnife,canEquipMask,canUseHealthKit;
+    private bool canEquipPistol, canEquipRifle, canEquipShotgun,canEquipKnife,canEquipMask,canUseHealthKit,canUseFlashlight,canEquipUVLight,canUseOxygenKit;
     float bulletToMinus;
     private List<float> magazine;
     public List<float> Magazine { get => magazine; set => magazine = value; }
@@ -35,6 +35,9 @@ public class GunManager : MonoBehaviour
     public float TotalBullets { get => totalBullets; set => totalBullets = value; }
     public float Damage { get => damage; set => damage = value; }
     public bool CanUseHealthKit { get => canUseHealthKit; set => canUseHealthKit = value; }
+    public bool CanUseFlashlight { get => canUseFlashlight; set => canUseFlashlight = value; }
+    public bool CanEquipUVLight { get => canEquipUVLight; set => canEquipUVLight = value; }
+    public bool CanUseOxygenKit { get => canUseOxygenKit; set => canUseOxygenKit = value; }
 
     private void Initialize()
     {
@@ -165,7 +168,6 @@ public class GunManager : MonoBehaviour
         {
             CanEquipMask = false;
         }
-
         if(ItemList.Instance.Itemlist.Contains(7))
         {
             CanUseHealthKit = true;
@@ -173,6 +175,30 @@ public class GunManager : MonoBehaviour
         else
         {
             CanUseHealthKit = false;
+        }
+        if(ItemList.Instance.Itemlist.Contains(9))
+        {
+            CanUseFlashlight = true;
+        }
+        else
+        {
+            CanUseFlashlight = false;
+        }
+        if(ItemList.Instance.Itemlist.Contains(10))
+        {
+            CanEquipUVLight = true;
+        }
+        else
+        {
+            CanEquipUVLight = false;
+        }
+        if(ItemList.Instance.Itemlist.Contains(4))
+        {
+            CanUseOxygenKit = true;
+        }
+        else
+        {
+            CanUseOxygenKit = false;
         }
     }
     public void SetWeaponChanges()
@@ -231,7 +257,7 @@ public class GunManager : MonoBehaviour
    }
     private void Awake()
     {
-        inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
+        inventoryController = Camera.main.GetComponent<InventoryController>();
         if (instance != null && instance != this)
         {
             Destroy(gameObject);

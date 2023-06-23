@@ -10,15 +10,21 @@ using System;
 using System.Xml.Serialization;
 using System.IO;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerInteractScript : MonoBehaviour
 {
     [SerializeField] GameObject bag;
+    [SerializeField] GameObject normalCamera;
+    [SerializeField] GameObject aimCamera;
+    [SerializeField] Canvas mainCanvas;
+    [SerializeField] GameObject bag;
     [SerializeField] PlayableDirector doorUnlockedPlayableDirector;
-    [SerializeField] PlayableDirector brutesAppear;
+    [SerializeField] PlayableDirector bossAppear;
     [SerializeField] Canvas interactCanvas;
     [SerializeField] Image storyImage;
     [SerializeField] Canvas puzzleOneCanvas;
+    [SerializeField] Canvas puzzleTwoCanvas;
     [SerializeField] Canvas storyCanvas;
     [SerializeField] TextMeshProUGUI itemNameUI;
     [SerializeField] TextMeshProUGUI storyText;
@@ -41,7 +47,7 @@ public class PlayerInteractScript : MonoBehaviour
     }
     void Update()
     { 
-        if(puzzleOneCanvas.enabled == true)
+        if(puzzleOneCanvas.enabled == true || puzzleTwoCanvas.enabled == true)
         {
             Cursor.lockState = CursorLockMode.None;
         }
@@ -122,6 +128,12 @@ public class PlayerInteractScript : MonoBehaviour
                 interactCanvas.enabled = true;
                 Interact(hit.collider.gameObject,"BossInitiate");
             }
+            else if(hit.collider.tag == "Button")
+            {
+                itemNameUI.text = "Press E to press button";
+                interactCanvas.enabled = true;
+                Interact(hit.collider.gameObject,"Button");
+            }
             else if(lastLookedObject is null)
             {
                 return;
@@ -161,7 +173,14 @@ public class PlayerInteractScript : MonoBehaviour
         if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Puzzle")
         {
             DisableScripts(true);
-            puzzleOneCanvas.enabled = true;
+            if(SceneManager.GetActiveScene().name == "level 1")
+            {
+                puzzleOneCanvas.enabled = true;
+            }
+            else if(SceneManager.GetActiveScene().name == "level 2")
+            {
+                puzzleTwoCanvas.enabled = true;
+            }
         } 
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Door")
         {   
@@ -176,7 +195,8 @@ public class PlayerInteractScript : MonoBehaviour
             gameObject.GetComponent<Collider>().enabled = false;
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "UVPaperFile")
-        {            
+        {     
+            PlayerState.Instance.IsReading = true;       
             AudioManager.Instance.PlaySound(generalSound,"Open Story");            
             storyImage.sprite = gameObject.GetComponent<StoryScript>().UVsprite;
             itemNameUI.text = "";
@@ -195,6 +215,7 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "JournalPage")
         {
+            PlayerState.Instance.IsReading = true;
             AudioManager.Instance.PlaySound(generalSound, "Open Story");
             DisableScripts(true);
             storyCanvas.enabled = true;
@@ -219,25 +240,45 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Reader")
         {  
-            PlayerState.Instance.LevelOneDoorUnlocked = true;
-            doorUnlockedPlayableDirector.Play();
-            ItemList.Instance.DropItem("Keycard");
-            foreach(InventoryItem i in ItemList.Instance.InventoryItems)
+            if(SceneManager.GetActiveScene().name == "level 1")
             {
-                 if(i.itemData.name == "KeyCard")
-                 {
-                    inventoryController.selectedItem = i;
-                    inventoryController.DeleteItem(inventoryController.selectedItem);
-                 }
+                PlayerState.Instance.LevelOneDoorUnlocked = true;
+                doorUnlockedPlayableDirector.Play();
+                foreach(InventoryItem i in ItemList.Instance.InventoryItems)
+                {
+                        if(i.itemData.name == "KeyCard")
+                        {
+                        inventoryController.selectedItem = i;
+                        inventoryController.DeleteItem(inventoryController.selectedItem);
+                        break;
+                        }
+                }
+                ItemList.Instance.DropItem("Keycard");
+            }
+            else if(SceneManager.GetActiveScene().name == "level 2")
+            {
+                PlayerState.Instance.LevelTwoDoorUnlocked = true;
+                doorUnlockedPlayableDirector.Play();
+                foreach(InventoryItem i in ItemList.Instance.InventoryItems)
+                {
+                        if(i.itemData.name == "KeyCard")
+                        {
+                        inventoryController.selectedItem = i;
+                        inventoryController.DeleteItem(inventoryController.selectedItem);
+                        break;
+                        }
+                }
+                ItemList.Instance.DropItem("Keycard");
             }
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "SavePoint")
         {
+            PlayerData.Instance.IsSessionSaved = true;
             PlayerData.Instance.PlayerPosition = this.gameObject.transform.position;
             PlayerData.Instance.PlayerRotation = this.gameObject.transform.rotation;
             DataMembers dm = new DataMembers();
             dm.level = PlayerData.Instance.Stage;
-            dm.isSessionSaved = true;
+            dm.isSessionSaved = PlayerData.Instance.IsSessionSaved;
             dm.health = PlayerData.Instance.PlayerHealth;
             dm.oxygen = PlayerData.Instance.PlayerOxygen;
             dm.position = PlayerData.Instance.PlayerPosition;
@@ -263,15 +304,45 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "BossInitiate")
         {
-            brutesAppear.Play();
+            if(PlayerData.Instance.Stage == 1)
+            {
+                bossAppear.Play();
+                PlayerState.Instance.LevelOneCageUnlocked = true;
+            }
+            if(PlayerData.Instance.Stage == 2)
+            {
+                // bossAppear.Play();
+                PlayerState.Instance.LevelTwoCageUnlocked = true;
+            }
+            
+        }
+        else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Button")
+        {
+            if(SceneManager.GetActiveScene().name == "level 2")
+            {
+                gameObject.GetComponent<LevelTwoScript>().doorPuzzle.SetActive(false);
+                gameObject.GetComponent<DialogueScript>().showText(gameObject.GetComponent<DialogueScript>().subtitle,gameObject.GetComponent<DialogueScript>().deletionTime);
+            }
         }
     }
     public void ExitStoryText()
     {
         DisableScripts(false);
     }
+    public void ExitPuzzle2()
+    {
+        DisableScripts(false);
+    }
     public void ExitPuzzle()
     {
+        if(PlayerState.Instance.IsPuzzleOneSolved)
+        {
+            gameObject.GetComponent<DialogueScript>().showText("Uhhh what? The answer for that puzzle is… my birthday? Okay?",5);
+        }
+        else
+        {
+            gameObject.GetComponent<DialogueScript>().showText("I didn't expect that it will be THIS hard! Let's see if there's any clues here. ",5);
+        }
         DisableScripts(false);
     }
     public void DisableScripts(bool isOn)
@@ -287,6 +358,7 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else
         {
+            PlayerState.Instance.IsReading = false;
             Cursor.lockState = CursorLockMode.Locked;
             gameObject.GetComponent<PlayerMovement>().enabled = true;
             gameObject.GetComponent<PlayerShootingScript>().enabled = true;
