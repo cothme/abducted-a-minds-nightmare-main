@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DataMembers xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <level>1</level>
-  <health>25</health>
+  <level>2</level>
+  <health>13</health>
   <oxygen>25</oxygen>
   <rotation>
     <x>0</x>
@@ -21,21 +21,26 @@
   </position>
   <weaponEquipped>Pistol</weaponEquipped>
   <gemsCollected>0</gemsCollected>
-  <bulletsLoaded>0</bulletsLoaded>
-  <totalBullets>0</totalBullets>
+  <bulletsLoaded>5</bulletsLoaded>
+  <totalBullets>49</totalBullets>
   <isSessionSaved>true</isSessionSaved>
   <aiming>false</aiming>
   <reloading>false</reloading>
   <running>false</running>
-  <isPuzzleOneSolved>false</isPuzzleOneSolved>
-  <levelOneDoorUnlocked>false</levelOneDoorUnlocked>
-  <levelOneCageUnlocked>false</levelOneCageUnlocked>
+  <isPuzzleOneSolved>true</isPuzzleOneSolved>
+  <levelOneDoorUnlocked>true</levelOneDoorUnlocked>
+  <levelOneCageUnlocked>true</levelOneCageUnlocked>
   <canEquipPistol>false</canEquipPistol>
   <canEquipShotgun>false</canEquipShotgun>
   <canEquipKnife>false</canEquipKnife>
   <canEquipRifle>false</canEquipRifle>
   <paused>false</paused>
   <itemList>
+    <int>0</int>
+    <int>0</int>
+    <int>7</int>
+    <int>7</int>
+    <int>2</int>
     <int>5</int>
     <int>0</int>
   </itemList>
