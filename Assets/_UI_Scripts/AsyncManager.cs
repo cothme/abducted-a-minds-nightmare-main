@@ -26,31 +26,25 @@ public class AsyncManager : MonoBehaviour
         StartCoroutine(LoadLevelAsync(levelToLoad)); 
     }
     public void ContinueGame()
-    {
-        Time.timeScale = 1;
+    {  
         XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
         StreamReader sr = new StreamReader("Abducted Save File");
-        DataMembers dm = (DataMembers)loadData.Deserialize(sr);  
-        PlayerData.Instance.IsSessionSaved = dm.isSessionSaved;
-        PlayerData.Instance.PlayerPosition = dm.position;
-        PlayerData.Instance.PlayerRotation = dm.rotation;
-        PlayerData.Instance.Stage = dm.level;
-        ItemList.Instance.Itemlist.Clear();
-        loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
-        mainMenu.SetActive(false);
-        loadingScreen.SetActive(true);
+        DataMembers dm = (DataMembers)loadData.Deserialize(sr); 
         if(PlayerData.Instance.Stage == 1)
         {
-            StartCoroutine(LoadLevelAsync("level 1"));
+            StartCoroutine(LoadLevelContinue("level 1"));
         }
-        if(PlayerData.Instance.Stage == 2)
+        else if(PlayerData.Instance.Stage == 2)
         {
-            StartCoroutine(LoadLevelAsync("level 2"));
+            StartCoroutine(LoadLevelContinue("level 2"));
         }
         else if(PlayerData.Instance.Stage == 3)
         {
             StartCoroutine(LoadLevelAsync("level 3"));
         }
+        loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
+        mainMenu.SetActive(false);
+        loadingScreen.SetActive(true);
     }
     IEnumerator LoadLevelAsync(string levelToLoad)
     {
@@ -72,29 +66,60 @@ public class AsyncManager : MonoBehaviour
             yield return null;
         }
     }
+    IEnumerator LoadLevelContinue(string levelToLoad)
+    {
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(levelToLoad);
+        loadOperation.allowSceneActivation = false;
+        loadingText.text = "Loading...";
+        while(!loadOperation.isDone)
+        {
+            float progressValue = Mathf.Clamp01(loadOperation.progress / 0.9f);
+            loadingSlider.value = progressValue;
+            if (progressValue >= 0.9f)
+            {
+                loadingText.text = "Press space to continue";
+                if(Input.GetKeyDown(KeyCode.Space))
+                {
+                    loadOperation.allowSceneActivation = true;
+                    XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
+                    StreamReader sr = new StreamReader("Abducted Save File");
+                    DataMembers dm = (DataMembers)loadData.Deserialize(sr);
+                    PlayerData.Instance.PlayerPosition = dm.position;
+                    PlayerData.Instance.PlayerHealth = dm.health;
+                    PlayerData.Instance.IsSessionSaved = dm.isSessionSaved;
+                    ItemList.Instance.Itemlist.Clear();
+                    PlayerData.Instance.Stage = 1;
+                    gameObject.transform.position = PlayerData.Instance.PlayerPosition;
+                }
+            }
+            yield return null;
+        }
+    }
     public void goToMainMenu(string levelToLoad)
     {
-            Time.timeScale = 1;
-            PlayerData.Instance.Stage = 0;
-            PlayerData.Instance.IsSessionSaved = false;
-            PlayerData.Instance.PlayerHealth = 50;
-            PlayerData.Instance.PlayerOxygen= 100;
-            GunManager.Instance.WeaponEquipped = null;
-            GunManager.Instance.BulletsLoaded = 0;
-            GunManager.Instance.TotalBullets = 0;
-            GunManager.Instance.CanEquipRifle = false;
-            GunManager.Instance.CanEquipShotgun = false;
-            GunManager.Instance.CanEquipPistol = false;
-            GunManager.Instance.CanEquipKnife = false;
-            PlayerState.Instance.Aiming = false;
-            PlayerState.Instance.Reloading = false;
-            PlayerState.Instance.Running = false;
-            PlayerState.Instance.IsPuzzleOneSolved = false;
-            PlayerState.Instance.LevelOneDoorUnlocked = false;
-            PlayerState.Instance.LevelOneCageUnlocked = false;
-            loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
-            loadingScreen.SetActive(true);
-            StartCoroutine(LoadLevelAsync(levelToLoad));
+        Time.timeScale = 1;
+        PlayerData.Instance.Stage = 0;
+        PlayerData.Instance.IsSessionSaved = false;
+        
+        PlayerData.Instance.PlayerHealth = 50;
+        PlayerData.Instance.PlayerOxygen= 100;
+        GunManager.Instance.WeaponEquipped = null;
+        GunManager.Instance.BulletsLoaded = 0;
+        GunManager.Instance.TotalBullets = 0;
+        GunManager.Instance.CanEquipRifle = false;
+        GunManager.Instance.CanEquipShotgun = false;
+        GunManager.Instance.CanEquipPistol = false;
+        GunManager.Instance.CanEquipKnife = false;
+        PlayerState.Instance.Aiming = false;
+        PlayerState.Instance.Reloading = false;
+        PlayerState.Instance.Running = false;
+        PlayerState.Instance.IsPuzzleOneSolved = false;
+        PlayerState.Instance.LevelOneDoorUnlocked = false;
+        PlayerState.Instance.LevelOneCageUnlocked = false;
+        ItemList.Instance.Itemlist.Clear();
+        loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
+        loadingScreen.SetActive(true);
+        StartCoroutine(LoadLevelAsync(levelToLoad));
     }
     public void LoadLevelTwo(string levelToLoad)
     {

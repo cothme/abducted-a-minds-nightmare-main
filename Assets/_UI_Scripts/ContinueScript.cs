@@ -17,6 +17,6 @@ public class ContinueScript : MonoBehaviour
     }
     void CheckSaveFile()
     {  
-        gameObject.GetComponent<Button>().interactable = File.Exists("D:\\CAPSTONE_1_PROJECT_FILES\\abducted-a-minds-nightmare-main\\Abducted Save File");
+        gameObject.GetComponent<Button>().interactable = File.Exists(Application.dataPath + "Abducted Save File");
     }
 }
