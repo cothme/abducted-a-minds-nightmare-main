@@ -144,8 +144,9 @@ public class RunnersScript : MonoBehaviour
     }
     private void Die()
     {
-        agent.SetDestination(transform.position);
+        agent.SetDestination(this.transform.position);
         anim.Play("Death");
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
         Destroy(this.gameObject, deathAnimTime);
     }
     void OnDrawGizmosSelected()
