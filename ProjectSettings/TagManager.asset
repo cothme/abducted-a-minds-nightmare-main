@@ -24,6 +24,7 @@ TagManager:
   - AlexBag
   - Fog
   - Button
+  - PuzzlePage
   layers:
   - Default
   - TransparentFX
