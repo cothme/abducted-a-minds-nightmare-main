@@ -362,16 +362,19 @@ public class PlayerShootingScript : MonoBehaviour
             flashLightOn = !flashLightOn;
             if(flashLightNumber == 1 && flashLightOn)
             {
+                PlayerState.Instance.IsUVOn = false;
                 flashlight.SetActive(true);
                 flashlight.GetComponent<Light>().color = Color.white;
             }
             else if(flashLightNumber == 2)
             {
+                PlayerState.Instance.IsUVOn = true;
                 flashlight.SetActive(true);
                 flashlight.GetComponent<Light>().color = Color.magenta;
             }
             else if(flashLightNumber == 3)
             {
+                PlayerState.Instance.IsUVOn = false;
                 flashLightOn = !flashLightOn;
                 flashlight.SetActive(false);
                 flashLightNumber = 0;
