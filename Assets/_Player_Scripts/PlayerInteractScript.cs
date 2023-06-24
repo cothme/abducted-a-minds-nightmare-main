@@ -90,6 +90,12 @@ public class PlayerInteractScript : MonoBehaviour
                 interactCanvas.enabled = true;
                 Interact(hit.collider.gameObject, "JournalPage");
             }
+            else if (hit.collider.tag == "PuzzlePage")
+            {
+                itemNameUI.text = "Press E to read puzzle instructions";
+                interactCanvas.enabled = true;
+                Interact(hit.collider.gameObject, "PuzzlePage");
+            }
             else if (hit.collider.tag == "UVPaperFile")
             {
                 itemNameUI.text = "Press E to read";
@@ -232,6 +238,27 @@ public class PlayerInteractScript : MonoBehaviour
                 gameObject.GetComponent<DialogueScript>().showText(gameObject.GetComponent<DialogueScript>().subtitle,gameObject.GetComponent<DialogueScript>().deletionTime);
             }
         }
+
+        else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "PuzzlePage")
+        {
+            PlayerState.Instance.IsReading = true;
+            AudioManager.Instance.PlaySound(generalSound, "Open Story");
+            DisableScripts(true);
+            storyCanvas.enabled = true;
+            storyImage.sprite = gameObject.GetComponent<StoryScript>().UVsprite;
+            itemNameUI.text = "";
+            storyText.text = gameObject.GetComponent<StoryScript>().Sentence;
+            Cursor.lockState = CursorLockMode.None;
+            if (gameObject.GetComponent<DialogueScript>() == null)
+            {
+                return;
+            }
+            else
+            {
+                gameObject.GetComponent<DialogueScript>().showText(gameObject.GetComponent<DialogueScript>().subtitle, gameObject.GetComponent<DialogueScript>().deletionTime);
+            }
+        }
+
         else if (ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Bag")
         {
             AudioManager.Instance.PlaySound(generalSound, "Pick Up");
