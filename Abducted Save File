@@ -1,39 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DataMembers xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <level>2</level>
-  <health>13</health>
+  <level>0</level>
+  <health>25</health>
   <oxygen>25</oxygen>
   <rotation>
     <x>0</x>
-    <y>-0.0193093941</y>
+    <y>-0.025954077</y>
     <z>0</z>
-    <w>0.999813557</w>
+    <w>0.9996632</w>
     <eulerAngles>
       <x>0</x>
-      <y>357.78717</y>
+      <y>357.025543</y>
       <z>0</z>
     </eulerAngles>
   </rotation>
   <position>
-    <x>-285.476959</x>
-    <y>12.6493635</y>
-    <z>-14.097105</z>
+    <x>-286.8178</x>
+    <y>12.6493645</y>
+    <z>-15.7060976</z>
   </position>
+  <weaponEquipped>Knife</weaponEquipped>
   <gemsCollected>0</gemsCollected>
-  <bulletsLoaded>5</bulletsLoaded>
-  <totalBullets>49</totalBullets>
+  <bulletsLoaded>0</bulletsLoaded>
+  <totalBullets>30</totalBullets>
   <isSessionSaved>true</isSessionSaved>
   <aiming>false</aiming>
   <reloading>false</reloading>
   <running>false</running>
-  <isPuzzleOneSolved>true</isPuzzleOneSolved>
-  <levelOneDoorUnlocked>true</levelOneDoorUnlocked>
-  <levelOneCageUnlocked>true</levelOneCageUnlocked>
-  <canEquipPistol>false</canEquipPistol>
+  <isPuzzleOneSolved>false</isPuzzleOneSolved>
+  <levelOneDoorUnlocked>false</levelOneDoorUnlocked>
+  <levelOneCageUnlocked>false</levelOneCageUnlocked>
+  <canEquipPistol>true</canEquipPistol>
   <canEquipShotgun>false</canEquipShotgun>
-  <canEquipKnife>false</canEquipKnife>
+  <canEquipKnife>true</canEquipKnife>
   <canEquipRifle>false</canEquipRifle>
   <paused>false</paused>
-  <itemList />
+  <itemList>
+    <int>5</int>
+    <int>0</int>
+    <int>7</int>
+    <int>7</int>
+    <int>2</int>
+  </itemList>
   <playerMaxHealth>0</playerMaxHealth>
 </DataMembers>

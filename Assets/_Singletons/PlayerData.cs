@@ -40,7 +40,10 @@ public class PlayerData : MonoBehaviour
             // {
             //     Debug.Log(i);
             // }
-            Debug.Log(PlayerState.Instance.Aiming);
+            Debug.Log(PlayerData.Instance.Stage);
+            Debug.Log(PlayerData.Instance.PlayerHealth);
+            Debug.Log(PlayerData.Instance.IsSessionSaved);
+            Debug.Log(PlayerData.Instance.PlayerPosition);
         }
         Stage = Level();
     }
@@ -62,14 +65,12 @@ public class PlayerData : MonoBehaviour
     }
     private void Awake()
     {
-        if (Instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
+            return;
         }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 }

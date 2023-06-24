@@ -10,6 +10,7 @@ using System.Linq;
 
 public class PlayerCollisions : MonoBehaviour
 {
+    [SerializeField] Transform respawnPoint;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] Slider healthSlider;
     [SerializeField] Slider oxygenSlider;
@@ -92,23 +93,15 @@ public class PlayerCollisions : MonoBehaviour
     }
     public void RespawnClicked()
     {
+        PlayerState.Instance.IsDead = false;
         gameObject.GetComponent<PlayerMovement>().enabled = true;
         gameObject.GetComponent<PlayerShootingScript>().enabled = true;
         gameObject.GetComponent<PlayerAnimation>().enabled = true;
         gameObject.GetComponent<PlayerInventory>().enabled = true;
         Camera.main.GetComponent<CinemachineBrain>().enabled = true;
         PlayerData.Instance.PlayerHealth = PlayerData.Instance.PlayerMaxHealth;
-        PlayerState.Instance.IsDead = false;
-        if(PlayerData.Instance.Stage == 1)
-        {
-            this.gameObject.transform.position = new Vector3(-286f,13.2200003f,-16.3999996f);
-            this.gameObject.transform.rotation = new Quaternion(0,-0.74098742f,0,0.671518922f);
-        }
-        else if(PlayerData.Instance.Stage == 2)
-        {
-            this.gameObject.transform.position = new Vector3(74.0699997f,61.7700005f,-1026.83997f);
-            this.gameObject.transform.rotation = new Quaternion(0,0.707106829f,0f,0.707106829f);
-        }
+        gameObject.transform.position = respawnPoint.position;
+        gameObject.transform.rotation = respawnPoint.rotation;
         Cursor.lockState = CursorLockMode.Locked;
         deathCanvas.enabled = false;
         mainCanvas.enabled = true;

@@ -3473,9 +3473,9 @@ GameObject:
   - component: {fileID: 1356522454}
   - component: {fileID: 1356522453}
   - component: {fileID: 1356522456}
-  - component: {fileID: 1356522457}
   - component: {fileID: 1356522458}
   - component: {fileID: 1356522459}
+  - component: {fileID: 1356522457}
   m_Layer: 5
   m_Name: Continue Button
   m_TagString: Untagged
@@ -3542,7 +3542,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1356522454}
   m_OnClick:
     m_PersistentCalls:
