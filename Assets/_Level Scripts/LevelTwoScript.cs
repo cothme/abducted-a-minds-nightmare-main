@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LevelTwoScript : MonoBehaviour
 {
+    [SerializeField] GameObject stalker;
     [SerializeField] public GameObject bossCage;
-    [SerializeField] public GameObject doorPuzzle;
     [SerializeField] AudioSource soundToPlay;
     private void OnTriggerEnter(Collider other)
     {
@@ -19,7 +19,9 @@ public class LevelTwoScript : MonoBehaviour
     {
         if(PlayerState.Instance.LevelTwoCageUnlocked)
         {
-            Destroy(bossCage);
+            bossCage.GetComponent<BoxCollider>().enabled = true;
+            gameObject.GetComponent<DialogueScript>().showText("So the wall in to the boss is all an illusion?",5);
+            stalker.SetActive(true);
         }
     }
 }

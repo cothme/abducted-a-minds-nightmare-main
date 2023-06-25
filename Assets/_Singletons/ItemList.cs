@@ -96,9 +96,17 @@ public class ItemList : MonoBehaviour
         switch(name)
         {
             case "Ammo":
-            itemList.Remove(0);
-            GunManager.Instance.Magazine.RemoveAt(0);
             GunManager.Instance.UpdateBullets();
+            if(GunManager.Instance.TotalBullets < 30)
+            {   
+                GunManager.Instance.Magazine.RemoveAt(0);
+                GunManager.Instance.TotalBullets = 0;
+            }
+            else
+            {
+                GunManager.Instance.Magazine.RemoveAt(0);
+                itemList.Remove(0);
+            }
             InventoryItems.Remove(inventoryController.selectedItem);
             break;
             case "Assault Rifle":

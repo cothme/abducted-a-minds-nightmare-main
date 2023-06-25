@@ -41,9 +41,7 @@ public class PlayerData : MonoBehaviour
             //     Debug.Log(i);
             // }
             Debug.Log(PlayerData.Instance.Stage);
-            Debug.Log(PlayerData.Instance.PlayerHealth);
-            Debug.Log(PlayerData.Instance.IsSessionSaved);
-            Debug.Log(PlayerData.Instance.PlayerPosition);
+            Debug.Log(GunManager.Instance.TotalBullets);
         }
         Stage = Level();
     }
