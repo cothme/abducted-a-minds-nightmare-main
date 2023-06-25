@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class LevelTwoScript : MonoBehaviour
 {
-    [SerializeField] GameObject stalker;
     [SerializeField] public GameObject bossCage;
     [SerializeField] public GameObject doorPuzzle;
     bool doorUnlocked = true;
+    [SerializeField] GameObject stalker;
+    [SerializeField] AudioSource soundToPlay;
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            soundToPlay.Play();
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
+    }
     private void Update()
     {
         if(PlayerState.Instance.LevelTwoCageUnlocked && doorUnlocked == true)

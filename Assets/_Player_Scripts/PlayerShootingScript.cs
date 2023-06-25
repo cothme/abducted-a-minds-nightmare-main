@@ -20,6 +20,7 @@ public class PlayerShootingScript : MonoBehaviour
     [SerializeField] GameObject bulletPreFab;
     [SerializeField] Transform bulletTransform;
     [SerializeField] GameObject aimCamera;
+    [SerializeField] TextMeshProUGUI magazineCountText;
     [SerializeField] TextMeshProUGUI totalBulletsCountText;
     [SerializeField] TextMeshProUGUI bulletsCountText;
     [SerializeField] AudioSource generalSound;

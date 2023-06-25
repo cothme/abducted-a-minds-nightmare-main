@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Playables;
 
 public class StalkersScript : MonoBehaviour
 {
-    [SerializeField] PlayableDirector levelTwoDefeatedCutscene;
     [SerializeField] Transform resetPoint;
     [SerializeField] Transform attackBehind;
     [SerializeField] GameObject body, head;
@@ -160,7 +158,6 @@ public class StalkersScript : MonoBehaviour
         agent.SetDestination(transform.position);
         anim.Play("Death");
         Destroy(this.gameObject, deathAnimTime);
-        StartCoroutine(StalkersDeathCoroutine());
     }
     void OnDrawGizmosSelected()
     {
@@ -203,14 +200,5 @@ public class StalkersScript : MonoBehaviour
         yield return new WaitForSeconds(10f);
         body.GetComponent<Renderer>().material = glassMaterial;
         head.GetComponent<Renderer>().material = glassMaterial;
-    }
-    IEnumerator StalkersDeathCoroutine()
-    {   
-        anim.Play("Death");
-        yield return new WaitForSeconds(deathAnimTime);
-        Destroy(gameObject);
-        PlayerState.Instance.LevelOneBossDefeated = true;
-        levelTwoDefeatedCutscene.Play();
-        Cursor.lockState = CursorLockMode.None;
     }
 }

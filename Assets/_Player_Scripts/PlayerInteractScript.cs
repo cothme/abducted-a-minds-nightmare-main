@@ -338,6 +338,7 @@ public class PlayerInteractScript : MonoBehaviour
             }
             if(PlayerData.Instance.Stage == 2)
             {
+                bossAppear.Play();
                 PlayerState.Instance.LevelTwoCageUnlocked = true;
             }
             
