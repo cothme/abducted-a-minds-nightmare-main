@@ -346,6 +346,7 @@ public class PlayerInteractScript : MonoBehaviour
         {
             if(SceneManager.GetActiveScene().name == "level 2")
             {
+                gameObject.GetComponent<LevelTwoScript>().doorPuzzle.SetActive(false);
                 gameObject.GetComponent<DialogueScript>().showText(gameObject.GetComponent<DialogueScript>().subtitle,gameObject.GetComponent<DialogueScript>().deletionTime);
             }
         }
