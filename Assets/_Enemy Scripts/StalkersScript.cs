@@ -8,8 +8,8 @@ public class StalkersScript : MonoBehaviour
     [SerializeField] Transform resetPoint;
     [SerializeField] Transform attackBehind;
     [SerializeField] GameObject basemodel, hood;
-    [SerializeField] Material camo;
-    [SerializeField] Material normalMaterial;
+    [SerializeField] Material camo, hoodcamo;
+    [SerializeField] Material normalskin, normalhood;
     [SerializeField] AudioSource attack1Sound;
     [SerializeField] AudioSource attack2Sound;
     [SerializeField] AudioSource alertSound;
@@ -37,7 +37,7 @@ public class StalkersScript : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         basemodel.GetComponent<Renderer>().material = camo;
-        hood.GetComponent<Renderer>().material = camo;
+        hood.GetComponent<Renderer>().material = hoodcamo;
     }
     void Update()
     {
@@ -70,13 +70,13 @@ public class StalkersScript : MonoBehaviour
         {
             Patrolling();
             alerted = false;
-            anim.SetBool("Alerted",alerted);
+            anim.SetBool("Camo", alerted);
         } 
         else if(playerInSightRange && !playerInAttackRange)
         {
             StartCoroutine(ChasePlayerCoroutine());
             alerted = true;
-            anim.SetBool("Alerted",alerted);
+            anim.SetBool("Camo", alerted);
         }
         else if(playerInAttackRange && playerInSightRange)
         {
@@ -116,29 +116,35 @@ public class StalkersScript : MonoBehaviour
     void ChasePlayer()
     {
         alerted = true;
-        anim.SetBool("Alerted",alerted);
+        anim.SetBool("Camo",alerted);
         agent.SetDestination(attackBehind.position);
     }
     void AttackPlayer()
     {
         if(!attacked)
-        {
-            //attack animations and types here
-            attackType = UnityEngine.Random.Range(1,3);
-            if(attackType == 1)
-            { 
-                anim.Play("Attack 1");
+        {            
+                anim.Play("Attack");
                 AudioManager.Instance.PlaySound(alertSound, "Runners Attack 1");
                 attackDelay = 1.80f;
-            }
-            else 
-            { 
-                anim.Play("Attack 2");
-                AudioManager.Instance.PlaySound(alertSound, "Runners Attack 2");
-                attackDelay = 3.57f;
-            }
-            attacked = true;
-            Invoke(nameof(ResetAttack),attackDelay);
+                attacked = true;
+                Invoke(nameof(ResetAttack), attackDelay);
+
+            //attack animations and types here
+            //attackType = UnityEngine.Random.Range(1,3);
+            //if(attackType == 1)
+            //{ 
+            //    anim.Play("Attack 1");
+            //    AudioManager.Instance.PlaySound(alertSound, "Runners Attack 1");
+            //    attackDelay = 1.80f;
+            //}
+            //else 
+            //{ 
+            //    anim.Play("Attack 2");
+            //    AudioManager.Instance.PlaySound(alertSound, "Runners Attack 2");
+            //    attackDelay = 3.57f;
+            //}
+            //attacked = true;
+            //Invoke(nameof(ResetAttack),attackDelay);
         }
     }
     void ResetAttack()
@@ -171,7 +177,7 @@ public class StalkersScript : MonoBehaviour
         if(!animationPlayed)
         {
             agent.SetDestination(this.gameObject.transform.position);
-            anim.Play("Alerted");
+            anim.Play("Camo");
             AudioManager.Instance.PlaySound(alertSound,"Runners Alert");
         }
             animationPlayed = true;
@@ -182,7 +188,7 @@ public class StalkersScript : MonoBehaviour
     {
         if(col.collider.tag == "Bullet")
         {
-            anim.Play("Hit 1");
+            anim.Play("Hit");
             health -= GunManager.Instance.Damage;
             TakeDamage();
             agent.SetDestination(playerTransform.position);
@@ -195,10 +201,10 @@ public class StalkersScript : MonoBehaviour
     }
     IEnumerator RevealCoroutine()
     {
-        basemodel.GetComponent<Renderer>().material = normalMaterial;
-        hood.GetComponent<Renderer>().material = normalMaterial;
-        yield return new WaitForSeconds(10f);
+        basemodel.GetComponent<Renderer>().material = normalskin;
+        hood.GetComponent<Renderer>().material = normalhood;
+        yield return new WaitForSeconds(4f);
         basemodel.GetComponent<Renderer>().material = camo;
-        hood.GetComponent<Renderer>().material = camo;
+        hood.GetComponent<Renderer>().material = hoodcamo;
     }
 }
