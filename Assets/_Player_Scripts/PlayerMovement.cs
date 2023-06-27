@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
             GameObject.Find("Run").GetComponent<AudioSource>().enabled = false;
         }
         groundedPlayer = controller.isGrounded;
-        if(Input.GetKey(KeyCode.LeftShift) && !PlayerState.Instance.Aiming && !PlayerState.Instance.Reloading && movementDirection != Vector2.zero)
+        if(Input.GetKey(KeyCode.LeftShift) && !PlayerState.Instance.Aiming && !PlayerState.Instance.Reloading && movementDirection != Vector2.zero && !PlayerState.Instance.Aiming)
         {
             PlayerState.Instance.Running = true;
             playerSpeed += 2f;
@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
                 playerSpeed = 20f;
             }
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) || movementDirection == Vector2.zero)
         {
             PlayerState.Instance.Running = false;
             playerSpeed = 6f;

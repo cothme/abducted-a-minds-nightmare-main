@@ -71,7 +71,7 @@ public class PlayerCameraScript : MonoBehaviour
     }
     void StartAim(InputAction.CallbackContext context)
     {
-        if(GunManager.Instance.WeaponEquipped == null || PlayerState.Instance.Reloading)
+        if(GunManager.Instance.WeaponEquipped == null || PlayerState.Instance.Reloading || PlayerState.Instance.Running)
         {
             return;
         }

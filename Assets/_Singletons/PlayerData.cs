@@ -43,7 +43,11 @@ public class PlayerData : MonoBehaviour
             Debug.Log(PlayerData.Instance.Stage);
             Debug.Log(PlayerData.Instance.PlayerHealth);
             Debug.Log(PlayerData.Instance.IsSessionSaved);
-            Debug.Log(PlayerData.Instance.PlayerPosition);
+            Debug.Log("Can Equip Pistol " + GunManager.Instance.CanEquipPistol);
+            foreach(int i in ItemList.Instance.Itemlist)
+            {
+                Debug.Log(i);
+            }
         }
         Stage = Level();
     }

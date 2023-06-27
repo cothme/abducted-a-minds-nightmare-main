@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   reloadSpeed: 3.03
-  damage: 20
+  damage: 30
   attackSpeed: 2
   capacity: 6
   weaponRecoil: 6

@@ -149,6 +149,10 @@ public class ItemList : MonoBehaviour
             break;
         }
     }    
+    public void ClearItemList()
+    {
+        itemList.Clear();
+    }
     private void Update()
     {
         inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();

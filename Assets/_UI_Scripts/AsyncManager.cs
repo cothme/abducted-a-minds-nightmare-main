@@ -116,7 +116,7 @@ public class AsyncManager : MonoBehaviour
         PlayerState.Instance.IsPuzzleOneSolved = false;
         PlayerState.Instance.LevelOneDoorUnlocked = false;
         PlayerState.Instance.LevelOneCageUnlocked = false;
-        ItemList.Instance.Itemlist.Clear();
+        ItemList.Instance.ClearItemList();
         loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
         loadingScreen.SetActive(true);
         StartCoroutine(LoadLevelAsync(levelToLoad));
