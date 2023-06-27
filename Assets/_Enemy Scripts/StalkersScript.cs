@@ -7,8 +7,8 @@ public class StalkersScript : MonoBehaviour
 {
     [SerializeField] Transform resetPoint;
     [SerializeField] Transform attackBehind;
-    [SerializeField] GameObject body, head;
-    [SerializeField] Material glassMaterial;
+    [SerializeField] GameObject basemodel, hood;
+    [SerializeField] Material camo;
     [SerializeField] Material normalMaterial;
     [SerializeField] AudioSource attack1Sound;
     [SerializeField] AudioSource attack2Sound;
@@ -36,8 +36,8 @@ public class StalkersScript : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        body.GetComponent<Renderer>().material = glassMaterial;
-        head.GetComponent<Renderer>().material = glassMaterial;
+        basemodel.GetComponent<Renderer>().material = camo;
+        hood.GetComponent<Renderer>().material = camo;
     }
     void Update()
     {
@@ -195,10 +195,10 @@ public class StalkersScript : MonoBehaviour
     }
     IEnumerator RevealCoroutine()
     {
-        body.GetComponent<Renderer>().material = normalMaterial;
-        head.GetComponent<Renderer>().material = normalMaterial;
+        basemodel.GetComponent<Renderer>().material = normalMaterial;
+        hood.GetComponent<Renderer>().material = normalMaterial;
         yield return new WaitForSeconds(10f);
-        body.GetComponent<Renderer>().material = glassMaterial;
-        head.GetComponent<Renderer>().material = glassMaterial;
+        basemodel.GetComponent<Renderer>().material = camo;
+        hood.GetComponent<Renderer>().material = camo;
     }
 }
