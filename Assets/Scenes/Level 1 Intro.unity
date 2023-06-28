@@ -180,8 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"In a world plagued by inner turmoil and shattered perceptions of reality,
-    a troubled soul awakens."'
+  m_text: '"A fight for survival against unseen adversaries begins"'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -638,8 +637,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035935018}
-  m_LocalRotation: {x: 0, y: 0.9469948, z: 0, w: -0.32124895}
-  m_LocalPosition: {x: 169.7136, y: 103, z: 141.13094}
+  m_LocalRotation: {x: -1e-45, y: 0.14962009, z: 0, w: 0.9887436}
+  m_LocalPosition: {x: 170.77336, y: 55.89805, z: 103.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 837914829}
@@ -1032,7 +1031,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126677004}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: -0.32124895}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 174.5243, y: 55.89805, z: 111.68475}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1153,7 +1152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268676226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 174.52426, y: 55.99, z: 115.124756}
+  m_LocalPosition: {x: 174.5243, y: 55.89805, z: 111.68475}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1496892461}
@@ -1641,8 +1640,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"Immerse yourself in this extraordinary odyssey, where the boundaries
-    of reality blur, and confront the haunting specters within."'
+  m_text: '"Unravel the mysteries. Reclaim your mind.. The fight for survival begins
+    now."'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2084,8 +2083,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"As the vessel gracefully dances through the cosmic abyss, a new chapter
-    unfolds, spinning the threads of fate."'
+  m_text: '"Face the manifestations of inner demons, and  shed light on the shadows
+    that haunt."'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2611,8 +2610,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\"Eyes drawn upward, the enigmatic craft unveils a tantalizing glimpse
-    of what lies beyond\u2014a voyage into the depths of the mind.\""
+  m_text: '"A testament to the indomitable human spirit. Step into the nightmare
+    within, and embrace the challenge."'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2931,8 +2930,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"Unbeknownst to him, the fabric of his existence has been ripped apart,
-    and he finds himself aboard a mysterious spaceship."'
+  m_text: '"Trapped aboard a spaceship, unravel the mysteries and confront the terrifying
+    truth lurking within."'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
