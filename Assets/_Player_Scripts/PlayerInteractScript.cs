@@ -328,6 +328,9 @@ public class PlayerInteractScript : MonoBehaviour
             StreamWriter sw = new StreamWriter("Abducted Save File");
             saveData.Serialize(sw,dm);
             sw.Close();
+
+            AudioManager.Instance.PlaySound(generalSound, "SaveSound");
+            this.gameObject.GetComponent<Animator>().Play("Open Door");
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "BossInitiate")
         {
@@ -347,6 +350,9 @@ public class PlayerInteractScript : MonoBehaviour
         {
             if(SceneManager.GetActiveScene().name == "level 2")
             {
+                AudioManager.Instance.PlaySound(generalSound, "PuzzleButtonClick");
+                this.gameObject.GetComponent<Animator>().Play("Open Door");
+                gameObject.GetComponent<Animator>().Play("ButtonPress");
                 gameObject.GetComponent<LevelTwoScript>().doorPuzzle.SetActive(false);
                 gameObject.GetComponent<DialogueScript>().showText(gameObject.GetComponent<DialogueScript>().subtitle,gameObject.GetComponent<DialogueScript>().deletionTime);
             }
