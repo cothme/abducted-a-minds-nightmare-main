@@ -348,7 +348,8 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Button")
         {
-            if(SceneManager.GetActiveScene().name == "level 2")
+
+            if (SceneManager.GetActiveScene().name == "level 2")
             {
                 AudioManager.Instance.PlaySound(generalSound, "PuzzleButtonClick");
                 this.gameObject.GetComponent<Animator>().Play("Open Door");

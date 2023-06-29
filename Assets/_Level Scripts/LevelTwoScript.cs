@@ -8,12 +8,11 @@ public class LevelTwoScript : MonoBehaviour
     [SerializeField] public GameObject doorPuzzle;
     bool doorUnlocked = true;
     [SerializeField] GameObject stalker;
-    [SerializeField] AudioSource soundToPlay;
+    
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            soundToPlay.Play();
             gameObject.GetComponent<BoxCollider>().enabled = false;
         }
     }
