@@ -104,7 +104,7 @@ public class PlayerShootingScript : MonoBehaviour
         if(PlayerState.Instance.Aiming && GunManager.Instance.BulletsLoaded != 0)
         {
             AudioManager.Instance.PlaySound(generalSound,"Fire");
-            gameObject.GetComponent<Animator>().Play("Rif Fire");
+            AudioManager.Instance.PlaySound(generalSound, "Fire Rifle");
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,gameObject.transform.rotation);
             GunManager.Instance.shootInGunManager();
         } 
@@ -116,12 +116,13 @@ public class PlayerShootingScript : MonoBehaviour
             if(GunManager.Instance.WeaponEquipped == "Pistol")
             {
                 gameObject.GetComponent<Animator>().Play("HG Fire");
+                AudioManager.Instance.PlaySound(generalSound, "Fire Handgun");
             }
             else if(GunManager.Instance.WeaponEquipped == "Shotgun")
             {
                 gameObject.GetComponent<Animator>().Play("SG Fire");
+                AudioManager.Instance.PlaySound(generalSound, "Fire Shotgun");
             }
-            AudioManager.Instance.PlaySound(generalSound,"Fire");
             GameObject bullet = Instantiate(bulletPreFab,bulletTransform.position,gameObject.transform.rotation);
             GunManager.Instance.shootInGunManager();
         }
@@ -280,6 +281,7 @@ public class PlayerShootingScript : MonoBehaviour
         {
             maskEquipped = !maskEquipped;
             gameObject.GetComponent<Animator>().Play("Equip Space Mask");
+            AudioManager.Instance.PlaySound(generalSound, "SpaceMask");
             mask.SetActive(true);
         }
         else if(maskEquipped)
@@ -357,6 +359,7 @@ public class PlayerShootingScript : MonoBehaviour
     {
         if(GunManager.Instance.CanUseFlashlight)
         {
+            AudioManager.Instance.PlaySound(generalSound, "Flashlight");
             Debug.Log(flashLightNumber + " " + GunManager.Instance.CanUseFlashlight);
             flashLightNumber++;
             flashLightOn = !flashLightOn;
