@@ -43,7 +43,7 @@ public class PlayerData : MonoBehaviour
             Debug.Log(PlayerData.Instance.Stage);
             Debug.Log(PlayerData.Instance.PlayerHealth);
             Debug.Log(PlayerData.Instance.IsSessionSaved);
-            Debug.Log("Can Equip Pistol " + GunManager.Instance.CanEquipPistol);
+            Debug.Log("Can Equip Pistol " + GunManager.Instance.CanUseHealthKit);
             foreach(int i in ItemList.Instance.Itemlist)
             {
                 Debug.Log(i);

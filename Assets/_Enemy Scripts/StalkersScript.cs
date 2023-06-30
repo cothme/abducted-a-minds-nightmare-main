@@ -5,14 +5,14 @@ using UnityEngine.AI;
 
 public class StalkersScript : MonoBehaviour
 {
-    [SerializeField] Transform resetPoint;
     [SerializeField] Transform attackBehind;
-    [SerializeField] GameObject basemodel, hood;
-    [SerializeField] Material camo, hoodcamo;
-    [SerializeField] Material normalskin, normalhood;
-    [SerializeField] AudioSource attack1Sound;
-    [SerializeField] AudioSource attack2Sound;
-    [SerializeField] AudioSource alertSound;
+    [SerializeField] GameObject body, hood;
+    [SerializeField] Material camo, normalHoodMaterial;
+    [SerializeField] Material[] bodyMaterials,camoMaterials;
+    bool isRevealed = false;
+    // [SerializeField] AudioSource attack1Sound;
+    // [SerializeField] AudioSource attack2Sound;
+    // [SerializeField] AudioSource alertSound;
     Animator anim;
     bool animationPlayed = false;
     bool walking = false;
@@ -36,8 +36,14 @@ public class StalkersScript : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        basemodel.GetComponent<Renderer>().material = camo;
-        hood.GetComponent<Renderer>().material = hoodcamo;
+        // body.GetComponent<SkinnedMeshRenderer>().SetMa
+        // hood.GetComponent<Renderer>().material = hoodcamo;
+        // for(int i = 0; i < 7; i++)
+        // {
+         body.GetComponent<SkinnedMeshRenderer>().materials = camoMaterials;
+        // }
+        hood.GetComponent<SkinnedMeshRenderer>().material = camo;
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }
     void Update()
     {
@@ -82,8 +88,9 @@ public class StalkersScript : MonoBehaviour
         {
             AttackPlayer();
         }
-        if(PlayerState.Instance.IsUVOn && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hit,15))
+        if(PlayerState.Instance.IsUVOn && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hit,15) && isRevealed == false)
         {
+            isRevealed = true;
             Reveal();
         }
     }
@@ -124,7 +131,7 @@ public class StalkersScript : MonoBehaviour
         if(!attacked)
         {            
                 anim.Play("Attack");
-                AudioManager.Instance.PlaySound(alertSound, "Runners Attack 1");
+                // AudioManager.Instance.PlaySound(alertSound, "Runners Attack 1");
                 attackDelay = 1.80f;
                 attacked = true;
                 Invoke(nameof(ResetAttack), attackDelay);
@@ -149,7 +156,6 @@ public class StalkersScript : MonoBehaviour
     }
     void ResetAttack()
     {
-        agent.SetDestination(resetPoint.position);
         attacked = false;
     }
     public void TakeDamage()
@@ -178,7 +184,7 @@ public class StalkersScript : MonoBehaviour
         {
             agent.SetDestination(this.gameObject.transform.position);
             anim.Play("Camo");
-            AudioManager.Instance.PlaySound(alertSound,"Runners Alert");
+            // AudioManager.Instance.PlaySound(alertSound,"Runners Alert");
         }
             animationPlayed = true;
         yield return new WaitForSeconds(alertTime);
@@ -201,10 +207,18 @@ public class StalkersScript : MonoBehaviour
     }
     IEnumerator RevealCoroutine()
     {
-        basemodel.GetComponent<Renderer>().material = normalskin;
-        hood.GetComponent<Renderer>().material = normalhood;
+        ChangeSkin();
+        hood.GetComponent<SkinnedMeshRenderer>().material = normalHoodMaterial;
+        gameObject.GetComponent<CapsuleCollider>().enabled = true;
         yield return new WaitForSeconds(4f);
-        basemodel.GetComponent<Renderer>().material = camo;
-        hood.GetComponent<Renderer>().material = hoodcamo;
+        body.GetComponent<SkinnedMeshRenderer>().materials = camoMaterials;
+        hood.GetComponent<SkinnedMeshRenderer>().material = camo;
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        isRevealed = false;
     }
+    void ChangeSkin()
+  {
+        Material[] mats = new Material[]{bodyMaterials[0],bodyMaterials[1],bodyMaterials[2],bodyMaterials[3],bodyMaterials[4],bodyMaterials[5]};
+        body.GetComponent<SkinnedMeshRenderer>().materials = mats;
+  }
 }
