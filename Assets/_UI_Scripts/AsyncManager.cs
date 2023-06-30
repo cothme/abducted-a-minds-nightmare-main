@@ -148,6 +148,10 @@ public class AsyncManager : MonoBehaviour
         loadingScreen.SetActive(true);
         StartCoroutine(LoadLevelAsync(levelToLoad));
     }
+    public void LoadLevelThree(string levelToLoad)
+    {
+
+    }
     public void QuitClicked()
     {
         Application.Quit();

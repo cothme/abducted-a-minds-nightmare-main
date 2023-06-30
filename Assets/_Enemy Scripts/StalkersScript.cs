@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Playables;
 
 public class StalkersScript : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class StalkersScript : MonoBehaviour
     [SerializeField] GameObject body, hood;
     [SerializeField] Material camo, normalHoodMaterial;
     [SerializeField] Material[] bodyMaterials,camoMaterials;
+    [SerializeField] PlayableDirector levelTwoCutscene;
     bool isRevealed = false;
     // [SerializeField] AudioSource attack1Sound;
     // [SerializeField] AudioSource attack2Sound;
@@ -221,4 +223,13 @@ public class StalkersScript : MonoBehaviour
         Material[] mats = new Material[]{bodyMaterials[0],bodyMaterials[1],bodyMaterials[2],bodyMaterials[3],bodyMaterials[4],bodyMaterials[5]};
         body.GetComponent<SkinnedMeshRenderer>().materials = mats;
   }
+  IEnumerator StalkersDeathCoroutine()
+    {   
+        anim.Play("Death");
+        yield return new WaitForSeconds(deathAnimTime);
+        Destroy(gameObject);
+        PlayerState.Instance.LevelTwoBossDefeated = true;
+        levelTwoCutscene.Play();
+        Cursor.lockState = CursorLockMode.None;
+    }
 }

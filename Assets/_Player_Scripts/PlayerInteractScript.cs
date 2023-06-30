@@ -348,7 +348,6 @@ public class PlayerInteractScript : MonoBehaviour
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Button")
         {
-
             if (SceneManager.GetActiveScene().name == "level 2")
             {
                 AudioManager.Instance.PlaySound(generalSound, "PuzzleButtonClick");
