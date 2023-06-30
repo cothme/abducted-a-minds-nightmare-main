@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class Memory_Puzzle : MonoBehaviour
 {
     int maxSize = 5;
+    public Sprite imageSprite;
     public Button startButton;
+    public GameObject gameWonPanel;
     [SerializeField] List<Button> buttons;
     [SerializeField] List<Sprite> images = new List<Sprite>{};
     [SerializeField] List<Image> imagesPlaceHolder = new List<Image>{};
@@ -45,7 +47,7 @@ public class Memory_Puzzle : MonoBehaviour
         yield return new WaitForSeconds(5f);
         foreach(Image placeholder in imagesPlaceHolder)
         {
-            placeholder.sprite = null;
+            placeholder.sprite = imageSprite;
         }
         enableButtons(buttons);
     }
@@ -121,7 +123,7 @@ public class Memory_Puzzle : MonoBehaviour
             disableButtons(buttons);
             if(CheckWinCondition())
             {
-                Debug.Log("Win");
+                gameWonPanel.SetActive(true);
                 playerValues.Clear();
             }
             else
@@ -135,5 +137,11 @@ public class Memory_Puzzle : MonoBehaviour
     bool CheckWinCondition()
     {
         return Enumerable.SequenceEqual(correctValues,playerValues);
+    }
+    public void ExitClicked()
+    {
+        playerValues.Clear();
+        startButton.interactable = true;
+        disableButtons(buttons);
     }
 }

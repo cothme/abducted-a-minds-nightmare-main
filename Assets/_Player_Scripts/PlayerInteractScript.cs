@@ -18,13 +18,13 @@ public class PlayerInteractScript : MonoBehaviour
     [SerializeField] GameObject normalCamera;
     [SerializeField] GameObject aimCamera;
     [SerializeField] Canvas mainCanvas;
-    //[SerializeField] GameObject bag;
     [SerializeField] PlayableDirector doorUnlockedPlayableDirector;
     [SerializeField] PlayableDirector bossAppear;
     [SerializeField] Canvas interactCanvas;
     [SerializeField] Image storyImage;
     [SerializeField] Canvas puzzleOneCanvas;
     [SerializeField] Canvas puzzleTwoCanvas;
+    [SerializeField] Canvas puzzleThreeCanvas;
     [SerializeField] Canvas storyCanvas;
     [SerializeField] TextMeshProUGUI itemNameUI;
     [SerializeField] TextMeshProUGUI storyText;
@@ -47,10 +47,10 @@ public class PlayerInteractScript : MonoBehaviour
     }
     void Update()
     { 
-        if(puzzleOneCanvas.enabled == true || puzzleTwoCanvas.enabled == true)
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
+        // if(puzzleOneCanvas.enabled == true || puzzleTwoCanvas.enabled == true || puzzleThreeCanvas.enabled == true)
+        // {
+        //     Cursor.lockState = CursorLockMode.None;
+        // }
         LookAtItem();
     }
     void LookAtItem()
@@ -186,6 +186,10 @@ public class PlayerInteractScript : MonoBehaviour
             else if(SceneManager.GetActiveScene().name == "level 2")
             {
                 puzzleTwoCanvas.enabled = true;
+            }
+            else if(SceneManager.GetActiveScene().name == "level 3")
+            {
+                puzzleThreeCanvas.enabled = true;
             }
         } 
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Door")
@@ -359,6 +363,10 @@ public class PlayerInteractScript : MonoBehaviour
         }
     }
     public void ExitStoryText()
+    {
+        DisableScripts(false);
+    }
+    public void ExitPuzzle3()
     {
         DisableScripts(false);
     }
