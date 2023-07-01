@@ -10,6 +10,8 @@ public class Memory_Puzzle : MonoBehaviour
     public Sprite imageSprite;
     public Button startButton;
     public GameObject gameWonPanel;
+    public GameObject rifle;
+    public GameObject puzzleObject;
     [SerializeField] List<Button> buttons;
     [SerializeField] List<Sprite> images = new List<Sprite>{};
     [SerializeField] List<Image> imagesPlaceHolder = new List<Image>{};
@@ -124,7 +126,10 @@ public class Memory_Puzzle : MonoBehaviour
             if(CheckWinCondition())
             {
                 gameWonPanel.SetActive(true);
+                rifle.SetActive(true);
                 playerValues.Clear();
+                PlayerState.Instance.IsPuzzleThreeSolved = true;
+                Destroy(puzzleObject);
             }
             else
             {

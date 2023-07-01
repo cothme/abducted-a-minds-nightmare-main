@@ -25,6 +25,7 @@ TagManager:
   - Fog
   - Button
   - PuzzlePage
+  - Gem
   layers:
   - Default
   - TransparentFX

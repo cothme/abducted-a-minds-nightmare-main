@@ -81,15 +81,6 @@ public class AsyncManager : MonoBehaviour
                 if(Input.GetKeyDown(KeyCode.Space))
                 {
                     loadOperation.allowSceneActivation = true;
-                    XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
-                    StreamReader sr = new StreamReader("Abducted Save File");
-                    DataMembers dm = (DataMembers)loadData.Deserialize(sr);
-                    PlayerData.Instance.PlayerPosition = dm.position;
-                    PlayerData.Instance.PlayerHealth = dm.health;
-                    PlayerData.Instance.IsSessionSaved = dm.isSessionSaved;
-                    ItemList.Instance.Itemlist.Clear();
-                    PlayerData.Instance.Stage = 1;
-                    gameObject.transform.position = PlayerData.Instance.PlayerPosition;
                 }
             }
             yield return null;
