@@ -170,8 +170,8 @@ public class StalkersScript : MonoBehaviour
     private void Die()
     {
         agent.SetDestination(transform.position);
-        anim.Play("Death");
-        Destroy(this.gameObject, deathAnimTime);
+        StartCoroutine(StalkersDeathCoroutine());
+        
     }
     void OnDrawGizmosSelected()
     {
@@ -230,6 +230,7 @@ public class StalkersScript : MonoBehaviour
         Destroy(gameObject);
         PlayerState.Instance.LevelTwoBossDefeated = true;
         levelTwoCutscene.Play();
+        Destroy(gameObject);
         Cursor.lockState = CursorLockMode.None;
     }
 }
