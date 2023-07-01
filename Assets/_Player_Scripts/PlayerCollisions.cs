@@ -49,6 +49,11 @@ public class PlayerCollisions : MonoBehaviour
                 damageCoroutine = StartCoroutine(StartDamageCoroutine());
             }
         }
+        if(col.tag == "Gem")
+        {
+            PlayerData.Instance.GemsCollected+=1;
+            Destroy(col.gameObject);
+        }
     }
     void OnTriggerExit(Collider col)
     {
