@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 
 public class StalkersScriptNormal : MonoBehaviour
 {
-    [SerializeField] Transform attackBehind;
+    Transform attackBehind;
     [SerializeField] GameObject body, hood;
     [SerializeField] Material camo, normalHoodMaterial;
     [SerializeField] Material[] bodyMaterials,camoMaterials;
@@ -22,7 +22,7 @@ public class StalkersScriptNormal : MonoBehaviour
     public float health = 50f;
     public float deathAnimTime;
     NavMeshAgent agent;
-    public Transform playerTransform;
+    Transform playerTransform;
     public LayerMask ground, player;
     bool walkPointSet;
     public float walkPointRange;
@@ -40,6 +40,8 @@ public class StalkersScriptNormal : MonoBehaviour
          body.GetComponent<SkinnedMeshRenderer>().materials = camoMaterials;
         hood.GetComponent<SkinnedMeshRenderer>().material = camo;
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        attackBehind = GameObject.Find("Alex Behind").transform;
     }
     void Update()
     {

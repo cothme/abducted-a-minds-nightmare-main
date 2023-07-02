@@ -17,7 +17,7 @@ public class RunnersScript : MonoBehaviour
     public float health = 50f;
     public float deathAnimTime;
     NavMeshAgent agent;
-    public Transform playerTransform;
+    Transform playerTransform;
     public LayerMask ground, player;
     bool walkPointSet;
     public float walkPointRange;
@@ -32,6 +32,7 @@ public class RunnersScript : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Update()
     {

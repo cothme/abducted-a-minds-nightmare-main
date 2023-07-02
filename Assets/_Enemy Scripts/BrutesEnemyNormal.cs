@@ -21,7 +21,7 @@ public class BrutesEnemyNormal : MonoBehaviour
     public float health = 50f;
     public float deathAnimTime;
     NavMeshAgent agent;
-    public Transform playerTransform;
+    Transform playerTransform;
     public LayerMask ground, player;
     public Vector3 walkPoint;
     bool walkPointSet;
@@ -37,6 +37,7 @@ public class BrutesEnemyNormal : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Update()
     {

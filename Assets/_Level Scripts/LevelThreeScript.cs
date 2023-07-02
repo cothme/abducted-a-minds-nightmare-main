@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class LevelThreeScript : MonoBehaviour
 {
@@ -8,8 +9,8 @@ public class LevelThreeScript : MonoBehaviour
     [SerializeField] GameObject firstDoor;
     [SerializeField] GameObject dialogue1;
     [SerializeField] GameObject bossDoor;
-    float enemiesDefeated;
     [SerializeField] GameObject[] enemies;
+    [SerializeField] PlayableDirector levelThreeDefeatedCutscene;
     bool a = false, b = false;
     float gemsCollectedLvlThree = 0;
     private void Update()
@@ -26,6 +27,10 @@ public class LevelThreeScript : MonoBehaviour
             PlayerState.Instance.LevelThreeCageUnlocked = true;
             bossDoor.tag = "Door";
         }
-        
+        if(enemies[0] == null && enemies[1] == null)
+        {
+            levelThreeDefeatedCutscene.Play();
+            Cursor.lockState = CursorLockMode.None;
+        }   
     }
 }

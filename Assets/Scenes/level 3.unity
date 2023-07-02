@@ -2367,7 +2367,10 @@ MonoBehaviour:
   firstDoor: {fileID: 1939631563}
   dialogue1: {fileID: 1212683563}
   bossDoor: {fileID: 94150600}
-  enemies: []
+  enemies:
+  - {fileID: 1548481532}
+  - {fileID: 1446088727}
+  levelThreeDefeatedCutscene: {fileID: 0}
 --- !u!4 &68957592
 Transform:
   m_ObjectHideFlags: 0
@@ -3799,7 +3802,7 @@ Transform:
   - {fileID: 1347776774}
   - {fileID: 2000723231}
   m_Father: {fileID: 0}
-  m_RootOrder: 86
+  m_RootOrder: 85
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &97592219
 GameObject:
@@ -5252,7 +5255,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 88
+  m_RootOrder: 87
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &137996563
 GameObject:
@@ -14115,7 +14118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &384471599
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20040,7 +20043,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh784022
+  m_Name: pb_Mesh155652
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -29619,7 +29622,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh783120
+  m_Name: pb_Mesh154714
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -35480,7 +35483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &932445394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35512,7 +35515,7 @@ MonoBehaviour:
   walkPointRange: 1
   attackDelay: 3
   alertTime: 3
-  sightRange: 9.6
+  sightRange: 14.92
   attackRange: 2.09
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -36117,7 +36120,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 6
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -36156,7 +36159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932445393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -372.7, y: 11.3, z: 63.8}
+  m_LocalPosition: {x: -379.4, y: 11.3, z: 69.4}
   m_LocalScale: {x: 0.46065, y: 0.46065, z: 0.46065}
   m_Children:
   - {fileID: 1231851911}
@@ -46629,7 +46632,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh785476
+  m_Name: pb_Mesh157166
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -53067,7 +53070,7 @@ Transform:
   - {fileID: 1118628584}
   - {fileID: 1306610905}
   m_Father: {fileID: 0}
-  m_RootOrder: 87
+  m_RootOrder: 86
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1104767992
 GameObject:
@@ -58665,7 +58668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1243173789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58697,7 +58700,7 @@ MonoBehaviour:
   walkPointRange: 1
   attackDelay: 3
   alertTime: 3
-  sightRange: 9.6
+  sightRange: 22.53
   attackRange: 2.09
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -59302,7 +59305,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 6
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -59341,7 +59344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243173788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -372.7, y: 11.3, z: 95.59}
+  m_LocalPosition: {x: -376, y: 11.3, z: 113.3}
   m_LocalScale: {x: 0.46065, y: 0.46065, z: 0.46065}
   m_Children:
   - {fileID: 832798847}
@@ -61968,7 +61971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1314022676
 AudioSource:
   m_ObjectHideFlags: 0
@@ -65084,7 +65087,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh787068
+  m_Name: pb_Mesh158878
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -66900,7 +66903,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &1446088728
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -67472,7 +67475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1452443852
 AudioSource:
   m_ObjectHideFlags: 0
@@ -72914,7 +72917,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1548481533
 AudioSource:
   m_ObjectHideFlags: 0
@@ -73597,7 +73600,7 @@ Transform:
   - {fileID: 1727618402}
   - {fileID: 35236934}
   m_Father: {fileID: 0}
-  m_RootOrder: 85
+  m_RootOrder: 88
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1551128337
 GameObject:
@@ -74691,7 +74694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1575906630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81179,7 +81182,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh785224
+  m_Name: pb_Mesh156910
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

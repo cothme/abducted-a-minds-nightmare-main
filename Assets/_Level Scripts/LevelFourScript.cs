@@ -1,0 +1,73 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+public class LevelFourScript : MonoBehaviour
+{
+    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] Transform[] enemySpawnPoints;
+    [SerializeField] GameObject[] enemyToSpawn;
+    bool levelInitiate = false;
+    bool canSpawnEnemy = false;
+    float timeRemaining = 180f;
+    private void Start()
+    {
+        InvokeRepeating("SpawnEnemy",0f,5f);
+    }
+    private void Update()
+    {
+        if(levelInitiate == true)
+        {
+            RunTimer();
+        }
+    }
+    private void DisplayTime(float timeToDisplay)
+    {
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);  
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+    private void RunTimer()
+    {
+        DisplayTime(timeRemaining);
+        if (timeRemaining > 0)
+        {
+            canSpawnEnemy = true;
+            timeRemaining -= Time.deltaTime;
+        }
+        else
+        {
+            canSpawnEnemy = false;
+            timeRemaining = 0;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            levelInitiate = true;
+        }
+    }
+    void SpawnEnemy()
+    {
+        if(canSpawnEnemy == true)
+        {
+            int randomSpawnEnemy = Random.Range(0,2);
+            int randomSpawnLocation = Random.Range(0,3);
+            Instantiate(enemyToSpawn[randomSpawnEnemy],enemySpawnPoints[randomSpawnLocation]);
+        } 
+    }
+    IEnumerator SpawnEnemyCoroutine()
+    {
+        if(canSpawnEnemy)
+        {
+            int randomSpawnEnemy = Random.Range(0,2);
+            int randomSpawnLocation = Random.Range(0,3);
+            Instantiate(enemyToSpawn[randomSpawnEnemy],enemySpawnPoints[randomSpawnLocation]);
+            canSpawnEnemy = false;
+        }
+        yield return new WaitForSeconds(3f);
+        canSpawnEnemy = true;
+    }
+}
