@@ -17,6 +17,7 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] GameObject oxygenIcon;
     [SerializeField] Canvas deathCanvas;
     [SerializeField] public Canvas mainCanvas;
+    [SerializeField] AudioSource generalSound;
     Coroutine damageCoroutine;
     private bool isDamaging = false;
     private void OnCollisionEnter(Collision col)
@@ -51,6 +52,7 @@ public class PlayerCollisions : MonoBehaviour
         }
         if(col.tag == "Gem")
         {
+            AudioManager.Instance.PlaySound(generalSound, "Gem");
             PlayerData.Instance.GemsCollected+=1;
             Destroy(col.gameObject);
         }

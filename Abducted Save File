@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataMembers xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <level>2</level>
+  <health>22</health>
+  <oxygen>25</oxygen>
+  <rotation>
+    <x>0</x>
+    <y>0.08906056</y>
+    <z>0</z>
+    <w>0.9960262</w>
+    <eulerAngles>
+      <x>-0</x>
+      <y>10.2191277</y>
+      <z>0</z>
+    </eulerAngles>
+  </rotation>
+  <position>
+    <x>98.97069</x>
+    <y>62.3997459</y>
+    <z>-928.433655</z>
+  </position>
+  <gemsCollected>0</gemsCollected>
+  <bulletsLoaded>0</bulletsLoaded>
+  <totalBullets>30</totalBullets>
+  <isSessionSaved>true</isSessionSaved>
+  <aiming>false</aiming>
+  <reloading>false</reloading>
+  <running>false</running>
+  <isPuzzleOneSolved>false</isPuzzleOneSolved>
+  <levelOneDoorUnlocked>false</levelOneDoorUnlocked>
+  <levelOneCageUnlocked>false</levelOneCageUnlocked>
+  <canEquipPistol>true</canEquipPistol>
+  <canEquipShotgun>false</canEquipShotgun>
+  <canEquipKnife>false</canEquipKnife>
+  <canEquipRifle>false</canEquipRifle>
+  <paused>false</paused>
+  <itemList>
+    <int>3</int>
+    <int>4</int>
+    <int>5</int>
+    <int>9</int>
+    <int>0</int>
+  </itemList>
+  <playerMaxHealth>0</playerMaxHealth>
+</DataMembers>
