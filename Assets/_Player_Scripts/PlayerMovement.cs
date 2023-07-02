@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {   
     Animator animator;
-    float playerSpeed = 6.0f;
+    public float playerSpeed = 6.0f;
+    public float runSpeed = 20f;
     float gravityValue = -9.81f;
     float rotationSpeed = 4f;
     CharacterController controller;
@@ -66,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
             playerSpeed += 2f;
             if (playerSpeed >= 10f)
             {
-                playerSpeed = 20f;
+                playerSpeed = runSpeed;
             }
         }
         if (Input.GetKeyUp(KeyCode.LeftShift) || movementDirection == Vector2.zero)

@@ -348,7 +348,11 @@ public class PlayerInteractScript : MonoBehaviour
                 bossAppear.Play();
                 PlayerState.Instance.LevelTwoCageUnlocked = true;
             }
-            
+            if(PlayerData.Instance.Stage == 3)
+            {
+                bossAppear.Play();
+                PlayerState.Instance.LevelThreeCageUnlocked = true;
+            }  
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Button")
         {
