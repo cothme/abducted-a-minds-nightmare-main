@@ -14342,7 +14342,6 @@ MonoBehaviour:
   alertSound: {fileID: 384471599}
   health: 75
   deathAnimTime: 1.2
-  playerTransform: {fileID: 1198622346}
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -18452,7 +18451,6 @@ MonoBehaviour:
   alertSound: {fileID: 458413925}
   health: 75
   deathAnimTime: 1.2
-  playerTransform: {fileID: 1198622346}
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -24082,6 +24080,18 @@ PrefabInstance:
     - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
       propertyPath: m_RootOrder
       value: 67
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35504,7 +35514,6 @@ MonoBehaviour:
   brutesHit: {fileID: 932445395}
   health: 75
   deathAnimTime: 5
-  playerTransform: {fileID: 1198622346}
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -57310,6 +57319,7 @@ MonoBehaviour:
   oxygenIcon: {fileID: 1449200618}
   deathCanvas: {fileID: 1127071620}
   mainCanvas: {fileID: 697185976}
+  generalSound: {fileID: 1198622335}
 --- !u!114 &1198622338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58689,7 +58699,6 @@ MonoBehaviour:
   brutesHit: {fileID: 1243173790}
   health: 75
   deathAnimTime: 5
-  playerTransform: {fileID: 1198622346}
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -62195,7 +62204,6 @@ MonoBehaviour:
   alertSound: {fileID: 1314022676}
   health: 75
   deathAnimTime: 1.2
-  playerTransform: {fileID: 1198622346}
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -66930,7 +66938,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c158d36a5d2ecc49bd16e7110876250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackBehind: {fileID: 607798502}
   body: {fileID: 1120842426}
   hood: {fileID: 160997453}
   camo: {fileID: 2100000, guid: 127bafbc3e6f8594984b3bd92d8c7bc1, type: 2}
@@ -66951,7 +66958,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 02beca1a9d0de3241b16c7d883cfe4bd, type: 2}
   health: 125
   deathAnimTime: 4
-  playerTransform: {fileID: 1198622346}
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -67699,7 +67705,6 @@ MonoBehaviour:
   alertSound: {fileID: 1452443852}
   health: 75
   deathAnimTime: 1.2
-  playerTransform: {fileID: 1198622346}
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -74715,7 +74720,6 @@ MonoBehaviour:
   brutesHit: {fileID: 1575906631}
   health: 75
   deathAnimTime: 5
-  playerTransform: {fileID: 1198622346}
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -86407,7 +86411,6 @@ MonoBehaviour:
   alertSound: {fileID: 1883807522}
   health: 75
   deathAnimTime: 1.2
-  playerTransform: {fileID: 1198622346}
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -87083,21 +87086,27 @@ MonoBehaviour:
   - {fileID: 11400000, guid: af263afb3c931ea46a5f6b85fe564dca, type: 2}
   - {fileID: 11400000, guid: 9feaf26838502e042b4b66af6a7eadbe, type: 2}
   - {fileID: 11400000, guid: 85829ac5afb29eb438b9dd2dfcaaba61, type: 2}
-  - {fileID: 11400000, guid: 13f4a5e0d75a25d4d9f0cc3ff0927db4, type: 2}
-  - {fileID: 11400000, guid: c1906982c6890da49afbbef3693b19e8, type: 2}
   - {fileID: 11400000, guid: 093650d5e4eace042840a9665f0c1bfe, type: 2}
   - {fileID: 11400000, guid: bb63bc74a0c7bef4589236a57a9ace2e, type: 2}
-  - {fileID: 11400000, guid: cbc86d78c86d9f54ca3d4784741950ed, type: 2}
   - {fileID: 11400000, guid: 1ce36ae85c01e4e439ba82b14b6fa8a3, type: 2}
+  - {fileID: 11400000, guid: cbc86d78c86d9f54ca3d4784741950ed, type: 2}
+  - {fileID: 11400000, guid: 13f4a5e0d75a25d4d9f0cc3ff0927db4, type: 2}
+  - {fileID: 11400000, guid: c1906982c6890da49afbbef3693b19e8, type: 2}
   - {fileID: 11400000, guid: 59c5f3702a1f29e4c9edb15982deb26c, type: 2}
   - {fileID: 11400000, guid: d8498193723e6f145bd19e5efe6fab00, type: 2}
   - {fileID: 11400000, guid: 9ff9c3331f276cd498983324b67611ba, type: 2}
-  - {fileID: 11400000, guid: 1b6dbf35aea1b9848b8bdb0c69867c51, type: 2}
   - {fileID: 11400000, guid: c964d968278534445877224b8bdce75e, type: 2}
+  - {fileID: 11400000, guid: 9ff9c3331f276cd498983324b67611ba, type: 2}
+  - {fileID: 11400000, guid: f3e4e27ac79893943938326f6e957727, type: 2}
+  - {fileID: 11400000, guid: 693d2b423670fd44f9eef878a3677d7c, type: 2}
+  - {fileID: 11400000, guid: 6718fce6d0b7ff843a2781843454c2bf, type: 2}
+  - {fileID: 11400000, guid: 258823e903061604c9019fe9034b6293, type: 2}
+  - {fileID: 11400000, guid: 7f852c11b2db04c4486e33cbe298a0e9, type: 2}
   - {fileID: 11400000, guid: 959b6f3af6e9e0042ac5c17130c39791, type: 2}
   - {fileID: 11400000, guid: a3c5fc0e6d2dbc445bf1265ee857fad1, type: 2}
   - {fileID: 11400000, guid: d89774600d125a843b91b2b37f276f45, type: 2}
   - {fileID: 11400000, guid: 8d177b3dfdec96647bd0652a2666491f, type: 2}
+  - {fileID: 11400000, guid: d7fc5e10f34942742b46de77dd18301e, type: 2}
 --- !u!4 &1904403020
 Transform:
   m_ObjectHideFlags: 0
@@ -89791,7 +89800,6 @@ MonoBehaviour:
   alertSound: {fileID: 1967436471}
   health: 75
   deathAnimTime: 1.2
-  playerTransform: {fileID: 1198622346}
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -92401,6 +92409,18 @@ PrefabInstance:
     - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
       propertyPath: m_RootOrder
       value: 66
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -95240,16 +95260,28 @@ PrefabInstance:
       value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.40233
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -355.1
       objectReference: {fileID: 0}
     - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.37
+      value: 9.193
       objectReference: {fileID: 0}
     - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 74.47
+      value: 76.393
       objectReference: {fileID: 0}
     - target: {fileID: 7375378976447736689, guid: af2df6a429b552c4187c31a8455a8cd2, type: 3}
       propertyPath: m_LocalRotation.w
