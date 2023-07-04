@@ -27,24 +27,30 @@ public class AsyncManager : MonoBehaviour
     }
     public void ContinueGame()
     {  
-        XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
-        StreamReader sr = new StreamReader("Abducted Save File");
-        DataMembers dm = (DataMembers)loadData.Deserialize(sr); 
-        if(PlayerData.Instance.Stage == 1)
+        try
         {
-            StartCoroutine(LoadLevelContinue("level 1"));
-        }
-        else if(PlayerData.Instance.Stage == 2)
+            XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
+            StreamReader sr = new StreamReader("Abducted Save File");
+            DataMembers dm = (DataMembers)loadData.Deserialize(sr); 
+            if(PlayerData.Instance.Stage == 1)
+            {
+                StartCoroutine(LoadLevelContinue("level 1"));
+            }
+            else if(PlayerData.Instance.Stage == 2)
+            {
+                StartCoroutine(LoadLevelContinue("level 2"));
+            }
+            else if(PlayerData.Instance.Stage == 3)
+            {
+                StartCoroutine(LoadLevelAsync("level 3"));
+            }
+            loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
+            mainMenu.SetActive(false);
+            loadingScreen.SetActive(true);
+        }catch(FileNotFoundException)
         {
-            StartCoroutine(LoadLevelContinue("level 2"));
+            return;
         }
-        else if(PlayerData.Instance.Stage == 3)
-        {
-            StartCoroutine(LoadLevelAsync("level 3"));
-        }
-        loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
-        mainMenu.SetActive(false);
-        loadingScreen.SetActive(true);
     }
     IEnumerator LoadLevelAsync(string levelToLoad)
     {
@@ -127,6 +133,7 @@ public class AsyncManager : MonoBehaviour
         PlayerData.Instance.PlayerRotation = new Quaternion(0,-0.707106829f,0,0.707106829f);
         loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
         loadingScreen.SetActive(true);
+        ItemList.Instance.ClearInventoryItems();
         StartCoroutine(LoadLevelAsync(levelToLoad));
     }
     public void LoadLevelFour(string levelToLoad)
@@ -135,6 +142,7 @@ public class AsyncManager : MonoBehaviour
         PlayerData.Instance.PlayerRotation = new Quaternion(0,-0.707106829f,0,0.707106829f);
         loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
         loadingScreen.SetActive(true);
+        ItemList.Instance.ClearInventoryItems();
         StartCoroutine(LoadLevelAsync(levelToLoad));
     }
     public void QuitClicked()

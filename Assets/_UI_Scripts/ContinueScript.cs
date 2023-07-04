@@ -17,6 +17,6 @@ public class ContinueScript : MonoBehaviour
     }
     void CheckSaveFile()
     {  
-        gameObject.GetComponent<Button>().interactable = File.Exists(Application.dataPath + "Abducted Save File");
+        
     }
 }

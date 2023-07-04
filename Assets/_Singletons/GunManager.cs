@@ -45,6 +45,10 @@ public class GunManager : MonoBehaviour
     }
     private void Update()
     {
+        if(TotalBullets <= 0)
+        {
+            TotalBullets = 0;
+        }
         CheckForWeapon();
     }
     public void shootInGunManager()

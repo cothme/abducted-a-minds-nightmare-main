@@ -40,14 +40,13 @@ public class PlayerData : MonoBehaviour
             // {
             //     Debug.Log(i);
             // }
+
             Debug.Log(PlayerData.Instance.Stage);
             Debug.Log(PlayerData.Instance.PlayerHealth);
-            Debug.Log(PlayerData.Instance.IsSessionSaved);
-            Debug.Log("Can Equip Pistol " + GunManager.Instance.CanUseHealthKit);
-            foreach(InventoryItem i in ItemList.Instance.InventoryItems)
-            {
-                Debug.Log(i.itemData.name);
-            }
+            Debug.Log("Total Bullets: " + GunManager.Instance.TotalBullets);
+            Debug.Log("Magazine: " + GunManager.Instance.Magazine[0]);
+            ItemList.Instance.ClearInventoryItems();
+            
         }
         Stage = Level();
     }

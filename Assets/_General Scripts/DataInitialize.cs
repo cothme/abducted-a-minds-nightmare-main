@@ -27,36 +27,41 @@ public class DataInitialize : MonoBehaviour
     void Start()
     {
         inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
-        if(PlayerData.Instance.IsSessionSaved == true)
+        // XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
+        //     StreamReader sr = new StreamReader("Abducted Save File");
+        //     DataMembers dm = (DataMembers)loadData.Deserialize(sr);  
+        //     PlayerData.Instance.Stage = dm.level;
+        //     PlayerData.Instance.IsSessionSaved = dm.isSessionSaved;
+        //     PlayerData.Instance.PlayerHealth = dm.health;
+        //     PlayerData.Instance.PlayerOxygen= dm.oxygen;
+        //     PlayerData.Instance.PlayerMaxHealth = dm.playerMaxHealth;
+        //     GunManager.Instance.WeaponEquipped = dm.weaponEquipped;
+        //     GunManager.Instance.BulletsLoaded = dm.bulletsLoaded;
+        //     GunManager.Instance.TotalBullets = dm.totalBullets;
+        //     PlayerData.Instance.PlayerPosition = dm.position;
+        //     PlayerData.Instance.PlayerRotation = dm.rotation;
+        //     foreach(int i in dm.itemList)
+        //     {
+        //         ItemList.Instance.AddItem(i);
+        //         inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
+        //     }
+        //     sr.Close();
+        //     ItemList.Instance.AddItem(i);
+        //     inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
+        // }
+        // else
+        // {
+        //     foreach(int i in ItemList.Instance.Itemlist)
+        //     {
+        //         ItemList.Instance.AddItem(i);
+        //         inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
+        //     }
+        // } 
+        foreach(int i in ItemList.Instance.Itemlist)
         {
-            XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
-            StreamReader sr = new StreamReader("Abducted Save File");
-            DataMembers dm = (DataMembers)loadData.Deserialize(sr);  
-            PlayerData.Instance.Stage = dm.level;
-            PlayerData.Instance.IsSessionSaved = dm.isSessionSaved;
-            PlayerData.Instance.PlayerHealth = dm.health;
-            PlayerData.Instance.PlayerOxygen= dm.oxygen;
-            PlayerData.Instance.PlayerMaxHealth = dm.playerMaxHealth;
-            GunManager.Instance.WeaponEquipped = dm.weaponEquipped;
-            GunManager.Instance.BulletsLoaded = dm.bulletsLoaded;
-            GunManager.Instance.TotalBullets = dm.totalBullets;
-            PlayerData.Instance.PlayerPosition = dm.position;
-            PlayerData.Instance.PlayerRotation = dm.rotation;
-            foreach(int i in dm.itemList)
-            {
-                ItemList.Instance.AddItem(i);
-                inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
-            }
-            sr.Close();
+            ItemList.Instance.AddItem(i);
+            inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
         }
-        else
-        {
-            foreach(int i in ItemList.Instance.Itemlist)
-            {
-                ItemList.Instance.AddItem(i);
-                inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
-            }
-        } 
     }
     private void Update()
     {
