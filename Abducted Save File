@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DataMembers xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <level>1</level>
-  <health>25</health>
+  <health>50</health>
   <oxygen>25</oxygen>
   <rotation>
     <x>0</x>
-    <y>0.02599195</y>
+    <y>0.0255483668</y>
     <z>0</z>
-    <w>-0.999662161</w>
+    <w>-0.9996736</w>
     <eulerAngles>
       <x>-0</x>
-      <y>357.0212</y>
+      <y>357.072052</y>
       <z>0</z>
     </eulerAngles>
   </rotation>
   <position>
-    <x>-286.618652</x>
-    <y>12.6493645</y>
-    <z>-12.1204586</z>
+    <x>-286.290741</x>
+    <y>12.6493635</y>
+    <z>-13.2066717</z>
   </position>
   <gemsCollected>0</gemsCollected>
   <bulletsLoaded>0</bulletsLoaded>
@@ -25,7 +25,7 @@
   <isSessionSaved>true</isSessionSaved>
   <aiming>false</aiming>
   <reloading>false</reloading>
-  <running>true</running>
+  <running>false</running>
   <isPuzzleOneSolved>false</isPuzzleOneSolved>
   <levelOneDoorUnlocked>false</levelOneDoorUnlocked>
   <levelOneCageUnlocked>false</levelOneCageUnlocked>
@@ -35,8 +35,8 @@
   <canEquipRifle>false</canEquipRifle>
   <paused>false</paused>
   <itemList>
-    <int>0</int>
     <int>5</int>
+    <int>0</int>
     <int>7</int>
     <int>7</int>
     <int>2</int>
