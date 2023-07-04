@@ -7,7 +7,6 @@ public class Doppelganger_Script : MonoBehaviour
 {
     [SerializeField] AudioSource attack1Sound;
     [SerializeField] AudioSource attack2Sound;
-    [SerializeField] AudioSource alertSound;
     Animator anim;
     bool animationPlayed = false;
     bool walking = false;
@@ -37,11 +36,11 @@ public class Doppelganger_Script : MonoBehaviour
     {
         if(alerted == true)
         {
-            agent.speed = 10;
+            agent.speed = 50;
         }
         else
         {
-            agent.speed = 5;
+            agent.speed = 25;
         }
         if(attacked)
         {
@@ -118,13 +117,13 @@ public class Doppelganger_Script : MonoBehaviour
             if(attackType == 1)
             { 
                 anim.Play("Attack 1");
-                AudioManager.Instance.PlaySound(alertSound, "Runners Attack 1");
+                attack1Sound.Play();
                 attackDelay = 1.80f;
             }
             else 
             { 
                 anim.Play("Attack 2");
-                AudioManager.Instance.PlaySound(alertSound, "Runners Attack 2");
+                attack2Sound.Play();
                 attackDelay = 3.57f;
             }
             attacked = true;
@@ -162,7 +161,6 @@ public class Doppelganger_Script : MonoBehaviour
         {
             agent.SetDestination(this.gameObject.transform.position);
             anim.Play("Alerted");
-            AudioManager.Instance.PlaySound(alertSound,"Runners Alert");
         }
             animationPlayed = true;
         yield return new WaitForSeconds(alertTime);
