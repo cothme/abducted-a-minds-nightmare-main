@@ -13,16 +13,16 @@ public class DataInitialize : MonoBehaviour
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        if(PlayerData.Instance.IsSessionSaved == true)
-        {
-            XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
-            StreamReader sr = new StreamReader("Abducted Save File");
-            DataMembers dm = (DataMembers)loadData.Deserialize(sr);
-            PlayerData.Instance.PlayerPosition = respawnPoint.position;
-            PlayerData.Instance.PlayerRotation = respawnPoint.rotation;
-            gameObject.transform.position = PlayerData.Instance.PlayerPosition;
-            sr.Close();
-        }    
+        // if(PlayerData.Instance.IsSessionSaved == true)
+        // {
+        //     XmlSerializer loadData = new XmlSerializer(typeof(DataMembers));
+        //     StreamReader sr = new StreamReader("Abducted Save File");
+        //     DataMembers dm = (DataMembers)loadData.Deserialize(sr);
+        //     PlayerData.Instance.PlayerPosition = respawnPoint.position;
+        //     PlayerData.Instance.PlayerRotation = respawnPoint.rotation;
+        //     gameObject.transform.position = PlayerData.Instance.PlayerPosition;
+        //     sr.Close();
+        // }    
     }
     void Start()
     {

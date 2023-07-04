@@ -7,8 +7,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {   
     Animator animator;
-    public float playerSpeed = 6.0f;
-    public float runSpeed = 20f;
+    float playerSpeed = 0f;
+    public float walkSpeed = 20f;
+    public float runSpeed = 30f;
     float gravityValue = -9.81f;
     float rotationSpeed = 4f;
     CharacterController controller;
@@ -41,16 +42,19 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(playerSpeed);
         Vector2 movementDirection = movementControl.ReadValue<Vector2>();
         if(movementDirection != Vector2.zero && !PlayerState.Instance.Running)
         {
             PlayerState.Instance.Walking = true;
             gameObject.GetComponent<AudioSource>().enabled = true;
+            playerSpeed = walkSpeed;
         }
         else
         {
             PlayerState.Instance.Walking = false;
             gameObject.GetComponent<AudioSource>().enabled = false;
+            playerSpeed = runSpeed;
         }
         if(PlayerState.Instance.Running)
         {
@@ -67,13 +71,14 @@ public class PlayerMovement : MonoBehaviour
             playerSpeed += 2f;
             if (playerSpeed >= 10f)
             {
-                playerSpeed = runSpeed;
+                
             }
         }
         if (Input.GetKeyUp(KeyCode.LeftShift) || movementDirection == Vector2.zero)
         {
             PlayerState.Instance.Running = false;
-            playerSpeed = 6f;
+            playerSpeed = walkSpeed;
+            
         }
         if (groundedPlayer && playerVelocity.y < 0)
         {
@@ -84,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
         PlayerState.Instance.MovingZ = move.z;
         move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
         move.y = 0;
-
         controller.Move(move * Time.deltaTime * playerSpeed);
 
         playerVelocity.y += gravityValue * Time.deltaTime;

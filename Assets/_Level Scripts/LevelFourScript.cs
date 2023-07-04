@@ -8,15 +8,21 @@ public class LevelFourScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] Transform[] enemySpawnPoints;
     [SerializeField] GameObject[] enemyToSpawn;
+    [SerializeField] Canvas timerCanvas;
     bool levelInitiate = false;
     bool canSpawnEnemy = false;
-    float timeRemaining = 180f;
+    float timeRemaining = 15f;
+    bool timerEnd = false;
     private void Start()
     {
         InvokeRepeating("SpawnEnemy",0f,5f);
     }
     private void Update()
     {
+        if(timerEnd == true)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+        }
         if(levelInitiate == true)
         {
             RunTimer();
@@ -40,12 +46,14 @@ public class LevelFourScript : MonoBehaviour
         {
             canSpawnEnemy = false;
             timeRemaining = 0;
+            timerEnd = true;
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
+            timerCanvas.enabled = true;
             levelInitiate = true;
         }
     }
@@ -53,7 +61,7 @@ public class LevelFourScript : MonoBehaviour
     {
         if(canSpawnEnemy == true)
         {
-            int randomSpawnEnemy = Random.Range(0,2);
+            int randomSpawnEnemy = Random.Range(0,3);
             int randomSpawnLocation = Random.Range(0,3);
             Instantiate(enemyToSpawn[randomSpawnEnemy],enemySpawnPoints[randomSpawnLocation]);
         } 

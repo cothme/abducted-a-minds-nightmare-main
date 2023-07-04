@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 7834574240173458727}
   m_Layer: 0
   m_Name: Runner
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -614,7 +614,7 @@ Transform:
   m_GameObject: {fileID: 7834574240173458732}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2608011, y: 1.2608011, z: 1.2608011}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 7834574241215681519}
   - {fileID: 7834574240107767376}
@@ -650,7 +650,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.27
-  m_Speed: 3
+  m_Speed: 20
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -674,8 +674,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317fdd513a499174e84c7b95a40d8caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack1Sound: {fileID: 0}
-  attack2Sound: {fileID: 0}
+  attack1Sound: {fileID: 7834574240173458726}
+  attack2Sound: {fileID: 7834574240173458727}
   alertSound: {fileID: 7834574240173458727}
   health: 50
   deathAnimTime: 1.2
@@ -688,8 +688,8 @@ MonoBehaviour:
   walkPointRange: 40
   attackDelay: 0
   alertTime: 3
-  sightRange: 30
-  attackRange: 3
+  sightRange: 90
+  attackRange: 15
   playerInSightRange: 0
   playerInAttackRange: 0
   isFacingObstacle: 0

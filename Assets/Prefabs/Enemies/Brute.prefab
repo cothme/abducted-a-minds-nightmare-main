@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 6853988370882006607}
   m_Layer: 0
   m_Name: Brute
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ Transform:
   m_GameObject: {fileID: 134926526070699563}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 1.29, z: 27.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 8056183981104881125}
   - {fileID: 2748951139456243362}
@@ -132,7 +132,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 15
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -764,8 +764,8 @@ MonoBehaviour:
   walkPointRange: 40
   attackDelay: 3
   alertTime: 3
-  sightRange: 30
-  attackRange: 5
+  sightRange: 90
+  attackRange: 15
   playerInSightRange: 0
   playerInAttackRange: 0
   isFacingObstacle: 0
