@@ -13,7 +13,7 @@ public class LevelFourScript : MonoBehaviour
     [SerializeField] GameObject levelFourBossDoor;
     bool levelInitiate = false;
     bool canSpawnEnemy = false;
-    float timeRemaining = 15f;
+    float timeRemaining = 180f;
     bool timerEnd = false;
     private void Start()
     {

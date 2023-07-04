@@ -118,6 +118,7 @@ public class AsyncManager : MonoBehaviour
         PlayerData.Instance.PlayerRotation = new Quaternion(0,0.707106829f,0f,0.707106829f);
         loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
         loadingScreen.SetActive(true);
+        ItemList.Instance.ClearInventoryItems();
         StartCoroutine(LoadLevelAsync(levelToLoad));
     }
     public void LoadLevelThree(string levelToLoad)
