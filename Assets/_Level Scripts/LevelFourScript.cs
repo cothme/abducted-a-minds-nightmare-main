@@ -9,6 +9,8 @@ public class LevelFourScript : MonoBehaviour
     [SerializeField] Transform[] enemySpawnPoints;
     [SerializeField] GameObject[] enemyToSpawn;
     [SerializeField] Canvas timerCanvas;
+    [SerializeField] GameObject blockDoor;
+    [SerializeField] GameObject levelFourBossDoor;
     bool levelInitiate = false;
     bool canSpawnEnemy = false;
     float timeRemaining = 15f;
@@ -22,6 +24,8 @@ public class LevelFourScript : MonoBehaviour
         if(timerEnd == true)
         {
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            blockDoor.SetActive(false);
+            levelFourBossDoor.tag = "Door";
         }
         if(levelInitiate == true)
         {
@@ -55,6 +59,7 @@ public class LevelFourScript : MonoBehaviour
         {
             timerCanvas.enabled = true;
             levelInitiate = true;
+            blockDoor.SetActive(true);
         }
     }
     void SpawnEnemy()
