@@ -458,7 +458,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 746, y: -272}
+  m_AnchoredPosition: {x: 474.8, y: -252.5}
   m_SizeDelta: {x: -1739.8737, y: -979}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &270157652
@@ -496,7 +496,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Survey
+  m_text: 'In partnership with:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9822cf6b94a94d24fb5c8a618ebb3caa, type: 2}
   m_sharedMaterial: {fileID: 8187282920697697622, guid: 9822cf6b94a94d24fb5c8a618ebb3caa, type: 2}
@@ -3253,7 +3253,7 @@ GameObject:
   - component: {fileID: 1173484139}
   - component: {fileID: 1173484138}
   m_Layer: 5
-  m_Name: QR Code
+  m_Name: Picture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3268,14 +3268,14 @@ RectTransform:
   m_GameObject: {fileID: 1173484136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3707486, y: 1.3707486, z: 1.3707486}
+  m_LocalScale: {x: 1.6839648, y: 1.6839648, z: 1.6839648}
   m_Children: []
   m_Father: {fileID: 1698289771}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 782, y: -376}
+  m_AnchoredPosition: {x: 775, y: -372.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1173484138
@@ -3298,7 +3298,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: df7b89d46f6a7d44ea6de538340827b0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 459704ed28f0bb348af1cfb4632a3acf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
