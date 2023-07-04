@@ -42,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(playerSpeed);
         Vector2 movementDirection = movementControl.ReadValue<Vector2>();
         if(movementDirection != Vector2.zero && !PlayerState.Instance.Running)
         {

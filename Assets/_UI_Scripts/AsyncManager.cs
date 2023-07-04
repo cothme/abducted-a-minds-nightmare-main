@@ -122,7 +122,19 @@ public class AsyncManager : MonoBehaviour
     }
     public void LoadLevelThree(string levelToLoad)
     {
-
+        PlayerData.Instance.PlayerPosition = new Vector3(-311.959991f,10.7010002f,73.3700027f);
+        PlayerData.Instance.PlayerRotation = new Quaternion(0,-0.707106829f,0,0.707106829f);
+        loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
+        loadingScreen.SetActive(true);
+        StartCoroutine(LoadLevelAsync(levelToLoad));
+    }
+    public void LoadLevelFour(string levelToLoad)
+    {
+        PlayerData.Instance.PlayerPosition = new Vector3(7,22.3600006f,2.4000001f);
+        PlayerData.Instance.PlayerRotation = new Quaternion(0,-0.707106829f,0,0.707106829f);
+        loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
+        loadingScreen.SetActive(true);
+        StartCoroutine(LoadLevelAsync(levelToLoad));
     }
     public void QuitClicked()
     {
