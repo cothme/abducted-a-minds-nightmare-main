@@ -15,5 +15,5 @@ MonoBehaviour:
   reloadSpeed: 2.5
   damage: 15
   attackSpeed: 0.3
-  capacity: 6
+  capacity: 10
   weaponRecoil: 5

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rifle
   m_EditorClassIdentifier: 
   reloadSpeed: 3.7
-  damage: 10
+  damage: 7
   attackSpeed: 0.1
-  capacity: 20
+  capacity: 30
   weaponRecoil: 3
