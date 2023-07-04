@@ -1056,7 +1056,7 @@ MonoBehaviour:
   m_EditorSettings:
     m_Framerate: 60
     m_ScenePreview: 1
-  m_DurationMode: 1
+  m_DurationMode: 0
   m_MarkerTrack: {fileID: -1757533879107195599}
 --- !u!114 &381696524862040817
 MonoBehaviour:
@@ -1325,7 +1325,7 @@ MonoBehaviour:
     m_DisplayName: Active
   m_Markers:
     m_Objects: []
-  m_PostPlaybackState: 3
+  m_PostPlaybackState: 0
 --- !u!114 &4784089922733358907
 MonoBehaviour:
   m_ObjectHideFlags: 1
