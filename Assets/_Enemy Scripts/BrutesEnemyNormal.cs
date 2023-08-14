@@ -16,6 +16,7 @@ public class BrutesEnemyNormal : MonoBehaviour
     bool knocked;
     Animator anim;
     bool animationPlayed = false;
+    bool dead = false;
     bool walking = false;
     int attackType;
     public float health = 50f;
@@ -41,13 +42,13 @@ public class BrutesEnemyNormal : MonoBehaviour
     }
     void Update()
     {
-        if(knocked)
+        if(knocked || dead)
         {
-            agent.SetDestination(this.gameObject.transform.position);
+            agent.SetDestination(gameObject.transform.position);
         }
         if(attacked)
         {
-            agent.SetDestination(this.gameObject.transform.position);
+            agent.SetDestination(gameObject.transform.position);
         }
         if(transform.position != Vector3.zero && !attacked)
         {
@@ -148,6 +149,10 @@ public class BrutesEnemyNormal : MonoBehaviour
             attacked = true;
             Invoke(nameof(ResetAttack),attackDelay);
         }
+        else if(dead)
+        {
+            return;
+        }
     }
     void ResetAttack()
     {
@@ -162,7 +167,10 @@ public class BrutesEnemyNormal : MonoBehaviour
     }
     private void Die()
     {
+        anim.StopPlayback();
+        anim.Play("Death");
         agent.SetDestination(gameObject.transform.position);
+        dead = true;
         Destroy(gameObject,deathAnimTime);
     }
     void OnDrawGizmosSelected()

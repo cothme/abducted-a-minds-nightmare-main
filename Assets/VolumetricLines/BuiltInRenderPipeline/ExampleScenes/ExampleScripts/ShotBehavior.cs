@@ -16,8 +16,8 @@ public class ShotBehavior : MonoBehaviour {
 	}
 	void OnCollisionEnter(Collision other)
 	{
-		GameObject hitObject = Instantiate(hitEffect,gameObject.transform.position,gameObject.transform.rotation);
-		Destroy(hitObject,0.8f);
+		// GameObject hitObject = Instantiate(hitEffect,gameObject.transform.position,gameObject.transform.rotation);
+		// Destroy(hitObject,0.8f);
 		Destroy(gameObject);
 	}
 }

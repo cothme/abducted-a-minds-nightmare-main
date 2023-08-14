@@ -42,6 +42,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKey(KeyCode.LeftAlt))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
         Vector2 movementDirection = movementControl.ReadValue<Vector2>();
         if(movementDirection != Vector2.zero && !PlayerState.Instance.Running)
         {

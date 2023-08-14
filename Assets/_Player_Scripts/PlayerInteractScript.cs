@@ -52,6 +52,14 @@ public class PlayerInteractScript : MonoBehaviour
         //     Cursor.lockState = CursorLockMode.None;
         // }
         LookAtItem();
+                if(Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log(PlayerState.Instance.CanStoreItem);
+            foreach(int i in ItemList.Instance.Itemlist)
+            {
+                Debug.Log(i);
+            }
+        }
     }
     void LookAtItem()
     {
@@ -166,12 +174,20 @@ public class PlayerInteractScript : MonoBehaviour
     {       
         if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "Item")
         {
-            AudioManager.Instance.PlaySound(generalSound,"Pick Up");
-            gameObject.GetComponent<Animator>().Play("Pick Up Item");
             ItemList.Instance.AddItem(itemName);
-            inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
+            inventoryController.ShowRandomItem(ItemList.Instance.Itemlist.Last());
             interactCanvas.enabled = false;
-            itemObject.SetActive(false);
+            if(PlayerState.Instance.CanStoreItem)
+            {
+                AudioManager.Instance.PlaySound(generalSound,"Pick Up");
+                inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
+                gameObject.GetComponent<Animator>().Play("Pick Up Item");
+                itemObject.SetActive(false);
+            }
+            else
+            {
+                ItemList.Instance.DropItem(itemName);
+            }        
         }
     }
     void Interact(GameObject gameObject, string colliderTag)

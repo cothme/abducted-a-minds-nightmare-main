@@ -20,10 +20,12 @@ public class PlayerState : MonoBehaviour
     private bool isPuzzleThreeSolved = false;
     private bool levelOneBossDefeated = false;
     private bool levelTwoBossDefeated = false;
+    private int levelThreeBossDefeated = 0;
     private bool walking;
     private bool isReading = false;
     private bool isDead = false;
     private bool isUVOn = false;
+    private bool canStoreItem = true;
     public bool Aiming { get => aiming; set => aiming = value; }
     public bool Reloading { get => reloading; set => reloading = value; }
     public bool Running { get => running; set => running = value; }
@@ -43,6 +45,8 @@ public class PlayerState : MonoBehaviour
     public bool LevelTwoBossDefeated { get => levelTwoBossDefeated; set => levelTwoBossDefeated = value; }
     public bool IsPuzzleThreeSolved { get => isPuzzleThreeSolved; set => isPuzzleThreeSolved = value; }
     public bool LevelThreeCageUnlocked { get => levelThreeCageUnlocked; set => levelThreeCageUnlocked = value; }
+    public int LevelThreeBossDefeated { get => levelThreeBossDefeated; set => levelThreeBossDefeated = value; }
+    public bool CanStoreItem { get => canStoreItem; set => canStoreItem = value; }
 
     private void Awake()
     {

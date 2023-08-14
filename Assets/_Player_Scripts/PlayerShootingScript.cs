@@ -360,7 +360,6 @@ public class PlayerShootingScript : MonoBehaviour
         if(GunManager.Instance.CanUseFlashlight)
         {
             AudioManager.Instance.PlaySound(generalSound, "Flashlight");
-            Debug.Log(flashLightNumber + " " + GunManager.Instance.CanUseFlashlight);
             flashLightNumber++;
             flashLightOn = !flashLightOn;
             if(flashLightNumber == 1 && flashLightOn)

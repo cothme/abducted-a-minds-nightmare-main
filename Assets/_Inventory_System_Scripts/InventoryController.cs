@@ -49,6 +49,7 @@ public class InventoryController : MonoBehaviour
     }
     void Update()
     {
+        // CheckSpace(selectedItem);
         if(Input.GetKeyDown(KeyCode.R))
         {
             RotateItem();
@@ -94,6 +95,16 @@ public class InventoryController : MonoBehaviour
             // inventoryHighlight.Show(false);
             Destroy(item.gameObject);
         }
+        Vector2Int? posOnGrid = selectedItemGrid.FindSpaceForObject(item);
+        if(posOnGrid == null)
+        { 
+            PlayerState.Instance.CanStoreItem = false;
+            return;
+        } 
+        else 
+        { 
+            PlayerState.Instance.CanStoreItem = true;
+        }
     }
     private void RotateItem()
     {
@@ -104,6 +115,16 @@ public class InventoryController : MonoBehaviour
         else 
         { 
             selectedItem.Rotate(); 
+            Vector2Int? posOnGrid = selectedItemGrid.FindSpaceForObject(selectedItem);
+            if(posOnGrid == null)
+            { 
+                PlayerState.Instance.CanStoreItem = false;
+                return;
+            } 
+            else 
+            { 
+                PlayerState.Instance.CanStoreItem = true;
+            }
         }
     }
     public void InsertRandomItem(int itemID)
@@ -112,17 +133,57 @@ public class InventoryController : MonoBehaviour
         CreateItem(itemID);
         ItemList.Instance.InventoryItems.Add(selectedItem);
         InventoryItem itemToInsert = selectedItem;
+        Debug.Log(CheckSpace(selectedItem));
         selectedItem = null;
         InsertItem(itemToInsert);
+    }
+    public void ShowRandomItem(int itemID)
+    {
+        CreateItem(itemID);
+        InventoryItem item = selectedItem;
+        PlayerState.Instance.CanStoreItem =  CheckSpace(item);
+        selectedItem = null;
+    }
+    public bool CheckSpace(InventoryItem item)
+    {
+        Vector2Int? posOnGrid = selectedItemGrid.FindSpaceForObject(item);
+        if(posOnGrid == null)
+        { 
+            return false;
+        } 
+        else 
+        { 
+            return true;
+        }
     }
 
     private void InsertItem(InventoryItem itemToInsert)
     {
         Vector2Int? posOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
 
-        if(posOnGrid == null) { return; }
+        if(posOnGrid == null)
+        { 
+            Debug.Log("No space!"); 
+            PlayerState.Instance.CanStoreItem = false;
+            return;
+        } 
+        else 
+        { 
+            selectedItemGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
+            PlayerState.Instance.CanStoreItem = true;
+        }
+        Vector2Int? posOnGrid2 = selectedItemGrid.FindSpaceForObject(itemToInsert);
 
-        selectedItemGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
+        if(posOnGrid2 == null)
+        { 
+            Debug.Log("No space!"); 
+            PlayerState.Instance.CanStoreItem = false;
+            return;
+        } 
+        else 
+        { 
+            PlayerState.Instance.CanStoreItem = true;
+        }
     }
 
     Vector2Int oldPosition;

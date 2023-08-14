@@ -49,6 +49,7 @@ public class AsyncManager : MonoBehaviour
             loadingScreen.SetActive(true);
         }catch(FileNotFoundException)
         {
+            Debug.Log("File not found!");
             return;
         }
     }
