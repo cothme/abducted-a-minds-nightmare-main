@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -163,7 +164,6 @@ public class InventoryController : MonoBehaviour
 
         if(posOnGrid == null)
         { 
-            Debug.Log("No space!"); 
             PlayerState.Instance.CanStoreItem = false;
             return;
         } 
@@ -176,6 +176,7 @@ public class InventoryController : MonoBehaviour
 
         if(posOnGrid2 == null)
         { 
+            
             Debug.Log("No space!"); 
             PlayerState.Instance.CanStoreItem = false;
             return;

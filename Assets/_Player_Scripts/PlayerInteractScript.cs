@@ -14,6 +14,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerInteractScript : MonoBehaviour
 {
+    [SerializeField] Canvas inventoryFullCanvas;
     [SerializeField] GameObject bag;
     [SerializeField] GameObject normalCamera;
     [SerializeField] GameObject aimCamera;
@@ -186,6 +187,7 @@ public class PlayerInteractScript : MonoBehaviour
             }
             else
             {
+                StartCoroutine(FullInventoryCoroutine());
                 ItemList.Instance.DropItem(itemName);
             }        
         }
@@ -427,5 +429,11 @@ public class PlayerInteractScript : MonoBehaviour
             gameObject.GetComponent<PlayerInventory>().enabled = true;
             Camera.main.GetComponent<CinemachineBrain>().enabled = true;
         }
+    }
+    IEnumerator FullInventoryCoroutine()
+    {
+        inventoryFullCanvas.enabled = true;
+        yield return new WaitForSeconds(3f);
+        inventoryFullCanvas.enabled = false;
     }
 }
