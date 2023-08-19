@@ -2355,8 +2355,8 @@ MonoBehaviour:
   walkPointRange: 1
   attackDelay: 3
   alertTime: 2
-  sightRange: 90
-  attackRange: 15
+  sightRange: 10
+  attackRange: 2
   playerInSightRange: 0
   playerInAttackRange: 0
   isFacingObstacle: 0
@@ -2554,7 +2554,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 528993523776601753}
-  - component: {fileID: 8928044741394680563}
+  - component: {fileID: 6121216300548465952}
+  - component: {fileID: 884613457772838521}
   m_Layer: 0
   m_Name: jnt_end_r_wrist01
   m_TagString: Attack
@@ -2581,8 +2582,8 @@ Transform:
   m_Father: {fileID: 7987679694050440321}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -19.988453, y: 16.932432, z: -160.5369}
---- !u!135 &8928044741394680563
-SphereCollider:
+--- !u!136 &6121216300548465952
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2591,9 +2592,26 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+  m_Radius: 0.15852316
+  m_Height: 2.5576522
+  m_Direction: 1
+  m_Center: {x: -0.00000063389814, y: 0.11270609, z: -0.108849205}
+--- !u!54 &884613457772838521
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662321366526133079}
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &8189713995895499529
 GameObject:
   m_ObjectHideFlags: 0
@@ -3070,7 +3088,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2080943572105110270}
-  - component: {fileID: 7443632025601643187}
+  - component: {fileID: 1372476992976440924}
+  - component: {fileID: 7581252063255369509}
   m_Layer: 0
   m_Name: jnt_end_l_wrist01
   m_TagString: Attack
@@ -3097,8 +3116,8 @@ Transform:
   m_Father: {fileID: 4279520293834943454}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 4.4782267, y: -0.90077615, z: -129.21497}
---- !u!135 &7443632025601643187
-SphereCollider:
+--- !u!136 &1372476992976440924
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3107,9 +3126,26 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Height: 1.8362014
+  m_Direction: 1
+  m_Center: {x: -0.000000020491855, y: -0.4180994, z: 0.00000016906945}
+--- !u!54 &7581252063255369509
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9073292190271105675}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &9117990286069338363
 GameObject:
   m_ObjectHideFlags: 0

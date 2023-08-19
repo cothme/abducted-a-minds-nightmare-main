@@ -24,8 +24,7 @@ public class PlayerCollisions : MonoBehaviour
     {
         if(col.collider.tag == "Attack")
         {
-            PlayerData.Instance.PlayerHealth -= 3f;
-            Debug.Log("Hit!!");
+            // PlayerData.Instance.PlayerHealth -= 3f;
             int hitNumber = Random.Range(1,4);
             if(hitNumber == 1)
             {
@@ -34,10 +33,6 @@ public class PlayerCollisions : MonoBehaviour
             else if(hitNumber == 2)
             {
                 gameObject.GetComponent<Animator>().Play("Hit 2");
-            }
-            else if(hitNumber == 3)
-            {
-                gameObject.GetComponent<Animator>().Play("Hit 3");
             }
         }    
     }
@@ -100,6 +95,8 @@ public class PlayerCollisions : MonoBehaviour
     }
     public void RespawnClicked()
     {
+        gameObject.transform.position = respawnPoint.position;
+        gameObject.transform.rotation = respawnPoint.rotation;
         PlayerState.Instance.IsDead = false;
         gameObject.GetComponent<PlayerMovement>().enabled = true;
         gameObject.GetComponent<PlayerShootingScript>().enabled = true;
@@ -107,8 +104,6 @@ public class PlayerCollisions : MonoBehaviour
         gameObject.GetComponent<PlayerInventory>().enabled = true;
         Camera.main.GetComponent<CinemachineBrain>().enabled = true;
         PlayerData.Instance.PlayerHealth = PlayerData.Instance.PlayerMaxHealth;
-        gameObject.transform.position = respawnPoint.position;
-        gameObject.transform.rotation = respawnPoint.rotation;
         Cursor.lockState = CursorLockMode.Locked;
         deathCanvas.enabled = false;
         mainCanvas.enabled = true;

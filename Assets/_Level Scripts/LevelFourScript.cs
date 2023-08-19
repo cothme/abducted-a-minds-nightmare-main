@@ -13,7 +13,7 @@ public class LevelFourScript : MonoBehaviour
     [SerializeField] GameObject levelFourBossDoor;
     bool levelInitiate = false;
     bool canSpawnEnemy = false;
-    float timeRemaining = 10f;
+    float timeRemaining = 40f;
     bool timerEnd = false;
     private void Start()
     {
@@ -21,11 +21,21 @@ public class LevelFourScript : MonoBehaviour
     }
     private void Update()
     {
+        if(PlayerState.Instance.IsDead)
+        {
+            timerCanvas.enabled = false;
+            levelInitiate = false;
+            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            canSpawnEnemy = false;
+            blockDoor.SetActive(false);
+            timeRemaining = 40f;
+        }
         if(timerEnd == true)
         {
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
             blockDoor.SetActive(false);
             levelFourBossDoor.tag = "Door";
+            timerCanvas.enabled = false;
         }
         if(levelInitiate == true)
         {

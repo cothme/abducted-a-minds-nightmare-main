@@ -612,7 +612,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7834574240173458732}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
@@ -688,8 +688,8 @@ MonoBehaviour:
   walkPointRange: 40
   attackDelay: 0
   alertTime: 3
-  sightRange: 90
-  attackRange: 15
+  sightRange: 15
+  attackRange: 3
   playerInSightRange: 0
   playerInAttackRange: 0
   isFacingObstacle: 0

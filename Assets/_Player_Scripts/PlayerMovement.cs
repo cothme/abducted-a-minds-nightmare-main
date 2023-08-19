@@ -8,8 +8,9 @@ public class PlayerMovement : MonoBehaviour
 {   
     Animator animator;
     float playerSpeed = 0f;
-    public float walkSpeed = 20f;
-    public float runSpeed = 30f;
+    public float walkSpeed;
+    public float runSpeed;
+    float walkSpeedEffect = 3, runSpeedEffect = 10,walkSpeedEffect2, runSpeedEffect2;
     float gravityValue = -9.81f;
     float rotationSpeed = 4f;
     CharacterController controller;
@@ -38,10 +39,24 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
         PlayerState.Instance.Aiming = false;
+        walkSpeedEffect2 = walkSpeed;
+        runSpeedEffect2 = runSpeed;
     }
 
     void Update()
     {
+        
+        Debug.Log(walkSpeedEffect2);
+        if(PlayerState.Instance.RunnersHit == true)
+        {
+            walkSpeed = walkSpeedEffect;
+            runSpeed = runSpeedEffect;
+        }
+        else
+        {
+            walkSpeed = walkSpeedEffect2;
+            runSpeed = runSpeedEffect2;
+        }
         if(Input.GetKey(KeyCode.LeftAlt))
         {
             Cursor.lockState = CursorLockMode.None;

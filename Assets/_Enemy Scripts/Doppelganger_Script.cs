@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Playables;
 
 public class Doppelganger_Script : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Doppelganger_Script : MonoBehaviour
     [SerializeField] AudioSource attack2Sound;
     [SerializeField] Transform bulletSpawn;
     [SerializeField] GameObject bullet;
+    [SerializeField] PlayableDirector endingCutscene;
     float meter = 0;
     Animator anim;
     bool rangeAttacked,meleeAttacked;
@@ -230,6 +232,8 @@ public class Doppelganger_Script : MonoBehaviour
         anim.Play("Death");
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         Destroy(this.gameObject, deathAnimTime);
+        endingCutscene.Play();
+        PlayerState.Instance.LevelFourBossDefeated = true;
     }
     void OnDrawGizmosSelected()
     {

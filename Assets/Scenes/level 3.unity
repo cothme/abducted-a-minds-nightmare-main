@@ -18063,7 +18063,7 @@ MonoBehaviour:
   walkPointRange: 1
   attackDelay: 0
   alertTime: 3
-  sightRange: 13.08
+  sightRange: 10
   attackRange: 3
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -23878,7 +23878,7 @@ MonoBehaviour:
   walkPointRange: 1
   attackDelay: 0
   alertTime: 3
-  sightRange: 20
+  sightRange: 10
   attackRange: 3
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -82866,7 +82866,7 @@ MonoBehaviour:
   walkPointRange: 1
   attackDelay: 0
   alertTime: 3
-  sightRange: 13.08
+  sightRange: 10
   attackRange: 3
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -104212,7 +104212,7 @@ MonoBehaviour:
   walkPointRange: 1
   attackDelay: 0
   alertTime: 3
-  sightRange: 20
+  sightRange: 10
   attackRange: 3
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -108903,7 +108903,7 @@ MonoBehaviour:
   walkPointRange: 1
   attackDelay: 0
   alertTime: 3
-  sightRange: 20
+  sightRange: 10
   attackRange: 3
   playerInSightRange: 0
   playerInAttackRange: 0

@@ -26,6 +26,9 @@ public class PlayerState : MonoBehaviour
     private bool isDead = false;
     private bool isUVOn = false;
     private bool canStoreItem = true;
+    private bool levelFourBossDefeated = false;
+    private bool runnersHit = false;
+    private bool brutesHit = false;
     public bool Aiming { get => aiming; set => aiming = value; }
     public bool Reloading { get => reloading; set => reloading = value; }
     public bool Running { get => running; set => running = value; }
@@ -47,6 +50,8 @@ public class PlayerState : MonoBehaviour
     public bool LevelThreeCageUnlocked { get => levelThreeCageUnlocked; set => levelThreeCageUnlocked = value; }
     public int LevelThreeBossDefeated { get => levelThreeBossDefeated; set => levelThreeBossDefeated = value; }
     public bool CanStoreItem { get => canStoreItem; set => canStoreItem = value; }
+    public bool LevelFourBossDefeated { get => levelFourBossDefeated; set => levelFourBossDefeated = value; }
+    public bool RunnersHit { get => runnersHit; set => runnersHit = value; }
 
     private void Awake()
     {
