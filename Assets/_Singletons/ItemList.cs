@@ -97,9 +97,9 @@ public class ItemList : MonoBehaviour
         {
             case "Ammo":
             itemList.Remove(0);
+            InventoryItems.Remove(inventoryController.selectedItem);
             GunManager.Instance.Magazine.RemoveAt(0);
             GunManager.Instance.UpdateBullets();
-            InventoryItems.Remove(inventoryController.selectedItem);
             break;
             case "Assault Rifle":
             itemList.Remove(1);
@@ -133,7 +133,7 @@ public class ItemList : MonoBehaviour
             itemList.Remove(7);
             InventoryItems.Remove(inventoryController.selectedItem);
             break;
-            case "Keycard":
+            case "KeyCard":
             itemList.Remove(8);
             InventoryItems.Remove(inventoryController.selectedItem);
             break;
@@ -157,9 +157,34 @@ public class ItemList : MonoBehaviour
     {
         inventoryItems.Clear();
     }
+    public void RemoveKeyCard()
+    {
+        foreach(InventoryItem i in InventoryItems)
+            {
+                if(i.itemData.name == "KeyCard")
+                {
+                    InventoryItems.Remove(i);
+                }
+            }
+    }
     private void Update()
     {
         inventoryController = GameObject.Find("Main Camera").GetComponent<InventoryController>();
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            // foreach(InventoryItem i in InventoryItems)
+            // {
+            //     Debug.Log(i.itemData.name);
+            // }
+            foreach(int i in Itemlist)
+            {
+                Debug.Log(i);
+            }
+            foreach(InventoryItem i in InventoryItems)
+            {
+                Debug.Log(i.itemData.name);
+            }
+        }
     }
     private void Awake()
     {

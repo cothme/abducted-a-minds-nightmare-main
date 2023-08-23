@@ -297,12 +297,13 @@ public class PlayerInteractScript : MonoBehaviour
                 {
                         if(i.itemData.name == "KeyCard")
                         {
-                        inventoryController.selectedItem = i;
-                        inventoryController.DeleteItem(inventoryController.selectedItem);
-                        break;
+                            inventoryController.selectedItem = i;
+                            inventoryController.DeleteItem(inventoryController.selectedItem);
+                            ItemList.Instance.RemoveKeyCard();
+                            break;
                         }
+                    ItemList.Instance.DropItem("KeyCard");
                 }
-                ItemList.Instance.DropItem("Keycard");
             }
             else if(SceneManager.GetActiveScene().name == "level 2")
             {
@@ -312,12 +313,13 @@ public class PlayerInteractScript : MonoBehaviour
                 {
                         if(i.itemData.name == "KeyCard")
                         {
-                        inventoryController.selectedItem = i;
-                        inventoryController.DeleteItem(inventoryController.selectedItem);
+                            inventoryController.selectedItem = i;
+                            inventoryController.DeleteItem(inventoryController.selectedItem);
+                            ItemList.Instance.RemoveKeyCard();
                         break;
                         }
+                    ItemList.Instance.DropItem("KeyCard");
                 }
-                ItemList.Instance.DropItem("Keycard");
             }
         }
         else if(ControlsManager.Instance.IsInteractButtonDown && colliderTag == "SavePoint")

@@ -134,7 +134,6 @@ public class InventoryController : MonoBehaviour
         CreateItem(itemID);
         ItemList.Instance.InventoryItems.Add(selectedItem);
         InventoryItem itemToInsert = selectedItem;
-        Debug.Log(CheckSpace(selectedItem));
         selectedItem = null;
         InsertItem(itemToInsert);
     }

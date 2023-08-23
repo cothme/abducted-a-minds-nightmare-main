@@ -1462,6 +1462,7 @@ GameObject:
   - component: {fileID: 8151695952320923479}
   - component: {fileID: 8038853240324803535}
   - component: {fileID: 6627135865007495778}
+  - component: {fileID: 6772079540791843999}
   m_Layer: 0
   m_Name: jnt_end_l_wrist1
   m_TagString: Attack
@@ -1517,6 +1518,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6772079540791843999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963825536086761849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d43bbcf0467de42880e69ee1852757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postProcessVolume: {fileID: 3215066203928604894, guid: 94cdda52ab09d15499bf8619ecfcf4b3, type: 3}
+  hasVignette: {fileID: 11400000, guid: 45626035a7626de46be1fd925e8beb99, type: 2}
+  noVignette: {fileID: 11400000, guid: 9f0bb6c12a4c28f49b29edeaf737c107, type: 2}
 --- !u!1 &2068578626379604177
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,6 +2364,7 @@ GameObject:
   - component: {fileID: 4210128806005895592}
   - component: {fileID: 8228899949203040521}
   - component: {fileID: 7874689671839103800}
+  - component: {fileID: 7492938857452088069}
   m_Layer: 0
   m_Name: jnt_end_r_wrist1
   m_TagString: Untagged
@@ -2403,6 +2420,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &7492938857452088069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3648064420634785141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d43bbcf0467de42880e69ee1852757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postProcessVolume: {fileID: 3215066203928604894, guid: 94cdda52ab09d15499bf8619ecfcf4b3, type: 3}
+  hasVignette: {fileID: 11400000, guid: 45626035a7626de46be1fd925e8beb99, type: 2}
+  noVignette: {fileID: 11400000, guid: 9f0bb6c12a4c28f49b29edeaf737c107, type: 2}
 --- !u!1 &3687117402096027980
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,6 +52,7 @@ public class PlayerState : MonoBehaviour
     public bool CanStoreItem { get => canStoreItem; set => canStoreItem = value; }
     public bool LevelFourBossDefeated { get => levelFourBossDefeated; set => levelFourBossDefeated = value; }
     public bool RunnersHit { get => runnersHit; set => runnersHit = value; }
+    public bool BrutesHit { get => brutesHit; set => brutesHit = value; }
 
     private void Awake()
     {

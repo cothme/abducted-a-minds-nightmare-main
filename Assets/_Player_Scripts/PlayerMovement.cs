@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.PostProcessing;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -46,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         
-        Debug.Log(walkSpeedEffect2);
+        
         if(PlayerState.Instance.RunnersHit == true)
         {
             walkSpeed = walkSpeedEffect;

@@ -59,8 +59,7 @@ public class DataInitialize : MonoBehaviour
         // } 
         foreach(int i in ItemList.Instance.Itemlist)
         {
-            ItemList.Instance.AddItem(i);
-            inventoryController.InsertRandomItem(ItemList.Instance.Itemlist.Last());
+            inventoryController.InsertRandomItem(i);
         }
     }
     private void Update()

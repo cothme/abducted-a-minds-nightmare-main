@@ -121,29 +121,29 @@ public class AsyncManager : MonoBehaviour
     }
     public void LoadLevelTwo(string levelToLoad)
     {
+        ItemList.Instance.ClearInventoryItems();
         PlayerData.Instance.PlayerPosition = new Vector3(74.0699997f,61.7700005f,-1026.83997f);
         PlayerData.Instance.PlayerRotation = new Quaternion(0,0.707106829f,0f,0.707106829f);
         loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
         loadingScreen.SetActive(true);
-        ItemList.Instance.ClearInventoryItems();
         StartCoroutine(LoadLevelAsync(levelToLoad));
     }
     public void LoadLevelThree(string levelToLoad)
     {
+        ItemList.Instance.ClearInventoryItems();
         PlayerData.Instance.PlayerPosition = new Vector3(-311.959991f,10.7010002f,73.3700027f);
         PlayerData.Instance.PlayerRotation = new Quaternion(0,-0.707106829f,0,0.707106829f);
         loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
         loadingScreen.SetActive(true);
-        ItemList.Instance.ClearInventoryItems();
         StartCoroutine(LoadLevelAsync(levelToLoad));
     }
     public void LoadLevelFour(string levelToLoad)
     {
+        ItemList.Instance.ClearInventoryItems();
         PlayerData.Instance.PlayerPosition = new Vector3(7,22.3600006f,2.4000001f);
         PlayerData.Instance.PlayerRotation = new Quaternion(0,-0.707106829f,0,0.707106829f);
         loadingImage.sprite = images.loadingScreenImages[Random.Range(1,images.loadingScreenImages.Length)];
         loadingScreen.SetActive(true);
-        ItemList.Instance.ClearInventoryItems();
         StartCoroutine(LoadLevelAsync(levelToLoad));
     }
     public void QuitClicked()

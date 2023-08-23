@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class LevelOneScript : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class LevelOneScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.L))
         {
+            // ItemList.Instance.ClearInventoryItems();
+            // SceneManager.LoadScene("Level 2");
             Cursor.lockState = CursorLockMode.None;
             ending.Play();
         }
