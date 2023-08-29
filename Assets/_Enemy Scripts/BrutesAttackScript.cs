@@ -13,6 +13,10 @@ public class BrutesAttackScript : MonoBehaviour
     {
         
     }
+    private void Update()
+    {
+        Debug.Log(PlayerState.Instance.BrutesHit);
+    }
     // Update is called once per frame
      void OnCollisionEnter(Collision col)
     {

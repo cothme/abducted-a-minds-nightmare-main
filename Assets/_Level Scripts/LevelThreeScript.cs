@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class LevelThreeScript : MonoBehaviour
 {
@@ -15,6 +16,15 @@ public class LevelThreeScript : MonoBehaviour
     float gemsCollectedLvlThree = 0;
     private void Update()
     {
+        
+        // if(Input.GetKeyDown(KeyCode.L))
+        // {
+        //     ItemList.Instance.ClearInventoryItems();
+        //     SceneManager.LoadScene("Level 4");
+        //     // Cursor.lockState = CursorLockMode.None;
+        //     // levelThreeDefeatedCutscene.Play();
+        // }
+    
         if(PlayerState.Instance.IsPuzzleThreeSolved && a == false)
         {
             firstDoor.tag = "Door";

@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Playables;
+using UnityEngine.Video;
 
 public class Doppelganger_Script : MonoBehaviour
 {
@@ -11,6 +13,10 @@ public class Doppelganger_Script : MonoBehaviour
     [SerializeField] Transform bulletSpawn;
     [SerializeField] GameObject bullet;
     [SerializeField] PlayableDirector endingCutscene;
+    [SerializeField] VideoPlayer videoPlayer;
+    [SerializeField] Canvas canvas;
+    [SerializeField] Canvas mainCanvas;
+    [SerializeField] GameObject playerGameObject;
     float meter = 0;
     Animator anim;
     bool rangeAttacked,meleeAttacked;
@@ -91,6 +97,13 @@ public class Doppelganger_Script : MonoBehaviour
             AttackPlayer();
         }
     }
+
+    private void EndVideo(VideoPlayer vp)
+    {
+        endingCutscene.Play();
+        PlayerState.Instance.LevelFourBossDefeated = true;
+    }
+
     void Patrolling()
     {
         agent.speed = 10;
@@ -120,7 +133,6 @@ public class Doppelganger_Script : MonoBehaviour
     }
     void ChasePlayer()
     {
-        Debug.Log(meter);
         if(meter <= 15f)
         {
             if(shotCD > 0)
@@ -232,8 +244,12 @@ public class Doppelganger_Script : MonoBehaviour
         anim.Play("Death");
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         Destroy(this.gameObject, deathAnimTime);
-        endingCutscene.Play();
-        PlayerState.Instance.LevelFourBossDefeated = true;
+        canvas.enabled = true;
+        mainCanvas.enabled = false;
+        videoPlayer.Play();
+        videoPlayer.loopPointReached += EndVideo;
+        playerGameObject.SetActive(false);
+        
     }
     void OnDrawGizmosSelected()
     {

@@ -74,9 +74,11 @@ public class GunManager : MonoBehaviour
                     {
                         if(i.itemData.name == "Ammo")
                         {
-                            ItemList.Instance.InventoryItems.Remove(i);
                             inventoryController.selectedItem = i;
+                            // Debug.Log(inventoryController.selectedItem);
                             inventoryController.DeleteItem(inventoryController.selectedItem);
+                            ItemList.Instance.DropItem("Ammo1");
+                            ItemList.Instance.InventoryItems.Remove(i);
                             break;
                         }
                     }

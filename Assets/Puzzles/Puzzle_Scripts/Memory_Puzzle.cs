@@ -90,18 +90,18 @@ public class Memory_Puzzle : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.S))
         {
-            foreach(int i in correctValues)
-            {
-                print("Correct Value " + i);
-            }
+            // foreach(int i in correctValues)
+            // {
+            //     print("Correct Value " + i);
+            // }
         }
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            foreach(int i in playerValues)
-            {
-                print("Player Value " + i);
-            }
-        }
+        // if(Input.GetKeyDown(KeyCode.A))
+        // {
+        //     foreach(int i in playerValues)
+        //     {
+        //         print("Player Value " + i);
+        //     }
+        // }
         Retry();
     }
     void disableButtons(List<Button> buttons)

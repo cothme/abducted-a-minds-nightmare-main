@@ -24,7 +24,7 @@ public class PlayerCollisions : MonoBehaviour
     {
         if(col.collider.tag == "Attack")
         {
-            // PlayerData.Instance.PlayerHealth -= 3f;
+            PlayerData.Instance.PlayerHealth -= 3f;
             int hitNumber = Random.Range(1,4);
             if(hitNumber == 1)
             {

@@ -6,7 +6,7 @@ public class LevelThreeBossScript : MonoBehaviour
 {
     private void OnDestroy()
     {
-        PlayerState.Instance.LevelThreeBossDefeated++;
-        Debug.Log(PlayerState.Instance.LevelThreeBossDefeated);
+        // PlayerState.Instance.LevelThreeBossDefeated++;
+        // Debug.Log(PlayerState.Instance.LevelThreeBossDefeated);
     }
 }

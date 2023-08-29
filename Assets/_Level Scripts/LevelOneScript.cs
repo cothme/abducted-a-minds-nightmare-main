@@ -19,12 +19,12 @@ public class LevelOneScript : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            // ItemList.Instance.ClearInventoryItems();
-            // SceneManager.LoadScene("Level 2");
-            Cursor.lockState = CursorLockMode.None;
-            ending.Play();
-        }
+        // if(Input.GetKeyDown(KeyCode.L))
+        // {
+        //     // ItemList.Instance.ClearInventoryItems();
+        //     // SceneManager.LoadScene("Level 2");
+        //     Cursor.lockState = CursorLockMode.None;
+        //     ending.Play();
+        // }
     }
 }

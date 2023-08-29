@@ -309,9 +309,10 @@ public class PlayerShootingScript : MonoBehaviour
                 {
                     if(i.itemData.name == "Oxygen_Kit")
                     {
-                        ItemList.Instance.InventoryItems.Remove(i);
                         inventoryController.selectedItem = i;
                         inventoryController.DeleteItem(inventoryController.selectedItem);
+                        ItemList.Instance.DropItem("Oxygen Kit");
+                        ItemList.Instance.InventoryItems.Remove(i);
                         break;
                     }
                 }
@@ -341,9 +342,10 @@ public class PlayerShootingScript : MonoBehaviour
                 {
                     if(i.itemData.name == "Health Kit")
                     {
-                        ItemList.Instance.InventoryItems.Remove(i);
                         inventoryController.selectedItem = i;
                         inventoryController.DeleteItem(inventoryController.selectedItem);
+                        ItemList.Instance.DropItem("Health Kit");
+                        ItemList.Instance.InventoryItems.Remove(i);
                         break;
                     }
                 }

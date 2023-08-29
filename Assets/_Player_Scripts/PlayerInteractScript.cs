@@ -299,7 +299,7 @@ public class PlayerInteractScript : MonoBehaviour
                         {
                             inventoryController.selectedItem = i;
                             inventoryController.DeleteItem(inventoryController.selectedItem);
-                            ItemList.Instance.RemoveKeyCard();
+                            // ItemList.Instance.RemoveKeyCard();
                             break;
                         }
                     ItemList.Instance.DropItem("KeyCard");
